@@ -1,0 +1,1707 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: fuenteRandom;
+    src: url('../Fuentes/PT_Sans_Narrow/PTSansNarrow-Regular.ttf');
+}
+
+
+                                                                /*< HEADER > */   
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+ font-weight: bold!important;
+}
+header{
+
+    width: 100%;
+    height: 80px;
+    display: flex;
+    background:  rgb(55 146 232);
+
+
+}
+
+#parteP{
+    display: flex;
+    align-items: center;
+    width: 20%;
+    z-index: 1;
+    margin-top: 67px;
+    margin-left: 70px;
+
+}
+
+#tituloP{
+    width: 100%;
+    margin-left: 15px;
+ }   
+#soyh1{
+
+    font-size: 70px;
+    font-weight: bold;
+
+}
+#gif1{
+
+    margin-left: 5px ;
+
+}
+ #navSuperior ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    font-size: 19px;
+    color: whitesmoke;
+    margin-bottom: 0;
+ }
+
+ #navSuperior li{
+    margin: 10px;
+    display: flex;
+    align-items: center;                
+ }
+ #navSuperior li:hover{
+    
+    color: rgb(39, 44, 44);
+    transition: 960ms; 
+    border: 1px solid black;
+    margin-bottom: 10px;
+    border-top:0 ;
+    border-left: 0;
+    border-right: 0;
+ }
+ .areaHeaderG{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+
+
+ }
+
+#iconoG{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#iconoS{
+    cursor: pointer;
+}
+.aSvg:hover,.aSvg:hover ~ #plbRegistro > a > strong {
+    color: white;
+    transition: 960ms;    
+}
+#iconoS svg{
+    width: 100%;
+    height: 35px;
+}
+#plbRegistro{
+    font-size: 18px;
+}
+#plbRegistro:hover{
+
+   color: aliceblue;
+}
+
+::placeholder{
+   padding-left: 5px;
+   color: rgb(126, 123, 123);
+   
+ }
+ #navBar{
+
+    position: relative;
+    width: 45%;
+    --bs-bg-opacity: 0;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+ }
+
+ #container-F{
+    display: flex;
+    justify-content: end;
+ }
+#btnVar:hover{
+    
+    background: rgb(238, 238, 238);
+    transition: 950ms;
+
+}
+#btnTogglee::after{
+    box-shadow: 0 2px 4px 0.8px rgba(0, 0, 0, 0.2);
+    background: transparent;
+    color: white!important;
+}
+
+
+
+                                                            /* </HEADER> */
+
+
+                                                            /* <BODY> */
+  
+                                                            
+body{
+
+    width: 100%;
+    height: 110vh;
+    font-family: fuenteRandom !important;
+   
+}
+p {
+    margin-top: 0;
+    margin-bottom: 0rem!important;
+}
+
+#menuSecundario{
+
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: #148ad8;
+   
+
+}
+#menuSecundario ul{
+
+    width: 76%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 75px;
+    list-style: none;
+    margin-right: 30px;
+    margin-bottom: 0;
+    
+}
+
+#iconosMenuS{
+
+    display: flex;
+}
+
+
+
+#menuSecundario li{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-size: 17px; 
+    
+
+}
+#menuSecundario li:hover{
+
+   color: white;
+}
+#menuSecundario svg{
+
+    margin: 10px;
+    
+
+
+}
+#areaCentralG{
+    width: 24%;
+    display: flex;
+    justify-content: center;
+    
+    
+ }
+.areaCentral{
+
+    width: 70%;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border:2px solid #30194b;
+    border-radius: 15px;
+    background: white;
+   
+
+}                                                              
+
+.inputBuscar{
+
+   margin-left: 20px;
+   width: 100%;
+   height: 25px;
+   border: none;
+   outline: 0;
+   font-size: 15px;
+   
+
+}
+
+#iconoBuscar{
+
+    color: #060ae9;
+    top: 50%;
+    width: 26%;
+    height: 20px;
+    cursor: pointer;
+    
+ }
+
+ #barraLateralG{
+    width: 22%;
+    height: 80vh;
+   
+
+
+ }
+ #seccionProductos{
+
+    width: 78%;
+    /* height: fit-content; */
+    
+ }
+#seccionPrincipal{
+    display: flex;
+}
+aside{
+
+    
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+    height: 80vh;
+
+}
+#barraL1{
+
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 80%;
+    height: 12vh;
+    position: relative;
+    top: 92px;
+    left: 30px;
+
+
+}
+
+.barraC{
+
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;    
+    background:#148ad8;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.barraC p{
+    
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+
+#barraL2{
+
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 80%;
+    height: 40vh;
+    position: relative;
+    top: 93px;
+    left: 30px; 
+
+}
+
+#iconoFiltro{
+
+    margin-right:5px;
+    
+}
+
+.selectBL2{
+
+   
+    width: 100%;
+    height: 7vh;
+    background: transparent;
+    outline: 0;
+    padding-left: 10px;
+    appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+
+.divSelect{
+
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+
+.divSelect svg{
+    z-index: 0;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+
+}
+#divSelectG{
+
+    display: grid;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    top: 18px;
+    height: 24vh;
+}    
+
+.divSeccion{
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;  
+    gap: 20px; 
+}  
+
+#seccionP{
+
+    width: 100%;
+    display: grid;
+    grid-template: 2tf;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow-y: scroll;
+    max-height: 79vh; 
+
+}
+
+.cajas{
+
+    border: 2px solid none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 36vh;
+    width: 92%;
+    background: white;
+    /* cursor: pointer; */
+}
+.contenedorImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedorImgP{
+    width: 91%;
+    /* height: 36vh; */
+}
+.cajaFP{
+    display: flex;
+    justify-content: center;
+    width: 9%;
+    height: 6vh;
+}
+/* .cajaSecundaria{
+    display: flex;
+    /* background: red;} */
+
+
+.cajaFavorito{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: rgb(0, 0, 0);
+    border-radius: 1px;
+    width: 100%;
+    height: 5vh;
+    font-size: 21px;
+}
+.cajaFavorito:hover{
+    border-top-left-radius: 8px ;
+    border-bottom-left-radius: 8px ;
+    background:  #148ad8;
+    color: white;
+  
+}
+
+.cajaC{
+
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px;
+
+}
+
+.cajaC h6{
+
+    font-weight: bold;
+}
+.cajas:hover{
+
+    box-shadow: 6px 2px 7px rgba(0,0,0,0.12), 0 3px 2px rgba(0,0,0,0.24);
+   
+
+}
+
+.cajaCB{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    height: 5vh;
+}
+
+.buttonComprar,.buttonVentana{
+    
+    border:0;
+    background: #148ad8;
+    border-radius: 10px;
+    font-size: 18.3px;
+    width: 50%;
+    color: white;
+
+
+}
+.buttonAgregar{
+
+    border: 0;
+    background:  #148ad8;
+    color: white;
+    border-radius: 10px;
+    width: 12%;
+    font-size: 21px;
+
+}
+
+.buttonAgregar:hover,.buttonComprar:hover,.buttonVentana:hover,#btnCT:hover{
+    border: 1px solid black;
+    background: white;
+    transition: 950ms;
+    color: rgb(0, 0, 0);
+}
+
+#divContactG{
+
+    width: 100%;
+    display: flex;
+    background:  #148ad8;
+    justify-content: center;
+    height: 14vh;
+
+   
+}
+#divCR1{
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    flex-direction: column;
+    width: 40%;
+
+}
+#divCR1 div:hover{
+
+    color: white;
+
+   
+}
+#divCR2{
+
+ 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 40%;
+
+}
+#tituloA{
+    
+    margin-top: 10px;
+    text-align: center;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+}
+#tituloR{
+
+    width: 100%;
+
+
+}
+#divRGE{
+
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    gap: 30px;
+
+
+}
+.centrarIconos{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+
+}
+.centrarIconos:hover{
+
+    color: white;
+    transition: 500ms;
+
+
+}
+a:link{
+    text-decoration: none;
+    color: black;
+}
+
+a:visited{
+
+    color: black;
+   
+   
+   }
+
+
+
+
+   
+                                                            /* </BODY> */
+
+                                                            /* STYLE RESGISTRO  */
+ 
+
+                                                            
+
+                                                            
+
+#divContainer{
+
+  
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#divFormulario{
+
+    
+    width: 30%;
+    height: 80vh;
+    border: 3px solid  none;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+
+}
+
+#tituloForm{
+
+    width: 100%;
+    background: rgb(55 146 232);
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    height: 20vh;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#iconoForm{
+
+    position: relative;
+    right: 10px;
+
+}
+
+.formulario{
+    text-align: center;
+}
+
+#plbIngresar h2{
+
+    width: 100%;
+    height: 13vh;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.areaInputForm{
+
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+}
+.inputsForm{
+
+    width: 60%;
+    height: 6vh;
+    outline: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.olvidarContrasena{
+
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  
+}
+
+.areainputsG{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.divButtonIn{
+
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.buttonIngresarF{
+
+    width: 30%;
+    height: 5vh;
+    border: 0;
+    border-radius: 8px;
+    background: rgb(55 146 232);
+    cursor: pointer;
+}
+
+.buttonIngresarF h3{
+    border-radius: 8px;
+    color: white;
+    text-align:center;
+    display: flex;
+    height: 5vh;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.linkCuenta{
+
+    text-decoration: solid;
+
+}
+
+.divButtonIngresar{
+    
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+
+
+
+                                                                    /* /STYLE RESGISTRO */
+
+                                                                    /* STYLE RESGISTRO CREAR CUENTA */
+
+
+#divContainer2{
+
+  
+    width: 100%;
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#bodyResgistroC{
+
+
+    width: 100%;
+    height: 130vh;
+    font-family: fuenteRandom;
+
+
+}                                                                   
+#divFormulario2{
+
+    width: 33%;
+    height: 105vh;
+    border: 3px solid none;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12) ;
+
+}
+#divInputsG{
+
+    width: 100%;
+}
+.divInputsC{
+
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    text-align: start;
+
+}
+.cajaInps{
+
+    width: 50%;
+    margin-left: 14px;
+    height: 10vh;
+
+
+}
+.divAB{
+
+    width: 95%;
+    height: 6vh;
+    outline: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.divGid{
+
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.divIdentificacion{
+
+    width: 100%;
+    height: 7vh;
+    text-align: start;
+    
+  
+}
+.inputId{
+
+    width: 80%;
+    height: 6vh;
+    outline: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    
+}
+.cajasId{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   
+}
+.labelid{
+
+    margin-left: 50px;
+
+
+}
+.divInputsC2{
+
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    text-align: start;
+    margin-top: 30px;
+
+}
+
+
+#divCDesigualdad{
+    
+     width: 100%;
+     height: 9vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     gap: 10px 
+     
+}
+
+#cDesigualdad{
+    
+    text-align: center;
+    
+}
+
+
+#divTerminos{
+    
+    height: 5vh;
+    line-height: 1.5vh;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 5px;
+}
+
+#aceptarTerminos {
+    
+  width: 16px; /* Ancho personalizado */
+  height:16px; /* Altura personalizada */
+}
+
+
+#aTerminos{
+    
+    margin-bottom: 1px;
+}
+
+#aTerminos:hover{
+        text-decoration: underline;
+}
+
+
+.checkBoxActivado{
+    
+    color: red !important;
+    
+}
+
+/* #inputR{
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+} */
+
+/* .inputRadius{
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+  
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+  
+    position: relative;
+    top: 4px;
+} */
+  
+/* input:checked {
+    border: 6px solid black;
+    outline: unset !important ;
+} */
+/* .divInputR{
+
+    height: 10px;
+    
+} */
+                                                    /* DISCRIPCIONES PRODUCTOS */
+.seccionPrincipalD{
+
+    width: 100%;
+    height: 90vh;
+    display: flex;
+}
+#bodyDescripcion{
+
+    height: 130vh;
+}
+.linkDi1{
+
+    width: 100%;
+    color: black;
+    display: flex;
+    /* flex-direction: column;
+    align-items: center; */
+
+}
+
+#divCorauselG{
+
+
+    width: 60%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#divDescripcionG{
+
+    width: 40%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#divCorauselS{
+
+    width: 98%;
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+#divDescripcionS{
+
+    width: 98%;
+    height: 88vh;
+      
+}
+#divCarouselC{
+
+    width: 80%;
+    height: 60vh;
+   
+
+
+}
+#tituloD{
+
+    width: 100%;
+    height: 8vh;
+    padding-top: 20px;
+    padding-left: 40px;
+
+}
+
+#descripcionCentral{
+
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 40px;
+   
+}
+
+.spanC{
+
+    color: #575757;
+}
+.spanAT{
+
+    font-size: 20px;
+    text-decoration:line-through;
+
+}
+.spanAH{
+
+    font-size: 30px;
+}
+#divButtonA{
+
+   
+    width: 100%;
+    height: 10vh;
+    padding-top: 20px;
+    padding-left: 40px;
+
+}
+#buttonCarrito{
+
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+#h5{
+
+    margin-bottom: 0;
+}
+
+#descripcionProductoG{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#descripcionProductoS{
+
+    padding-top: 30px;
+    width: 90%;
+
+}
+
+                                                    /* STYLES Tabla deseos */
+#divTablaG{
+
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+
+}
+#divTablaC{
+    width: 80%;
+    height: 95vh;
+}
+#tituloTabla1{
+
+    width: 100%;
+    background: rgb(55 146 232);
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    height: 8vh;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#iconoTabla{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 10px;
+}
+#divCentralTabla{
+
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    border-radius: 3px;
+    /* border: 3px solid black; */
+    flex-direction: column;
+
+}
+#encajar{
+    display: flex;
+    /* border: 3px solid rgb(247, 91, 255); */
+    height: 75vh;
+
+    
+}
+#listaP{
+    width: 32%;
+}
+
+#soyh2{
+    padding-top: 4px;
+    padding-left: 10px;
+    margin-bottom: 0;
+    width: 24%;
+}
+#contenedorTrash{
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+
+}
+#contenedorSTrash{
+    width: 70%;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+}
+
+.contenedorSvg{
+   
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+
+
+
+.lineaTrash{
+    margin-top: 2px;
+    border: 1px solid black;
+    height: 0;
+    width: 100%;
+}
+
+.lineaA1{
+
+    width: 85%; 
+    border: 1.9px solid black;  
+    border-left: 0;
+    border-right: 0;
+}
+#listaG.scrollable {
+    overflow-y: scroll;
+    max-height: 57vh;
+ }
+ #centrarLista{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+    height: 65vh;
+ }
+ #centrarLista svg{
+    margin-bottom: 5px;
+   
+ }
+ #centrarLista svg:hover{
+    transform: rotate(360deg);
+    transition: 1s;
+    
+ }
+ .listaFavoritos li:hover{
+    background: rgba(75, 144, 208, 0.097);
+ }
+
+ #encerrarLista{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:  1px solid#000000;
+    border-radius: 3px;
+    width: 80%;
+    height: 60vh;
+ }
+ #productosGeneral{
+    height: 75vh;
+    width: 75%;
+    display: flex;
+    align-items: center;
+
+ }
+ #productoD{
+    /* border: 2px solid red; */
+    height: 72vh;
+    overflow: auto;
+    width: 100%;
+
+}
+
+.cajaPD{
+
+    height: 24vh;
+    /* border: 3px solid yellow; */ 
+}
+.dividirD{
+    display:flex;
+    /* border: 3px solid palevioletred; */
+    height: 18vh;
+}
+.descripcionP{
+    width: 82%;
+}
+.descripcionP:hover{
+    box-shadow: 0px 5px 2px -2px rgba(0,0,0,0.5), 0px 0px 3px 0px rgba(0,0,0,0);
+
+}
+.descripcionR{
+
+    width: 100%;
+    height: 11vh;
+    padding-left: 4px;
+
+}
+#comprarTodo{
+
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.buttonComprarTodo{
+    background: none;
+    border: 2px solid black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 40%;
+
+}
+.buttonComprarTodo:hover{
+    color: red;
+}
+#lineaLateral{
+
+    width: 0;
+    height: 72vh;
+    border: 1px solid black;
+    position: relative;
+    top: 8px;
+    right: 14px;
+}
+
+#botonesCE{
+
+    display: flex;
+    width: 100%;
+    height: 6vh;
+
+}
+.botonG{
+
+    width: 60%;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    gap: 10px;
+
+
+}
+#botonC{
+
+    width: 30%;
+    height: 4.2vh;
+
+    
+}
+
+.divImagen{
+    width: 18%;
+    /* border: 3px solid blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagenProducto{
+    
+    /* border: 3px solid brown ; */
+    width: 90%;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+
+}
+
+#divFooter{
+
+    width: 100%;
+    background: rgb(55 146 232);
+    border-bottom-right-radius: 10px;
+    border-Bottom-left-radius: 10px;
+    height: 8vh;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+#footerC {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+}
+#footerC svg{
+    display: flex;
+    align-items: center;
+    
+}
+#footerG{
+
+    width: 100%;
+}
+#aLinkProductos{ 
+
+    color: whitesmoke;
+}
+#aLinkProductos:hover{ 
+
+    color: rgb(39, 44, 44);
+    transition: 960ms;
+}
+
+                                                    /* STYLES AREA DE ADMINISTRACION */
+#bordeG{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#bordeP{
+    /* (izquierda,posicion vertical,tamano de la sombra, cantidad de desenfoque) */
+    border: 3px solid black;
+    box-shadow: -0px 8px 0px -5px rgba(0,0,0,.2), 0 16px 16px 2px rgba(0,0,0,.14), 0 6px 5px 5px rgba(0,0,0,.12);
+    border-radius: 5px;
+    width: 80%;
+    height: 60vh;
+   
+}
+.hA{
+
+    padding: 4px;
+    padding-left: 10px ;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 51px;
+   
+}
+#bordeCa{
+
+    /* border: 3px solid black; */
+    border-radius: 5px;
+    width: 98%;
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+}
+#bordeCS{
+
+    width: 98%;
+    height: 24vh;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    
+}
+#bordeCG{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#divCa{
+
+    display: flex;
+    margin-top: 10px;
+    /* align-items: center; */
+}
+#aImg{
+
+    padding-left: 14px;
+}
+/* .divButtonA{
+} */
+.divButtonA{
+
+  width: 150px;
+  height: 23vh;
+  border: 3px solid rgb(27, 25, 25);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow:0 0px 4px 1px rgba(0,0,0,.2), 0 3px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+  
+}
+
+.buttonAF{
+
+    width: 120px;
+    height: 5vh;
+    border: 0;
+    border-radius: 8px;
+    background: rgb(55 146 232);
+    box-sizing: border-box;
+}
+.divButtonA h3{
+
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    display: flex;
+    height: 5vh;
+    align-items: center;
+    justify-content: center;
+}
+.SvgA{
+    height: 14vh;
+    display: flex;
+    align-items: end;
+
+
+}
+.buttonAb{
+
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+                                                    /* STYLES AREA DE VISTA DE LAS fARMACIA*/
+
+#mainVDF{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+#divVG{
+    width: 98%;
+    height: 95vh;
+    /* border: 3px solid rgb(0, 0, 0); */
+    border-radius: 3px; 
+}
+                                                  
+#tituloF{
+     /* LINEA ABAJO */
+    width: 100%;
+    height: 10vh;
+    display: flex;
+
+}
+#cotenedorVDF{
+
+    height: 10vh;
+    padding-bottom: 14px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    display: flex;
+    align-items: end;
+}
+#contenedorH1{
+    box-sizing: border-box;
+    display: flex;  
+    align-items: end;
+    height: 10vh;
+    font-size: 22px;
+
+
+}
+#contenedorP h1{
+
+  height: 10vh;
+}
+.lineaA{
+
+    border: 2.4px solid;  
+    height: 4px;
+    border-left: 0;
+    border-right: 0;
+    border-top-color: black;
+    border-bottom-color:#7592cd;
+}
+
+#seccionGV{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 83vh;
+    width: 100%;
+
+}
+.seccionCV {
+
+    height: 76vh;
+    width: 95%;
+    /* border: 3px solid black; */
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Deshabilitar la barra de desplazamiento predeterminada en IE 10+ */
+    scrollbar-width: none; /* Deshabilitar la barra de desplazamiento predeterminada en Firefox */
+}
+.seccionCVP{
+    /* vistaDatosPersona */
+    height: 76vh;
+    width: 100%;
+    /* border: 3px solid black; */
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Deshabilitar la barra de desplazamiento predeterminada en IE 10+ */
+    scrollbar-width: none; /* Deshabilitar la barra de desplazamiento predeterminada en Firefox */
+}
+
+.seccionCV::-webkit-scrollbar, .seccionCVP::-webkit-scrollbar,#productoD::-webkit-scrollbar,#seccionP::-webkit-scrollbar,.cajaCarritoI::-webkit-scrollbar{
+    width: 10px; /* Ancho de la barra de desplazamiento */
+}
+.seccionCV::-webkit-scrollbar-track, .seccionCVP::-webkit-scrollbar-track,#productoD::-webkit-scrollbar-track,#seccionP::-webkit-scrollbar-track,.cajaCarritoI::-webkit-scrollbar-track{
+    background-color: #f3f3f3; /* Color del fondo de la barra de desplazamiento */
+}
+.seccionCV::-webkit-scrollbar-thumb, .seccionCVP::-webkit-scrollbar-thumb,#productoD::-webkit-scrollbar-thumb,#seccionP::-webkit-scrollbar-thumb,.cajaCarritoI::-webkit-scrollbar-thumb{
+    background-color: #bcbcbc; /* Color de la barra de desplazamiento */
+    border-radius: 10px;
+}
+
+#listaG::-webkit-scrollbar,.subCajaS1::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+}
+#listaG::-webkit-scrollbar-track,.subCajaS1::-webkit-scrollbar-track {
+    background-color: #f3f3f3; /* Color del fondo de la barra de desplazamiento */
+}
+#listaG::-webkit-scrollbar-thumb,.subCajaS1::-webkit-scrollbar-thumb {
+    background-color: #e1e0e0; /* Color de la barra de desplazamiento */
+    border-radius: 10px;
+}
+
+.lineaAF{
+    display: flex;
+    align-items: end;
+    border: 2.4px solid;  
+    height: 4px;
+    border-left: 0;
+    border-right: 0;
+    border-top-color: black;
+    border-bottom-color:#7592cd;
+}
+.buttonEnviar{
+
+    border:0;
+    background: #343e48;
+    border-radius: 10px;
+    width: 48.55%;
+    height: 5vh;
+    color: white;
+    
+
+}
+
+.buttonEnviar2{
+    border:0;
+    background:#0077ff;
+    border-radius: 10px;
+    width: 48.55%;
+    height: 5vh;
+    color: white;
+}
+
+#iconsAV{
+
+    height: 10vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    position: absolute;
+    left: 94.7%;
+    width: 40px;
+
+}
+.divMv{
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 5vh;
+    width: 40px;
+    background: rgb(1, 170, 208);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.buttonEnviar:hover,.buttonEnviar2:hover{
+
+   color: black;
+}
+#tituloAbajo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+#tituloH h2{
+    height: 7vh;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    font-size: 40px;
+    padding-left: 3px;
+    box-sizing: border-box;
+}
+.Separar{
+    margin-left: 5px;
+}
+
+                                        /*////////////////////////////////////     CLASES REUTILIZABLES         \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+                                        
+                                        
+                                        
+ .encabezadoGris{
+            
+      background: rgba(0, 0, 0, 0.05);
+ 
+    }
+ .gap4{
+           display: flex;
+           gap: 4px;
+}
