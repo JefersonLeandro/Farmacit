@@ -1,2 +1,2 @@
 # Farmacia
-Repositorio para mi proyecto personal 
+Repositorio para mi proyecto personal en python web
