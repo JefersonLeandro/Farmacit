@@ -5,3 +5,4 @@ SQLAlchemy==1.4.31
 #mysqlclient==2.0.3
 PyMySQL==1.0.2
 Werkzeug==2.2.2
+mysqlclient==2.2.1

@@ -148,7 +148,7 @@
 
                                        
                                     <li><a class='dropdown-item' href='controladorCerrarSesion'>Cerrar session</a></li>
-                                    <li><a class='nav-link' href=href="controladorDireccionamiento?opcion=Registro">Iniciar Sesion</a></li>
+                                    <li><a class='nav-link' href="controladorDireccionamiento?opcion=Registro">Iniciar Sesion</a></li>
                                     </li>
                                 </ul>
                                 <form class="d-flex mt-3" role="search">
@@ -265,15 +265,16 @@
                                 <div class="divSelect">
                                     <select name='fIdMarcaProducto' class='selectBL2' required>
                                         <option disabled selected>
-                                           
+                                           Marcas
                                         </option>
-                                        <!-- <c:forEach items="${laMarca.listar(0)}" var="unaMarca"> -->
+                                        {% for marca in marcasProductos%}
+                                       
                                             <option value="${unaMarca.idMarcaProducto}" >
-                                                <!-- <c:out value="${unaMarca.nombreMarca}"/> -->
+                                                {{marca.nombreMarca}}
                                             </option>
 
-                                        <!-- </c:forEach>  -->
-                                        <!-- -->
+                                     
+                                        {%endfor%}
                                     </select> 
 
 
@@ -309,24 +310,21 @@
                 <div id="seccionProductos">
                     <section id="seccionP">
 
-
-
-                        <!--  <c:forEach items="${unProducto.listar(0,false)}" var= "elProducto">  -->
-
+                        {% for producto in productos       %}
                             <div class='divSeccion'>
                                 <div class='cajas'>
                                    
                                         <div  class='linkDi1'>
                                             <div class='contenedorImgP'>
                                                 <a href='DescripcionProductos.php' class='contenedorImg'>
-                                                    Imagen
+                                                    <!-- Imagen {{url_for('static',filename = 'imagenes/???????')}} -->
 
-                                                    <!-- <img src="Public/imgs/${elProducto.unaImagen.nombreImagen}" alt="" class='imgsG' width='75%' height='145px'> -->
+                                                    <img src="" alt="" class='imgsG' width='75%' height='145px'>
                                                 </a>  
                                                 <a href='DescripcionProductos.php' class='cajaC'>
-                                                    <span>nombreProducto</span>
-                                                    <h6>descripcionUnidad</h6>
-                                                    <h6>precioProducto</h6>
+                                                    <span>{{producto.nombreProducto}}</span>
+                                                    <h6>{{producto.descripcionUnidad}}</h6>
+                                                    <h6>{{producto.precioProducto}}</h6>
                                                 </a>
                                             </div>
 
@@ -354,7 +352,7 @@
                                                 </form>
                                 </div>
                             </div>
-                        <!--  </c:forEach>  -->
+                        {% endfor %}
                     </section>
                 </div>
             </div>
