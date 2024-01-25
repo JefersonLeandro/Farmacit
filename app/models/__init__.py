@@ -1,2 +1,2 @@
-# from app.models.book import Book
-# from app.models.author import Author
+from app.models.Producto import Producto
+from app.models.MarcaProducto import MarcaProducto

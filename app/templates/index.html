@@ -85,7 +85,7 @@
                             </ul>
                         </div>  -->
                         
-                        <a href="controladorDireccionamiento?opcion=Registro">
+                        <a href="{{url_for('static',filename = '')}}">
                             <strong class='aSvg'>Registro</strong>
                         </a>
                         
@@ -268,12 +268,9 @@
                                            Marcas
                                         </option>
                                         {% for marca in marcasProductos%}
-                                       
                                             <option value="${unaMarca.idMarcaProducto}" >
                                                 {{marca.nombreMarca}}
                                             </option>
-
-                                     
                                         {%endfor%}
                                     </select> 
 
@@ -310,7 +307,7 @@
                 <div id="seccionProductos">
                     <section id="seccionP">
 
-                        {% for producto in productos       %}
+                        {% for producto in productos  %}
                             <div class='divSeccion'>
                                 <div class='cajas'>
                                    
