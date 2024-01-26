@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="Public/Estilos/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+
 
 
 </head>
@@ -16,12 +17,12 @@
             <div id="divFormulario">
 
             <!--  action="../controlador/controladorInicioSession.php"   PONER LA VISTA DE REGISTRO EXIOSO YA PUEDE INICIAR SESION  -->
-            <form  class = "formulario" action="controladorSesion"  method="post" onclick="cambiarColor();">
+            <form  class = "formulario" action="#"  method="post" onclick="cambiarColor();">
 
                     <div id="tituloForm">
                         <div id="iconoForm">
                             
-                            <img src="Public/imgs/logoQ1.png" alt="logo" width="70px" height="70px" />
+                            <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="70px" height="70px" />
 
                         </div>
                         <div>
@@ -37,13 +38,13 @@
                         if (request.getParameter("msj") != null) {
                             String mensaje = request.getParameter("msj");
                         %> -->
-                            <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert"></h5>
+                            <!-- <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert"></h5>
                             <script>
                                 var elMensaje = "<%= mensaje %>";
                                 document.getElementById("datosInvalidos").innerHTML= elMensaje;
                                 console.log(" msj P : "+elMensaje);
                              
-                            </script>
+                            </script> -->
                             
                         <!-- <%
                         }
@@ -68,7 +69,7 @@
 
                         </div>
                         <div id="divCrearC">
-                            <p>¿No tienes una cuenta?<a href="controladorDireccionamiento?opcion=crearCuenta" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
+                            <p>¿No tienes una cuenta?<a href="{{url_for('bp_autenticacion_crear.crearCuenta')}}" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
                            
                         </div>
                         
@@ -89,10 +90,10 @@
                 String mensajeC = request.getParameter("mensaje");
             
             %> -->
-            <script>
+            <!-- <script>
                // Declaración de contar en un alcance más amplio, fuera de cualquier función arreglar esto o dejarlo asi             
                 window.alert("<%= mensajeC %>");                    
-            </script>
+            </script> -->
 
             <!-- <%
             }
