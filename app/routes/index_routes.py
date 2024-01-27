@@ -3,7 +3,7 @@ from app.models.Producto import Producto
 from app.models.MarcaProducto import MarcaProducto
 from app import db
 
-bp = Blueprint('inicio', __name__)
+bp = Blueprint('bp_inicio', __name__)
 
 @bp.route('/')
 def index():
