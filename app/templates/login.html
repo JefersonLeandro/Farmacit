@@ -82,50 +82,30 @@
 
 
         </div>
-
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %} 
+                <script>
+                    // Función para mostrar una alerta después de cargar completamente la página
+                    window.onload = function() {
+                        alert("{{message}}")
+                        };
+                </script>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+                
+   
     </main>
-                        
-          <!-- <%
-            if (request.getParameter("mensaje") != null) {
-                String mensajeC = request.getParameter("mensaje");
-            
-            %> -->
-            <!-- <script>
-               // Declaración de contar en un alcance más amplio, fuera de cualquier función arreglar esto o dejarlo asi             
-                window.alert("<%= mensajeC %>");                    
-            </script> -->
-
-            <!-- <%
-            }
-            %> -->
-    
 </body>
 
     <script>
-        
-        
-            function verificarCampos(){
-                
-                !(function(window, document) {//Esta es una función IIFE que toma window y document como argumentos, que son objetos globales. y se utliza para encapsular las variables
-
-                    // Obtener los valores de correo y contraseña
-                    let correo = document.getElementById("DocumentoCorreo").value;
-                    let contrasena = document.getElementById("contrasena").value;
-
-                    // Verificar si los campos están vacíos
-                    if (correo.trim() === "" || contrasena.trim() === "") {
-                        // Mostrar un mensaje de alerta
-                        window.alert("Rellene todos los campos");
-                      return false; // Detiene el envío del formulario/
-                    }
-                
-                })(window, document);
-             }
-             
-             
+      
+            // Recuperar mensajes flash
+           
              function cambiarColor(){
 
-                //nombre
+
 
                     const colorOriginal = "rgb(118, 118, 118)";
                     let inputCorreo = document.querySelector("#DocumentoCorreo");
@@ -158,66 +138,13 @@
               }
              
                 
-               function RemplazarValor() {
+                function RemplazarValor() {
                 
                     
                     if (typeof elMensaje !== 'undefined') {// tambien sirve ese undefined pero es mas preciso el typeof
                         document.getElementById("datosInvalidos").innerHTML = "";
                 
                     }
-                }
-
- 
-    // function verificarCredenciales(){// function en desuso porque hay un eror de direcconamiento , nose porque no me direcciona  -->
-          // Crear una instancia de XMLHttpRequest para realizar la solicitud AJAX
-               // let xhr = new XMLHttpRequest();
-
-                // Configurar el manejo de la respuesta
-               // xhr.onreadystatechange = function () {
-                    
-                    //if (xhr.readyState === 4 && xhr.status === 200) {
-                       // // Obtener la respuesta del servidor
-                        //let respuesta = xhr.responseText;
-
-                        // Manejar la respuesta según su valor
-                        //console.log("La respuesta es: " + respuesta);
-
-                        //if (respuesta === "true") {
-                            //document.getElementById("datosInvalidos").innerHTML = "";
-                           // return true;// Permitir el envío del formulario
-                       // } else if (respuesta === "false") {
-                           // document.getElementById("datosInvalidos").innerHTML = "Datos Invalidos";
-                           // return false; // Detiene el envío del formulario
-                        //} else {
-                           // document.getElementById("datosInvalidos").innerHTML = "Error en la consulta.";
-//                            return false; // Detiene el envío del formulario
-                       // }
-                    //}
-                //};
-
-                // Configurar la solicitud AJAX
-                //xhr.open("POST", "controladorSesion", true);
-                //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-                // Enviar los datos al servidor
-               // xhr.send("emailDocumento=" + correo + "&contrasena=" + contrasena);
-
-                // Mostrar los datos en la consola (para depuración)
-                //console.log("Los datos son: ");
-//console.log("Correo: " + correo);
-                //console.log("Contraseña: " + contrasena);
-
-//              Detener el envío del formulario de forma predeterminada
-//              return false;
-        
-         
-            //}
-
-         
-
-        
-
-
-
+                } 
     </script>
 </html>

@@ -10,6 +10,6 @@ class Producto (db.Model):
     descripcionProductoGeneral = db.Column(db.Text, nullable=False)
     stockProducto = db.Column(db.Integer, nullable=False)
     precioProducto = db.Column(db.Integer, nullable=False)
-    idMarcaProducto = db.Column(db.Integer, db.ForeignKey('MarcaProducto.id'))
+    idMarcaProducto = db.Column(db.Integer, db.ForeignKey('MarcasProductos.idMarcaProducto'))
 
     

@@ -717,10 +717,10 @@ a:visited{
 .divButtonIn{
 
     width: 100%;
-    height: 9vh;
+    height: 12vh;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
 }
 .buttonIngresarF{
 
@@ -789,8 +789,9 @@ a:visited{
 }                                                                   
 #divFormulario2{
 
+    /*  h : 105vh */
     width: 33%;
-    height: 105vh;
+    height: auto; 
     border: 3px solid none;
     border-radius: 10px;
     box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12) ;
@@ -803,9 +804,10 @@ a:visited{
 .divInputsC{
 
     width: 100%;
-    height: 10vh;
+    height: auto;
     display: flex;
     text-align: start;
+   
 
 }
 .cajaInps{
@@ -813,42 +815,48 @@ a:visited{
     width: 50%;
     margin-left: 14px;
     height: 10vh;
-
-
+   
 }
 .divAB{
 
     width: 95%;
-    height: 6vh;
+    height: 4.5vh;
     outline: 0;
     border-top: 0;
     border-left: 0;
     border-right: 0;
 }
+.dispersar{
+   display: flex; 
+   flex-direction: column;
+   gap: 15px;
+   /* margin-top: 5px; */
+}
+
 .divGid{
 
     width: 100%;
-    height: 10vh;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-
-
-
+ 
+    
+    
 }
 
 .divIdentificacion{
 
     width: 100%;
-    height: 7vh;
+    height: auto;
     text-align: start;
+   
     
-  
 }
 .inputId{
 
     width: 80%;
-    height: 6vh;
+    height: 4.5vh;
     outline: 0;
     border-top: 0;
     border-left: 0;
@@ -861,6 +869,7 @@ a:visited{
     display: flex;
     justify-content: center;
    
+    
 }
 .labelid{
 

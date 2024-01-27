@@ -22,6 +22,8 @@
             <div id="divFormulario2">
 
                 <form class="formulario" action="{{url_for('bp_autenticacion_crear.RegistrarUsuario')}}" id="miFormulario" onclick="cambiarColor();"  method="post" >
+                   
+
                     <div id="tituloForm">
                         <div id="iconoForm">
                             <!--el mismo error de la imagen-->
@@ -49,21 +51,36 @@
 
                                 <div class="cajaInps">
                                     <div>
-                                        <label for="cajaInps">Nombre</label>
+                                        <label for="fNombrePersona" name="Nombre">Nombre</label>
                                     </div>
-                                    <!--<input type="hidden" name="fIdPersona" value="0"> es inesesario enviar este dato al controlador ya que va en auto Incremento--> 
-                                    <input type="text" name="fNombrePersona" placeholder="Sus nombres" class="divAB nombreC" id="nombreP"   >
-                                </div>
+                                    
+                                     <!-- crear una alerta para datos -->
+                                     <input type="text" name="fNombrePersona" placeholder="Sus nombres" class="divAB nombreC" id="nombreP" value="{{ form.fNombrePersona.data if form and form.fNombrePersona }}">
+
+
+                                    {% if form is defined and 'fNombrePersona' in form.errors %}
+                                        {% for error in form.errors['fNombrePersona'] %}
+                                            <small style="color: red;">{{ error }}</small>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
 
                                 <div class="cajaInps">
                                     <div>
                                         <label for="cajaInps">Apellido</label>
 
                                     </div>
-                                    <input type="text" name="fApellidoPersona" placeholder="Sus apellidos" class="divAB apellidoC" id="apellidoP" >
+                                    <input type="text" name="fApellidoPersona" placeholder="Sus apellidos" class="divAB apellidoC" id="apellidoP" value="{{ form.fApellidoPersona.data if form and form.fApellidoPersona }}">
+                                    <!-- <small style="color: red;">Apellido invalido</small> -->
+                                    {% if form is defined and 'fApellidoPersona' in form.errors %}
+                                        {% for error in form.errors['fApellidoPersona'] %}
+                                            <small style="color: red;">{{ error }}</small>
+                                        {% endfor %}
+                                    {% endif %}
                                 </div>
 
                             </div>
+                            <div class="dispersar">
                             <div class="divGid">
                                 <div class="divIdentificacion">
 
@@ -73,13 +90,22 @@
                                     </div>
                                     <div class="cajasId">
                                         <input type="number" class="inputId documentoC" name="fIdentificacionPersona"
-                                            placeholder="Su identificacion" id="documentoP" >
-
+                                            placeholder="Su identificacion" id="documentoP" value="{{ form.fIdentificacionPersona.data if form and form.fIdentificacionPersona }}" >
+                                            
+                                           
                                     </div>
+                                    {% if form is defined and 'fIdentificacionPersona' in form.errors %}
+                                        {% for error in form.errors['fIdentificacionPersona'] %}
+                                        <div class="labelid">
+                                                <small style="color: red;">{{ error }}</small>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
 
 
                                 </div>
                             </div>
+                            
                             <div class="divGid">
                                 <div class="divIdentificacion">
 
@@ -89,9 +115,30 @@
                                     </div>
                                     <div class="cajasId">
                                         <input type="email" class="inputId emailC" name="fCorreoPersona"
-                                               placeholder="Su correo"  id="inputCorreo"   >
-
+                                               placeholder="Su correo"  id="inputCorreo"  value="{{ form.fCorreoPersona.data if form and form.fCorreoPersona }}" >
                                     </div>
+
+                                    {% if form is defined and 'fCorreoPersona' in form.errors %}
+                                        {% for error in form.errors['fCorreoPersona'] %}
+                                        <div class="labelid">
+                                                <small style="color: red;">{{ error }}</small>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    <!-- mensaje flash -->
+                                    {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                            {% for message in messages %} 
+                                            <div class="labelid">
+                                                <small style="color: red;">{{ message }}</small>
+                                            </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+                                    
+                                    
+
 
 
                                 </div>
@@ -105,12 +152,20 @@
                                     </div>
                                     <div class="cajasId">
                                         <input type="number" class="inputId telefonoC" name="fTelefonoPersona"
-                                            placeholder="Su Telefono" id="telefonoP" >
+                                            placeholder="Su Telefono" id="telefonoP"  value="{{ form.fTelefonoPersona.data if form and form.fTelefonoPersona }}">
 
                                     </div>
-
-
+                                    {% if form is defined and 'fTelefonoPersona' in form.errors %}
+                                        {% for error in form.errors['fTelefonoPersona'] %}
+                                        <div class="labelid">
+                                                <small style="color: red;">{{ error }}</small>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    
                                 </div>
+                               
+                            </div>
                             </div>
                         </div>
                         <div class="divInputsC2">
@@ -120,8 +175,13 @@
                                     <label for="cajaInps" >Contraseña</label>
                                 </div>
 
-                                <input type="password" placeholder="Su Contraseña" name="fContrasenaPersona" class="divAB contraC" id="inputContrasena"  autocomplete="new-password">
-
+                                <input type="password" placeholder="Su Contraseña" name="fContrasenaPersona" class="divAB contraC" id="inputContrasena"   autocomplete="new-password" >
+                                {% if form is defined and 'fContrasenaPersona' in form.errors %}
+                                    {% for error in form.errors['fContrasenaPersona'] %}
+                                    <small style="color: red;">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                               
                             </div>
 
                             <div class="cajaInps">
@@ -130,6 +190,12 @@
 
                                 </div>
                                 <input type="password" placeholder="Confirmar" name="fConfirmarContrasena" class="divAB contraCC" id="inputConfirmarContrasena"  >
+                                {% if form is defined and 'fConfirmarContrasena' in form.errors %}
+                                    {% for error in form.errors['fConfirmarContrasena'] %}
+                                        <small style="color: red;">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            
                             </div>
 
                         </div>
@@ -137,7 +203,7 @@
                         <div id="divTerminos">
                             <!--el checkbox cuando no esta marcado el java script le agrega una clase-->                                                                                                                                                        
                             
-                            <input type="checkbox" id="aceptarTerminos" onchange="" >   
+                            <input type="checkbox" id="aceptarTerminos" onchange="" required >   
                           
                             <a href="#"  id="aTerminos" > Aceptar los términos y condiciones </a>
  
@@ -281,74 +347,7 @@
                             }
           
                             
-                         function validarCorreo() {// esta funcion no esta en uso porque al final no sirvio
-                             // tengo una idea para hacer lo mismo de la funcion ajax pero tendrian  los datos irse a la funcion ajax 
-                                
-                            console.log(" Dentre a la funcion validarCorreo");
-                                
-
-                            
-                             !(function(window, document) {//Esta es una función IIFE que toma window y document como argumentos, que son objetos globales. y se utliza para encapsular las variables
-//                                   
-                                  
-                                    let nombre = document.getElementById("nombreP").value;
-                                    let apellido = document.getElementById("apellidoP").value;
-                                    let identificacion = document.getElementById("documentoP").value;
-                                    let correo = document.getElementById("inputCorreo").value;
-                                    let telefono = document.getElementById("telefonoP").value;
-                                    let contrasena = document.getElementById("inputContrasena").value;
-                                    
-                                    
-                                    
-                                     let xhr = new XMLHttpRequest();// se encarga de la comunicacion entre la otra vista enviar y recibir la respuesta 
-                            
-                                    xhr.onreadystatechange = function() {
-
-                                        if (xhr.readyState === 4 && xhr.status === 200) {
-
-                                            let respuesta = xhr.responseText;// obtiene la respuesta  
-
-                                            console.log(" La respuesta es ::::: "+ respuesta+" ______------ final de la respuesta ");
-
-
-                                            if (respuesta === "true") {
-
-                                                window.alert("El correo sumistrado ya esta Registrado, debes cambiarlo.");
-
-                                     
-                                            }else if (respuesta === "false") {
-
-                                                console.log("el correo no esta Registrado");
-                                                xhr.abort();
-
-                                            } else {
-
-                                                console.log("Error en la consulta");
-//                                             
-
-                                            }
-                                        }
-                                    };
-                            
-                                        
-                                    xhr.open("POST", "controladorCrearCuenta", true); // se envia el correo por medio de la url a controlador 
-                                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                    xhr.send("fNombrePersona="+nombre+"&fApellidoPersona="+apellido+"&fIdentificacionPersona=" + identificacion +"&fCorreoPersona=" + correo +"&fTelefonoPersona=" + telefono +"&fContrasenaPersona=" + contrasena);
-
-
-                                    console.log(correo+" EEEEEEEEEEL CORREO ");
-                                 
-                            
-                                    
-                                event.preventDefault(); // Previene el comportamiento predeterminado del botón 
-
-
-                                })(window, document);
-                            
-
-                            
-                        }
-
+                      
                                
                        </script>
                                
