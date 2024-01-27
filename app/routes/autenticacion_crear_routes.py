@@ -60,37 +60,38 @@ class RegistrationForm(Form):
 @bp.route('/login/crear_cuenta/Registrar', methods=['GET', 'POST'])
 def RegistrarUsuario():
     
-    nombre = request.form['fNombrePersona']
-    apellido = request.form['fApellidoPersona']
-    identificacion = request.form['fIdentificacionPersona']
-    correo = request.form['fCorreoPersona']
-    telefono = request.form['fTelefonoPersona']
-    contrasena = request.form['fContrasenaPersona']
-    bcrypt = Bcrypt()
+    if request.method == 'POST':
+        nombre = request.form['fNombrePersona']
+        apellido = request.form['fApellidoPersona']
+        identificacion = request.form['fIdentificacionPersona']
+        correo = request.form['fCorreoPersona']
+        telefono = request.form['fTelefonoPersona']
+        contrasena = request.form['fContrasenaPersona']
+        bcrypt = Bcrypt()
 
-    
-    # Verificar si el correo ya está en la base de datos
-    verificar = Persona.query.filter_by(correoPersona=correo).first()
-    form = RegistrationForm(request.form) 
-    
-    
-    if request.method == 'POST' and form.validate():
-        if verificar: 
-            # el correo ya esta registrado
-            flash("El correo suministrado ya se encuentra registrado", 'error')
-    
-            return render_template('crear_cuenta.html' , form=form)
         
-        hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
-        nuevaPersona = Persona(nombrePersona=nombre, apellidoPersona = apellido, identificacionPersona = identificacion, correoPersona = correo, telefonoPersona = telefono, contrasenaPersona = hashedContrasena, idRol= 1)
-        db.session.add(nuevaPersona)
-        db.session.commit()
-        flash("Registro Exitoso", 'exito')
-        return redirect(url_for('bp_autenticacion_crear.login'))
+        # Verificar si el correo ya está en la base de datos
+        verificar = Persona.query.filter_by(correoPersona=correo).first()
+        form = RegistrationForm(request.form) 
     
-    else:
-        return render_template('crear_cuenta.html' , form=form)
     
+        if  form.validate():
+            if verificar: 
+                # el correo ya esta registrado
+                flash("El correo suministrado ya se encuentra registrado", 'error')
+        
+                return render_template('crear_cuenta.html' , form=form)
+            
+            hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
+            nuevaPersona = Persona(nombrePersona=nombre, apellidoPersona = apellido, identificacionPersona = identificacion, correoPersona = correo, telefonoPersona = telefono, contrasenaPersona = hashedContrasena, idRol= 1)
+            db.session.add(nuevaPersona)
+            db.session.commit()
+            flash("Registro Exitoso", 'exito')
+            return redirect(url_for('bp_autenticacion_crear.login'))
+        
+        else:
+            return render_template('crear_cuenta.html' , form=form)
+    return render_template("crearCuenta_cuenta.html")
 
     
     
