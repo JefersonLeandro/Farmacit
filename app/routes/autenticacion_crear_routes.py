@@ -38,7 +38,7 @@ class RegistrationForm(Form):
         validators.Length(min= 6, max=12, message="Ingrese una identificacion valida")
         ])
     fTelefonoPersona = StringField('fTelefonoPersona', [
-        validators.DataRequired(message="telefono requerido"),
+        validators.DataRequired(message="Telefono requerido"),
         validators.Length(min= 10, max=12, message="Ingrese un telefono valido")
         ])
     
