@@ -6,4 +6,5 @@ SQLAlchemy==1.4.31
 #mysqlclient==2.2.1
 PyMySQL==1.0.2
 Werkzeug==2.2.2
-Flask-Bcrypt==1.0.1
+Flask-Bcrypt==1.0.1 
+WTForms==3.1.2
