@@ -11,9 +11,9 @@ app = Flask(__name__)
 bp = Blueprint('bp_autenticacion_crear', __name__)
 
 
-@bp.route('/login') 
-def login():
-    return render_template('login.html')
+# @bp.route('/login') 
+# def login():
+#     return render_template('login.html')
 
 @bp.route('/login/crear_cuenta')
 def crearCuenta():
@@ -87,11 +87,11 @@ def RegistrarUsuario():
             db.session.add(nuevaPersona)
             db.session.commit()
             flash("Registro Exitoso", 'exito')
-            return redirect(url_for('bp_autenticacion_crear.login'))
+            return redirect(url_for('bp_login.login'))
         
         else:
             return render_template('crear_cuenta.html' , form=form)
-    return render_template("crearCuenta_cuenta.html")
+    return render_template("crear_cuenta.html")
 
     
     
