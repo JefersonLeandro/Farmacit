@@ -15,7 +15,7 @@
             <div id="divFormulario">
 
             <!--  action="../controlador/controladorInicioSession.php"   PONER LA VISTA DE REGISTRO EXIOSO YA PUEDE INICIAR SESION  -->
-            <form  class = "formulario" action="#"  method="post" onclick="cambiarColor();">
+            <form  class = "formulario" action="{{url_for('bp_login.autenticacion')}}"  method="post" onclick="cambiarColor();">
 
                     <div id="tituloForm">
                         <div id="iconoForm">
@@ -59,15 +59,15 @@
                             <h3><a href="">¿Olvido la contraseña?</a></h3>
                         </div>
                         <!--en este div cambie la clase--> 
-                        <div class="divButtonIngresar">
-                            <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession" onclick=" return verificarCampos() && mostrarMensaje();"  > 
-                            <!--onclick="/*location.href='index.php*/'"-->
+                        <div class="divButtonIngresar" >
+                            <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession" onclick=" mostrarMensaje();"  > 
+                            
                             <h3>Ingresar</h3>
-                            </button>
+                            </button> 
 
                         </div>
                         <div id="divCrearC">
-                            <p>¿No tienes una cuenta?<a href="{{url_for('bp_autenticacion_crear.crearCuenta')}}" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
+                            <p>¿No tienes una cuenta?<a href="{{url_for('bp_crear_cuenta.crearCuenta')}}" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
                            
                         </div>
                         

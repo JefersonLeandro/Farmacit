@@ -13,4 +13,6 @@ def login():
 
 @bp.route('/login/autenticacion') 
 def autenticacion():
+    
+    
     return "login en proceso para verificar"

@@ -12,11 +12,11 @@ def create_app():
     bcrypt = Bcrypt(app)
     db.init_app(app)
 
-    from app.routes import index_routes, login_routes, autenticacion_crear_routes
+    from app.routes import index_routes, login_routes, crear_cuenta_routes
     
     # se registran los blueprint de las rutas 
     app.register_blueprint(index_routes.bp)
     app.register_blueprint(login_routes.bp)
-    app.register_blueprint(autenticacion_crear_routes.bp)
+    app.register_blueprint(crear_cuenta_routes.bp)
    
     return app

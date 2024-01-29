@@ -8,7 +8,7 @@ from app import db
 
 
 app = Flask(__name__)
-bp = Blueprint('bp_autenticacion_crear', __name__)
+bp = Blueprint('bp_crear_cuenta', __name__)
 
 
 # @bp.route('/login') 
@@ -73,14 +73,15 @@ def RegistrarUsuario():
         # Verificar si el correo ya está en la base de datos
         verificar = Persona.query.filter_by(correoPersona=correo).first()
         form = RegistrationForm(request.form) 
-    
-    
-        if  form.validate():
-            if verificar: 
-                # el correo ya esta registrado
-                flash("El correo suministrado ya se encuentra registrado", 'error')
         
-                return render_template('crear_cuenta.html' , form=form)
+        if not ('fCorreoPersona' in form.errors) and verificar:
+           
+            # el correo ya esta registrado
+            flash("El correo suministrado ya se encuentra registrado", 'error')
+    
+            return render_template('crear_cuenta.html' , form=form)
+        
+        elif  form.validate():
             
             hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
             nuevaPersona = Persona(nombrePersona=nombre, apellidoPersona = apellido, identificacionPersona = identificacion, correoPersona = correo, telefonoPersona = telefono, contrasenaPersona = hashedContrasena, idRol= 1)
