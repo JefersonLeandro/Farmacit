@@ -45,7 +45,7 @@ class RegistrationForm(Form):
     fCorreoPersona = StringField('fCorreoPersona', [
         validators.DataRequired(message="Correo Electronico requerido"),
         validators.Email(message="Ingrese una dirección de correo electrónico válida"),
-        validators.Length(max=120, message="El correo execede el numero maximo de caracteres")
+        validators.Length(max=255, message="El correo execede el numero maximo de caracteres")
         ])
     
     fContrasenaPersona = PasswordField('fContrasenaPersona', validators=[
@@ -63,10 +63,10 @@ def RegistrarUsuario():
     if request.method == 'POST':
         nombre = request.form['fNombrePersona']
         apellido = request.form['fApellidoPersona']
-        identificacion = request.form['fIdentificacionPersona']
-        correo = request.form['fCorreoPersona']
+        identificacion = request.form['fIdentificacionPersona'].strip()
+        correo = request.form['fCorreoPersona'].strip()
         telefono = request.form['fTelefonoPersona']
-        contrasena = request.form['fContrasenaPersona']
+        contrasena = request.form['fContrasenaPersona'].strip()
         bcrypt = Bcrypt()
 
         

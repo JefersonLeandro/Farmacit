@@ -15,7 +15,7 @@
             <div id="divFormulario">
 
             <!--  action="../controlador/controladorInicioSession.php"   PONER LA VISTA DE REGISTRO EXIOSO YA PUEDE INICIAR SESION  -->
-            <form  class = "formulario" action="{{url_for('bp_login.autenticacion')}}"  method="post" onclick="cambiarColor();">
+            <form  class = "formulario" action="{{url_for('bp_login.autenticacion')}}"  method="POST" >
 
                     <div id="tituloForm">
                         <div id="iconoForm">
@@ -47,20 +47,37 @@
                         <!-- <%
                         }
                         %> -->
+                        {% if form is defined and 'emailDocumento' in form.errors %}
+                            {% for error in form.errors['emailDocumento'] %}
+                                <small style="color: red;">{{ error }}</small>
+                                <script>
+                                    console.log("fallooooooooooo")
+                                </script>
+                            {% endfor %}
+                        {% endif %}
+                        {% if form is defined and 'contrasena' in form.errors %}
+                            {% for error in form.errors['contrasena'] %}
+                                <small style="color: red;">{{ error }}</small>
+                                <script>
+                                    console.log("fallooooooooooo")
+                                </script>
+                            {% endfor %}
+                        {% endif %}
+                            
 
 
                         <div class="areaInputForm">
-                            <input type="text" placeholder="Email o Numero de identificacion"  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" onclick="RemplazarValor();" required>
+                            <input type="text" placeholder="Correo electronico "  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" >
                         </div>
                         <div class="areaInputForm">
-                            <input type="password" placeholder="Contraseña" class="inputsForm" name="contrasena" id="contrasena" onclick="RemplazarValor();"  required>
+                            <input type="password" placeholder="Contraseña" class="inputsForm" name="contrasena" id="contrasena"   >
                         </div>
                         <div class="olvidarContrasena">
                             <h3><a href="">¿Olvido la contraseña?</a></h3>
                         </div>
                         <!--en este div cambie la clase--> 
                         <div class="divButtonIngresar" >
-                            <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession" onclick=" mostrarMensaje();"  > 
+                            <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession"  > 
                             
                             <h3>Ingresar</h3>
                             </button> 
