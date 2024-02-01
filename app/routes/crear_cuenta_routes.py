@@ -1,8 +1,10 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash , session
 from wtforms import Form, StringField, PasswordField, validators
 from app.models.Persona import Persona
+from flask_login import  current_user
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm 
+from .index_routes import index
 from app import db
 
 
@@ -17,9 +19,10 @@ bp = Blueprint('bp_crear_cuenta', __name__)
 
 @bp.route('/login/crear_cuenta')
 def crearCuenta():
+    if current_user.is_authenticated:
+        vistaIndex = index()
+        return vistaIndex  
     return render_template('crear_cuenta.html') 
-
-
 
 class RegistrationForm(Form):
     
@@ -87,11 +90,16 @@ def RegistrarUsuario():
             nuevaPersona = Persona(nombrePersona=nombre, apellidoPersona = apellido, identificacionPersona = identificacion, correoPersona = correo, telefonoPersona = telefono, contrasenaPersona = hashedContrasena, idRol= 1)
             db.session.add(nuevaPersona)
             db.session.commit()
-            flash("Registro Exitoso", 'exito')
+            mensajeExito = "Registro Exitoso"
+            flash(mensajeExito, 'exito')
             return redirect(url_for('bp_login.login'))
         
         else:
             return render_template('crear_cuenta.html' , form=form)
+   
+    if current_user.is_authenticated:
+        vistaIndex = index()
+        return vistaIndex  
     return render_template("crear_cuenta.html")
 
     

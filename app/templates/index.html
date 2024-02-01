@@ -15,7 +15,8 @@
     </head>
 
     <body>
-        <header>
+
+            <header>
             <!-- P==PRIMARI@ -->
             <!-- S==secundario -->
 
@@ -58,9 +59,45 @@
                     </a>
                     <div id="plbRegistro">
 
-                      
+                        {% if current_user.is_authenticated %}
+                          
+                            <div class='btn-group'>
+                                <button type='button' class='btn btn-tranparent dropdown-toggle' style='padding: 0; border: none; display: flex; align-items: center; gap: 5px;' data-bs-toggle='dropdown' aria-expanded='false' id='btnTogglee'>
+                                    <strong>{{ current_user.nombrePersona }}</strong>  
+                                </button>
+                                <ul class='dropdown-menu' style='padding-left:10px; '>
+                                    <li><a class='dropdown-items' href='#'>Perfil</a></li>
+                                    
+                                    
+                              
+                                        {% if  current_user.idRol == 3 %}
+                                            <li><a class='dropdown-items' href='controladorDireccionamiento?opcion=areaAdministracion'>Administrar</a></li>
+                                        {%else:%}
+                                            <li>aldfjladjfl</li>
+                                        {% endif %}
+                                   
+                                    <!-- int idTP = (int) session.getAttribute("idTipoPersona");  -->
+
+                                                <!-- if (idTP == 3){// ES ADMINISTRADOR de lo contrario tendra otro rol -->
+                                        <!-- %>  -->
+                                   
+                                    <li><hr class='dropdown-divider'></li>
+                                    <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
+                                </ul>
+                            </div> 
+
+
+                        {%else: %}
+
+                            <a href="{{url_for('bp_login.login')}}">
+                                <strong class='aSvg'>Registro</strong>
+                            </a>
+
+                        {%endif%}
+                        <!-- Otros detalles del perfil -->
+
                             
-                            <!-- if((session.getId() != null) && (session.getAttribute("idPersona") != null) && (session.getAttribute("nombrePersona") != null)){
+                    <!-- if((session.getId() != null) && (session.getAttribute("idPersona") != null) && (session.getAttribute("nombrePersona") != null)){
                             
                                 String nombre = (String)session.getAttribute("nombrePersona");
                                 String id = (String) session.getId(); // identificador de la sesion -->
@@ -84,9 +121,6 @@
                             </ul>
                         </div>  -->
                         
-                        <a href="{{url_for('bp_login.login')}}">
-                            <strong class='aSvg'>Registro</strong>
-                        </a>
                         
                     </div>
                 </div>

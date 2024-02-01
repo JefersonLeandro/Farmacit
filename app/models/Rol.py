@@ -1,5 +1,4 @@
-from app import db
-
+from app.extensiones import db
 
 class Rol (db.Model):
     __tablename__ = "Roles" 

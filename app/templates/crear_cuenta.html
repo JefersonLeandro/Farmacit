@@ -57,7 +57,7 @@
                                      <input type="text" name="fNombrePersona" placeholder="Sus nombres" class="divAB nombreC" id="nombreP" value="{{ form.fNombrePersona.data if form and form.fNombrePersona }}">
 
 
-                                    {% if form is defined and 'fNombrePersona' in form.errors %}
+                                    {% if form  is defined and 'fNombrePersona' in form.errors %}
                                         {% for error in form.errors['fNombrePersona'] %}
                                             <small style="color: red;">{{ error }}</small>
                                         {% endfor %}
@@ -70,7 +70,7 @@
 
                                     </div>
                                     <input type="text" name="fApellidoPersona" placeholder="Sus apellidos" class="divAB apellidoC" id="apellidoP" value="{{ form.fApellidoPersona.data if form and form.fApellidoPersona }}">
-                                    <!-- <small style="color: red;">Apellido invalido</small> -->
+                                   
                                     {% if form is defined and 'fApellidoPersona' in form.errors %}
                                         {% for error in form.errors['fApellidoPersona'] %}
                                             <small style="color: red;">{{ error }}</small>

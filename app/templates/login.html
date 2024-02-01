@@ -32,45 +32,33 @@
                         <div id="plbIngresar">
                             <h2>Ingresa a tu cuenta</h2>
                         </div>
-                        <!-- <%
-                        if (request.getParameter("msj") != null) {
-                            String mensaje = request.getParameter("msj");
-                        %> -->
-                            <!-- <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert"></h5>
-                            <script>
-                                var elMensaje = "<%= mensaje %>";
-                                document.getElementById("datosInvalidos").innerHTML= elMensaje;
-                                console.log(" msj P : "+elMensaje);
-                             
-                            </script> -->
-                            
-                        <!-- <%
-                        }
-                        %> -->
-                        {% if form is defined and 'emailDocumento' in form.errors %}
-                            {% for error in form.errors['emailDocumento'] %}
-                                <small style="color: red;">{{ error }}</small>
-                                <script>
-                                    console.log("fallooooooooooo")
-                                </script>
-                            {% endfor %}
-                        {% endif %}
-                        {% if form is defined and 'contrasena' in form.errors %}
-                            {% for error in form.errors['contrasena'] %}
-                                <small style="color: red;">{{ error }}</small>
-                                <script>
-                                    console.log("fallooooooooooo")
-                                </script>
-                            {% endfor %}
-                        {% endif %}
-                            
+
+                        {% with mensajes = get_flashed_messages(with_categories=true) %}
+                        {% for categoria, mensaje in mensajes %}
+                            {% if categoria == 'invalidados' %}
+                             <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert">{{mensaje}}</h5>
+                             <script>
+                                function remplazarValor() {
+                    
+                                    mensajeH5 = document.getElementById("datosInvalidos").value
+                                    if (mensajeH5 !== 'undefined') {
+                                        document.getElementById("datosInvalidos").innerHTML = "";
+                                    }
+                                } 
+
+                             </script>
+
+                            {% endif %}
+                        {% endfor %}
+                        {% endwith %}
+
 
 
                         <div class="areaInputForm">
-                            <input type="text" placeholder="Correo electronico "  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" >
+                            <input type="text" placeholder="Correo electronico "  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" onclick="remplazarValor()" >
                         </div>
                         <div class="areaInputForm">
-                            <input type="password" placeholder="Contraseña" class="inputsForm" name="contrasena" id="contrasena"   >
+                            <input type="password" placeholder="Contraseña" class="inputsForm" name="contrasena" id="contrasena" onclick="remplazarValor()"  >
                         </div>
                         <div class="olvidarContrasena">
                             <h3><a href="">¿Olvido la contraseña?</a></h3>
@@ -97,26 +85,26 @@
 
 
         </div>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %} 
-                <script>
-                    // Función para mostrar una alerta después de cargar completamente la página
-                    window.onload = function() {
-                        alert("{{message}}")
-                        };
-                </script>
-                {% endfor %}
+        
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'exito' %}
+            <script>
+                // Función para mostrar una alerta después de cargar completamente la página
+                window.onload = function() {
+                alert("{{ mensaje }}");
+                };
+            </script>
             {% endif %}
+        {% endfor %}
         {% endwith %}
-                
-   
+
+        
     </main>
 </body>
 
     <script>
-      
-            // Recuperar mensajes flash
+    
            
              function cambiarColor(){
 
@@ -153,13 +141,6 @@
               }
              
                 
-                function RemplazarValor() {
                 
-                    
-                    if (typeof elMensaje !== 'undefined') {// tambien sirve ese undefined pero es mas preciso el typeof
-                        document.getElementById("datosInvalidos").innerHTML = "";
-                
-                    }
-                } 
     </script>
 </html>
