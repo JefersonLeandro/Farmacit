@@ -7,8 +7,6 @@
     <title>Registro</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 
-
-
 </head>
 
 <body>
@@ -17,7 +15,7 @@
             <div id="divFormulario">
 
             <!--  action="../controlador/controladorInicioSession.php"   PONER LA VISTA DE REGISTRO EXIOSO YA PUEDE INICIAR SESION  -->
-            <form  class = "formulario" action="#"  method="post" onclick="cambiarColor();">
+            <form  class = "formulario" action="{{url_for('bp_login.autenticacion')}}"  method="POST" >
 
                     <div id="tituloForm">
                         <div id="iconoForm">
@@ -34,42 +32,47 @@
                         <div id="plbIngresar">
                             <h2>Ingresa a tu cuenta</h2>
                         </div>
-                        <!-- <%
-                        if (request.getParameter("msj") != null) {
-                            String mensaje = request.getParameter("msj");
-                        %> -->
-                            <!-- <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert"></h5>
-                            <script>
-                                var elMensaje = "<%= mensaje %>";
-                                document.getElementById("datosInvalidos").innerHTML= elMensaje;
-                                console.log(" msj P : "+elMensaje);
-                             
-                            </script> -->
-                            
-                        <!-- <%
-                        }
-                        %> -->
+
+                        {% with mensajes = get_flashed_messages(with_categories=true) %}
+                        {% for categoria, mensaje in mensajes %}
+                            {% if categoria == 'invalidados' %}
+                             <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert">{{mensaje}}</h5>
+                             <script>
+                                function remplazarValor() {
+                    
+                                    mensajeH5 = document.getElementById("datosInvalidos").value
+                                    if (mensajeH5 !== 'undefined') {
+                                        document.getElementById("datosInvalidos").innerHTML = "";
+                                    }
+                                } 
+
+                             </script>
+
+                            {% endif %}
+                        {% endfor %}
+                        {% endwith %}
+
 
 
                         <div class="areaInputForm">
-                            <input type="text" placeholder="Email o Numero de identificacion"  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" onclick="RemplazarValor();" required>
+                            <input type="text" placeholder="Correo electronico "  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" onclick="remplazarValor()" >
                         </div>
                         <div class="areaInputForm">
-                            <input type="password" placeholder="Contraseña" class="inputsForm" name="contrasena" id="contrasena" onclick="RemplazarValor();"  required>
+                            <input type="password" placeholder="Contraseña" class="inputsForm" name="contrasena" id="contrasena" onclick="remplazarValor()"  >
                         </div>
                         <div class="olvidarContrasena">
                             <h3><a href="">¿Olvido la contraseña?</a></h3>
                         </div>
                         <!--en este div cambie la clase--> 
-                        <div class="divButtonIngresar">
-                            <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession" onclick=" return verificarCampos() && mostrarMensaje();"  > 
-                            <!--onclick="/*location.href='index.php*/'"-->
+                        <div class="divButtonIngresar" >
+                            <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession"  > 
+                            
                             <h3>Ingresar</h3>
-                            </button>
+                            </button> 
 
                         </div>
                         <div id="divCrearC">
-                            <p>¿No tienes una cuenta?<a href="{{url_for('bp_autenticacion_crear.crearCuenta')}}" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
+                            <p>¿No tienes una cuenta?<a href="{{url_for('bp_crear_cuenta.crearCuenta')}}" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
                            
                         </div>
                         
@@ -82,26 +85,26 @@
 
 
         </div>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %} 
-                <script>
-                    // Función para mostrar una alerta después de cargar completamente la página
-                    window.onload = function() {
-                        alert("{{message}}")
-                        };
-                </script>
-                {% endfor %}
+        
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'exito' %}
+            <script>
+                // Función para mostrar una alerta después de cargar completamente la página
+                window.onload = function() {
+                alert("{{ mensaje }}");
+                };
+            </script>
             {% endif %}
+        {% endfor %}
         {% endwith %}
-                
-   
+
+        
     </main>
 </body>
 
     <script>
-      
-            // Recuperar mensajes flash
+    
            
              function cambiarColor(){
 
@@ -138,13 +141,6 @@
               }
              
                 
-                function RemplazarValor() {
                 
-                    
-                    if (typeof elMensaje !== 'undefined') {// tambien sirve ese undefined pero es mas preciso el typeof
-                        document.getElementById("datosInvalidos").innerHTML = "";
-                
-                    }
-                } 
     </script>
 </html>

@@ -10,7 +10,6 @@ def index():
     
     productos = Producto.query.all()
     marcasProductos = MarcaProducto.query.all()
-    #print(productos, "--iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii--")
     
     return render_template('index.html', productos = productos, marcasProductos = marcasProductos )    
 

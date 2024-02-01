@@ -1,25 +1,28 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash , session
 from wtforms import Form, StringField, PasswordField, validators
 from app.models.Persona import Persona
+from flask_login import  current_user
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm 
+from .index_routes import index
 from app import db
 
 
 
 app = Flask(__name__)
-bp = Blueprint('bp_autenticacion_crear', __name__)
+bp = Blueprint('bp_crear_cuenta', __name__)
 
 
-@bp.route('/login') 
-def login():
-    return render_template('login.html')
+# @bp.route('/login') 
+# def login():
+#     return render_template('login.html')
 
 @bp.route('/login/crear_cuenta')
 def crearCuenta():
-    return render_template('crear_cuenta.html') 
-
-
+    if current_user.is_authenticated:
+        vistaIndex = index()
+        return vistaIndex  
+    return render_template('autenticacion/crear_cuenta.html') 
 
 class RegistrationForm(Form):
     
@@ -45,7 +48,7 @@ class RegistrationForm(Form):
     fCorreoPersona = StringField('fCorreoPersona', [
         validators.DataRequired(message="Correo Electronico requerido"),
         validators.Email(message="Ingrese una dirección de correo electrónico válida"),
-        validators.Length(max=120, message="El correo execede el numero maximo de caracteres")
+        validators.Length(max=255, message="El correo execede el numero maximo de caracteres")
         ])
     
     fContrasenaPersona = PasswordField('fContrasenaPersona', validators=[
@@ -64,34 +67,40 @@ def RegistrarUsuario():
         nombre = request.form['fNombrePersona']
         apellido = request.form['fApellidoPersona']
         identificacion = request.form['fIdentificacionPersona']
-        correo = request.form['fCorreoPersona']
+        correo = request.form['fCorreoPersona'].strip()
         telefono = request.form['fTelefonoPersona']
-        contrasena = request.form['fContrasenaPersona']
+        contrasena = request.form['fContrasenaPersona'].strip()
         bcrypt = Bcrypt()
 
         
         # Verificar si el correo ya está en la base de datos
         verificar = Persona.query.filter_by(correoPersona=correo).first()
         form = RegistrationForm(request.form) 
-    
-    
-        if  form.validate():
-            if verificar: 
-                # el correo ya esta registrado
-                flash("El correo suministrado ya se encuentra registrado", 'error')
         
-                return render_template('crear_cuenta.html' , form=form)
+        if not ('fCorreoPersona' in form.errors) and verificar:
+           
+            # el correo ya esta registrado
+            flash("El correo suministrado ya se encuentra registrado", 'error')
+    
+            return render_template('/autenticacion/crear_cuenta.html' , form=form)
+        
+        elif  form.validate():
             
             hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
             nuevaPersona = Persona(nombrePersona=nombre, apellidoPersona = apellido, identificacionPersona = identificacion, correoPersona = correo, telefonoPersona = telefono, contrasenaPersona = hashedContrasena, idRol= 1)
             db.session.add(nuevaPersona)
             db.session.commit()
-            flash("Registro Exitoso", 'exito')
-            return redirect(url_for('bp_autenticacion_crear.login'))
+            mensajeExito = "Registro Exitoso"
+            flash(mensajeExito, 'exito')
+            return redirect(url_for('bp_login.login'))
         
         else:
-            return render_template('crear_cuenta.html' , form=form)
-    return render_template("crearCuenta_cuenta.html")
+            return render_template('/autenticacion/crear_cuenta.html' , form=form)
+   
+    if current_user.is_authenticated:
+        vistaIndex = index()
+        return vistaIndex  
+    return render_template("/autenticacion/crear_cuenta.html")
 
     
     
