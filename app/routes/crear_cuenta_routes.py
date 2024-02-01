@@ -22,7 +22,7 @@ def crearCuenta():
     if current_user.is_authenticated:
         vistaIndex = index()
         return vistaIndex  
-    return render_template('crear_cuenta.html') 
+    return render_template('autenticacion/crear_cuenta.html') 
 
 class RegistrationForm(Form):
     
@@ -66,7 +66,7 @@ def RegistrarUsuario():
     if request.method == 'POST':
         nombre = request.form['fNombrePersona']
         apellido = request.form['fApellidoPersona']
-        identificacion = request.form['fIdentificacionPersona'].strip()
+        identificacion = request.form['fIdentificacionPersona']
         correo = request.form['fCorreoPersona'].strip()
         telefono = request.form['fTelefonoPersona']
         contrasena = request.form['fContrasenaPersona'].strip()
@@ -82,7 +82,7 @@ def RegistrarUsuario():
             # el correo ya esta registrado
             flash("El correo suministrado ya se encuentra registrado", 'error')
     
-            return render_template('crear_cuenta.html' , form=form)
+            return render_template('/autenticacion/crear_cuenta.html' , form=form)
         
         elif  form.validate():
             
@@ -95,12 +95,12 @@ def RegistrarUsuario():
             return redirect(url_for('bp_login.login'))
         
         else:
-            return render_template('crear_cuenta.html' , form=form)
+            return render_template('/autenticacion/crear_cuenta.html' , form=form)
    
     if current_user.is_authenticated:
         vistaIndex = index()
         return vistaIndex  
-    return render_template("crear_cuenta.html")
+    return render_template("/autenticacion/crear_cuenta.html")
 
     
     

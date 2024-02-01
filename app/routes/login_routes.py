@@ -19,9 +19,7 @@ def login():
     
     if current_user.is_authenticated:
         return vistaIndex
-    return render_template('login.html')
-
-
+    return render_template('/autenticacion/login.html')
 
 @bp.route('/login/autenticacion', methods=['GET', 'POST']) 
 def autenticacion():
@@ -48,13 +46,14 @@ def autenticacion():
     if current_user.is_authenticated:
         vistaIndex = index()
         return vistaIndex  
-    return render_template('login.html') 
+    return render_template('/autenticacion/login.html') 
     
 @bp.route('/logout', methods=['GET']) 
 def logout():
-    vistaIndex = index()
     logout_user()
-    return vistaIndex    
+    vistaIndex = index()
+    
+    return vistaIndex   
 
 
 

@@ -67,20 +67,9 @@
                                 </button>
                                 <ul class='dropdown-menu' style='padding-left:10px; '>
                                     <li><a class='dropdown-items' href='#'>Perfil</a></li>
-                                    
-                                    
-                              
-                                        {% if  current_user.idRol == 3 %}
-                                            <li><a class='dropdown-items' href='controladorDireccionamiento?opcion=areaAdministracion'>Administrar</a></li>
-                                        {%else:%}
-                                            <li>aldfjladjfl</li>
-                                        {% endif %}
-                                   
-                                    <!-- int idTP = (int) session.getAttribute("idTipoPersona");  -->
-
-                                                <!-- if (idTP == 3){// ES ADMINISTRADOR de lo contrario tendra otro rol -->
-                                        <!-- %>  -->
-                                   
+                                    {% if  current_user.idRol == 3 %}
+                                        <li><a class='dropdown-items' href='controladorDireccionamiento?opcion=areaAdministracion'>Administrar</a></li>
+                                    {% endif %}
                                     <li><hr class='dropdown-divider'></li>
                                     <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
                                 </ul>
@@ -94,34 +83,6 @@
                             </a>
 
                         {%endif%}
-                        <!-- Otros detalles del perfil -->
-
-                            
-                    <!-- if((session.getId() != null) && (session.getAttribute("idPersona") != null) && (session.getAttribute("nombrePersona") != null)){
-                            
-                                String nombre = (String)session.getAttribute("nombrePersona");
-                                String id = (String) session.getId(); // identificador de la sesion -->
-                      
-                        <!-- <div class='btn-group'>
-                            <button type='button' class='btn btn-tranparent dropdown-toggle' style='padding: 0; border: none; display: flex; align-items: center; gap: 5px;' data-bs-toggle='dropdown' aria-expanded='false' id='btnTogglee'>
-                                 <strong><%= nombre %></strong>  -->
-                            <!-- </button>
-                            <ul class='dropdown-menu' style='padding-left:10px; '>
-                                <li><a class='dropdown-items' href='#'>Perfil</a></li>
-                                <li><a class='dropdown-items' href='#'> otra action</a></li>
-                                  
-                                 int idTP = (int) session.getAttribute("idTipoPersona"); -->
-
-                                            <!-- if (idTP == 3){// ES ADMINISTRADOR de lo contrario tendra otro rol -->
-                                    <!-- %>  -->
-                                <!-- <li><a class='dropdown-items' href='controladorDireccionamiento?opcion=areaAdministracion'>Administrar</a></li>          
-                                    
-                                <li><hr class='dropdown-divider'></li>
-                                <li><a class='dropdown-item' href='controladorCerrarSesion'>Cerrar session</a></li>
-                            </ul>
-                        </div>  -->
-                        
-                        
                     </div>
                 </div>
 
@@ -149,7 +110,7 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                            aria-expanded="false">
-                                            Dropdown
+                                            Desplegable
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#">Action</a></li>
@@ -162,31 +123,25 @@
                                     </li>
                                     <li class="nav-item">
 
+                                        {% if current_user.is_authenticated %}
+                                            {% if  current_user.idRol == 3 %}
 
-                                       
+                                                <a class='nav-link' href='controladorDireccionamiento?opcion=areaAdministracion'>Area de Administracion</a>
 
-                                            <!-- if ((session.getId() != null) && (session.getAttribute("idTipoPersona") != null) && (session.getAttribute("idPersona") != null)){
+                                            {%endif%}
+                                            
+                                            <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
 
-                                                int idTP = (int) session.getAttribute("idTipoPersona");
+                                        {%else:%}
+                                            <li><a class='nav-link' href="{{url_for('bp_login.login')}}">Iniciar Sesion</a></li>
 
-                                                if (idTP == 3){// ES ADMINISTRADOR de lo contrario tendra otro rol  -->
-
-                                        <!-- <a class='nav-link' href='controladorDireccionamiento?opcion=areaAdministracion'>Area de Administracion</a> -->
-                                      
-                                                <!-- } -->
-
-                                            <!-- } -->
-
-                                            <!-- if(session.getId() != null && session.getAttribute("idPersona") != null){ -->
-
-                                       
-                                    <li><a class='dropdown-item' href='controladorCerrarSesion'>Cerrar session</a></li>
-                                    <li><a class='nav-link' href="controladorDireccionamiento?opcion=Registro">Iniciar Sesion</a></li>
+                                        {%endif%}
+                                        
                                     </li>
                                 </ul>
                                 <form class="d-flex mt-3" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                    <input class="form-control me-2" type="search" placeholder="Buscar " aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit">Buscar</button>
                                 </form>
                             </div>
                         </div>

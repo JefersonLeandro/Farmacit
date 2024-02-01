@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask import Flask
-from .models.Persona import Persona , db
+from .models.Persona import Persona, db
 import os 
 
 login_manager = LoginManager()
