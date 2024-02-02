@@ -4,7 +4,6 @@ from app.models.Persona import Persona
 from flask_login import  current_user
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm 
-from .index_routes import index
 from app import db
 
 
@@ -20,8 +19,8 @@ bp = Blueprint('bp_crear_cuenta', __name__)
 @bp.route('/login/crear_cuenta')
 def crearCuenta():
     if current_user.is_authenticated:
-        vistaIndex = index()
-        return vistaIndex  
+        
+        return redirect(url_for('bp_inicio.index'))
     return render_template('autenticacion/crear_cuenta.html') 
 
 class RegistrationForm(Form):
@@ -98,8 +97,7 @@ def RegistrarUsuario():
             return render_template('/autenticacion/crear_cuenta.html' , form=form)
    
     if current_user.is_authenticated:
-        vistaIndex = index()
-        return vistaIndex  
+        return redirect(url_for('bp_inicio.index'))
     return render_template("/autenticacion/crear_cuenta.html")
 
     

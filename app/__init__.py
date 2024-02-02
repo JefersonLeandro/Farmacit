@@ -1,9 +1,13 @@
+from .models.Persona import Persona, db
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask import Flask
-from .models.Persona import Persona, db
 import os 
+from app.routes import index_routes
+from app.routes.autenticacion_routes import crear_cuenta_routes, login_routes
+from app.routes.area_Administracion_routes import index_routes as administracion_index_routes , farmacias_routes
+
 
 login_manager = LoginManager()
 
@@ -23,11 +27,13 @@ def create_app():
         return Persona.query.get(int(idPersona))
     
     
-    from app.routes import index_routes, login_routes, crear_cuenta_routes
+    
 
     # se registran los blueprint de las rutas 
     app.register_blueprint(index_routes.bp)
     app.register_blueprint(login_routes.bp)
     app.register_blueprint(crear_cuenta_routes.bp)
+    app.register_blueprint(administracion_index_routes.bp)
+    app.register_blueprint(farmacias_routes.bp)
    
     return app

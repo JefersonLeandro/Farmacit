@@ -2,7 +2,6 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for,
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models.Persona import Persona
 from flask_bcrypt import Bcrypt
-from .index_routes import index
 from app import db
 
 
@@ -15,10 +14,9 @@ bp = Blueprint('bp_login', __name__)
 
 @bp.route('/login') 
 def login():
-    vistaIndex = index()
-    
+  
     if current_user.is_authenticated:
-        return vistaIndex
+         return redirect(url_for('bp_inicio.index'))
     return render_template('/autenticacion/login.html')
 
 @bp.route('/login/autenticacion', methods=['GET', 'POST']) 
@@ -37,24 +35,19 @@ def autenticacion():
                 
                 if bcrypt.check_password_hash(contrasenaBD, contrasena):
                     login_user(consulta)#se marca como autenticado y recibe un objecto En este caso la persona
-                    
                     return redirect(url_for('bp_inicio.index'))
 
         mensajeInvalidado = "datos invalidos" 
         flash(mensajeInvalidado, 'invalidados') 
       
     if current_user.is_authenticated:
-        vistaIndex = index()
-        return vistaIndex  
+         return redirect(url_for('bp_inicio.index'))
     return render_template('/autenticacion/login.html') 
     
 @bp.route('/logout', methods=['GET']) 
 def logout():
     logout_user()
-    vistaIndex = index()
-    
-    return vistaIndex   
-
+    return redirect(url_for('bp_inicio.index'))
 
 
 # datosPersona = {
