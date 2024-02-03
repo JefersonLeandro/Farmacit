@@ -11,7 +11,7 @@ class Persona (db.Model, UserMixin):
     correoPersona = db.Column(db.String(255), nullable=False)
     telefonoPersona = db.Column(db.String(15), nullable=False)
     contrasenaPersona = db.Column(db.String, nullable=False)
-    idRol = db.Column(db.Integer, db.ForeignKey('Roles.idRol'))
+    idRol =db.Column(db.Integer, db.ForeignKey('Roles.idRol'))
     
     def get_id(self):
         return str(self.idPersona)
