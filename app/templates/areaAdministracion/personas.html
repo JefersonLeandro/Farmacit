@@ -30,9 +30,18 @@
                     <h4>-Roles</h4>
                     </a>
                 </div>
-                <div id="iconsAV">
+                <div id="iconsAV" class="width82-2">
+
                     <div class="divMv">
-                        <a href="#">
+                        <a href="{{url_for('bp_administracion.index')}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="divMv">
+                        <a href="{{url_for('bp_inicio.index')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                                 class="bi bi-house-fill" viewBox="0 0 16 16">
                                 <path
@@ -70,11 +79,11 @@
 
                                 <tr><form id="fModificarDatosPersona"  action="{{url_for('bp_personas.acciones')}}" method="post">
                                     <td><input type="hidden" name="fIdPersona" value="{{ persona.idPersona }}">
-                                    <input type="text" name="fNombrePersona" value="{{ persona.nombrePersona }}"></td>
-                                <td><input type="text" name="fApellidoPersona" value="{{ persona.apellidoPersona }}"></td>
-                                <td><input type="number" name="fIdentificacionPersona" value="{{ persona.identificacionPersona }}"></td>
+                                    <input type="text" name="fNombrePersona" value="{{ persona.nombrePersona }}" required></td>
+                                <td><input type="text" name="fApellidoPersona" value="{{ persona.apellidoPersona }}" required></td>
+                                <td><input type="number" name="fIdentificacionPersona" value="{{ persona.identificacionPersona }}" required></td>
                                 <td><input type="email"  value="{{ persona.correoPersona }}" disabled ></td>
-                                <td><input type="number" name="fTelefonoPersona" value="{{ persona.telefonoPersona }}"></td>
+                                <td><input type="number" name="fTelefonoPersona" value="{{ persona.telefonoPersona }}" required></td>
                                 <td><input type="text"   value="{{ persona.contrasenaPersona }}" disabled ></td>
                                
                                <td>
@@ -83,7 +92,7 @@
                                         {% for rol in roles %}
                                             {% if persona.idRol ==  rol.idRol  %}
                                                 <option value="{{persona.idRol}}"  selected>
-                                                {{rol.nombreRol}}
+                                                    {{rol.nombreRol}}
                                                 </option>
                                             {%else : %}
                                                 <option value="{{rol.idRol}}" >
@@ -111,19 +120,19 @@
                                     <td><input type="number" name="fTelefonoPersona" required></td>
                                     <td><input type="text" name="fContrasenaPersona" required></td>
 
-                                        <td>
-                                            <select name='fIdRol'  required>
-                                            <option disabled selected>
-                                                Selecciona
-                                            </option>
+                                    <td>
+                                    <select name='fIdRol'  required>
+                                        <option disabled selected>
+                                            Selecciona
+                                        </option>
 
-                                            {% for rol in roles %}
+                                        {% for rol in roles %}
                                             <option value="{{rol.idRol}}" >
                                                 {{rol.nombreRol}}
                                             </option>
-                                            {% endfor %}
-                                        </select> 
-                                        </td>
+                                        {% endfor %}
+                                    </select> 
+                                    </td>
                                     <td>
                                         <button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar">Ingresar</button>
                                         <button type="reset"  value="Limpiar" class="buttonEnviar">Limpiar</button>

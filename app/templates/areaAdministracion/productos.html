@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos Producto</title>
+    <title>Productos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
 </head>
@@ -29,20 +29,29 @@
                     <h1>Productos</h1>
                 </div>
                 <div class="subTituloT" style="display: flex; align-items: end; padding-bottom: 4px; margin-left: 20px; width: auto;">
-                    <a href="controladorDireccionamiento?opcion=datosMarca">
+                    <a href="{{url_for('bp_marcas_productos.index')}}">
                     <h4>-Marcas</h4>
                     </a>
                 </div>
                 <div class="subTituloT" style="display: flex; align-items: end; padding-bottom: 4px; margin-left: 20px; width: auto;">
-                    <a href="controladorDireccionamiento?opcion=datosImagen">
+                    <a href="{{url_for('bp_imagenes.index')}}">
                     <h4>-Imagenes</h4>
                     </a>
                 </div>
                 
                 
-                <div id="iconsAV">
+                <div id="iconsAV" class="width72">
+
                     <div class="divMv">
-                        <a href="controladorDireccionamiento?opcion=">
+                        <a href="{{url_for('bp_administracion.index')}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="divMv">
+                        <a href="{{url_for('bp_inicio.index')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                                 class="bi bi-house-fill" viewBox="0 0 16 16">
                                 <path
@@ -82,7 +91,7 @@
                                     <td><input type="text" name="fDescripcionUnidad" required value="{{producto.descripcionUnidad}}"></td>
                                     <td><input type="text" name="fDescripcionProductoGeneral" value="{{producto.descripcionProductoGeneral}}"></td>
                                     <td><input type="number" name="fStockProducto" value="{{producto.stockProducto}}"></td>
-                                    <td><input type="number" name="fPrecioProducto" value="{{producto.precioProducto}}" ></td>
+                                    <td><input type="number"  name="fPrecioProducto" value="{{producto.precioProducto}}" ></td>
                                     
                                      <!--logica jcomboBox-->
                                      <!--se toma el id del producto de la marca y el id de la marca y se combrueban si son iguales los pone en ==-->
@@ -133,7 +142,7 @@
                                                 </option>
                                             {%endfor%}
                                             
-                                         </select> 
+                                        </select> 
                                     </td>
 
                                     <td><button type="submit" name="fAccion" value="Ingresar"
@@ -154,7 +163,7 @@
             <div class="lineaAF"></div>
             <div id="tituloAbajo">
                 <div id="iconoAbajo">
-                    <img src="/static/imagenes/logoQ1.png" alt="logo" width="41px" height="41px">
+                    <img  src="/static/imagenes/logoQ1.png" alt="logo"  width="41px" height="41px">
 
                 </div>
                 <div id="tituloH">

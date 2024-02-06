@@ -27,15 +27,22 @@
                 <div id="contenedorH1">
                     <h1>Farmacias</h1>
                 </div>
-                <div id="iconsAV">
-                        <div class="divMv">
+                <div id="iconsAV" class="width86">
+                    <div class="divMv">
+                        <a href="{{url_for('bp_administracion.index')}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="divMv">
                         <a href="{{url_for('bp_inicio.index')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
                                 <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
                             </svg>
                         </a>
-                        </div>
+                    </div>
                  </div>
                 
 
@@ -60,34 +67,30 @@
                                 
                                 
                         <tBody>  
-                            
-                            <!-- <c:forEach items="${unaFarmacia.listar(0)}" var= "laFarmacia"> -->
+
                             {% for farmacia in farmacias: %}
                                  
                                  <tr><form id="fModificarDatosFarmacia" action="{{url_for('bp_farmacias.acciones')}}"  method="post">
                                     <td><input type="hidden" name="fIdFarmacia" value="{{farmacia.idFarmacia}}">
-                                       <input type="text" name="fNitFarmacia" value="{{farmacia.nitFarmacia}}"></td>
-                                    <td><input type="text" name="fNombreFarmacia" value="{{farmacia.nombreFarmacia}}"></td>
-                                    <td><input type="number" name="fTelefonoFarmacia" value="{{farmacia.telefonoFarmacia}}"></td>
-                                    <td><input type="email" name="fCorreoFarmacia" value="{{farmacia.correoFarmacia}}"></td>
-                                    <td><input type="text" name="fUbicacionFarmacia" value="{{farmacia.ubicacionFarmacia}}"></td>
+                                       <input type="text" name="fNitFarmacia" value="{{farmacia.nitFarmacia}}" required ></td>
+                                    <td><input type="text" name="fNombreFarmacia" value="{{farmacia.nombreFarmacia}}" required ></td>
+                                    <td><input type="number" name="fTelefonoFarmacia" value="{{farmacia.telefonoFarmacia}}" required ></td>
+                                    <td><input type="email" name="fCorreoFarmacia" value="{{farmacia.correoFarmacia}}" required ></td>
+                                    <td><input type="text" name="fUbicacionFarmacia" value="{{farmacia.ubicacionFarmacia}}" required ></td>
                                     <td><button type="submit" name="fAccion" value="Modificar" class="buttonEnviar2">Modificar</button>
                                             <button type="submit" name="fAccion" value="Eliminar" class="buttonEnviar2">Eliminar</button></td>
                                 </form></tr>
-                                
-                                
-                            <!-- </c:forEach> -->
                             {%endfor%}
 
 
                                 <tr>
                                 <form id="fIngresarFarmacia" action="{{url_for('bp_farmacias.acciones')}}" method="post">
                                         <input type="hidden" name="fIdFarmacia" value="0">
-                                        <td><input type="text"  name="fNitFarmacia"></td>
-                                        <td><input type="text"  name="fNombreFarmacia"></td>
-                                        <td><input type="number" name="fTelefonoFarmacia"></td>
-                                        <td><input type="email" name="fCorreoFarmacia"></td>
-                                        <td><input type="text" name="fUbicacionFarmacia"></td>
+                                        <td><input type="text"  name="fNitFarmacia" required></td>
+                                        <td><input type="text"  name="fNombreFarmacia" required ></td>
+                                        <td><input type="number" name="fTelefonoFarmacia"required ></td>
+                                        <td><input type="email" name="fCorreoFarmacia"required ></td>
+                                        <td><input type="text" name="fUbicacionFarmacia"required ></td>
                                         <td><button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar">Ingresar</button>
                                             <button type="reset"  value="Limpiar"  class="buttonEnviar">Limpiar</button></td>
                                     </form>

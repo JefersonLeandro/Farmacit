@@ -1661,10 +1661,17 @@ a:visited{
     box-sizing: border-box;
     display: flex;
     align-items: end;
+    justify-content: end;
+    gap: 10px;
+
+    /* height: 10vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: end;
     justify-content: center;
     position: absolute;
     left: 94.7%;
-    width: 40px;
+    width: 40px; */
 
 }
 .divMv{
@@ -1701,6 +1708,41 @@ a:visited{
     margin-left: 5px;
 }
 
+/*                                                          STYLES DE TABLA ROLES                       */
+
+
+.seccionGeneral{
+    /* arreglar */
+    height: 71vh!important;
+}
+
+.subSeccion{
+
+    width: 80%;
+    height: 65vh;
+
+}
+
+.subMain{
+    /* arreglar */
+    width: 45%!important;
+
+}
+#iconsH{
+
+    height: 10vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    width: 79%;
+    gap: 10px ;
+
+}
+
+
+
+
                                         /*////////////////////////////////////     CLASES REUTILIZABLES         \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
                                         
                                         
@@ -1709,8 +1751,21 @@ a:visited{
             
       background: rgba(0, 0, 0, 0.05);
  
-    }
+}
+
  .gap4{
-           display: flex;
-           gap: 4px;
+    display: flex;
+    gap: 4px;
+}
+/*           widths         */
+.width86{
+    width: 86%;
+}
+.width82-2{
+    width: 82.2%;
+}
+.width72{
+
+    width: 72%;
+
 }

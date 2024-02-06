@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
-from app.models.Producto import Producto
+from app.models import Producto , Imagen
 from app.models.MarcaProducto import MarcaProducto
+from sqlalchemy.orm import aliased
 from app import db
 
 bp = Blueprint('bp_inicio', __name__)
@@ -8,10 +9,25 @@ bp = Blueprint('bp_inicio', __name__)
 @bp.route('/')
 def index():
     
-    productos = Producto.query.all()
+
+    aliasImagen = aliased(Imagen)
+
+    productosImagenPrimaria = (
+        db.session.query(Producto)
+        .join(aliasImagen, Producto.imagenes)
+        .filter(aliasImagen.tipoImagen == 0)
+        .distinct()
+        .all()
+    )
     marcasProductos = MarcaProducto.query.all()
     
-    return render_template('index.html', productos = productos, marcasProductos = marcasProductos )    
+    
+    # for p in productosImagenPrimaria:
+    #     for imagen in p.imagenes:
+    #         print(f"++++++++ nombre: {p.nombreProducto} Imagen: {imagen.nombreImagen}")
+
+        
+    return render_template('index.html', productos = productosImagenPrimaria, marcasProductos = marcasProductos )    
 
 
 

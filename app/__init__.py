@@ -6,7 +6,7 @@ from flask import Flask
 import os 
 from app.routes import index_routes
 from app.routes.autenticacion_routes import crear_cuenta_routes, login_routes
-from app.routes.area_Administracion_routes import index_routes as administracion_index_routes , farmacias_routes , personas_routes , roles_routes , productos_routes
+from app.routes.area_Administracion_routes import index_routes as administracion_index_routes , farmacias_routes , personas_routes , roles_routes , productos_routes , marcas_productos_routes , imagenes_routes
 
 
 login_manager = LoginManager()
@@ -38,5 +38,7 @@ def create_app():
     app.register_blueprint(personas_routes.bp)
     app.register_blueprint(roles_routes.bp)
     app.register_blueprint(productos_routes.bp)
+    app.register_blueprint(marcas_productos_routes.bp)
+    app.register_blueprint(imagenes_routes.bp)
    
     return app
