@@ -77,7 +77,7 @@
                                     <form id="fModificarDatosFarmacia" action="{{url_for('bp_imagenes.acciones')}}" method="post">
                                         <td class="miTds">
                                             <input type="hidden" name="fIdImagen" value="{{imagen.idImagen}}">
-                                            <input type="text" name="fNombreImagen" value="{{imagen.nombreImagen}}">
+                                            <input type="text" readonly value="{{imagen.nombreImagen}}" class="colorDisabled">
                                         </td>
 
                                         <td style="padding-left: 0!important;">

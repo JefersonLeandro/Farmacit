@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template , request , redirect , url_for , flash
 from sqlalchemy.exc import IntegrityError
+from flask_login import current_user
 from app.models import Rol
 from app import db
 
@@ -9,27 +10,33 @@ bp = Blueprint('bp_roles', __name__)
 @bp.route('/area_administracion/personas/roles' , methods=['POST', 'GET'])
 def index():
     # listar
-    roles = Rol.query.all()
-    return render_template('/areaAdministracion/roles.html' , roles=roles)
+    if current_user.is_authenticated and current_user.idRol == 3: 
+        roles = Rol.query.all()
+        return render_template('/areaAdministracion/roles.html' , roles=roles)
+    return redirect(url_for('bp_inicio.index'))
+        
 
-@bp.route('/area_administracion/personas/roles/acciones', methods=['POST'])
+@bp.route('/area_administracion/personas/roles/acciones', methods=['POST' , 'GET'])
 def acciones():
     
-    if request.method == 'POST':
-        
+    if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST': 
+       
         idRol = request.form['fIdRol']
         accion = request.form['fAccion']
         
         if accion == "Ingresar":       
-         insertar()
-         
+            insertar()
+        
         elif accion == "Modificar":
-         modificar(idRol)
-         
+            modificar(idRol)
+        
         elif accion == "Eliminar":
-         eliminar(idRol)    
-         
-    return redirect(url_for('bp_roles.index'))
+            eliminar(idRol)    
+            
+        return redirect(url_for('bp_roles.index'))
+       
+    return redirect(url_for('bp_inicio.index'))
+    
 
 
 

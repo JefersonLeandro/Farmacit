@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request ,flash ,  redirect, url_for
 from app.models import Imagen , Producto
+from flask_login import current_user
 from sqlalchemy import or_
 from app import db
 import os 
@@ -10,51 +11,59 @@ bp = Blueprint('bp_imagenes', __name__)
 @bp.route('/area_administracion/productos/imagenes' , methods=['POST', 'GET'])
 def index():
     # listar
-    imagenes = Imagen.query.all()
-    return render_template('/areaAdministracion/imagenes.html' , imagenes =imagenes )
+    
+    if current_user.is_authenticated and current_user.idRol == 3: 
+        imagenes = Imagen.query.all()
+        return render_template('/areaAdministracion/imagenes.html' , imagenes =imagenes )    
+    return redirect(url_for('bp_inicio.index'))
 
 
 @bp.route('/area_administracion/productos/imagenes/buscar' , methods=['POST', 'GET'])
 def buscar():
     
-    cadena = request.form['fValorBusqueda']
-
-    # Consulta con condiciones combinadas
-    productosEncontrados = Producto.query.filter(
-        or_(
-            Producto.nombreProducto.contains(cadena),
-            Producto.descripcionUnidad.contains(cadena),
-            Producto.descripcionProductoGeneral.contains(cadena)
-        )
-    ).all()
-
-    imagenes = Imagen.query.all()
     
-    if productosEncontrados :  
-        return render_template('/areaAdministracion/imagenes.html',imagenes=imagenes,  productosEncontrados = productosEncontrados, cadena = cadena)
-    else:
-        flash('No se encontraron coincidencias', 'busquedaVacia')
-        return render_template('/areaAdministracion/imagenes.html' ,imagenes=imagenes , cadena = cadena )  
+    if current_user.is_authenticated and current_user.idRol == 3 and  request.method == 'POST': 
+       
+        cadena = request.form['fValorBusqueda']
 
-@bp.route('/area_administracion/productos/imagenes/acciones', methods=['POST'])
+        # Consulta con condiciones combinadas
+        productosEncontrados = Producto.query.filter(
+            or_(
+                Producto.nombreProducto.contains(cadena),
+                Producto.descripcionUnidad.contains(cadena),
+                Producto.descripcionProductoGeneral.contains(cadena)
+            )
+        ).all()
+
+        imagenes = Imagen.query.all()
+        
+        if productosEncontrados:  
+            return render_template('/areaAdministracion/imagenes.html',imagenes=imagenes,  productosEncontrados = productosEncontrados, cadena = cadena)
+        else:
+            flash('No se encontraron coincidencias', 'busquedaVacia')
+            return render_template('/areaAdministracion/imagenes.html' ,imagenes=imagenes , cadena = cadena )  
+    return redirect(url_for('bp_inicio.index'))
+
+@bp.route('/area_administracion/productos/imagenes/acciones', methods=['POST' , 'GET'])
 def acciones():
     
-    if request.method == 'POST':
+    if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST' : 
         
         idImagen = request.form['fIdImagen']
         accion = request.form['fAccion']
         
         if accion == "Ingresar":       
             insertar()
-          
+        
         elif accion == "Modificar":
             modificar(idImagen)
-     
+    
         elif accion == "Eliminar":
             eliminar(idImagen)    
-         
-   
-    return redirect(url_for('bp_imagenes.index'))
+
+        
+        return redirect(url_for('bp_imagenes.index'))
+    return redirect(url_for('bp_inicio.index'))
 
 def insertar():
     
@@ -65,9 +74,10 @@ def insertar():
     idProducto = request.form['fIdProducto']
     consulta   = Producto.query.filter_by(idProducto=idProducto).first()
     
-    guardarImagen(imagen , nombreImagen)
     
     if consulta is not None :
+        
+        guardarImagen(imagen , nombreImagen)
         
         nuevaImagen = Imagen(idImagen= None, nombreImagen = nombreImagen , tipoImagen = tipoImagen, idProducto = idProducto)
         db.session.add(nuevaImagen)
@@ -80,7 +90,6 @@ def modificar(idImagen):
     
     imagen = Imagen.query.get_or_404(idImagen)
     
-    imagen.nombreImagen = request.form['fArchivoImagen']
     imagen.tipoImagen = request.form['fTipoImagen'] 
     db.session.commit()
    

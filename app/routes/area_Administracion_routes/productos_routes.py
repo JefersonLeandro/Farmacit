@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request , redirect, url_for , flash 
 from app.models import Producto , MarcaProducto
 from sqlalchemy.exc import IntegrityError
+from flask_login import current_user
 from app import db
 
 bp = Blueprint('bp_productos', __name__)
@@ -8,30 +9,34 @@ bp = Blueprint('bp_productos', __name__)
 @bp.route('/area_administracion/productos' , methods=['POST', 'GET'])
 def index():
     # listar
-    productos = Producto.query.all()
-    marcasProductos = MarcaProducto.query.all()
-    return render_template('/areaAdministracion/productos.html' , productos = productos , marcasProductos = marcasProductos)
+    
+    if current_user.is_authenticated and current_user.idRol == 3: 
+       
+      productos = Producto.query.all()
+      marcasProductos = MarcaProducto.query.all()
+      return render_template('/areaAdministracion/productos.html' , productos = productos , marcasProductos = marcasProductos)   
+    
+    return redirect(url_for('bp_inicio.index'))
 
-@bp.route('/area_administracion/productos/acciones', methods=['POST'])
+@bp.route('/area_administracion/productos/acciones', methods=['POST' , 'GET'])
 def acciones():
     
-    if request.method == 'POST':
-        
-        idProducto = request.form['fIdProducto']
-        accion = request.form['fAccion']
-        
-        if accion == "Ingresar":       
-          insertar()
+    if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST': 
           
-        elif accion == "Modificar":
-          modificar(idProducto)
-     
-        elif accion == "Eliminar":
-          eliminar(idProducto)    
-         
-   
-    return redirect(url_for('bp_productos.index'))
-    
+      idProducto = request.form['fIdProducto']
+      accion = request.form['fAccion']
+      
+      if accion == "Ingresar":       
+        insertar()
+        
+      elif accion == "Modificar":
+        modificar(idProducto)
+  
+      elif accion == "Eliminar":
+        eliminar(idProducto)    
+      
+      return redirect(url_for('bp_productos.index'))
+    return redirect(url_for('bp_inicio.index'))
  
 def insertar():
     

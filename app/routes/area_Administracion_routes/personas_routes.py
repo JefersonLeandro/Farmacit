@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request , redirect, url_for
+from flask import Blueprint, render_template, request , redirect, url_for 
+from flask_login import  current_user
 from app.models import Persona , Rol
 from flask_bcrypt import Bcrypt
 from app import db
@@ -8,30 +9,36 @@ bp = Blueprint('bp_personas', __name__)
 @bp.route('/area_administracion/personas' , methods=['POST', 'GET'])
 def index():
     # listar
-    roles  = Rol.query.all()
-    personas = Persona.query.all()
-    return render_template('/areaAdministracion/personas.html' , personas=personas , roles=roles)
+    if current_user.is_authenticated and current_user.idRol == 3: 
+        
+        roles  = Rol.query.all()
+        personas = Persona.query.all()
+        return render_template('/areaAdministracion/personas.html' , personas=personas , roles=roles)
+    
+    return redirect(url_for('bp_inicio.index'))
+    
     
     
 
-@bp.route('/area_administracion/personas/acciones', methods=['POST'])
+@bp.route('/area_administracion/personas/acciones', methods=['POST', 'GET'])
 def acciones():
     
-    if request.method == 'POST':
-        
+    if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST': 
+            
         idPersona = request.form['fIdPersona']
         accion = request.form['fAccion']
         
         if accion == "Ingresar":       
-          insertar()
+            insertar()
+            
         elif accion == "Modificar":
-          modificar(idPersona)
-     
+            modificar(idPersona)
+    
         elif accion == "Eliminar":
-         eliminar(idPersona)    
-         
-   
-    return redirect(url_for('bp_personas.index'))
+            eliminar(idPersona)    
+        
+        return redirect(url_for('bp_personas.index'))
+    return redirect(url_for('bp_inicio.index'))
     
  
 def insertar():

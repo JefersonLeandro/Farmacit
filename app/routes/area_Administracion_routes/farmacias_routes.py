@@ -15,23 +15,24 @@ def index():
     return redirect(url_for('bp_inicio.index'))
     
 
-@bp.route('/area_administracion/farmacias/acciones', methods=['POST'])
+@bp.route('/area_administracion/farmacias/acciones', methods=['POST','GET'])
 def acciones():
     
     
-    if current_user.is_authenticated and current_user.idRol == 3: 
-        if request.method == 'POST':
-            idFarmacia = request.form['fIdFarmacia']
-            accion = request.form['fAccion']
+    if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST': 
         
-            if accion == "Ingresar":       
-                insertar()
-        
-            elif accion == "Modificar":
-                modificar(idFarmacia)
-        
-            elif accion == "Eliminar":
-                eliminar(idFarmacia)  
+        idFarmacia = request.form['fIdFarmacia']
+        accion = request.form['fAccion']
+    
+        if accion == "Ingresar":       
+            insertar()
+    
+        elif accion == "Modificar":
+            modificar(idFarmacia)
+    
+        elif accion == "Eliminar":
+            eliminar(idFarmacia)  
+            
         return redirect(url_for('bp_farmacias.index'))
     return redirect(url_for('bp_inicio.index'))
     
