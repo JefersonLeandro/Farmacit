@@ -92,13 +92,16 @@
             <script>
                 // Función para mostrar una alerta después de cargar completamente la página
                 window.onload = function() {
-                alert("{{ mensaje }}");
+                    window.setTimeout(function(){
+                        alert("{{mensaje}}");
+                    }, 500); 
                 };
+
+                //50mls
             </script>
             {% endif %}
         {% endfor %}
         {% endwith %}
-
         
     </main>
 </body>

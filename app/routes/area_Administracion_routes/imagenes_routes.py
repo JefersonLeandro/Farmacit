@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request ,flash ,  redirect, url_fo
 from app.models import Imagen , Producto
 from sqlalchemy import or_
 from app import db
+import os 
 
 
 bp = Blueprint('bp_imagenes', __name__)
@@ -44,24 +45,27 @@ def acciones():
         accion = request.form['fAccion']
         
         if accion == "Ingresar":       
-           insertar()
+            insertar()
           
         elif accion == "Modificar":
-           modificar(idImagen)
+            modificar(idImagen)
      
         elif accion == "Eliminar":
-          eliminar(idImagen)    
+            eliminar(idImagen)    
          
    
     return redirect(url_for('bp_imagenes.index'))
 
 def insertar():
     
-    nombreImagen = request.form['fNombreImagen']
+    imagen = request.files["fArchivoImagen"]
+    nombreImagen =  imagen.filename 
     tipoImagen = request.form['fTipoImagen']
     
     idProducto = request.form['fIdProducto']
     consulta   = Producto.query.filter_by(idProducto=idProducto).first()
+    
+    guardarImagen(imagen , nombreImagen)
     
     if consulta is not None :
         
@@ -76,14 +80,25 @@ def modificar(idImagen):
     
     imagen = Imagen.query.get_or_404(idImagen)
     
-    imagen.nombreImagen = request.form['fNombreImagen']
+    imagen.nombreImagen = request.form['fArchivoImagen']
     imagen.tipoImagen = request.form['fTipoImagen'] 
     db.session.commit()
    
    
 def eliminar(idImagen):
+
+    from run  import app 
+    imagen = Imagen.query.get_or_404(idImagen)    
+    ruta_imagen = os.path.join(app.root_path, "static", "imagenes", imagen.nombreImagen)
+
+    # Elimina la imagen del sistema de archivos
+    if os.path.exists(ruta_imagen):
+        os.remove(ruta_imagen)
     
-    imagen = Imagen.query.get_or_404(idImagen)
     db.session.delete(imagen)
     db.session.commit()
-    
+
+def guardarImagen(imagen , nombreImagen):
+    from run  import app 
+    carpetaDestino = os.path.join(app.root_path, "static" , "imagenes")    
+    imagen.save(os.path.join(carpetaDestino, nombreImagen))

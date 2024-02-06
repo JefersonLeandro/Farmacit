@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request , redirect, url_for
+from flask_login import  current_user
 from app.models import Farmacia
 from app import db
 
@@ -7,28 +8,33 @@ bp = Blueprint('bp_farmacias', __name__)
 @bp.route('/area_administracion/farmacias' , methods=['POST', 'GET'])
 def index():
     # listar
-    farmacias = Farmacia.query.all()
-    return render_template('/areaAdministracion/farmacias.html' , farmacias = farmacias)
-   
+    
+    if current_user.is_authenticated and current_user.idRol == 3: 
+        farmacias = Farmacia.query.all()
+        return render_template('/areaAdministracion/farmacias.html' , farmacias = farmacias)
+    return redirect(url_for('bp_inicio.index'))
     
 
 @bp.route('/area_administracion/farmacias/acciones', methods=['POST'])
 def acciones():
     
-    if request.method == 'POST':
-        idFarmacia = request.form['fIdFarmacia']
-        accion = request.form['fAccion']
+    
+    if current_user.is_authenticated and current_user.idRol == 3: 
+        if request.method == 'POST':
+            idFarmacia = request.form['fIdFarmacia']
+            accion = request.form['fAccion']
         
-        if accion == "Ingresar":       
-          insertar()
-     
-        elif accion == "Modificar":
-          modificar(idFarmacia)
-     
-        elif accion == "Eliminar":
-         eliminar(idFarmacia)    
-   
-    return redirect(url_for('bp_farmacias.index'))
+            if accion == "Ingresar":       
+                insertar()
+        
+            elif accion == "Modificar":
+                modificar(idFarmacia)
+        
+            elif accion == "Eliminar":
+                eliminar(idFarmacia)  
+        return redirect(url_for('bp_farmacias.index'))
+    return redirect(url_for('bp_inicio.index'))
+    
     
  
 def insertar():

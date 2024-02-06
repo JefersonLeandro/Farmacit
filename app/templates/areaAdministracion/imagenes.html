@@ -164,7 +164,7 @@
                             </form>
                         </div>
 
-                        <form id="formularioPrincipal" action="{{url_for('bp_imagenes.acciones')}}" method="post">
+                        <form id="formularioPrincipal" action="{{url_for('bp_imagenes.acciones')}}" method="post"  enctype="multipart/form-data">
                             <div class="areaInsertar">
                                 <div class="subArea1P " >
                                     <table border="1" class="table table-striped">
@@ -180,7 +180,7 @@
                                             <tr>
                                                 <td>
                                                     <input type="hidden" name="fIdImagen" value="0">
-                                                    <input type="file" name="fNombreImagen" class="custom-file-upload" required>
+                                                    <input type="file" name="fArchivoImagen" class="custom-file-upload" required>
                                                 </td>
                                                 <td>
                                                     <select name="fTipoImagen"  required>

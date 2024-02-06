@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template , request , redirect , url_for
+from flask import Blueprint, render_template , request , redirect , url_for , flash
+from sqlalchemy.exc import IntegrityError
 from app.models import MarcaProducto
 from app import db
 
@@ -47,7 +48,11 @@ def modificar(idMarcaProducto):
     db.session.commit()
 
 def eliminar(idMarcaProducto):
-  
-    marcaProducto = MarcaProducto.query.get_or_404(idMarcaProducto)
-    db.session.delete(marcaProducto)
-    db.session.commit()
+    
+    try:
+      marcaProducto = MarcaProducto.query.get_or_404(idMarcaProducto)
+      db.session.delete(marcaProducto)
+      db.session.commit()
+    except IntegrityError as e:
+      db.session.rollback()  # Deshace la transacción para evitar cambios no deseados
+      flash('Error de integridad referencial. No se puede eliminar el producto debido a relaciones existentes.', 'errorIntegridad')
