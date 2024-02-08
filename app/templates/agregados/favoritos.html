@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla Productos deseados</title>
+    <title>Productos deseados</title>
 
-    <script src="Public/Jquery/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <!-- <script src="Public/bootstrap/bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.js"></script> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
     
 
@@ -17,11 +15,7 @@
 
 <body>
     
-    
-
     <main>
-
-
     <div class="cerrarVentanaG">
          <div class="overLay">
                 <div class="formVentana">
@@ -153,100 +147,48 @@
                         <div id="lineaLateral"></div>
                         <div id="productosGeneral">
                             <div id="productoD">
-                                <div>
 
-<!-- 
-                                    <c:if test="${not empty (sessionScope.idPersona)}">
-                                        <c:forEach items="${unProductoD.listar(0,sessionScope.idPersona)}" var= "elProductoD">
-                                            
-                                           
-                                            
-                                            <a href='#'><div class='cajaPD' id="${elProductoD.idProductoD}">
-                                                <h6></h6>
-                                                <h6>${elProductoD.nombreProducto}</h6>
-                                                <div class='dividirD'>
-                                                    <div class='descripcionP'>
-                                                        <div class='descripcionR'>
-                                                            <p>${elProductoD.descripcionProductoGeneral}</p>
-                                                        </div></a>
-                                                    
-                                                    <div id='botonesCE'>
-                                                        <Form class='botonG' action='controladorProductoDeseado' method='post'>
-                                                            <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
-                                                            <input type="hidden" name="fIdProducto" value="${elProductoD.idProducto}" />
-                                                            <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
-                                                        </Form>
-                                                    </div>
+                                    
+                                {% for productoDeseado, producto, imagen in productos %}
+                                        
+                                    <a href="#" style="display: inline-block;"> <h6>{{producto.nombreProducto}}</h6></a>
+                                    <div class='cajaPD' id="{{productoDeseado.idProductoDeseado}}">
+                                        
+                                        <div class='dividirD'>
+                                            <div class='descripcionP'>
+                                                <div class='descripcionR'>
+                                                    <p>{{producto.descripcionProductoGeneral}}</p>
                                                 </div>
-                                                <div class='divImagen'>
-                                                    <a href='#' class='imagenProducto'>
-                                                        <img src="Public/imgs/${elProductoD.nombreImagen}"
-                                                            alt="${elProductoD.nombreProducto}" class='imgsG' width='100%'
-                                                            height='100px'>
-                                                    </a>
+                                                <div id='botonesCE'>
+                                                    <form class='botonG' action="{{url_for('bp_favoritos.acciones')}}" method='post'>
+                                                        <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
+                                                        <input type="hidden" name="fIdProductoDeseado" value="{{productoDeseado.idProductoDeseado}}" />
+                                                        <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
+                                                    </form>
                                                 </div>
                                             </div>
+                                            <div class='divImagen'>
+                                                <a href='#' class='imagenProducto'>
+                                                    <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
+                                                        alt="{{imagen.nombreImagen}}" class='imgsG' width='100%'
+                                                        height='100px'>
+                                                </a>
                                             </div>
-
-                                            
-                                            
-                                        </c:forEach>
-
-
-                                        
-                                        
-
-                                    </c:if> -->
-
-                                     <!-- <c:if test="${ empty (sessionScope.idPersona)}">
-                                         
-                                         <div class='alert alert-dark-tranparent' role='alert'>
-                                            <h5>Tu menú favoritos está vacío, Regístrate <a href='controladorDireccionamiento?opcion=Registro' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
                                         </div>
+                                    </div>
+                                        
+                                {% endfor %}
 
-
-                                    </c:if> -->
-
-                                    <!-- VERIFICAR LOGICA Y MIRAR LA ETIQUETA A PARA DEJARLA BIEN IDENTADA> -->
-
-
+                                {% if not (current_user.is_authenticated) %}
+                                    <div class='alert alert-dark-tranparent' role='alert'>
+                                        <h5>Tu menú favoritos está vacío, inicia session <a href='{{url_for("bp_login.login")}}' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
+                                    </div>
+                                {% elif current_user.is_authenticated and tamano == 0 %}
                                     
-                                    {% for productoDeseado, producto, imagen in productos %}
-
-
-                                            <a href='#'>
-                                                <div class='cajaPD' id="{{productoDeseado.idProductoDeseado}}">
-                                                    <h6></h6>
-                                                    <h6>{{producto.nombreProducto}}</h6>
-                                                    <div class='dividirD'>
-                                                        <div class='descripcionP'>
-                                                            <div class='descripcionR'>
-                                                                <p>{{producto.descripcionProductoGeneral}}</p>
-                                                            </div>
-                                            </a>
-                                                    
-                                                            <div id='botonesCE'>
-                                                                <Form class='botonG' action='controladorProductoDeseado' method='post'>
-                                                                    <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
-                                                                    <input type="hidden" name="fIdProducto" value="{{producto.idProducto}}" />
-                                                                    <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
-                                                                </Form>
-                                                            </div>
-                                                        </div>
-                                                        <div class='divImagen'>
-                                                            <a href='#' class='imagenProducto'>
-                                                                <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
-                                                                    alt="{{imagen.nombreImagen}}" class='imgsG' width='100%'
-                                                                    height='100px'>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                    {% endfor %}
+                                    <h5>Tu menú favoritos esta vacio</h5>
                                     
-                                </div>
-                            </div>
+                                {% endif %}
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -273,7 +215,7 @@
             </div>
         </div>
 
-
+        <!-- En vez de mostrar los productos a la derecha se puede hacer un slaider con la imagenes del productos y dos flechas para pasar al siguiente <[===]> y aun lado la descripcion descripcion con el precio  -->
         <!-- ventana emergente  -->
 
         <style>

@@ -265,8 +265,6 @@
                                         {%endfor%}
                                     </select> 
 
-
-
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
                                     <path
@@ -302,40 +300,47 @@
                             {%for imagen in producto.rs_Imagenes%} 
                                 <div class='divSeccion'>
                                     <div class='cajas'>
-                                            <div  class='linkDi1'>
-                                                <div class='contenedorImgP'>
-                                                    <a href='DescripcionProductos.php' class='contenedorImg'>
-                                                        <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="" class='imgsG' width='75%' height='145px'>
-                                                    </a>  
-                                                    <a href='DescripcionProductos.php' class='cajaC'>
-                                                        <span>{{producto.nombreProducto}}</span>
-                                                        <h6>{{producto.descripcionUnidad}}</h6>
-                                                        <h6>{{producto.precioProducto}}</h6>
-                                                    </a>
-                                                </div>
+                                        <div  class='linkDi1'>
+                                            <div class='contenedorImgP'>
+                                                <a href='#' class='contenedorImg'>
+                                                    <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="" class='imgsG' width='75%' height='145px'>
+                                                </a>  
+                                                <a href='#' class='cajaC'>
+                                                    <span>{{producto.nombreProducto}}</span>
+                                                    <h6>{{producto.descripcionUnidad}}</h6>
+                                                    <h6>{{producto.precioProducto}}</h6>
+                                                </a>
+                                            </div>
+                                            {% if current_user.is_authenticated %}
+                                                <form class='cajaFP' action="{{url_for('bp_favoritos.acciones')}}" method="post">
+                                                    <input type="hidden" name="fAccion" value="Ingresar">
+                                                    <button class='cajaFavorito' name="fIdProducto" value="{{producto.idProducto}}">
+                                                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-bookmark-star' viewBox='0 0 16 16'>
+                                                        <path d='M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z'/>
+                                                        <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z'/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            {% else %}
+                                                <a class='cajaFP' href="{{url_for('bp_login.login')}}">
+                                                    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-bookmark-star' viewBox='0 0 16 16'>
+                                                        <path d='M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z'/>
+                                                        <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z'/>
+                                                    </svg>
+                                                </a>
+                                            {% endif %}
+                                        </div>
 
-                                                
-                                                        <form class='cajaFP' action="controladorProductoDeseado" method="post">
-                                                            <input type="hidden" name="fAccion" value="Ingresar">
-                                                            <button class='cajaFavorito' name="fIdProducto" value="${elProducto.idProducto}">
-                                                                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-bookmark-star' viewBox='0 0 16 16'>
-                                                                <path d='M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z'/>
-                                                                <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z'/>
-                                                                </svg>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-
-                                                    <form class='cajaCB' action='../controlador/controladorCarritoProducto.php' method='post'>
-                                                        <button class='buttonComprar' type='button'>
-                                                            <p>Comprar</p>
-                                                        </button>
-                                                        <button class='buttonAgregar' name='agregar' value='[ID del Producto]' type='submit'>
-                                                            <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-cart-plus-fill' viewBox='0 0 16 16'>
-                                                            <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z'/>
-                                                            </svg>
-                                                        </button>
-                                                    </form>
+                                        <form class='cajaCB' action='../controlador/controladorCarritoProducto.php' method='post'>
+                                            <button class='buttonComprar' type='button'>
+                                                <p>Comprar</p>
+                                            </button>
+                                            <button class='buttonAgregar' name='agregar' value='[ID del Producto]' type='submit'>
+                                                <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-cart-plus-fill' viewBox='0 0 16 16'>
+                                                <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z'/>
+                                                </svg>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             {% endfor %}
