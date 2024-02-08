@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Productos deseados</title>
+
+    <script src="Public/Jquery/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <!-- <script src="Public/bootstrap/bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.js"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
+    
+
+</head>
+
+<body>
+    
+    
+
+    <main>
+
+
+    <div class="cerrarVentanaG">
+         <div class="overLay">
+                <div class="formVentana">
+                    <div class="descripcionVentana">
+                        <div class="descripcionVentanaS" >
+
+                            {% if current_user.is_authenticated  %}
+                                {% if productos|length == 0  %}
+                                    <p>No hay productos por eliminar </p>  
+                                    <strong>¿Deseas agregar?</strong>
+                                {% else %}
+                                    <strong>¿Deseas eliminar todos los productos?</strong>
+                                {% endif %}
+                            {% else %}
+                                <p>No hay productos por eliminar </p>  
+                                <strong>¿Deseas agregar?</strong>
+                            {% endif %}
+                                                                           
+                        </div>
+                        <div class="CerrarVentana" >
+                            <a href="#" id="aCerrarPopup" class="aCerrarPopup">
+                                <svg id="svgCerrar" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                    class="bi bi-x" viewBox="0 0 16 16">
+                                
+                                    <path
+                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    {% set tamano = productos|default([])|length %}
+                        {% if current_user.is_authenticated  %}
+                            {% if tamano == 0  %}
+                                <div class='ventanaBotones' >
+                                    <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
+                                    <button type="click" class='buttonVentana' onclick="direccionar()" id='aceptarBtn1'>Aceptar</button>
+                                </div>
+
+                            {% else %}
+                                <form class='ventanaBotones'  action="{{url_for('bp_favoritos.acciones')}}" method='post'>
+                                    <input type="hidden" name = "fIdProductoDeseado" value="0">
+                                    <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
+                                    <button class='buttonVentana' id='aceptarBtn' name='fAccion'  value='EliminarTodo'>Aceptar</button>
+                                </form> 
+                            {% endif %}
+                        {% else %}
+                            <div class='ventanaBotones' > 
+                                <button class='buttonVentana' id='cancelarBtn' type="button" >Cancelar</button> 
+                                <button type="click" class='buttonVentana' onclick="direccionar()" id='aceptarBtn1'>Aceptar</button>
+
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divTablaG">
+
+            <div id="divTablaC">
+                <div id="tituloTabla1">
+                    <div id="iconoTabla">
+                        <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="42px" height="42px">
+
+                    </div>
+                    <div>
+                        <h1>Farmacit</h1>
+                    </div>
+
+                </div>
+                <div id="divCentralTabla">
+                    <div id="contenedorTrash">
+                        <h4 id="soyh2">Productos deseados</h4>
+
+                        <div id="contenedorSTrash">
+                            <div class="contenedorSvg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    id="svgTrash" class="bi bi-trash3" viewBox="0 0 16 16" >
+                                    <path
+                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                </svg>
+                                <div class="lineaTrash"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="encajar">
+                        <div id="listaP">
+                            <div id="centrarLista">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                                <div class="lineaA1"></div>
+                                <div id="encerrarLista">
+                                    <ul class="list-group list-group-flush scrollable listaFavoritos" id="listaG">
+                                 
+                                        {% if current_user.is_authenticated  %}
+                                            {% for productoDeseado, producto, imagen in productos %}
+                                                <a href="#{{productoDeseado.idProductoDeseado}}" >
+                                                    <li class='list-group-item' ><h6>{{producto.nombreProducto}}</h6>{{producto.descripcionUnidad}} </li>
+                                                </a>
+                                            {% endfor %}
+                                        {% endif %}
+                                        
+                                    </ul>
+                                </div>
+                                <div class="lineaA1"></div>
+                            </div>
+                            <div id="comprarTodo">
+
+
+                                {% if tamano > 0  %}
+                                    <button class='buttonComprarTodo'>
+                                        <p>COMPRAR TODO</p>
+                                    </button>
+
+                                {% else %}
+                                    <a href="{{url_for('bp_inicio.index')}}" class='buttonComprarTodo' style='text-align: center;' >
+                                        <p>AGREGAR PRODUCTOS</p>
+                                    </a>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div id="lineaLateral"></div>
+                        <div id="productosGeneral">
+                            <div id="productoD">
+                                <div>
+
+<!-- 
+                                    <c:if test="${not empty (sessionScope.idPersona)}">
+                                        <c:forEach items="${unProductoD.listar(0,sessionScope.idPersona)}" var= "elProductoD">
+                                            
+                                           
+                                            
+                                            <a href='#'><div class='cajaPD' id="${elProductoD.idProductoD}">
+                                                <h6></h6>
+                                                <h6>${elProductoD.nombreProducto}</h6>
+                                                <div class='dividirD'>
+                                                    <div class='descripcionP'>
+                                                        <div class='descripcionR'>
+                                                            <p>${elProductoD.descripcionProductoGeneral}</p>
+                                                        </div></a>
+                                                    
+                                                    <div id='botonesCE'>
+                                                        <Form class='botonG' action='controladorProductoDeseado' method='post'>
+                                                            <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
+                                                            <input type="hidden" name="fIdProducto" value="${elProductoD.idProducto}" />
+                                                            <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
+                                                        </Form>
+                                                    </div>
+                                                </div>
+                                                <div class='divImagen'>
+                                                    <a href='#' class='imagenProducto'>
+                                                        <img src="Public/imgs/${elProductoD.nombreImagen}"
+                                                            alt="${elProductoD.nombreProducto}" class='imgsG' width='100%'
+                                                            height='100px'>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            
+                                            
+                                        </c:forEach>
+
+
+                                        
+                                        
+
+                                    </c:if> -->
+
+                                     <!-- <c:if test="${ empty (sessionScope.idPersona)}">
+                                         
+                                         <div class='alert alert-dark-tranparent' role='alert'>
+                                            <h5>Tu menú favoritos está vacío, Regístrate <a href='controladorDireccionamiento?opcion=Registro' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
+                                        </div>
+
+
+                                    </c:if> -->
+
+                                    <!-- VERIFICAR LOGICA Y MIRAR LA ETIQUETA A PARA DEJARLA BIEN IDENTADA> -->
+
+
+                                    
+                                    {% for productoDeseado, producto, imagen in productos %}
+
+
+                                            <a href='#'>
+                                                <div class='cajaPD' id="{{productoDeseado.idProductoDeseado}}">
+                                                    <h6></h6>
+                                                    <h6>{{producto.nombreProducto}}</h6>
+                                                    <div class='dividirD'>
+                                                        <div class='descripcionP'>
+                                                            <div class='descripcionR'>
+                                                                <p>{{producto.descripcionProductoGeneral}}</p>
+                                                            </div>
+                                            </a>
+                                                    
+                                                            <div id='botonesCE'>
+                                                                <Form class='botonG' action='controladorProductoDeseado' method='post'>
+                                                                    <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
+                                                                    <input type="hidden" name="fIdProducto" value="{{producto.idProducto}}" />
+                                                                    <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
+                                                                </Form>
+                                                            </div>
+                                                        </div>
+                                                        <div class='divImagen'>
+                                                            <a href='#' class='imagenProducto'>
+                                                                <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
+                                                                    alt="{{imagen.nombreImagen}}" class='imgsG' width='100%'
+                                                                    height='100px'>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divFooter">
+                    <footer id="footerG">
+
+                        <div id="footerC">
+                            <a href="{{url_for('bp_inicio.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                    class="bi bi-house-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
+                                    <path
+                                        d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
+                                </svg>
+                            </a>
+                        </div>
+
+
+                    </footer>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <!-- ventana emergente  -->
+
+        <style>
+        /* ----------------------------STYLE PARA VENTANA EMERGENTE------------------- */
+
+         .cerrarVentanaG{ 
+            visibility: hidden;
+            height: 100vh;
+            width: 100%;
+            background: rgb(0,0,0,0.3);
+            position: fixed;
+            z-index: 2;
+        }  
+
+        .cerrarVentanaG.active{
+            visibility: visible;
+        } 
+        /* color de fondo de la ventana emergente overlay  */
+        .overLay {  
+            height: 60vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: .3s ease all;
+            transform: scale(0.7);
+        }
+        .overLay.active{
+         opacity: 1;
+         transform: scale(1);
+        }
+        
+        /* el forwards es para que tome la ultimas propiedades que tiene una etiqueta */
+
+        .overLay.active  .descripcionVentanaS strong{ animation: tituloStrong  700ms ease .2s  forwards;} 
+        /* .overLay.active  .descripcionVentanaS p{ animation: tituloStrong  800ms ease .3s  forwards;}  */
+        .overLay.active .ventanaBotones button{ animation: botones 800ms ease 500ms  forwards;}
+        .overLay.active .ventanaBotones a{ animation: botones 800ms ease 500ms  forwards;}
+
+      
+
+        @keyframes tituloStrong{
+
+            from {
+
+                transform : translateY(-25px);
+                opacity: 0;
+                
+            }
+            to {
+
+                transform : translateY(0);
+                opacity: 1;
+            }
+
+
+        }
+        @keyframes botones{
+
+            from {
+
+                transform : translateY(-25px);
+                opacity: 0;
+            }
+            to {
+
+                transform : translateY(0);
+                opacity: 1;
+            }
+            
+        }
+
+        /* .buttonVentana:hover.active2{
+            transition: 0ms; 
+            esto era para solucionar el problema de la transicion del buttom
+        } */
+
+        .aCerrarPopup svg{   
+            /* color: rgb(255, 255, 255); */
+            transition: 4ms ease all;
+        }
+        .aCerrarPopup svg:hover{   
+            color: red;
+            /* transition: 3ms ease all; */
+            
+        }
+
+        .formVentana {
+
+            background-color: white;
+            box-shadow: 0px 0px 5px 0px rgb(0, 0, 0 ,0.3);
+            border-radius: 10px;
+            width: 25%;
+            height: 20vh;
+        }
+
+        .cajaVentana p {
+            padding: 8px;
+            font-size: 20px;
+        }
+
+        .descripcionVentana {
+          
+            display: flex;
+            width: 100%;
+            height: 12vh;
+        }
+
+        .descripcionVentanaS {
+            padding-top: 12px;
+            padding-left: 10px;
+            font-size: 23px;
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            width: 90%;
+
+        }
+        .descripcionVentanaS strong{
+            opacity: 0;
+        }
+
+        .CerrarVentana {
+            width: 10%;
+            display: flex;
+            justify-content: center;
+            padding-top: 15px;
+        }
+
+        .ventanaBotones {
+            width: 100%;
+            display: flex;
+            align-items: end;
+            padding-left: 10px;
+            height: 6vh;
+            gap: 10px;
+
+        }
+
+        .ventanaBotones button {
+            width: 30%;
+            height: 5vh;
+            opacity: 0;
+        }
+        #svgTrash:hover{
+            color: red;
+        }
+
+
+
+/* ------------------------------------------------------------------- */
+        </style>
+        
+       
+
+        <script>
+
+            const  clickSvg = document.getElementById("svgTrash"),
+                   ventana = document.querySelector(".cerrarVentanaG"),
+                   svgCerrar =document.getElementById("svgCerrar"),
+                   btnCancelar =document.getElementById("cancelarBtn"),
+                   overLay =document.querySelector(".overLay"),
+                   btnAceptar1 = document.getElementById("aceptarBtn1");
+
+            
+                    clickSvg.addEventListener('click',function () {
+                        ventana.classList.add('active'); 
+                        overLay.classList.add('active');
+                    });
+
+                    svgCerrar.addEventListener('click',function () {
+                        ventana.classList.remove('active');
+                        overLay.classList.remove('active'); 
+                    });
+
+                    btnCancelar.addEventListener('click',function () {
+                        
+                        ventana.classList.remove('active');
+                        overLay.classList.remove('active');
+                    });
+
+            function direccionar(){
+                window.location.href="{{ url_for('bp_inicio.index') }}"
+            }
+         </script>
+    </main>
+</body>
+
+</html>

@@ -34,7 +34,7 @@
             <div class="areaHeaderG">
                 <nav id="navSuperior">
                     <ul>
-                        <li><a href="controladorDireccionamiento?opcion=Favoritos" id="aLinkProductos">Productos deseados</a></li>
+                        <li><a href="{{url_for('bp_favoritos.index')}}" id="aLinkProductos">Productos deseados</a></li>
                         <li><a href="CarritoCompras.php" id="aLinkProductos">Carrito</a></li>
                         <li>Servicios</li>
                         <li>destacados</li>
@@ -297,9 +297,9 @@
 
                 <div id="seccionProductos">
                     <section id="seccionP">
-
+                    
                         {% for producto in productos %}
-                            {%for imagen in producto.imagenes%} 
+                            {%for imagen in producto.rs_Imagenes%} 
                                 <div class='divSeccion'>
                                     <div class='cajas'>
                                             <div  class='linkDi1'>

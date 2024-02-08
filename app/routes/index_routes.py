@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
-from app.models import Producto , Imagen
+from app.models.Producto import Producto 
+from app.models.Imagen import  Imagen
 from app.models.MarcaProducto import MarcaProducto
 from sqlalchemy.orm import aliased
 from app import db
@@ -14,20 +15,14 @@ def index():
 
     productosImagenPrimaria = (
         db.session.query(Producto)
-        .join(aliasImagen, Producto.imagenes)
+        .join(aliasImagen, Producto.rs_Imagenes)
         .filter(aliasImagen.tipoImagen == 0)
         .distinct()
         .all()
     )
     marcasProductos = MarcaProducto.query.all()
-    
-    
-    # for p in productosImagenPrimaria:
-    #     for imagen in p.imagenes:
-    #         print(f"++++++++ nombre: {p.nombreProducto} Imagen: {imagen.nombreImagen}")
-
-        
-    return render_template('index.html', productos = productosImagenPrimaria, marcasProductos = marcasProductos )    
+  
+    return render_template('index.html', productos= productosImagenPrimaria, marcasProductos = marcasProductos )    
 
 
 

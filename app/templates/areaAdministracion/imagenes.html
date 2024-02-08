@@ -241,16 +241,18 @@
               </script>  
 
             {% with mensajes = get_flashed_messages(with_categories=true) %}
-            {% for categoria, mensaje in mensajes %}
-                {% if categoria == 'idNoEncontrado' %}
-                <script>
-                    // Función para mostrar una alerta después de cargar completamente la página
-                    window.onload = function() {
-                    alert("{{ mensaje }}");
-                    };
-                </script>
-                {% endif %}
-            {% endfor %}
+                {% for categoria, mensaje in mensajes %}
+                    {% if categoria == 'idNoEncontrado' %}
+                    <script>
+                        // Función para mostrar una alerta después de cargar completamente la página
+                        window.onload = function() {
+                            window.setTimeout(function(){
+                                alert("{{mensaje}}");
+                            }, 500); 
+                        };//500mls
+                    </script>
+                    {% endif %}
+                {% endfor %}
             {% endwith %}
     
     

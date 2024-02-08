@@ -12,6 +12,8 @@ class Persona (db.Model, UserMixin):
     telefonoPersona = db.Column(db.String(15), nullable=False)
     contrasenaPersona = db.Column(db.String, nullable=False)
     idRol =db.Column(db.Integer, db.ForeignKey('Roles.idRol'), nullable=False)
+    productosDeseados = db.relationship('ProductoDeseado', backref='bk_persona', lazy=True)
+    
     
     def get_id(self):
         return str(self.idPersona)
