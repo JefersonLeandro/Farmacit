@@ -1741,6 +1741,350 @@ a:visited{
 }
 
 
+/*                                                                              STYLES CARRITO  */
+
+
+
+.tituloCarrito{
+        margin-bottom: 0;
+        font-size: 50px;
+}
+.cajaColor{
+
+    width: 16%;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    background:  rgb(55 146 232);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 25px;
+}
+.cotenedorIconoC{
+    width: 22%;
+    height: 10vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+    .contenedorImgLogo{
+    width: 90%;
+}
+.subContenedor{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 78%;
+}
+.lineaCarritoF{
+
+    display: flex;
+    align-items: end;
+    border: 2.4px solid;  
+    height: 4px;
+    border-left: 0;
+    border-right: 0;
+    border-color:  rgb(1, 170, 208) ;
+    border-color: rgb(55 146 232);
+}
+.contenedorIconoCarrito{
+
+    width: 10%;
+    height: 10vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: end;
+
+}
+.contenedorCC{
+    height: 4vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    background:  rgb(55 146 232);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.contenedorCC h5{
+    margin-bottom: 0rem;
+}
+.contenedorCentralC{
+    width: 71%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    gap: 12px;
+}
+.cajaCentralC{
+    width: 7.5%;
+    background:  rgb(55 146 232);
+    background: rgb(1, 170, 208);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 7vh;
+    display: flex;
+}
+.cajaCentralImg{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    width: 65%;
+    height: 7vh;
+}
+.cajaNumero{
+    width: 35%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cajaPrincipalC{
+    display: flex;
+    width: 100%;
+    height: 80vh;
+    /* background: rebeccapurple; */
+
+}
+.subCajaI{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    /* background: yellow; */
+
+}
+.contenedorLineaV{
+
+    display: flex;
+    align-items: center;
+
+
+
+}
+.cajaCarritoI{
+    width: 90%;
+    height: 75vh;
+    overflow-y: scroll;
+    max-height: 75vh;
+    /* display: flex;
+    gap: 7px;
+    flex-direction: column; */
+    /* background: rgb(234, 49, 251); */
+
+}
+.subCajaD{
+    width: 30%;
+    /* background: yellowgreen; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cajaCarritoD{
+        width: 90%;
+        /* background: rgb(55 146 232);// programar para despues recortando la imagen y denjando la barra debajo de ella */
+        height: 75vh;
+        display: flex;
+        align-items: center;
+}
+.cajaLateral{
+
+    width: 100%;
+    height: 77vh;
+    /* background: white; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+}
+.cajaProductoC{
+    display: flex;
+    width: 100%;
+    height: 25vh;
+    margin-bottom: 7.8px;
+    /* background: red; */
+}
+    
+.cajaProductoC:hover{
+    box-shadow: 0px 3px 3px 0px gray ;
+    /* //rgb(1, 170, 208) */
+}
+.cajaPequenaC{
+
+    /* background: rgb(24, 235, 239); */
+    height: 25vh;
+    width: 20%;
+    /* border: 3px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.cajaPequenaS{
+
+    width: 40%;
+    height: 25vh;
+    /* background: rgb(123, 101, 160); */
+    
+
+}
+.subCajaS1{
+    padding-left: 4px;
+    overflow-y: scroll;
+    width: 100%;
+    height: 17vh;
+    /* background: burlywood; */
+
+}
+.subCajaS2{
+
+    width: 100%;
+    height: 8vh;
+    /* background:rgb(47, 229, 6); */
+    display: flex;
+    align-items: center;
+}
+.aumentarC{
+
+    width: 60%;
+    height: 5vh;
+    display: flex;
+
+}
+.inputCantidad{
+    border-radius: 8px;
+    border: none;
+    background: rgb(55 146 232) ;
+    opacity: 0.9;
+    width: 35%;
+    font-size: 18px;
+    text-align: center;
+}
+.btnAD{
+    font-size: 25px;
+    width: 32.5%;
+    border: none;
+    background: none;
+}
+.btnRemover{
+
+    background: none;
+    border: 2px solid black;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+    opacity: 0.5; 
+    width: 100%;
+
+}
+.divPrecio{
+    font-size: 25px;
+}
+.subBontones{
+    display: flex;
+    padding-left: 4px;
+    gap: 10px;
+    width: 100%;
+
+}
+.cajasTotal{
+
+    border: 3px solid gray;
+    border-radius: 10px;
+    width: 63%;
+    height: 16vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.subCajaTotal{
+    font-size: 19px;
+    height: 3vh;
+    display: flex;
+}
+.subTotalD{
+    padding-left: 10px;
+    width: 40%;
+}
+.subTotalP{
+    height: 3vh;
+    width: 60%;
+    display: flex;
+    justify-content: end;
+    padding-right: 10px;
+}
+.cajaImgM{
+    /* border: 3px solid black; */
+    width: 98%;
+    height: 46vh;
+}
+.navSuperiorF ul{
+    
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    font-size: 19px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+    padding-left: 0rem;
+    gap: 15px;
+}
+.navSuperiorF {
+
+    background:  rgb(55 146 232);
+    height: 6vh;
+    width: 34%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    
+    
+}
+.navSuperiorF li:hover{
+    
+    color: rgb(255, 255, 255);
+} 
+.tituloH{
+    width:100%;
+    display: flex;
+    justify-content: center;
+
+}
+.aLinkProductosD:hover{
+    color: white;
+
+}
+.btnComprarT{
+    height: 10vh;
+    
+}
+.btnComprarT button{
+    font-size: 18px;
+}
+
+
+               
+
+
+
+
+
+
+
+
+
+
+
+/*                                                                              END STYLES CARRITO  */
+
+
+
 
 
                                         /*////////////////////////////////////     CLASES REUTILIZABLES         \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
