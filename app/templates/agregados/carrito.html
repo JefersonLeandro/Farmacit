@@ -31,10 +31,11 @@
                         <h5>Carrito compras</h5>
                     </div>
                 </div>
+                {% set tamano = productos|default([])|length %}
                 <div class="contenedorCentralC">
                     <div class="cajaCentralC">
                         <div class="cajaNumero">
-                            <span><!-- Contenido --- TAMANO --dinámico PHP eliminado --></span>
+                            <span>{{tamano}}</span>
                         </div>
                         <div class="cajaCentralImg">
                             <img src="{{url_for('static',filename = 'imagenes/carrito-de-compras.png')}}" alt="logo" width="100%"
@@ -42,7 +43,7 @@
                         </div>
                     </div>
                     <div class="divMv">
-                        <a href="index.php">
+                        <a href="{{url_for('bp_inicio.index')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                                 class="bi bi-house-fill" viewBox="0 0 16 16">
                                 <path
@@ -58,26 +59,119 @@
             <div class="cajaPrincipalC">
                 <div class="subCajaI">
                     <div class="cajaCarritoI">
-                        <!-- Contenido dinámico PHP eliminado -->
 
-                        CAJA PARA EL PRODUCTO 
+                        {% if current_user.is_authenticated %}                           
+                            {% for carrito, producto, imagen in productos %}
+    
+
+                                <div class="carrito-caja">
+                                    <a  class="carrito-picture" href="#">
+                                        <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="{{producto.nombreProducto}}"  width="100%" height= "100%" />
+                                    </a>
+                                    <div class="carrito-cajaMediana">
+                                        <div class="carrito-subCajaArriba">
+                                            {{producto.descripcionProductoGeneral[:600]}}
+                                            
+                                            <div class="carrito-stock">
+                                                {% if producto.stockProducto <= 20  %}
+                                                    <small class="text-red" >stock en linea {{producto.stockProducto}}</small>
+
+                                                {% endif%}
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="carrito-subCajaAbajo">
+                                            <div class="carrito-subCaja1">
+                                                <div class="carrito-subCaja1-1">
+                                                    <input  class="carrito-inputCantidad" type="text" value="{{carrito.cantidadCarrito}}">
+                                                    <button type="button" class="carrito-btnActualizar " >Actulizar</button>
+                                                    <button  type="button" class="btn btn-secondary " type="reset" >Reset</button>
+                                                    <input type="hiddien" class="carrito-inputStock" value="{{producto.stockProducto}}">
+                                                </div>
+                                                <form action="{{url_for('bp_carrito.eliminarCarrito')}}" method="post" class="formEliminar">
+                                                    <input type="hidden" name="fIdCarrito" value="{{carrito.idCarrito}}">
+                                                    <button class="btn btn-danger">Eliminar</button>
+                                                </form>
+                                            </div>
+                                            <div class="carrito-subCaja2">
+                                                <strong>${{producto.precioProducto}}$</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                            
+                            {% endfor %}
+
+                            {% if tamano == 0 %}
+                                <div class='alert alert-dark-tranparent' role='alert'>
+                                    <h5>Tu carrito está vacío</h5>
+                                </div>
+                            {% endif %}
+                          
+
+                        {%else : %}
+                            <div class='alert alert-dark-tranparent' role='alert'>
+                                <h5>Tu carrito está vacío, inicia session <a href='{{url_for("bp_login.login")}}' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
+                            </div>
+                        {%endif%}
+
                     </div>
                 </div>
-                <div>
-                    PRECIO : 
-                    CANTIDAD  :
-                    IVA : 
-                    TOTAL : 
-                </div>
-                <br>
-                <br>
-                <b></b>
-                <p>AGREGAR UNA IMAGEN </p>
+                <div class="carrito-info">
+                    <div class="carrito-subInfo">
+                        
+                        {% if diccionario != undefined : %}
 
-                <!-- <img src="" alt="agregar una imagen con IA " width="100%" height="350px">
-                <div class="btnComprarT">
-                    <button type="button" class="btn btn-primary" id="btnCT">Comprar todo</button>
-                </div> -->
+                            {% set subtotal = diccionario["subtotal"] %}
+                            {% set cantidad = diccionario["cantidadFinal"] %}
+                            {% set iva = diccionario["iva"] %}
+                            {% set total = diccionario["total"] %}
+
+                        {% else: %}
+                            {% set subtotal = 0 %}
+                            {% set cantidad = 0 %}
+                            {% set iva = 0 %}
+                            {% set total = 0 %}
+                        
+                        {% endif %}
+                      
+                        <div class="carrito-subHeader">
+                            <p>Subtotal {{ subtotal }}</p>
+                        </div>
+                       <div class="carrito-contenedorInfo">
+                            <div class="carrito-descripcion">
+                                <p>Cantidad {{cantidad}}</p>
+                                <p>Iva {{iva}}</p>
+                                <strong>Total {{total}}</strong>
+                            </div>
+                            <div class="carrito-contenedorImagen">
+                                <img src="/static/imagenes/chicaAnimada.png" class="carrito-imagen" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carrito-btnPagar">
+                        {% if current_user.is_authenticated %}  
+                            
+                            {% if tamano >= 1 : %}
+                                <button class="btn btn-primary">
+                                    <strong>Pagar</strong>
+                                </button>
+                            {%else: %}
+                            <a class="btn btn-primary" style="color: white;" href="{{url_for('bp_inicio.index')}}" role="button">
+                                <strong>Agregar</strong>
+                            </a>
+                            {% endif %}
+
+                        {%else : %}
+                            <button class="btn btn-primary">
+                                <strong>Agregar</strong>
+                            </button>
+                        {% endif %}
+                    </div>
+                  
+                </div>
+                    <!-- <button type="button" class="btn btn-primary" id="btnCT">Comprar todo</button> -->
+                
             </div>
             <div class="lineaCarritoF"></div>
             <div class="tituloH">
@@ -92,6 +186,98 @@
             </div>
         </div>
     </main>
-</body>
+</body>    
 
+<script>
+    
+    //eventos 
+
+    //inputs
+
+    let inputs = document.querySelectorAll(".carrito-inputCantidad");
+    inputs.forEach(function(input) {
+        input.addEventListener("click", function(event) {
+            event.preventDefault(); // Evitar el comportamiento predeterminado del evento
+            //se seleciona dentro del contenedor el btn a actualizar 
+            let botonActualizar = input.closest(".carrito-subCaja1-1").querySelector(".carrito-btnActualizar");
+            // var botonActualizar = input.parentNode.querySelector(".carrito-btnActualizar");
+
+            if (botonActualizar.style.display != "block") {
+                botonActualizar.style.display = "block"; 
+            }
+            cantidad = input.value
+            console.log("click input-cantidad : "+input.value);
+        });
+    });
+
+    //botones
+    const botones = document.querySelectorAll("button.carrito-btnActualizar");
+    botones.forEach(function(boton) {
+        boton.addEventListener("click", function(event) {
+            event.preventDefault();  // Evitar el comportamiento predeterminado del evento
+            console.log("click btn-actualizar ");
+
+            const input = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputCantidad");
+            console.log(" cantidad input  : " + input.value);
+            const stockProducto = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputStock");
+            
+            verificacion(input.value, stockProducto.value);
+        });
+    });
+
+
+
+    function verificacion(cantidadAsociada,stockProducto) {
+        
+            //se seleciona dentro del contenedor el btn a actualizar 
+            console.log("cantidadddddddd : "+cantidadAsociada)
+            console.log("stock-productoooooooo : "+stockProducto)
+            
+        
+        let resultado = (function(cantidadAsociada,stockProducto) {//función IIFE para encapsular
+
+            // Expresión regular que coincide con cualquier cosa que no sea un número
+            var expresionRegular = /[^0-9]/;
+
+            // Verificar si la cadena contiene caracteres que no son números
+            let test =  expresionRegular.test(cantidadAsociada); // true a2b4ca, false 123123 
+
+            let bandera = false;
+
+            if(!(test)){//false
+
+                var cantidad = parseInt(cantidadAsociada, 10);
+                if(stockProducto > 0){
+
+                    if (cantidad <= stockProducto) {
+
+                        if (!isNaN(cantidad) && cantidad > 0) {
+                            bandera = true;
+                        }
+
+                    }else{
+
+                        bandera = null;
+                    }
+                }else{
+                    window.location.reload();
+                }
+            }
+
+            return bandera;
+
+        })(cantidadAsociada,stockProducto);
+
+        return resultado;
+    }
+       
+
+
+    
+
+
+    //---cuando se actulize la cantidad en el servidor en ajax poner otra vez el btn oculto 
+
+    
+</script>
 </html>

@@ -7,7 +7,7 @@ class Producto (db.Model):
     idProducto = db.Column(db.Integer, primary_key=True)
     nombreProducto = db.Column(db.String(45), nullable=False)
     descripcionUnidad = db.Column(db.String(45), nullable=False)
-    descripcionProductoGeneral = db.Column(db.Text, nullable=False)
+    descripcionProductoGeneral = db.Column(db.String(3000), nullable=False)
     stockProducto = db.Column(db.Integer, nullable=False)
     precioProducto = db.Column(db.Integer, nullable=False)
     idMarcaProducto = db.Column(db.Integer, db.ForeignKey('MarcasProductos.idMarcaProducto') , nullable=False)
