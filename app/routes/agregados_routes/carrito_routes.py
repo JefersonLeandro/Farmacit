@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template , request , url_for , redirect
+from flask import Blueprint, render_template , request , url_for , redirect, jsonify
 from app.models.Producto import Producto 
 from app.models.CarritoCompra import CarritoCompra 
 from app.models.Imagen import Imagen
@@ -29,7 +29,7 @@ def index():
 
 @bp.route('/carrito_compras/insertar', methods=['POST','GET'])
 def insertar():
-    
+    # *no dejar insertar productos que vayan a superar el stock de l producto
     if current_user.is_authenticated and  request.method == 'POST': 
     
         idProducto = request.form.get('fIdProducto', 0)
@@ -88,11 +88,58 @@ def eliminarCarrito():
         db.session.commit()
 
     return redirect(url_for('bp_carrito.index'))
+
+
+@bp.route('/carrito_compras/actulizar', methods=['POST'])
+def actualizarCantidad():
+    
+    
+    data = request.get_json()
+      
+    cantidad = data['cantidad'].strip()
+    idCarrito = data['idCarrito'].strip()
+    
+    
+    
+    if cantidad and idCarrito and (not cantidad.isspace()) and (not idCarrito.isspace()):
+        # Hacer algo con los datos
+            respuesta = {'mensaje': f'¡Datos recibidossss {data} correctamente cantidad {cantidad} idCarrito : {idCarrito}  !'}
+            return jsonify(respuesta)
+
+    else:
+        respuesta = {'mensaje': '######DATOS-VACIOS#########' }
+        return jsonify(respuesta)
+    
+    
+    
+    
+    
     
     
 
+    # respuesta = {'mensaje': f'¡Datos recibidos {data} correctamente cantidad {cantidad} idCarrito : {idCarrito}  !'}
+    # return jsonify(respuesta)
+  
 
+    # Si 'dato' no está presente en los datos recibidos, devolver un error
+        # return jsonify({'error': 'Campo "dato" no encontrado en los datos recibidos'}), 400
+
+    #   if (not cantidad.isspace()) and (not idCarrito.isspace()):
+    #     # Hacer algo con los datos
+       
+    #     if isinstance(cantidad (int)) and isinstance(idCarrito (int)):
+    #         # La variable cantidad es un número (entero)
+    #         respuesta = {'mensaje': f'¡Datos recibidos {data} correctamente ENTEROS cantidad {cantidad} idCarrito : {idCarrito}  !'}
+    #         return jsonify(respuesta)
+    #     else: 
+    #         respuesta = {'mensaje' : 'NO SON ENTEROS '}
+    #         return jsonify(respuesta)
+            
     
+    # else:
+    #     respuesta = {'mensaje': '######DATOS-VACIOS#########' }
+   
+    #     return jsonify(respuesta)
     
     
 

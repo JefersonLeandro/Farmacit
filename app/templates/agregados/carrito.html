@@ -60,9 +60,10 @@
                 <div class="subCajaI">
                     <div class="cajaCarritoI">
 
-                        {% if current_user.is_authenticated %}                           
-                            {% for carrito, producto, imagen in productos %}
-    
+                        {% if current_user.is_authenticated %}  
+
+                            {%set subtotal =  0 %}
+                            {% for (carrito, producto, imagen) in productos %}
 
                                 <div class="carrito-caja">
                                     <a  class="carrito-picture" href="#">
@@ -71,7 +72,7 @@
                                     <div class="carrito-cajaMediana">
                                         <div class="carrito-subCajaArriba">
                                             {{producto.descripcionProductoGeneral[:600]}}
-                                            
+                                           
                                             <div class="carrito-stock">
                                                 {% if producto.stockProducto <= 20  %}
                                                     <small class="text-red" >stock en linea {{producto.stockProducto}}</small>
@@ -83,10 +84,11 @@
                                         <div class="carrito-subCajaAbajo">
                                             <div class="carrito-subCaja1">
                                                 <div class="carrito-subCaja1-1">
-                                                    <input  class="carrito-inputCantidad" type="text" value="{{carrito.cantidadCarrito}}">
+                                                    <input   class="carrito-inputCantidad" maxlength="3" autocomplete="off" type="text" value="{{carrito.cantidadCarrito}}">
                                                     <button type="button" class="carrito-btnActualizar " >Actulizar</button>
                                                     <button  type="button" class="btn btn-secondary " type="reset" >Reset</button>
-                                                    <input type="hiddien" class="carrito-inputStock" value="{{producto.stockProducto}}">
+                                                    <input type="hidden" class="carrito-inputStock" value="{{producto.stockProducto}}">
+                                                    <input type="hidden" class="carrito-inputIdCarrito" value="{{carrito.idCarrito}}">
                                                 </div>
                                                 <form action="{{url_for('bp_carrito.eliminarCarrito')}}" method="post" class="formEliminar">
                                                     <input type="hidden" name="fIdCarrito" value="{{carrito.idCarrito}}">
@@ -101,7 +103,7 @@
                                 </div>    
                             
                             {% endfor %}
-
+                            {{subtotal}}
                             {% if tamano == 0 %}
                                 <div class='alert alert-dark-tranparent' role='alert'>
                                     <h5>Tu carrito está vacío</h5>
@@ -128,6 +130,7 @@
                             {% set total = diccionario["total"] %}
 
                         {% else: %}
+
                             {% set subtotal = 0 %}
                             {% set cantidad = 0 %}
                             {% set iva = 0 %}
@@ -150,8 +153,10 @@
                         </div>
                     </div>
                     <div class="carrito-btnPagar">
+
+                        
+
                         {% if current_user.is_authenticated %}  
-                            
                             {% if tamano >= 1 : %}
                                 <button class="btn btn-primary">
                                     <strong>Pagar</strong>
@@ -218,61 +223,113 @@
             console.log("click btn-actualizar ");
 
             const input = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputCantidad");
-            console.log(" cantidad input  : " + input.value);
-            const stockProducto = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputStock");
+            const stock_Producto = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputStock");
+            const id_Carrito = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputIdCarrito");
+            console.log(" idCarrito  : " + id_Carrito);
             
-            verificacion(input.value, stockProducto.value);
+            let cantidad = input.value.trim();
+            let stockProducto = stock_Producto.value.trim();
+            let idCarrito = id_Carrito.value.trim();
+
+            if ((cantidad !== null && cantidad.replace(/\s/g, '') !== "") && (stockProducto !== null && stockProducto.replace(/\s/g, '') !== "") && (idCarrito !== null && idCarrito.replace(/\s/g, '') !== "") ){
+
+                comprobar = verificacion(cantidad, stockProducto , idCarrito);
+                
+                if (comprobar) {
+                    
+                    actualizarCantidadAjax(cantidad,idCarrito, input, boton)
+                    
+                }else if (comprobar === false){
+                    
+                    input.value = 1;
+                    
+                }else{
+
+                    window.alert("stock disponible :  "+stockProducto)
+                    input.value = stockProducto;
+                }
+
+            }else{
+                input.value = 1;
+            }
         });
     });
 
 
 
-    function verificacion(cantidadAsociada,stockProducto) {
-        
-            //se seleciona dentro del contenedor el btn a actualizar 
-            console.log("cantidadddddddd : "+cantidadAsociada)
-            console.log("stock-productoooooooo : "+stockProducto)
+    function verificacion(cantidadAsociada,stock_Producto,id_Carrito) {
+
+
+        // Expresión regular que coincide con cualquier cosa que no sea un número
+        let expresionRegular = /[^0-9]/;
+
+        // Verificar si la cadena contiene caracteres que no son números
+        let test =  expresionRegular.test(cantidadAsociada); // true a2b4ca, false 123123 
+
+        let bandera = false;
+
+        if(!(test)){//false
             
-        
-        let resultado = (function(cantidadAsociada,stockProducto) {//función IIFE para encapsular
+            let cantidad = parseInt(cantidadAsociada, 10);
+            let stockProducto = parseInt(stock_Producto, 10)
+            let idCarrito = parseInt(id_Carrito, 10)
 
-            // Expresión regular que coincide con cualquier cosa que no sea un número
-            var expresionRegular = /[^0-9]/;
-
-            // Verificar si la cadena contiene caracteres que no son números
-            let test =  expresionRegular.test(cantidadAsociada); // true a2b4ca, false 123123 
-
-            let bandera = false;
-
-            if(!(test)){//false
-
-                var cantidad = parseInt(cantidadAsociada, 10);
-                if(stockProducto > 0){
-
-                    if (cantidad <= stockProducto) {
-
-                        if (!isNaN(cantidad) && cantidad > 0) {
-                            bandera = true;
-                        }
+            console.log("stock PRODUCTO INT "+ stockProducto)
+            console.log("id Carrito  INT "+ idCarrito)
+            
+            if ( stockProducto > 0 && idCarrito > 0  ){
+              
+                if (!isNaN(cantidad) && cantidad > 0){
+                    
+                    if (cantidad <= stockProducto ) {
+                       
+                        bandera = true;
 
                     }else{
-
-                        bandera = null;
+                     
+                       bandera = null;
                     }
-                }else{
-                    window.location.reload();
                 }
+
+            }else{
+                window.location.reload();
             }
+        }
 
-            return bandera;
-
-        })(cantidadAsociada,stockProducto);
-
-        return resultado;
+        return bandera 
     }
        
 
-
+    function actualizarCantidadAjax(cantidad,idCarrito, input, boton) {
+        // Crear objeto XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+    
+        // Configurar la solicitud
+        xhr.open('POST', '/carrito_compras/actulizar', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');  // Cambiar el tipo de contenido a JSON
+        boton.style.display = "none";
+        // Configurar la función de devolución de llamada
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                   
+                    // Procesar la respuesta del servidor
+                    var respuesta = JSON.parse(xhr.responseText);
+                    console.log("####EXITO#######" + respuesta.mensaje);
+                } else {
+                    // Manejar errores aquí
+                    //recargar la pagina si falla el ajax 
+                    window.alert("hubo un error al actulizar la cantidad ")// temporal
+                    //window.location.reload(); permanente 
+                    console.log("####FALLO#######");
+                }
+            }
+        };
+    
+        // Enviar la solicitud con los datos como objeto JSON
+        xhr.send(JSON.stringify({ cantidad: cantidad , idCarrito:idCarrito}));
+    }
+    
     
 
 
