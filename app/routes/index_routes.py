@@ -9,7 +9,6 @@ bp = Blueprint('bp_inicio', __name__)
 
 @bp.route('/')
 def index():
-    
 
     aliasImagen = aliased(Imagen)
 

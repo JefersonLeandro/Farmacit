@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
-   
+
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
 </head>
@@ -19,7 +19,8 @@
                 <div class="cajaColor">
                     <div class="cotenedorIconoC">
                         <div class="contenedorImgLogo">
-                            <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="100%" height="48px">
+                            <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="100%"
+                                height="48px">
                         </div>
                     </div>
                     <div id="contenedorH1" class="Separar subContenedor">
@@ -38,8 +39,8 @@
                             <span>{{tamano}}</span>
                         </div>
                         <div class="cajaCentralImg">
-                            <img src="{{url_for('static',filename = 'imagenes/carrito-de-compras.png')}}" alt="logo" width="100%"
-                                height="50px">
+                            <img src="{{url_for('static',filename = 'imagenes/carrito-de-compras.png')}}" alt="logo"
+                                width="100%" height="50px">
                         </div>
                     </div>
                     <div class="divMv">
@@ -48,8 +49,7 @@
                                 class="bi bi-house-fill" viewBox="0 0 16 16">
                                 <path
                                     d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
-                                <path
-                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
+                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
                             </svg>
                         </a>
                     </div>
@@ -60,92 +60,100 @@
                 <div class="subCajaI">
                     <div class="cajaCarritoI">
 
-                        {% if current_user.is_authenticated %}  
+                        {% if current_user.is_authenticated %}
 
-                            {%set subtotal =  0 %}
-                            {% for (carrito, producto, imagen) in productos %}
+                        
+                        {% for (carrito, producto, imagen) in productos %}
 
-                                <div class="carrito-caja">
-                                    <a  class="carrito-picture" href="#">
-                                        <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="{{producto.nombreProducto}}"  width="100%" height= "100%" />
-                                    </a>
-                                    <div class="carrito-cajaMediana">
-                                        <div class="carrito-subCajaArriba">
-                                            {{producto.descripcionProductoGeneral[:600]}}
-                                           
-                                            <div class="carrito-stock">
-                                                {% if producto.stockProducto <= 20  %}
-                                                    <small class="text-red" >stock en linea {{producto.stockProducto}}</small>
+                        <div class="carrito-caja">
+                            <a class="carrito-picture" href="#">
+                                <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
+                                    alt="{{producto.nombreProducto}}" width="100%" height="100%" />
+                            </a>
+                            <div class="carrito-cajaMediana">
+                                <div class="carrito-subCajaArriba">
+                                    <h6>{{producto.nombreProducto}}</h6>
+                                    <p>{{producto.descripcionProductoGeneral[:380]}}.etc</p>
 
-                                                {% endif%}
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="carrito-subCajaAbajo">
-                                            <div class="carrito-subCaja1">
-                                                <div class="carrito-subCaja1-1">
-                                                    <input   class="carrito-inputCantidad" maxlength="3" autocomplete="off" type="text" value="{{carrito.cantidadCarrito}}">
-                                                    <button type="button" class="carrito-btnActualizar " >Actulizar</button>
-                                                    <button  type="button" class="btn btn-secondary " type="reset" >Reset</button>
-                                                    <input type="hidden" class="carrito-inputStock" value="{{producto.stockProducto}}">
-                                                    <input type="hidden" class="carrito-inputIdCarrito" value="{{carrito.idCarrito}}">
-                                                </div>
-                                                <form action="{{url_for('bp_carrito.eliminarCarrito')}}" method="post" class="formEliminar">
-                                                    <input type="hidden" name="fIdCarrito" value="{{carrito.idCarrito}}">
-                                                    <button class="btn btn-danger">Eliminar</button>
-                                                </form>
-                                            </div>
-                                            <div class="carrito-subCaja2">
-                                                <strong>${{producto.precioProducto}}$</strong>
-                                            </div>
-                                        </div>
+                                    <div class="carrito-stock">
+                                        {% if producto.stockProducto <= 20 %} <small class="text-red smallStock">stock en linea
+                                            {{producto.stockProducto}}</small>
+
+                                        {% endif%}
                                     </div>
-                                </div>    
-                            
-                            {% endfor %}
-                            {{subtotal}}
-                            {% if tamano == 0 %}
-                                <div class='alert alert-dark-tranparent' role='alert'>
-                                    <h5>Tu carrito está vacío</h5>
+
                                 </div>
-                            {% endif %}
-                          
+                                <div class="carrito-subCajaAbajo">
+                                    <div class="carrito-subCaja1">
+                                        <div class="carrito-subCaja1-1">
+                                            <input class="carrito-inputCantidad" maxlength="3" read autocomplete="off"
+                                                type="text" value="{{carrito.cantidadCarrito}}">
+                                            <button type="button" class="carrito-btnActualizar ">Actulizar</button>
+                                            <button type="button" class="btn btn-secondary " type="reset">Reset</button>
+                                            <input type="hidden" class="carrito-inputStock"
+                                                value="{{producto.stockProducto}}">
+                                            <input type="hidden" class="carrito-inputIdCarrito"
+                                                value="{{carrito.idCarrito}}">
+                                        </div>
+                                        <form action="{{url_for('bp_carrito.eliminarCarrito')}}" method="post"
+                                            class="formEliminar">
+                                            <input type="hidden" name="fIdCarrito" value="{{carrito.idCarrito}}">
+                                            <button class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </div>
+                                    <div class="carrito-subCaja2">
+                                        <strong>${{producto.precioProducto}}$</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        
+                        {% if tamano == 0 %}
+                        <div class='alert alert-dark-tranparent' role='alert'>
+                            <h5>Tu carrito está vacío</h5>
+                        </div>
+                        {% endif %}
+
 
                         {%else : %}
-                            <div class='alert alert-dark-tranparent' role='alert'>
-                                <h5>Tu carrito está vacío, inicia session <a href='{{url_for("bp_login.login")}}' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
-                            </div>
+                        <div class='alert alert-dark-tranparent' role='alert'>
+                            <h5>Tu carrito está vacío, inicia session <a href='{{url_for("bp_login.login")}}'
+                                    style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar
+                                productos.</h5>
+                        </div>
                         {%endif%}
 
                     </div>
                 </div>
                 <div class="carrito-info">
                     <div class="carrito-subInfo">
-                        
+
                         {% if diccionario != undefined : %}
 
-                            {% set subtotal = diccionario["subtotal"] %}
-                            {% set cantidad = diccionario["cantidadFinal"] %}
-                            {% set iva = diccionario["iva"] %}
-                            {% set total = diccionario["total"] %}
+                        {% set subtotal = diccionario["subtotal"] %}
+                        {% set cantidad = diccionario["cantidadFinal"] %}
+                        {% set iva = diccionario["iva"] %}
+                        {% set total = diccionario["total"] %}
 
                         {% else: %}
 
-                            {% set subtotal = 0 %}
-                            {% set cantidad = 0 %}
-                            {% set iva = 0 %}
-                            {% set total = 0 %}
-                        
+                        {% set subtotal = 0 %}
+                        {% set cantidad = 0 %}
+                        {% set iva = 0 %}
+                        {% set total = 0 %}
+
                         {% endif %}
-                      
+
                         <div class="carrito-subHeader">
-                            <p>Subtotal {{ subtotal }}</p>
+                            <p class="carrito-subtotal">Subtotal {{ subtotal }}</p>
                         </div>
-                       <div class="carrito-contenedorInfo">
+                        <div class="carrito-contenedorInfo">
                             <div class="carrito-descripcion">
-                                <p>Cantidad {{cantidad}}</p>
-                                <p>Iva {{iva}}</p>
-                                <strong>Total {{total}}</strong>
+                                <p class="carrito-cantidad">Cantidad {{cantidad}}</p>
+                                <p class="carrito-iva">Iva {{iva}}</p>
+                                <strong class="carrito-total">Total {{total}}</strong>
                             </div>
                             <div class="carrito-contenedorImagen">
                                 <img src="/static/imagenes/chicaAnimada.png" class="carrito-imagen" alt="">
@@ -154,29 +162,30 @@
                     </div>
                     <div class="carrito-btnPagar">
 
-                        
 
-                        {% if current_user.is_authenticated %}  
-                            {% if tamano >= 1 : %}
-                                <button class="btn btn-primary">
-                                    <strong>Pagar</strong>
-                                </button>
-                            {%else: %}
-                            <a class="btn btn-primary" style="color: white;" href="{{url_for('bp_inicio.index')}}" role="button">
-                                <strong>Agregar</strong>
-                            </a>
-                            {% endif %}
+
+                        {% if current_user.is_authenticated %}
+                        {% if tamano >= 1 : %}
+                        <button class="btn btn-primary">
+                            <strong>Pagar</strong>
+                        </button>
+                        {%else: %}
+                        <a class="btn btn-primary" style="color: white;" href="{{url_for('bp_inicio.index')}}"
+                            role="button">
+                            <strong>Agregar</strong>
+                        </a>
+                        {% endif %}
 
                         {%else : %}
-                            <button class="btn btn-primary">
-                                <strong>Agregar</strong>
-                            </button>
+                        <button class="btn btn-primary">
+                            <strong>Agregar</strong>
+                        </button>
                         {% endif %}
                     </div>
-                  
+
                 </div>
-                    <!-- <button type="button" class="btn btn-primary" id="btnCT">Comprar todo</button> -->
-                
+                <!-- <button type="button" class="btn btn-primary" id="btnCT">Comprar todo</button> -->
+
             </div>
             <div class="lineaCarritoF"></div>
             <div class="tituloH">
@@ -191,34 +200,34 @@
             </div>
         </div>
     </main>
-</body>    
+</body>
 
 <script>
-    
+
     //eventos 
 
     //inputs
 
     let inputs = document.querySelectorAll(".carrito-inputCantidad");
-    inputs.forEach(function(input) {
-        input.addEventListener("click", function(event) {
+    inputs.forEach(function (input) {
+        input.addEventListener("click", function (event) {
             event.preventDefault(); // Evitar el comportamiento predeterminado del evento
             //se seleciona dentro del contenedor el btn a actualizar 
             let botonActualizar = input.closest(".carrito-subCaja1-1").querySelector(".carrito-btnActualizar");
             // var botonActualizar = input.parentNode.querySelector(".carrito-btnActualizar");
 
             if (botonActualizar.style.display != "block") {
-                botonActualizar.style.display = "block"; 
+                botonActualizar.style.display = "block";
             }
             cantidad = input.value
-            console.log("click input-cantidad : "+input.value);
+            console.log("click input-cantidad : " + input.value);
         });
     });
 
     //botones
     const botones = document.querySelectorAll("button.carrito-btnActualizar");
-    botones.forEach(function(boton) {
-        boton.addEventListener("click", function(event) {
+    botones.forEach(function (boton) {
+        boton.addEventListener("click", function (event) {
             event.preventDefault();  // Evitar el comportamiento predeterminado del evento
             console.log("click btn-actualizar ");
 
@@ -226,115 +235,203 @@
             const stock_Producto = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputStock");
             const id_Carrito = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputIdCarrito");
             console.log(" idCarrito  : " + id_Carrito);
-            
+
             let cantidad = input.value.trim();
             let stockProducto = stock_Producto.value.trim();
             let idCarrito = id_Carrito.value.trim();
 
             if ((cantidad !== null && cantidad.replace(/\s/g, '') !== "") && (stockProducto !== null && stockProducto.replace(/\s/g, '') !== "") && (idCarrito !== null && idCarrito.replace(/\s/g, '') !== "") ){
 
-                comprobar = verificacion(cantidad, stockProducto , idCarrito);
-                
+                comprobar = verificacion(cantidad, stockProducto , idCarrito); 
+               
                 if (comprobar) {
-                    
-                    actualizarCantidadAjax(cantidad,idCarrito, input, boton)
-                    
-                }else if (comprobar === false){
-                    
-                    input.value = 1;
-                    
-                }else{
 
-                    window.alert("stock disponible :  "+stockProducto)
+                    actualizarCantidadAjax(cantidad, idCarrito, input, boton)
+
+                } else if (comprobar === false) {
+
+                    input.value = 1;
+
+                } else {
+
+                    window.alert("stock disponible :  " + stockProducto)
                     input.value = stockProducto;
                 }
 
             }else{
-                input.value = 1;
+             input.value = 1;
             }
         });
     });
 
 
 
-    function verificacion(cantidadAsociada,stock_Producto,id_Carrito) {
+    function verificacion(cantidadAsociada, stock_Producto, id_Carrito) {
 
 
         // Expresión regular que coincide con cualquier cosa que no sea un número
         let expresionRegular = /[^0-9]/;
 
         // Verificar si la cadena contiene caracteres que no son números
-        let test =  expresionRegular.test(cantidadAsociada); // true a2b4ca, false 123123 
+        let test = expresionRegular.test(cantidadAsociada); // true a2b4ca, false 123123 
 
         let bandera = false;
 
-        if(!(test)){//false
-            
+        if (!(test)) {//false
+
             let cantidad = parseInt(cantidadAsociada, 10);
             let stockProducto = parseInt(stock_Producto, 10)
             let idCarrito = parseInt(id_Carrito, 10)
 
-            console.log("stock PRODUCTO INT "+ stockProducto)
-            console.log("id Carrito  INT "+ idCarrito)
-            
-            if ( stockProducto > 0 && idCarrito > 0  ){
-              
-                if (!isNaN(cantidad) && cantidad > 0){
-                    
-                    if (cantidad <= stockProducto ) {
-                       
+            console.log("stock PRODUCTO INT " + stockProducto)
+            console.log("id Carrito  INT " + idCarrito)
+
+            if (stockProducto > 0 && idCarrito > 0) {
+
+                if (!isNaN(cantidad) && cantidad > 0) {
+
+                    if (cantidad <= stockProducto) {
+
                         bandera = true;
 
-                    }else{
-                     
-                       bandera = null;
+                    } else {
+
+                        bandera = null;
                     }
                 }
 
-            }else{
+            } else {
                 window.location.reload();
             }
         }
 
-        return bandera 
+        return bandera
     }
-       
 
-    function actualizarCantidadAjax(cantidad,idCarrito, input, boton) {
+
+    function actualizarCantidadAjax(cantidadAsociada, id_Carrito, input, boton) {
         // Crear objeto XMLHttpRequest
         var xhr = new XMLHttpRequest();
-    
+        let cantidad = parseInt(cantidadAsociada, 10);
+
+        let idCarrito = parseInt(id_Carrito, 10)
+
         // Configurar la solicitud
         xhr.open('POST', '/carrito_compras/actulizar', true);
         xhr.setRequestHeader('Content-Type', 'application/json');  // Cambiar el tipo de contenido a JSON
-        boton.style.display = "none";
         // Configurar la función de devolución de llamada
+        boton.disabled = true;
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                   
-                    // Procesar la respuesta del servidor
-                    var respuesta = JSON.parse(xhr.responseText);
-                    console.log("####EXITO#######" + respuesta.mensaje);
+                    boton.disabled = false
+                    boton.style.display = "none";
+
+                    //seleccion 
+                    const stock_Producto = boton.closest(".carrito-subCaja1-1").querySelector(".carrito-inputStock");
+                    let small_stock = boton.closest(".carrito-cajaMediana").querySelector(".smallStock");
+                    
+                    stockActual = stock_Producto.value 
+
+                    let respuesta = JSON.parse(xhr.responseText);
+                    
+                    //controlar la respuesta 
+                    if (respuesta.hasOwnProperty("resultados") ){
+                        //recibir los datos actulizados devueltos por ajaxs 
+                        //alert("exito es "+respuesta.resultados)
+                        let resultados = respuesta.resultados;
+                        //alert("Subtotal: " + resultados.subtotal);
+                        //alert("Cantidad Final: " + resultados.cantidadFinal);
+                        //alert("IVA: " + resultados.iva);
+                        //alert("Total: " + resultados.total);
+                        
+                        subtotal = document.querySelector(".carrito-subtotal");
+                        cantidad = document.querySelector(".carrito-cantidad");
+                        iva = document.querySelector(".carrito-iva");
+                        total = document.querySelector(".carrito-total");
+
+
+                        subtotal.innerHTML = "Subtotal "+resultados.subtotal
+                        cantidad.innerHTML = "Cantidad "+resultados.cantidadFinal
+                        iva.innerHTML = "Iva "+resultados.iva
+                        total.innerHTML = "Total "+resultados.total
+
+
+
+                        stockDisponibleDb = respuesta.stockProducto
+                        
+
+                        if (stockDisponibleDb > stockActual){
+                            stock_Producto.value = stockDisponibleDb
+                            mostrarSmall(small_stock, stockDisponibleDb)
+                        }
+
+                    }else if ((respuesta.hasOwnProperty("stockSuperado")) ) {
+                        //##### actulizar el input de la clase stock con el nuevo valor disponible  de ese producto 
+                        stockDisponible = respuesta.stockSuperado
+                        input.value = stockDisponible
+                        stock_Producto.value = stockDisponible;
+  
+                        if (!(small_stock)){
+                            
+                            console.log("La etiqueta small no se encontró. Creando una nueva etiqueta small.");
+                            small_stock = document.createElement("small");
+                            // Configurar cualquier otra propiedad del elemento si es necesario
+                            let cajaMediana = boton.closest(".carrito-cajaMediana");
+                            cajaMediana.querySelector(".carrito-stock").appendChild(small_stock);
+                            
+                            small_stock.classList.add("smallStock");
+                            small_stock.style.color = "red";  
+                            small_stock.innerHTML = "stock en línea " + stockDisponible;
+                        
+                        }
+                        
+                        
+                        mostrarSmall(small_stock, stockDisponible, stockActual )
+                        alert(" stock en linea disponible es de : "+stockDisponible)
+
+                        
+                    }else{
+
+                        alert("otra cosa ")
+                    }
+
                 } else {
                     // Manejar errores aquí
-                    //recargar la pagina si falla el ajax 
-                    window.alert("hubo un error al actulizar la cantidad ")// temporal
-                    //window.location.reload(); permanente 
-                    console.log("####FALLO#######");
+
+                    alert("fallo ajax por parte del servidor ")
+                    //window.location.reload(); 
+                
                 }
             }
         };
-    
+
         // Enviar la solicitud con los datos como objeto JSON
-        xhr.send(JSON.stringify({ cantidad: cantidad , idCarrito:idCarrito}));
+        xhr.send(JSON.stringify({ cantidad: cantidad, idCarrito: idCarrito }));
     }
-    
-    
+
+    function mostrarSmall(small_stock, stockDisponible, stockActual ){
+        
+
+        console.log("dentre a mostrarSmall ")
+        if (small_stock) {
+
+            if (stockDisponible <=20){
+
+                console.log("smallllllllllllllllll definido ")
+                small_stock.innerHTML = "stock en linea "+stockDisponible;
 
 
-    //---cuando se actulize la cantidad en el servidor en ajax poner otra vez el btn oculto 
+            }else if (stockDisponible > 20){
+               
+                small_stock.parentNode.removeChild(small_stock);
+            }
+        }
+
+    }
+
 
     
 </script>
+
 </html>
