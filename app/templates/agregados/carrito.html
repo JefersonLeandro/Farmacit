@@ -9,7 +9,9 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap-5.3.0/js/bootstrap.bundle.js') }}"></script> 
 </head>
+
 
 <body>
     <main id="mainVDF">
@@ -67,7 +69,7 @@
 
                         <div class="carrito-caja">
                             <a class="carrito-picture" href="#">
-                                <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
+                                <img class="carrito-imagen" src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
                                     alt="{{producto.nombreProducto}}" width="100%" height="100%" />
                             </a>
                             <div class="carrito-cajaMediana">
@@ -88,8 +90,9 @@
                                         <div class="carrito-subCaja1-1">
                                             <input class="carrito-inputCantidad" maxlength="3" read autocomplete="off"
                                                 type="text" value="{{carrito.cantidadCarrito}}">
-                                            <button type="button" class="carrito-btnActualizar ">Actulizar</button>
-                                            <button type="button" class="btn btn-secondary " type="reset">Reset</button>
+                                            <button type="button" class="carrito-btnActualizar ">
+                                                Actualizar
+                                            </button>
                                             <input type="hidden" class="carrito-inputStock"
                                                 value="{{producto.stockProducto}}">
                                             <input type="hidden" class="carrito-inputIdCarrito"
@@ -98,7 +101,7 @@
                                         <form action="{{url_for('bp_carrito.eliminarCarrito')}}" method="post"
                                             class="formEliminar">
                                             <input type="hidden" name="fIdCarrito" value="{{carrito.idCarrito}}">
-                                            <button class="btn btn-danger">Eliminar</button>
+                                            <button class="carrito-btnRemover">Remover producto</button>
                                         </form>
                                     </div>
                                     <div class="carrito-subCaja2">
@@ -161,27 +164,46 @@
                         </div>
                     </div>
                     <div class="carrito-btnPagar">
-
-
-
+                        
                         {% if current_user.is_authenticated %}
-                        {% if tamano >= 1 : %}
-                        <button class="btn btn-primary">
-                            <strong>Pagar</strong>
-                        </button>
-                        {%else: %}
-                        <a class="btn btn-primary" style="color: white;" href="{{url_for('bp_inicio.index')}}"
-                            role="button">
+                            {% if tamano >= 1 : %}
+                            
+                            <a href="{{url_for('bp_factura.index')}}" class="btn btn-primary">
+                                <strong>Pagar</strong>
+                            </a>
+                            {%else: %}
+                            <a class="btn btn-primary" style="color: white;" href="{{url_for('bp_inicio.index')}}"
+                                role="button">
+                                <strong>Agregar</strong>
+                            </a>
+                            {% endif %}
+
+                        {%else : %}
+                        <a  href="{{url_for('bp_inicio.index')}}" class="btn btn-primary">
                             <strong>Agregar</strong>
                         </a>
                         {% endif %}
-
-                        {%else : %}
-                        <button class="btn btn-primary">
-                            <strong>Agregar</strong>
-                        </button>
-                        {% endif %}
                     </div>
+                    {% if (productosAgotados) and productosAgotados != "noHayAgotados" %}
+                        <div>
+                            
+                            <div class="toast fade show" style="margin-top: 50px;" role="alert"  aria-live="assertive" aria-atomic="true">
+
+                                <div class="toast-header">
+                                  <img src="..." class="rounded me-2" alt="...">
+                                  <strong class="me-auto">Productos agotados</strong>
+                                  <small>11 mins ago</small>
+                                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    {% for clave, valor in productosAgotados.items() %}
+                                        <li>{{ valor.nombreProducto }}</li>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                
 
                 </div>
                 <!-- <button type="button" class="btn btn-primary" id="btnCT">Comprar todo</button> -->
@@ -200,7 +222,30 @@
             </div>
         </div>
     </main>
+
+    
+    <h1>holaaaaaaaaa</h1>
+
+
+
 </body>
+
+{% with mensajes = get_flashed_messages(with_categories=true) %}
+{% for categoria, mensaje in mensajes %}
+    {% if categoria == 'stockSuperado' %}
+        <script>
+            window.onload = function() {
+                window.setTimeout(function(){
+                    alert("{{mensaje}}");
+                },10 ); 
+            };
+        </script>
+    {% endif %}
+{% endfor %}
+{% endwith %}
+
+
+
 
 <script>
 

@@ -12,6 +12,7 @@ bp = Blueprint('bp_carrito', __name__)
 @bp.route('/carrito_compras')
 def index():
     if current_user.is_authenticated:
+        #* eliminar los carritos donde su stock es igual a cero y mandarlos a un array con los productos agotados
         
         #me devuelve un diccionario 
         diccionario  = calcularTotales()
@@ -24,37 +25,45 @@ def index():
 
 @bp.route('/carrito_compras/insertar', methods=['POST','GET'])
 def insertar():
-    # *no dejar insertar productos que vayan a superar el stock de l producto
+  
     if current_user.is_authenticated and  request.method == 'POST': 
     
         idProducto = request.form.get('fIdProducto', 0)
         consulta  = CarritoCompra.query.filter_by(idProducto=idProducto, idPersona=current_user.idPersona).first()
         verificacion = Producto.query.filter_by(idProducto=idProducto).first()
         
+       
+        stockDisponible = verificacion.stockProducto if verificacion else 0
+        cantidad = consulta.cantidadCarrito if consulta else 1
+        
         
         if not consulta : 
             # inserta     
-            if verificacion :         
-                nuevoCarrito = CarritoCompra(idCarrito = None, idPersona = current_user.idPersona , idProducto = idProducto , cantidadCarrito=1  )
-                db.session.add(nuevoCarrito)
-            
+            if verificacion :  
+                
+                if stockDisponible > cantidad :      
+
+                    nuevoCarrito = CarritoCompra(idCarrito = None, idPersona = current_user.idPersona , idProducto = idProducto , cantidadCarrito=1  )
+                    db.session.add(nuevoCarrito)
+                else:
+                     
+                    flash( "Producto no agregado, stock superado" , "stockSuperado")
+                    
         else:
             #actualiza la cantidad del carrito encontrado 
-            stockDisponible = verificacion.stockProducto
-            cantidad = consulta.cantidadCarrito
-            
             if stockDisponible > cantidad :  
         
                 cantidad = consulta.cantidadCarrito + 1  
                 consulta.cantidadCarrito = cantidad
+                
             else: 
 
-                flash("Producto no agregado, stock superado")
+                flash("Producto no agregado, stock superado", "stockSuperado")
 
         try:
             db.session.commit()
+        
         except IntegrityError:
-            # Se producirá una excepción si hay una violación de restricción única
             db.session.rollback() 
     
     return redirect(url_for('bp_inicio.index'))
@@ -119,37 +128,31 @@ def actualizarCantidad():
         cantidad = int(cantidad)
         idCarrito = int(idCarrito)
         
-       
-        
         if cantidad > 0  and  idCarrito > 0 :
             
-            
-            # respuesta = {'exito': f'----exito-- cantidad : {cantidad} y  idCarrito : {idCarrito}' }
-            # carrito
+            #carrito
             carritoEncontrado = CarritoCompra.query.filter_by(idCarrito=idCarrito , idPersona=current_user.idPersona).first()
-            idProducto = carritoEncontrado.idProducto
             
             if carritoEncontrado:
+                
+                idProducto = carritoEncontrado.idProducto
                   
                 # producto
                 productoEncontrado = Producto.query.filter_by(idProducto = idProducto).first()
                 stockProducto = productoEncontrado.stockProducto
                 
                 if stockProducto >= cantidad:    
-                    
-                    #update de cantidad carrito 
-                                       
+                                      
                     carritoEncontrado.cantidadCarrito = cantidad
                     db.session.commit()
                     
                     resultados = calcularTotales()
-                    
                     respuesta = {f'resultados': resultados , 'stockProducto':stockProducto }
+                    
                     return jsonify(respuesta)
-                    # actualizar la cantidad solo y si la cantidad es menor a que el stock de ese producto 
-                    respuesta = {'mensaje': f'¡Datos recibidossss {data} correctamente cantidad {cantidad} idCarrito : {idCarrito}  !'}
-                    return jsonify(respuesta)
+           
                 else: 
+                    
                    respuesta = {'stockSuperado': stockProducto}
                    return jsonify(respuesta)
                     

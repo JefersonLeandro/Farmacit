@@ -398,7 +398,6 @@
             <div id="divCR2">
 
                 <div id="tituloR">
-                    <h4>Redes</h4>
                 </div>
                 <div id="divRGE">
 
@@ -455,6 +454,19 @@
         </div>
     </footer>
 
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'stockSuperado' %}
+                <script>
+                    window.onload = function() {
+                        window.setTimeout(function(){
+                            alert("{{mensaje}}");
+                        },10 ); 
+                    };
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
 
 
 </body>
