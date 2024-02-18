@@ -41,7 +41,7 @@ def insertar():
             # inserta     
             if verificacion :  
                 
-                if stockDisponible > cantidad :      
+                if stockDisponible >= cantidad :      
 
                     nuevoCarrito = CarritoCompra(idCarrito = None, idPersona = current_user.idPersona , idProducto = idProducto , cantidadCarrito=1  )
                     db.session.add(nuevoCarrito)

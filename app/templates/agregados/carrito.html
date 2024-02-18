@@ -167,7 +167,6 @@
                         
                         {% if current_user.is_authenticated %}
                             {% if tamano >= 1 : %}
-                            
                             <a href="{{url_for('bp_factura.index')}}" class="btn btn-primary">
                                 <strong>Pagar</strong>
                             </a>
@@ -190,20 +189,20 @@
                             <div class="toast fade show" style="margin-top: 50px;" role="alert"  aria-live="assertive" aria-atomic="true">
 
                                 <div class="toast-header">
-                                  <img src="..." class="rounded me-2" alt="...">
-                                  <strong class="me-auto">Productos agotados</strong>
-                                  <small>11 mins ago</small>
+                                  
+                                  <strong class="me-auto text-red">Productos agotados</strong>
+                                  
                                   <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
-                                <div class="toast-body">
-                                    {% for clave, valor in productosAgotados.items() %}
-                                        <li>{{ valor.nombreProducto }}</li>
+                                <div class="toast-body carrito-scroll" >
+                                    {% for valor  in productosAgotados%}
+                                        <li>{{ valor }}</li>
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     {% endif %}
-                
+                    
 
                 </div>
                 <!-- <button type="button" class="btn btn-primary" id="btnCT">Comprar todo</button> -->
@@ -224,7 +223,6 @@
     </main>
 
     
-    <h1>holaaaaaaaaa</h1>
 
 
 
@@ -232,7 +230,7 @@
 
 {% with mensajes = get_flashed_messages(with_categories=true) %}
 {% for categoria, mensaje in mensajes %}
-    {% if categoria == 'stockSuperado' %}
+    {% if categoria == 'stockSuperado' or categoria == 'sinStock' or categoria == 'compraExito'%}
         <script>
             window.onload = function() {
                 window.setTimeout(function(){
