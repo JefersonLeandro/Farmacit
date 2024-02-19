@@ -132,9 +132,9 @@
 
 
                                 {% if tamano > 0  %}
-                                    <button class='buttonComprarTodo'>
-                                        <p>COMPRAR TODO</p>
-                                    </button>
+                                    <a class='buttonComprarTodo'  href="{{url_for('bp_carrito.transferenciaFavoritos')}}">
+                                        <p class="text-center">COMPRAR TODO LO DISPONIBLE</p>
+                                    </a>
 
                                 {% else %}
                                     <a href="{{url_for('bp_inicio.index')}}" class='buttonComprarTodo' style='text-align: center;' >
@@ -161,7 +161,15 @@
                                                 </div>
                                                 <div id='botonesCE'>
                                                     <form class='botonG' action="{{url_for('bp_favoritos.acciones')}}" method='post'>
-                                                        <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
+                                                        {% if producto.stockProducto > 0 %}
+                                                            
+                                                            <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
+                                                        
+                                                        {%else%}
+                                                        
+                                                            <strong class="text-red">Producto sin stock</strong>
+                                                            
+                                                        {%endif%}
                                                         <input type="hidden" name="fIdProductoDeseado" value="{{productoDeseado.idProductoDeseado}}" />
                                                         <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
                                                     </form>
@@ -402,6 +410,23 @@
                 window.location.href="{{ url_for('bp_inicio.index') }}"
             }
          </script>
+
+         
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'indisponibilidad' %}
+                <script>
+                    window.onload = function() {
+                        window.setTimeout(function(){
+                            alert("{{mensaje}}");
+                        },10 ); 
+                    };
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+    
     </main>
 </body>
 

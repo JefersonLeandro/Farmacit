@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template , request , url_for , redirect, jsonify , flash
 from app.models.Producto import Producto 
 from app.models.CarritoCompra import CarritoCompra 
+from app.models.ProductoDeseado import ProductoDeseado 
 from app.models.Imagen import Imagen
 from sqlalchemy.exc import IntegrityError
 from flask_login import current_user
@@ -12,15 +13,34 @@ bp = Blueprint('bp_carrito', __name__)
 @bp.route('/carrito_compras')
 def index():
     if current_user.is_authenticated:
-        #* eliminar los carritos donde su stock es igual a cero y mandarlos a un array con los productos agotados
         
         #me devuelve un diccionario 
         diccionario  = calcularTotales()
         
         #me devuelve los valores de bd 
         resultados = retornarResultados()
+        productosAgotados = []
         
-        return render_template('/agregados/carrito.html' , diccionario=diccionario , productos=resultados)    
+        for carrito, producto , imagen  in resultados:
+            cantidad = carrito.cantidadCarrito
+            stockProducto  = producto.stockProducto
+
+            if stockProducto > 0 and  stockProducto < cantidad : 
+                carrito.cantidadCarrito = stockProducto
+                db.session.commit()
+                
+            elif stockProducto == 0:
+                productosAgotados.append(producto.nombreProducto)
+                db.session.delete(carrito)   
+                db.session.commit()  
+            
+                    
+        if productosAgotados: 
+            # Filtrar productos agotados de los resultados, solo dejar producto disponibles 
+            resultados = [res for res in resultados if res[1].stockProducto > 0] 
+            flash("Revisa,  alguno de tus productos se agoto","sinStock") 
+            
+        return render_template('/agregados/carrito.html' , diccionario=diccionario , productos=resultados , productosAgotados = productosAgotados)    
     return render_template('/agregados/carrito.html')
 
 @bp.route('/carrito_compras/insertar', methods=['POST','GET'])
@@ -118,61 +138,90 @@ def eliminarCarrito():
 def actualizarCantidad():
     
     
-    data = request.get_json()
-      
-    cantidad = str(data['cantidad'])
-    idCarrito = str(data['idCarrito'])
-    
-    if cantidad and idCarrito and (not cantidad.isspace()) and (not idCarrito.isspace()) and cantidad.isdigit() and idCarrito.isdigit():
+    if current_user.is_authenticated:  
+        data = request.get_json()
         
-        cantidad = int(cantidad)
-        idCarrito = int(idCarrito)
+        cantidad = str(data['cantidad'])
+        idCarrito = str(data['idCarrito'])
         
-        if cantidad > 0  and  idCarrito > 0 :
+        if cantidad and idCarrito and (not cantidad.isspace()) and (not idCarrito.isspace()) and cantidad.isdigit() and idCarrito.isdigit():
             
-            #carrito
-            carritoEncontrado = CarritoCompra.query.filter_by(idCarrito=idCarrito , idPersona=current_user.idPersona).first()
+            cantidad = int(cantidad)
+            idCarrito = int(idCarrito)
             
-            if carritoEncontrado:
+            if cantidad > 0  and  idCarrito > 0 :
                 
-                idProducto = carritoEncontrado.idProducto
-                  
-                # producto
-                productoEncontrado = Producto.query.filter_by(idProducto = idProducto).first()
-                stockProducto = productoEncontrado.stockProducto
+                #carrito
+                carritoEncontrado = CarritoCompra.query.filter_by(idCarrito=idCarrito , idPersona=current_user.idPersona).first()
                 
-                if stockProducto >= cantidad:    
-                                      
-                    carritoEncontrado.cantidadCarrito = cantidad
-                    db.session.commit()
+                if carritoEncontrado:
                     
-                    resultados = calcularTotales()
-                    respuesta = {f'resultados': resultados , 'stockProducto':stockProducto }
+                    idProducto = carritoEncontrado.idProducto
                     
-                    return jsonify(respuesta)
-           
-                else: 
+                    # producto
+                    productoEncontrado = Producto.query.filter_by(idProducto = idProducto).first()
+                    stockProducto = productoEncontrado.stockProducto
                     
-                   respuesta = {'stockSuperado': stockProducto}
-                   return jsonify(respuesta)
+                    if stockProducto >= cantidad:    
+                                        
+                        carritoEncontrado.cantidadCarrito = cantidad
+                        db.session.commit()
+                        
+                        resultados = calcularTotales()
+                        respuesta = {f'resultados': resultados , 'stockProducto':stockProducto }
+                        
+                        return jsonify(respuesta)
+            
+                    else: 
+                            
+                        respuesta = {'stockSuperado': stockProducto}
+                        return jsonify(respuesta)
+                        
+        
                     
-    
-                 
-    respuesta = {'fallo': 404 }
-    return jsonify(respuesta)
-    
-    
-    
+        respuesta = {'fallo': 404 }
+        return jsonify(respuesta)
+    return redirect(url_for("bp_inicio.index"))
 
-        
- 
+@bp.route('/carrito_compras/transferencia', methods=['GET'])
+def transferenciaFavoritos(): 
     
+    if current_user.is_authenticated:   
         
-              
+        idPersona =  current_user.idPersona
+        favoritos = (
+            db.session.query(ProductoDeseado, Producto)
+            .join(Producto, Producto.idProducto == ProductoDeseado.idProducto)
+            .filter(ProductoDeseado.idPersona == idPersona, Producto.stockProducto > 0)
+            .order_by(ProductoDeseado.idProductoDeseado.asc())
+            .all()
+        )
+        
+        if favoritos:  
+           
+            for productoDeseado , producto  in favoritos :
+                
+                idProducto = producto.idProducto
+                #si ya esta ese producto en el carrito no se agrega , seria incesesario. 
+                carrito = CarritoCompra.query.filter_by(idProducto=idProducto, idPersona=idPersona).first()
+                
+                if not carrito : 
+                    # si no esta lo agrega
+                    nuevaCarrito = CarritoCompra(idCarrito= None, idPersona = idPersona , idProducto = productoDeseado.idProducto, cantidadCarrito = 1)
+                    db.session.add(nuevaCarrito)
+                    db.session.delete(productoDeseado)
+                    
+                else : 
+                    # si esta lo elimina de deseados
+                    db.session.delete(productoDeseado)
+                
+                db.session.commit()
+        else :   
             
+            flash("No tienes productos disponibles para agregar.", "indisponibilidad")
+            return  redirect(url_for('bp_favoritos.index'))  
         
-       
-     
+    return redirect(url_for('bp_carrito.index')) 
 
 
 
