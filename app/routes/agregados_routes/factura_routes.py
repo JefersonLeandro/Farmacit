@@ -9,27 +9,6 @@ from datetime import date
 
 bp = Blueprint('bp_factura', __name__)
 
-
-# @bp.before_request
-# def before_request():
-#     # Configura la cookie 'reload_flag' para la próxima carga
-#     response = make_response()
-
-#     # Verifica si la cookie 'reload_flag' está presente
-#     reload_flag = request.cookies.get('reload_flag')
-#     print(f"Valor de 'reload_flag' al inicioooo: {reload_flag}")
-
-#     # Utiliza reload_flag para determinar si la página se recargó
-#     if reload_flag:
-        
-#         print("dentre a retornarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr ")
-#         return render_template('/agregados/carrito.html')   
-#     else:
-#         print("Primera carga.")
-#     response.set_cookie('reload_flag', '1')
-
-
-
 @bp.route('/carrito_compras/factura' ,  methods=['GET'])
 def index():
     if current_user.is_authenticated :
@@ -87,14 +66,16 @@ def index():
                 
                 # fallo 
                 
-                db.session.commit()#confirmar cambios de verificar Factura
+                db.session.commit() #confirmar cambios de verificar Factura
 
                 # Filtrar productos agotados de los resultados, solo dejar producto disponibles 
                 resultados = [res for res in resultados if res[1].stockProducto > 0] 
             
                 diccionario = calcularTotales()  
                 
-                return render_template('agregados/carrito.html',diccionario=diccionario , productos=resultados, productosAgotados = productosAgotados)
+                # para mostrar los productos agotados debo dejar los productos agotados 
+                #return render_template('agregados/carrito.html',diccionario=diccionario , productos=resultados, productosAgotados = productosAgotados)
+                return redirect(url_for('bp_carrito.index'))
         
     return render_template('/agregados/carrito.html')                   
     
@@ -104,8 +85,7 @@ def verificarFactura(resultados):
     
     verificar = False  
     stockSuperado = False 
-    
-    global productosAgotados
+
     
     for carrito , producto , Imagen  in resultados :
         
@@ -151,3 +131,10 @@ def actualizarCantidades(informacionCompra):
                 if stockDisponible < cantidad : 
                     carrito.cantidadCarrito = stockDisponible 
             db.session.commit()    
+
+
+@bp.route('/carrito_compras/nuevaUrl' ,  methods=['GET'])
+def nuevaUrl(): 
+    return redirect(url_for("bp_inicio.index"))
+    
+    

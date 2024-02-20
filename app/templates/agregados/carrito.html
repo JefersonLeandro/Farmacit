@@ -237,6 +237,22 @@
                     alert("{{mensaje}}");
                 },10 ); 
             };
+
+            // Cambiar la URL antes de recargar la página
+            function cambiarURL() {
+                var nuevaURL = "/carrito_compras/nuevaUrl";
+                history.replaceState(null, null, nuevaURL);
+                
+            }
+            
+            // Agregar un evento antes de la recarga de la página
+            window.addEventListener('beforeunload', function (event) {
+                
+                cambiarURL();
+            });
+  
+
+
         </script>
     {% endif %}
 {% endfor %}

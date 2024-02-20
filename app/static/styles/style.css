@@ -161,7 +161,6 @@ p {
 
 #menuSecundario{
 
-    
     width: 100%;
     display: flex;
     align-items: center;
@@ -171,7 +170,7 @@ p {
    
 
 }
-#menuSecundario ul{
+.ulPc{
 
     width: 76%;
     display: flex;
@@ -185,13 +184,12 @@ p {
 }
 
 #iconosMenuS{
-
     display: flex;
 }
 
 
 
-#menuSecundario li{
+.ulPc li{
 
     display: flex;
     justify-content: center;
@@ -1587,7 +1585,6 @@ a:visited{
 
     height: 76vh;
     width: 95%;
-    /* border: 3px solid black; */
     overflow-y: scroll;
     -ms-overflow-style: none; /* Deshabilitar la barra de desplazamiento predeterminada en IE 10+ */
     scrollbar-width: none; /* Deshabilitar la barra de desplazamiento predeterminada en Firefox */
@@ -1664,14 +1661,7 @@ a:visited{
     justify-content: end;
     gap: 10px;
 
-    /* height: 10vh;
-    box-sizing: border-box;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    position: absolute;
-    left: 94.7%;
-    width: 40px; */
+
 
 }
 .divMv{
@@ -1739,6 +1729,48 @@ a:visited{
     gap: 10px ;
 
 }
+                                                        /*  END STYLES TABLA ROLES*/
+
+                                /* STYLES AREA DE VISTA DE LAS FACTURAS*/
+.facturas-subContenedor{
+
+    width: 50%;
+    margin-left: 14px;
+}
+.facturas-subMain{
+
+    width: 55%;
+
+}
+.facturas-iconos{
+
+    width: 25%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    gap: 10px;
+}
+
+.facturas-centro{
+
+    height: 78vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+.facturas-scroll{
+
+    height: 76vh;
+    width: 85%;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Deshabilitar la barra de desplazamiento predeterminada en IE 10+ */
+    scrollbar-width: none; /* Deshabilitar la barra de desplazamiento predeterminada en Firefox */
+    max-height: 72vh;
+}
+
+
+                                /* END STYLES FACTURAS*/
+
 
 
 /*                                                                              STYLES CARRITO  */
@@ -2267,10 +2299,23 @@ a:visited{
  
 }
 
- .gap4{
+.fondon-gris-oscuro{
+
+    background-color: rgb(220, 220, 220);
+
+}
+
+
+            /* gap */
+.gap4{
     display: flex;
     gap: 4px;
 }
+
+.gap-10px{
+    gap: 10px;
+}
+
 /*           widths         */
 .width86{
     width: 86%;
@@ -2283,6 +2328,24 @@ a:visited{
     width: 72%;
 
 }
+.width60{
+   width: 60%; 
+}
+
+.width65px{
+
+    width:65px;
+
+}
+
+                    /* heights */
+
+.height65px{
+
+    height: 65px;
+}
+
+
 
                  /* disabled  */
 
@@ -2306,3 +2369,158 @@ a:visited{
 
     text-align: center;
 }
+
+                /* display */
+.display-flex{
+    display: flex;
+}
+
+                /* align */
+
+.align-items-end{
+    align-items: end;
+}
+                /* justify-content */
+.justify-content-end{
+    justify-content: end;
+} 
+
+
+                /* STYLES FOR PHONE  */
+
+.celular-ul {
+    display: none;
+}
+
+
+
+                /* END STYLES  */
+
+
+
+
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 768px) {
+
+    #barraLateralG{
+        display:  none;
+    }
+    #menuSecundario{
+        display :block ;
+    }
+
+    .ulPc{
+
+        display: none;
+
+    }
+
+    .areaCentral{
+
+        display: none;
+    }
+
+    #seccionP{
+        display: grid;
+        overflow-y: auto;
+        grid-template-columns:  auto ;
+
+
+    }
+
+    #navSuperior{
+        display: none;
+    }
+
+
+    #parteP{
+        margin-top: 0; 
+        margin-left: 0;
+        z-index: 0;
+        width: auto;
+    }
+    #iconoP img{
+        margin-left: 7px;
+        height: 38px;
+        width: 38px;
+    }
+    
+    /* titulo index */
+    
+    #soyh1 {
+        
+        text-align: start;
+        font-size: 40px;
+        margin-bottom: 0;
+        
+
+    }
+
+    .areaHeaderG{
+
+        display: none;
+
+    }
+    #iconoG{
+
+        width: 60%;
+        display: flex;
+        justify-content: end;
+        padding-right: 10px;
+    }
+
+    #iconoS{
+        display: none;
+    }
+
+    #navBar{
+
+        width: 52%;
+
+    }
+
+    .celular-ul{
+
+        display: flex;
+        margin: 0;
+        font-size: 10px;
+        padding-left: 0;
+        width: 100%;
+        gap: 18px;
+        justify-content: center;
+        height: 100%;
+        line-height: 50px;
+    }
+    
+    .celular-ul li{
+        list-style: none;
+        font-size: 20px;
+
+    }
+    
+    #seccionProductos {
+    
+        width: 100%;
+    }
+
+    .imgsG{
+        /* width: 95%; */
+        height: 200px;
+    }
+
+    /* .buttonAgregar{
+        width: 21%;
+    } */
+
+    .divSeccion{
+
+        height: 50vh;
+    }
+
+    .cajas{
+
+        height: 47vh;
+    }
+}   
