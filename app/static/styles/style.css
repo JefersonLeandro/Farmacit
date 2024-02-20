@@ -2404,22 +2404,13 @@ a:visited{
 
 @media screen and (max-width: 768px) {
 
-    #barraLateralG{
+    /* Reponsive inicio */
+
+    #barraLateralG , .ulPc ,  .areaCentral ,  #navSuperior , .areaHeaderG , #iconoS , #tituloA{
         display:  none;
     }
     #menuSecundario{
         display :block ;
-    }
-
-    .ulPc{
-
-        display: none;
-
-    }
-
-    .areaCentral{
-
-        display: none;
     }
 
     #seccionP{
@@ -2429,11 +2420,6 @@ a:visited{
 
 
     }
-
-    #navSuperior{
-        display: none;
-    }
-
 
     #parteP{
         margin-top: 0; 
@@ -2447,7 +2433,6 @@ a:visited{
         width: 38px;
     }
     
-    /* titulo index */
     
     #soyh1 {
         
@@ -2458,21 +2443,12 @@ a:visited{
 
     }
 
-    .areaHeaderG{
-
-        display: none;
-
-    }
     #iconoG{
 
         width: 60%;
         display: flex;
         justify-content: end;
         padding-right: 10px;
-    }
-
-    #iconoS{
-        display: none;
     }
 
     #navBar{
@@ -2523,4 +2499,67 @@ a:visited{
 
         height: 47vh;
     }
+
+    #divContactG{
+        display: flex;
+        flex-direction: column;
+        height: 20vh;
+        align-items: center;
+        gap: 10px;
+    }
+    #divCR1{
+
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #divCR2{
+        width: 100%;
+
+    }
+
+    #divRGE{
+        justify-content: center;
+    }
+    .aSvg:hover{
+
+        transition: 50ms;
+    }
+
+    /* responsive login */
+
+    #divFormulario{
+
+        width: 90%;
+
+    }
+
+    #iconoForm{
+        position: static;
+        right: 0;
+        width: 30%;
+        display: flex;
+        justify-content: end;
+        padding-right: 10px;
+    }
+    
+    .login-img{
+
+        width: 62px;
+        height: 62px;
+        display: flex;
+        justify-content: end;
+        
+
+    }
+    
+    .login-titulo{
+        text-align: start;
+        font-size: 34px;
+        width: 70%;
+    }
+
+
 }   

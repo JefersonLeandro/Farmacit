@@ -201,9 +201,29 @@
                 </ul>
 
                 <ul class="celular-ul">
-                    <li>Favoritos</li>
-                    <li>Carrito</li>
-                    <li>Registro</li>
+                    <li><a class='aSvg'href="{{url_for('bp_favoritos.index')}}" >favoritos</a></li>
+                    <li><a class='aSvg' href="{{url_for('bp_carrito.index')}}" >Carrito(0)</a></li>
+
+                    {% if current_user.is_authenticated %}
+                        <li> 
+                            <div class='btn-group'>
+                                <button type='button' class='btn btn-tranparent dropdown-toggle' style='padding: 0; border: none; display: flex; align-items: center; gap: 5px;' data-bs-toggle='dropdown' aria-expanded='false' id='btnTogglee'>
+                                    <strong>{{ current_user.nombrePersona }}</strong>  
+                                </button>
+                                <ul class='dropdown-menu' style='padding-left:10px; '>
+                                    <li><a class='dropdown-items' href='#'>Perfil</a></li>
+                                    {% if  current_user.idRol == 3 %}
+                                        <li><a class='dropdown-items' href="{{url_for('bp_administracion.index')}}">Administrar</a></li>
+                                    {% endif %}
+                                    <li><hr class='dropdown-divider'></li>
+                                    <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
+                                </ul>
+                            </div>
+                        </li> 
+                    {%else: %}
+                        <li> <a class='aSvg' href="{{url_for('bp_login.login')}}">Registro </a></li>
+                    {%endif%}
+
 
                 </ul>
 
@@ -340,21 +360,19 @@
                                         </div>
 
                                         {% if current_user.is_authenticated and producto.stockProducto > 0  %}
-
                                            
-                                                <form class='cajaCB' action="{{url_for('bp_carrito.insertar')}}" method='post'>
-                                                    <input type="hidden" name="fIdProducto" value="{{producto.idProducto}}">
-                                                    <button class='buttonComprar' type='button'>
-                                                        <p>Comprar</p>
-                                                    </button>
-                                                    <button class='buttonAgregar' name='agregar' value='[ID del Producto]' type='submit'>
-                                                        <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-cart-plus-fill' viewBox='0 0 16 16'>
-                                                        <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z'/>
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                        
-                                                
+                                            <form class='cajaCB' action="{{url_for('bp_carrito.insertar')}}" method='post'>
+                                                <input type="hidden" name="fIdProducto" value="{{producto.idProducto}}">
+                                                <button class='buttonComprar' type='button'>
+                                                    <p>Comprar</p>
+                                                </button>
+                                                <button class='buttonAgregar' name='agregar' value='[ID del Producto]' type='submit'>
+                                                    <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-cart-plus-fill' viewBox='0 0 16 16'>
+                                                    <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z'/>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                           
                                         {%elif producto.stockProducto == 0 %}
 
                                                 <strong class="text-red">Producto sin stock</strong>
@@ -387,7 +405,7 @@
 
             <div id="divCR1">
                 <h4>Contáctanos</h4>
-                <div>
+                <div class="inicio-telefono">
                     <span>Telefono: 3143842657</span>
                 </div>
                 <div>
@@ -399,11 +417,11 @@
             <div id="tituloA">
 
                 <div>
-                    <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="50px" height="50px">
+                    <img class="inicio-img-footer" src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="50px" height="50px">
 
                 </div>
                 <div>
-                    <h3>Farmacit</h3>
+                    <h3 class="inicio-subtitulo">Farmacit</h3>
                 </div>
 
             </div>
