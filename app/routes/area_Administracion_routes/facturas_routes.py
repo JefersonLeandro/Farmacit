@@ -13,4 +13,14 @@ def index():
         facturas = Factura.query.all()
         return render_template('/areaAdministracion/Facturas.html' , facturas = facturas)
     return redirect(url_for('bp_inicio.index'))
+    # button ver detalles y que lo lleve a los tabla de detalles pero solo con esos detalles de aqui mismo crear un funcion 
+
+
+# @bp.route('/area_administracion/facturas<int:idFactura>' , methods=['POST', 'GET'])
+# def detallesEspecificos(idFactura){
     
+    
+    
+    
+    
+# } 
