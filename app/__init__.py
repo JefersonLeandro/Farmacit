@@ -19,7 +19,7 @@ def create_app():
     
     db.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'bp_login.login'
+    login_manager.login_view = 'bp_inicio.index'
     
     @login_manager.user_loader
     def load_user(idPersona): # Flask-Login intentará cargar al usuario actual basándose en su identificador.

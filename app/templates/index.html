@@ -35,7 +35,7 @@
                 <nav id="navSuperior">
                     <ul>
                         <li><a href="{{url_for('bp_favoritos.index')}}" id="aLinkProductos">Productos deseados</a></li>
-                        <li><a href="{{url_for('bp_carrito.index')}}" id="aLinkProductos">Carrito</a></li>
+                        <li><a href="{{url_for('bp_carrito.index')}}" id="aLinkProductos">Carrito({{cantidadTotal | default(0) }})</a></li>
                         <li>Servicios</li>
                         <li>destacados</li>
                         <li>destacados</li>
@@ -202,7 +202,7 @@
 
                 <ul class="celular-ul">
                     <li><a class='aSvg'href="{{url_for('bp_favoritos.index')}}" >favoritos</a></li>
-                    <li><a class='aSvg' href="{{url_for('bp_carrito.index')}}" >Carrito(0)</a></li>
+                    <li><a class='aSvg' href="{{url_for('bp_carrito.index')}}" >Carrito({{cantidadTotal | default(0) }})</a></li>
 
                     {% if current_user.is_authenticated %}
                         <li> 
