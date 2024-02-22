@@ -2366,6 +2366,9 @@ a:visited{
 
     height: 65px;
 }
+.height30px{
+    height: 30px;
+}
 
 
 
@@ -2413,6 +2416,27 @@ a:visited{
 .h-text-decoration-underline:hover{
     text-decoration: underline;
 }
+
+
+
+                /* buttons */
+
+
+.boton-gris{
+    width: 20%;
+    height: 45%;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+
+.boton-gris:hover{
+  background-color: #d8d1d1;
+}
+
+
+
+
 
                 /* STYLES FOR PHONE  */
 

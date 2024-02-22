@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template , request , url_for , redirect, jsonify , flash , session , make_response
-from flask_login import current_user
+from flask_login import current_user , login_required
 from app.routes.agregados_routes.carrito_routes import retornarResultados , calcularTotales
 from app.models.Factura import Factura
 from app.models.DetalleFactura import DetalleFactura 
@@ -10,6 +10,7 @@ from datetime import date
 bp = Blueprint('bp_factura', __name__)
 
 @bp.route('/carrito_compras/factura' ,  methods=['GET'])
+@login_required
 def index():
     if current_user.is_authenticated :
         
@@ -80,7 +81,6 @@ def index():
     return render_template('/agregados/carrito.html')                   
     
 
-
 def verificarFactura(resultados):
     
     verificar = False  
@@ -114,10 +114,6 @@ def verificarFactura(resultados):
         
     return verificar        
 
-
-
-
-
 def actualizarCantidades(informacionCompra): 
     #actulizar las cantidades de todos los usuarios relacionados a ese producto en el carrito
     for id , stockDisponible in informacionCompra.items():
@@ -131,10 +127,5 @@ def actualizarCantidades(informacionCompra):
                 if stockDisponible < cantidad : 
                     carrito.cantidadCarrito = stockDisponible 
             db.session.commit()    
-
-
-@bp.route('/carrito_compras/nuevaUrl' ,  methods=['GET'])
-def nuevaUrl(): 
-    return redirect(url_for("bp_inicio.index"))
     
     

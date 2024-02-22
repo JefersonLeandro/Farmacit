@@ -4,13 +4,14 @@ from app.models.CarritoCompra import CarritoCompra
 from app.models.ProductoDeseado import ProductoDeseado 
 from app.models.Imagen import Imagen
 from sqlalchemy.exc import IntegrityError
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app import db
 
 bp = Blueprint('bp_carrito', __name__)
 
 
 @bp.route('/carrito_compras')
+@login_required
 def index():
     if current_user.is_authenticated:
         
@@ -44,6 +45,7 @@ def index():
     return render_template('/agregados/carrito.html')
 
 @bp.route('/carrito_compras/insertar', methods=['POST','GET'])
+@login_required
 def insertar():
   
     if current_user.is_authenticated and  request.method == 'POST': 
@@ -122,6 +124,7 @@ def calcularTotales():
     return diccionario
 
 @bp.route('/carrito_compras/eliminar', methods=['POST','GET'])
+@login_required
 def eliminarCarrito():
     
     if current_user.is_authenticated  and request.method == 'POST': 
@@ -135,6 +138,7 @@ def eliminarCarrito():
 
 
 @bp.route('/carrito_compras/actulizar', methods=['POST'])
+@login_required
 def actualizarCantidad():
     
     

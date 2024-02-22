@@ -21,14 +21,13 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'bp_inicio.index'
     
+    
+    
     @login_manager.user_loader
     def load_user(idPersona): # Flask-Login intentará cargar al usuario actual basándose en su identificador.
         # since the user_id is just the primary key of our user table, use it in the query for the user
         return Persona.query.get(int(idPersona))
     
-    
-    
-
     # se registran los blueprint de las rutas 
     app.register_blueprint(index_routes.bp)
     app.register_blueprint(login_routes.bp)

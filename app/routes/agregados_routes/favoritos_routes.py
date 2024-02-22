@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template , redirect , url_for , request
-from flask_login import current_user
+from flask_login import current_user , login_required
 from sqlalchemy.orm import aliased
 from app.models.Imagen import Imagen 
 from app.models.Producto import Producto 
@@ -12,6 +12,7 @@ from sqlalchemy.exc import IntegrityError
 bp = Blueprint('bp_favoritos', __name__)
 
 @bp.route('/productos_deseados')
+@login_required
 def index():
     
     if current_user.is_authenticated:
@@ -29,6 +30,7 @@ def index():
     return render_template('/agregados/favoritos.html' )    
 
 @bp.route('/productos_deseados/acciones',  methods=['POST','GET'])
+@login_required
 def acciones():
     
     

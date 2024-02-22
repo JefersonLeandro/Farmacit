@@ -48,18 +48,3 @@ def autenticacion():
 def logout():
     logout_user()
     return redirect(url_for('bp_inicio.index'))
-
-
-# datosPersona = {
-                
-            #     'idUsuario' : consulta.idPersona,
-            #     'nombreUsuario': consulta.nombrePersona,
-            #     'apellidoUsuario': consulta.apellidoPersona,
-            #     'documentoUsuario':consulta.identificacionPersona,
-            #     'correoUsuario': consulta.correoPersona ,
-            #     'telefonoUsuario' : consulta.telefonoPersona, 
-            #     'idRol' : consulta.idRol, 
-            # }
-            # # session['infoUsuario'] = datosPersona
-            # # session['nombreUsuario'] = consulta.nombrePersona
-            # # session['apellidoUsuario'] = consulta.apellidoPersona

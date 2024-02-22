@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template , redirect , url_for
-from flask_login import  current_user
+from flask_login import  current_user , login_required
 
 bp = Blueprint('bp_administracion', __name__)
 
 @bp.route('/area_administracion')
+@login_required
 def index():
     
     if current_user.is_authenticated and current_user.idRol == 3 : 

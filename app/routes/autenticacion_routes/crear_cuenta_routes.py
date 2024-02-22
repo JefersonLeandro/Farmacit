@@ -12,10 +12,6 @@ app = Flask(__name__)
 bp = Blueprint('bp_crear_cuenta', __name__)
 
 
-# @bp.route('/login') 
-# def login():
-#     return render_template('login.html')
-
 @bp.route('/login/crear_cuenta')
 def crearCuenta():
     if current_user.is_authenticated:

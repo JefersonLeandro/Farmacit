@@ -110,7 +110,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Acerca de nosotros</a>
                                     </li>
-                                    <li class="nav-item dropdown">
+                                    <!-- <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                            aria-expanded="false">
                                             Desplegable
@@ -123,7 +123,7 @@
                                             </li>
                                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
 
                                         {% if current_user.is_authenticated %}
@@ -142,9 +142,9 @@
                                         
                                     </li>
                                 </ul>
-                                <form class="d-flex mt-3" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar " aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                                <form class="d-flex mt-3" action="{{url_for('bp_inicio.buscar')}}" role="search" method="post">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar un producto" name="fCadena" aria-label="Search">
+                                    <button class="btn btn-outline-success"  type="submit">Buscar</button>
                                 </form>
                             </div>
                         </div>
@@ -228,17 +228,17 @@
                 </ul>
 
                 <div id="areaCentralG">
-                    <div class="areaCentral">
+                    <form action="{{url_for('bp_inicio.buscar')}}" class="areaCentral" method="post" id="miId">
 
-                        <input type="search" placeholder="Buscar producto" class="inputBuscar">
+                        <input type="search" placeholder="Buscar producto" name="fCadena" class="inputBuscar">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" id="iconoBuscar" width="24" height="24" fill="currentColor"
-                             class="bi bi-search" viewBox="0 0 16 16">
+                        <svg  onclick="miId.submit()" xmlns="http://www.w3.org/2000/svg" id="iconoBuscar" width="24" height="24" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg>
 
-                    </div>
+                    </form>
                 </div>
             </menu>
 
@@ -323,7 +323,8 @@
 
                 <div id="seccionProductos">
                     <section id="seccionP">
-                    
+                        
+                        
                         {% for producto in productos %}
                             {%for imagen in producto.rs_Imagenes%} 
                                 <div class='divSeccion'>
@@ -487,7 +488,7 @@
 
     {% with mensajes = get_flashed_messages(with_categories=true) %}
         {% for categoria, mensaje in mensajes %}
-            {% if categoria == 'stockSuperado' %}
+            {% if categoria == 'stockSuperado' or categoria == "sinConcidencias" %}
                 <script>
                     window.onload = function() {
                         window.setTimeout(function(){

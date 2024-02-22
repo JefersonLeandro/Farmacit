@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request , redirect, url_for 
-from flask_login import  current_user
+from flask_login import  current_user , login_required
 from app.models import Persona , Rol
 from flask_bcrypt import Bcrypt
 from app import db
@@ -7,6 +7,7 @@ from app import db
 bp = Blueprint('bp_personas', __name__)
 
 @bp.route('/area_administracion/personas' , methods=['POST', 'GET'])
+@login_required
 def index():
     # listar
     if current_user.is_authenticated and current_user.idRol == 3: 
@@ -21,6 +22,7 @@ def index():
     
 
 @bp.route('/area_administracion/personas/acciones', methods=['POST', 'GET'])
+@login_required
 def acciones():
     
     if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST': 

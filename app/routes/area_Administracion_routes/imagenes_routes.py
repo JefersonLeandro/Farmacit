@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request ,flash ,  redirect, url_for
 from app.models import Imagen , Producto
-from flask_login import current_user
+from flask_login import current_user , login_required
 from sqlalchemy import or_
 from app import db
 import os 
@@ -9,6 +9,7 @@ import os
 bp = Blueprint('bp_imagenes', __name__)
 
 @bp.route('/area_administracion/productos/imagenes' , methods=['POST', 'GET'])
+@login_required
 def index():
     # listar
     
@@ -19,6 +20,7 @@ def index():
 
 
 @bp.route('/area_administracion/productos/imagenes/buscar' , methods=['POST', 'GET'])
+@login_required
 def buscar():
     
     
@@ -45,6 +47,7 @@ def buscar():
     return redirect(url_for('bp_inicio.index'))
 
 @bp.route('/area_administracion/productos/imagenes/acciones', methods=['POST' , 'GET'])
+@login_required
 def acciones():
     
     if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST' : 

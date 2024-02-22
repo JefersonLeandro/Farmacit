@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template , request , redirect , url_for , flash
 from sqlalchemy.exc import IntegrityError
 from app.models import MarcaProducto
-from flask_login import current_user
+from flask_login import current_user , login_required
 from app import db
 
 bp = Blueprint('bp_marcas_productos', __name__)
 
 
 @bp.route('/area_administracion/productos/marcas_productos' , methods=['POST', 'GET'])
+@login_required
 def index():
     # listar
     if current_user.is_authenticated and current_user.idRol == 3:    
@@ -16,6 +17,7 @@ def index():
     return redirect(url_for('bp_inicio.index'))
 
 @bp.route('/area_administracion/productos/marcas_productos/acciones', methods=['POST' , 'GET'])
+@login_required
 def acciones():
     if current_user.is_authenticated and current_user.idRol == 3 and request.method == 'POST': 
       

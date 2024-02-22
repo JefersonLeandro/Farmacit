@@ -1,11 +1,12 @@
-from flask import Blueprint, render_template, request , redirect, url_for
-from flask_login import  current_user
+from flask import Blueprint, render_template, request , redirect, url_for 
+from flask_login import  current_user , login_required
 from app.models import Farmacia
 from app import db
 
 bp = Blueprint('bp_farmacias', __name__)
 
 @bp.route('/area_administracion/farmacias' , methods=['POST', 'GET'])
+@login_required
 def index():
     # listar
     
@@ -16,6 +17,7 @@ def index():
     
 
 @bp.route('/area_administracion/farmacias/acciones', methods=['POST','GET'])
+@login_required
 def acciones():
     
     

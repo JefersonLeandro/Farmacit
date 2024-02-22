@@ -54,10 +54,6 @@ def busqueda():
             (Persona.identificacionPersona.like(f'%{cadena}%')) | # (pipe) para representar la operación OR
             (Persona.nombrePersona.like(f'%{cadena}%'))
         ).all()
-                
-        # Filtrar las facturas por identificacionPersona o nombre de la persona asociada
-        for resultado in resultados: 
-            print("idFactura -- ----- > ", resultado.idFactura)
         
         return render_template('/areaAdministracion/Facturas.html' , facturas = resultados)
     return redirect(url_for('bp_inicio.index'))   
