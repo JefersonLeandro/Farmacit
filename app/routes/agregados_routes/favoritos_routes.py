@@ -12,7 +12,6 @@ from sqlalchemy.exc import IntegrityError
 bp = Blueprint('bp_favoritos', __name__)
 
 @bp.route('/productos_deseados')
-@login_required
 def index():
     
     if current_user.is_authenticated:

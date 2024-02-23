@@ -201,7 +201,7 @@
                 </ul>
 
                 <ul class="celular-ul">
-                    <li><a class='aSvg'href="{{url_for('bp_favoritos.index')}}" >favoritos</a></li>
+                    <li><a class='aSvg'href="{{url_for('bp_favoritos.index')}}" >Favoritos</a></li>
                     <li><a class='aSvg' href="{{url_for('bp_carrito.index')}}" >Carrito({{cantidadTotal | default(0) }})</a></li>
 
                     {% if current_user.is_authenticated %}

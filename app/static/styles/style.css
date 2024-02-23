@@ -1273,7 +1273,7 @@ a:visited{
     height: 18vh;
 }
 .descripcionP{
-    width: 82%;
+    width: 75%;
 }
 .descripcionP:hover{
     box-shadow: 0px 5px 2px -2px rgba(0,0,0,0.5), 0px 0px 3px 0px rgba(0,0,0,0);
@@ -1343,7 +1343,7 @@ a:visited{
 }
 
 .divImagen{
-    width: 18%;
+    width: 25%;
     /* border: 3px solid blue; */
     display: flex;
     align-items: center;
@@ -2605,7 +2605,6 @@ a:visited{
         height: 62px;
         display: flex;
         justify-content: end;
-        
 
     }
     
@@ -2614,6 +2613,183 @@ a:visited{
         font-size: 34px;
         width: 70%;
     }
+    .inputsForm{
 
+        width: 75%;
+    }
+
+    /* resposive crear cuenta  */
+
+    #divFormulario2{
+        width: 90%;
+    }
+
+    .labelid {
+        margin-left: 29px;
+    }
+
+    #divTablaC{
+
+        width: 90%;
+
+    }
+
+    /* responsive favoritos */
+
+    #listaP, #lineaLateral{
+
+        display: none;
+    }
+
+    #contenedorSTrash {
+        width: 13%;
+    }
+
+    #soyh2{
+        width: 82%;
+        font-size: 19px;
+    }
+    #contenedorSTrash {
+        width: 16%;
+
+    }
+    .contenedorSvg {
+        width: 35px;
+    }
+    
+    .img-favoritos{
+
+        width: 28px;
+        height: 28px;
+        margin-bottom: 5px;
+    }
+
+    #iconoTabla{
+        width: 12%;
+        position: static;
+    }
+    .favoritos-titulo{
+        margin-bottom: 0;
+    }
+
+    .formVentana {
+
+        width: 83%!important;
+    }
+    #productosGeneral {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #productoD {
+        width: 96%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: scroll; 
+        scrollbar-width: none;
+    }
+
+    .favoritos-link-nombre{
+        height: 43px;
+    }
+    
+    .favoritos-nombreProducto-h{
+        padding-top: 10px;
+        padding-left: 10px ;
+    }
+
+    .favoritos-mensaje-login{
+        font-size: 17px;
+        padding: 10px;
+    }
+
+    .descripcionP {
+        order: 2;
+    }
+
+    .divImagen{
+        width: 100%;
+        height: 29vh;
+        display: flex;
+        justify-content: center;
+    }
+
+    .cajaPD{
+
+        height: 65vh;
+
+    }
+
+    .dividirD{
+        flex-direction: column;
+        height:65vh;
+        border-radius: 10px;
+    }
+    
+    .imagenProducto{
+        width: 90%;
+        height: 30vh;
+    }
+    
+   
+
+    .favoritos-caja-producto{
+        border-radius: 10px;
+        /* background-color: rgb(255, 255, 255); */
+        background-color: rgb(239, 239, 239); 
+        width: 100%;
+        height: 64vh;
+    }
+
+    .descripcionP{
+        padding: 10px;
+        height: 30vh;
+        width: 100%;
+    }
+
+    .descripcionP:hover{
+
+        box-shadow: none;
+
+
+    }
+    .descripcionR{
+
+        height: 20vh;
+    }
+    
+    #botonC{
+        width: 35%;
+
+    }
+    .botonG{
+        width: 91%;
+    }
+
+    .favoritos-img-producto{
+        height: 93%;
+
+    }
 
 }   
+
+
+@media screen and (max-width: 350px) {
+
+    .formVentana {
+        width: 83%!important;
+        height: 23vh!important;
+
+    }
+    .ventanaBotones{
+        height: 9vh!important;
+
+
+    }
+
+
+}
+/* reponsive para cululares mas pequenos */
+

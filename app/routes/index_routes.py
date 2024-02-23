@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template , request, flash
+from flask import Blueprint, render_template , request, flash , redirect, url_for
 from app.models.Producto import Producto 
 from app.models.Imagen import  Imagen
 from app.models.MarcaProducto import MarcaProducto
@@ -14,24 +14,33 @@ bp = Blueprint('bp_inicio', __name__)
 @bp.route('/')
 def index():
 
-    productos = productosGenerales()
+    aliasImagen = aliased(Imagen)
+
+    productosImagenPrimaria = (
+        db.session.query(Producto)
+        .join(aliasImagen, Producto.rs_Imagenes)
+        .filter(aliasImagen.tipoImagen == 0)
+        .distinct()
+        .all()
+    )
       
     marcasProductos = MarcaProducto.query.all()
     
     if current_user.is_authenticated : 
         cantidadTotal = tamanoCarrito()
         
-        return render_template('index.html', productos= productos, marcasProductos = marcasProductos , cantidadTotal = cantidadTotal ) 
-    return render_template('index.html', productos= productos, marcasProductos = marcasProductos )    
+        return render_template('index.html', productos= productosImagenPrimaria, marcasProductos = marcasProductos , cantidadTotal = cantidadTotal ) 
+    return render_template('index.html', productos= productosImagenPrimaria, marcasProductos = marcasProductos )    
 
 def tamanoCarrito():
-    
+     
     cantidadTotal = (
-        db.session.query(func.sum(CarritoCompra.cantidadCarrito).label('cantidadTotal'))
+        db.session.query(func.coalesce(func.sum(CarritoCompra.cantidadCarrito), 0).label('cantidadTotal'))
         .filter(CarritoCompra.idPersona == current_user.idPersona)
-        .scalar()  # scalar() para obtener el valor directamente
+        .scalar()
     )
-    
+
+        
     return cantidadTotal
     
 
@@ -53,10 +62,11 @@ def buscar():
         .distinct()
         .all()
     )
-    
-    marcasProductos = MarcaProducto.query.all()
-    
+ 
     if productosFiltrados:
+        
+        marcasProductos = MarcaProducto.query.all()
+        
         if current_user.is_authenticated : 
         
             cantidadTotal = tamanoCarrito()
@@ -66,29 +76,12 @@ def buscar():
     else:  
         
         flash('No se encontraron concidencias.', 'sinConcidencias')
-        productos = productosGenerales()
+        return redirect(url_for('bp_inicio.index'))
         
-        if current_user.is_authenticated: 
-            cantidadTotal = tamanoCarrito()
-            return render_template('index.html', productos=productos, marcasProductos = marcasProductos, cantidadTotal = cantidadTotal)
-        
-        else: 
-            return render_template('index.html', productos=productos, marcasProductos = marcasProductos )
+       
            
 
-def productosGenerales(): 
-    
-    aliasImagen = aliased(Imagen)
 
-    productosImagenPrimaria = (
-        db.session.query(Producto)
-        .join(aliasImagen, Producto.rs_Imagenes)
-        .filter(aliasImagen.tipoImagen == 0)
-        .distinct()
-        .all()
-    )
-    
-    return productosImagenPrimaria 
     
     
 

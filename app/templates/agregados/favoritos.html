@@ -16,8 +16,8 @@
 <body>
     
     <main>
-    <div class="cerrarVentanaG">
-         <div class="overLay">
+        <div class="cerrarVentanaG">
+            <div class="overLay">
                 <div class="formVentana">
                     <div class="descripcionVentana">
                         <div class="descripcionVentanaS" >
@@ -79,11 +79,11 @@
             <div id="divTablaC">
                 <div id="tituloTabla1">
                     <div id="iconoTabla">
-                        <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="42px" height="42px">
+                        <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" class="img-favoritos" alt="logo" width="42px" height="42px">
 
                     </div>
                     <div>
-                        <h1>Farmacit</h1>
+                        <h1 class="favoritos-titulo">Farmacit</h1>
                     </div>
 
                 </div>
@@ -150,50 +150,51 @@
 
                                     
                                 {% for productoDeseado, producto, imagen in productos %}
-                                        
-                                    <a href="#" style="display: inline-block;"> <h6>{{producto.nombreProducto}}</h6></a>
-                                    <div class='cajaPD' id="{{productoDeseado.idProductoDeseado}}">
-                                        
-                                        <div class='dividirD'>
-                                            <div class='descripcionP'>
-                                                <div class='descripcionR'>
-                                                    <p>{{producto.descripcionProductoGeneral}}</p>
-                                                </div>
-                                                <div id='botonesCE'>
-                                                    <form class='botonG' action="{{url_for('bp_favoritos.acciones')}}" method='post'>
-                                                        {% if producto.stockProducto > 0 %}
+                                    <div class="favoritos-caja-producto">  
+                                        <a href="#" class="favoritos-link-nombre" style="display: inline-block;"> <h6 class="favoritos-nombreProducto-h">{{producto.nombreProducto}}</h6></a>
+                                        <div class='cajaPD' id="{{productoDeseado.idProductoDeseado}}">
+                                            
+                                            <div class='dividirD'>
+                                                <div class='descripcionP'>
+                                                    <div class='descripcionR'>
+                                                        <p>{{producto.descripcionProductoGeneral}}</p>
+                                                    </div>
+                                                    <div id='botonesCE'>
+                                                        <form class='botonG' action="{{url_for('bp_favoritos.acciones')}}" method='post'>
+                                                            {% if producto.stockProducto > 0 %}
+                                                                
+                                                                <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
                                                             
-                                                            <button type='button' name='#' class='buttonComprar' id='botonC'>Comprar</button>
-                                                        
-                                                        {%else%}
-                                                        
-                                                            <strong class="text-red">Producto sin stock</strong>
+                                                            {%else%}
                                                             
-                                                        {%endif%}
-                                                        <input type="hidden" name="fIdProductoDeseado" value="{{productoDeseado.idProductoDeseado}}" />
-                                                        <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
-                                                    </form>
+                                                                <strong class="text-red">Producto sin stock</strong>
+                                                                
+                                                            {%endif%}
+                                                            <input type="hidden" name="fIdProductoDeseado" value="{{productoDeseado.idProductoDeseado}}" />
+                                                            <button type='submit' name='fAccion' value='Eliminar' class='buttonComprar' id='botonC'>Eliminar</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class='divImagen'>
-                                                <a href='#' class='imagenProducto'>
-                                                    <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
-                                                        alt="{{imagen.nombreImagen}}" class='imgsG' width='100%'
-                                                        height='100px'>
-                                                </a>
+                                                <div class='divImagen'>
+                                                    <a href='#' class='imagenProducto'>
+                                                        <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
+                                                            alt="{{imagen.nombreImagen}}" class='favoritos-img-producto' width='100%'
+                                                            height='150px'>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                         
                                 {% endfor %}
 
                                 {% if not (current_user.is_authenticated) %}
-                                    <div class='alert alert-dark-tranparent' role='alert'>
-                                        <h5>Tu menú favoritos está vacío, inicia session <a href='{{url_for("bp_login.login")}}' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
-                                    </div>
+                                    
+                                    <h5  class="favoritos-mensaje-login">Tu menú favoritos está vacío, inicia session <a href='{{url_for("bp_login.login")}}' style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar productos.</h5>
+                                    
                                 {% elif current_user.is_authenticated and tamano == 0 %}
                                     
-                                    <h5>Tu menú favoritos esta vacio</h5>
+                                    <h5 class="favoritos-mensaje-login">Tu menú favoritos esta vacio</h5>
                                     
                                 {% endif %}
                         </div>
@@ -309,7 +310,6 @@
         .aCerrarPopup svg:hover{   
             color: red;
             /* transition: 3ms ease all; */
-            
         }
 
         .formVentana {
@@ -369,6 +369,7 @@
             height: 5vh;
             opacity: 0;
         }
+
         #svgTrash:hover{
             color: red;
         }

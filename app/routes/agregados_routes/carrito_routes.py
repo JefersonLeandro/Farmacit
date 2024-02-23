@@ -11,7 +11,6 @@ bp = Blueprint('bp_carrito', __name__)
 
 
 @bp.route('/carrito_compras')
-@login_required
 def index():
     if current_user.is_authenticated:
         
