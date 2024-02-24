@@ -1229,7 +1229,7 @@ a:visited{
     margin-bottom: 5px;
    
  }
- #centrarLista svg:hover{
+ .favoritos-svg:hover{
     transform: rotate(360deg);
     transition: 1s;
     
@@ -2282,7 +2282,6 @@ a:visited{
 }
 
 
-
 .carrito-scroll{
 
     overflow-y: scroll;
@@ -2393,7 +2392,10 @@ a:visited{
     color: red;
 
 }
+.color-white{
 
+    color: white;
+}
 
                 /* centrar */
 
@@ -2450,13 +2452,15 @@ a:visited{
 
                 /* STYLES FOR PHONE  */
 
-.celular-ul {
+.celular-ul ,.favoritos-svg-lista  {
     display: none;
 }
 
 .display-online-block{
     display: inline-block;
 }
+
+
 
                 /* END STYLES  */
 
@@ -2646,9 +2650,10 @@ a:visited{
 
     /* responsive favoritos */
 
-    #listaP, #lineaLateral{
+    #lineaLateral{
 
         display: none;
+    
     }
 
     #contenedorSTrash {
@@ -2790,6 +2795,70 @@ a:visited{
         display: block;
 
     }
+
+    #listaP{
+
+        visibility: hidden;
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background: rgb(0,0,0,0.3);
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        transition: .3s ease all;
+      
+    }
+    #listaP.active{
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #encerrarLista{
+
+        background-color: white;
+
+    }
+    .favoritos-p-disponible{
+
+        color: white;
+    }
+    #centrarLista , .favoritos-div-comprar{
+        width: 100%;
+    }
+
+    #centrarLista{
+        margin-top: 0;
+    }
+
+
+    .favoritos-svg-x{
+        display: block!important;
+    }
+
+    /* .overlay-lista{
+
+        height: 60vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: .3s ease all;
+        transform: scale(0.7);
+
+    } */
+
+    /* .overLay-lista.active {
+
+
+        
+    } */
 
 }   
 
