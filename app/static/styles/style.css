@@ -1211,6 +1211,7 @@ a:visited{
     border: 1.9px solid black;  
     border-left: 0;
     border-right: 0;
+
 }
 #listaG.scrollable {
     overflow-y: scroll;
@@ -2646,6 +2647,7 @@ a:visited{
 
     #divTablaC{
         width: 95%;
+        height: 98vh;
     }
 
     /* responsive favoritos */
@@ -2834,6 +2836,7 @@ a:visited{
 
     #centrarLista{
         margin-top: 0;
+        height: 72vh;
     }
 
 
@@ -2841,24 +2844,10 @@ a:visited{
         display: block!important;
     }
 
-    /* .overlay-lista{
-
-        height: 60vh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: .3s ease all;
-        transform: scale(0.7);
-
-    } */
-
-    /* .overLay-lista.active {
-
-
-        
-    } */
+    .lineaA1{
+        border : 2px solid black;
+        border-top: 0;
+    }
 
 }   
 
