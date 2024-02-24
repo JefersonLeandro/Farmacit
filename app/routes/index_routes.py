@@ -66,7 +66,7 @@ def buscar():
     if productosFiltrados:
         
         marcasProductos = MarcaProducto.query.all()
-        
+
         if current_user.is_authenticated : 
         
             cantidadTotal = tamanoCarrito()

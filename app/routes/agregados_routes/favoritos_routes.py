@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template , redirect , url_for , request
+from flask import Blueprint, render_template , redirect , url_for , request , flash
 from flask_login import current_user , login_required
 from sqlalchemy.orm import aliased
 from app.models.Imagen import Imagen 
 from app.models.Producto import Producto 
 from app.models.ProductoDeseado import ProductoDeseado
+from app.models.CarritoCompra import CarritoCompra
 from app import db
 from sqlalchemy.exc import IntegrityError
 
@@ -41,6 +42,10 @@ def acciones():
         if accion == "Ingresar":       
             return insertar()
         
+        elif accion == "transferirFavorito": 
+            
+            return tranferirFavorito()
+        
         elif accion == "Eliminar":
             eliminar(idProductoDeseado)    
 
@@ -71,6 +76,56 @@ def insertar():
     return redirect(url_for("bp_inicio.index"))
 
 
+def tranferirFavorito():
+    
+    idProducto = request.form['fIdProducto']
+    idProductoDeseado = request.form['fIdProductoDeseado']
+    
+    consulta  = CarritoCompra.query.filter_by(idProducto=idProducto, idPersona=current_user.idPersona).first()
+    verificacion = Producto.query.filter_by(idProducto=idProducto).first()
+    
+    stockDisponible = verificacion.stockProducto if verificacion else 0
+    cantidad = consulta.cantidadCarrito if consulta else 1
+    
+    
+    if not consulta : 
+        # inserta     
+        if verificacion :  
+            
+            if stockDisponible >= cantidad :      
+
+                nuevoCarrito = CarritoCompra(idCarrito = None, idPersona = current_user.idPersona , idProducto = idProducto , cantidadCarrito=1  )
+                db.session.add(nuevoCarrito)
+                eliminar(idProductoDeseado)
+                flash( " Producto agregado al carrito correctamente." , "agregado")
+                
+            else:
+                    
+                flash( "Producto no agregado, stock superado." , "stockSuperado")
+                
+    else:
+        #actualiza la cantidad del carrito encontrado 
+        if stockDisponible > cantidad :  
+    
+            cantidad = consulta.cantidadCarrito + 1  
+            consulta.cantidadCarrito = cantidad
+            eliminar(idProductoDeseado)
+            flash( " Producto agregado al carrito correctamente. " , "agregado")
+            
+        else: 
+
+            flash("Producto no agregado, stock superado.", "stockSuperado")
+
+    try:
+        db.session.commit()
+    
+    except IntegrityError:
+        db.session.rollback() 
+    
+    return redirect(url_for('bp_favoritos.index'))
+
+
+
 def eliminarTodo():
     
     id_persona = current_user.idPersona 
@@ -84,4 +139,3 @@ def eliminar(idProductoDeseado):
     db.session.commit()
      
     
-

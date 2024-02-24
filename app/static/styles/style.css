@@ -1336,10 +1336,18 @@ a:visited{
 }
 #botonC{
 
+    display: flex;
+    justify-self: center;
     width: 30%;
     height: 4.2vh;
-
+    align-items: center;
     
+}
+.favoritos-p-agregar{
+
+    width: 72%;
+    padding-left: 10px;
+
 }
 
 .divImagen{
@@ -2399,7 +2407,9 @@ a:visited{
 .display-flex{
     display: flex;
 }
-
+.display-none{
+    display: none;
+}
                 /* align */
 
 .align-items-end{
@@ -2462,6 +2472,11 @@ a:visited{
 
     #barraLateralG , .ulPc ,  .areaCentral ,  #navSuperior , .areaHeaderG , #iconoS , #tituloA{
         display:  none;
+    }
+
+    .inicio-main{
+        height: 80%;
+
     }
     #menuSecundario{
         display :block ;
@@ -2536,7 +2551,7 @@ a:visited{
     }
 
     .imgsG{
-        /* width: 95%; */
+        width: 85%;
         height: 200px;
     }
 
@@ -2550,7 +2565,6 @@ a:visited{
     }
 
     .cajas{
-
         height: 47vh;
     }
 
@@ -2585,9 +2599,7 @@ a:visited{
     /* responsive login */
 
     #divFormulario{
-
-        width: 90%;
-
+        width: 93%;
     }
 
     #iconoForm{
@@ -2629,9 +2641,7 @@ a:visited{
     }
 
     #divTablaC{
-
-        width: 90%;
-
+        width: 95%;
     }
 
     /* responsive favoritos */
@@ -2689,6 +2699,7 @@ a:visited{
         gap: 10px;
         overflow-y: scroll; 
         scrollbar-width: none;
+        align-items: center;
     }
 
     .favoritos-link-nombre{
@@ -2736,10 +2747,12 @@ a:visited{
    
 
     .favoritos-caja-producto{
+        margin-top: 10px;
         border-radius: 10px;
-        /* background-color: rgb(255, 255, 255); */
-        background-color: rgb(239, 239, 239); 
-        width: 100%;
+        -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+        width: 95%;
         height: 64vh;
     }
 
@@ -2750,10 +2763,7 @@ a:visited{
     }
 
     .descripcionP:hover{
-
         box-shadow: none;
-
-
     }
     .descripcionR{
 
@@ -2766,10 +2776,18 @@ a:visited{
     }
     .botonG{
         width: 91%;
+        height: 66px;
     }
 
     .favoritos-img-producto{
         height: 93%;
+    }
+
+    #footerC {
+        gap: 10px;
+    }
+    .favoritos-svg-lista{
+        display: block;
 
     }
 

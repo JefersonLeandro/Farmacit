@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
         <script src="{{ url_for('static', filename='bootstrap-5.3.0/js/bootstrap.bundle.js') }}"></script> 
   
-        <title >Farmacit</title>
+        <title> Farmacit</title>
 
     </head>
 
@@ -154,7 +154,7 @@
             </div>
         </header>
 
-        <main>
+        <main class="inicio-main">
             <menu id="menuSecundario">
                 <ul class="ulPc">
 
@@ -332,7 +332,7 @@
                                         <div  class='linkDi1'>
                                             <div class='contenedorImgP'>
                                                 <a href='#' class='contenedorImg'>
-                                                    <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="" class='imgsG' width='75%' height='145px' loading="lazy">
+                                                    <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="" class='imgsG inicio-img-producto' width='75%' height='145px' loading="lazy">
                                                 </a>  
                                                 <a href='#' class='cajaC'>
                                                     <span>{{producto.nombreProducto}}</span>
