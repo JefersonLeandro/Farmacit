@@ -2233,7 +2233,7 @@ a:visited{
 }
 
 .carrito-imagen  {
-    width: 100%;
+    width: 90%;
     border-radius: 10px;
       
 }
@@ -2867,9 +2867,9 @@ a:visited{
     }
 
     /* rensponsive carrito */
-    /* #mainVDF{
-        height: 95vh;
-    } */
+    #mainVDF{
+        height: 97vh;
+    }
 
     #tituloF {
         height: 7vh;
@@ -2898,7 +2898,7 @@ a:visited{
 
     .contenedorCC {
 
-        height: 4.5vh   ;
+        height: 4.8vh   ;
     }
     .cajaCentralC{
         width: 40%;
@@ -2921,8 +2921,8 @@ a:visited{
     }
     .cajaCarritoI {
         width: 98%;
-        height: 79vh;
-        max-height: 79vh;
+        height: 93vh;
+        max-height: 82vh;
     }
     .navSuperiorF{
         width: 63%;
@@ -2938,7 +2938,7 @@ a:visited{
     }
     
     .cajaPrincipalC{
-        height: 82vh;
+        height: 85vh;
     }
 
     .carrito-caja{
@@ -2972,7 +2972,7 @@ a:visited{
     .carrito-picture{
 
         width: auto;
-        height: 30vh;
+        height: 32vh;
         display: flex;      
         justify-content: center;
     }
@@ -3044,6 +3044,12 @@ a:visited{
     
     .carrito-li-factura{
         color: black;
+    }
+
+    .lineaCarritoF{
+        border: 4.3px solid;
+        border-bottom: 0;
+        border-color: rgb(55 146 232);
     }
 
 
