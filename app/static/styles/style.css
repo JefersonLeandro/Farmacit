@@ -2974,13 +2974,9 @@ a:visited{
 
     /* rensponsive carrito */
     #mainVDF{
-        height: 97vh;
+        height: 800px;
     }
 
-    #tituloF {
-        height: 6vh;
-        align-items: end;
-    }
 
     .cajaColor , .carrito-pc-ul{
         display: none;
@@ -2993,10 +2989,7 @@ a:visited{
         
     }
 
-    .contenedorIconoCarrito{
-        height: 5vh;
-        width: 48%;
-    }   
+   
     .contenedorCentralC{
         width: 52%;
 
@@ -3004,21 +2997,21 @@ a:visited{
 
     .contenedorCC {
 
-        height: 4.8vh   ;
+        height: 38px;
     }
     .cajaCentralC{
         width: 40%;
-        height: 5.6vh;
+        height: 45px;
     }
 
     .cajaCentralImg{
-        height: 5.6vh;
+        height: 45px;
     }
 
     .carrito-img-carrito{
 
         width: 85%;
-        height: 39px;
+        height: 42px;
 
     }
 
@@ -3027,12 +3020,12 @@ a:visited{
     }
     .cajaCarritoI {
         width: 98%;
-        height: 93vh;
-        max-height: 82vh;
+        height: 640px;
+        max-height: 630px;
     }
     .navSuperiorF{
         width: 63%;
-        height: 5.6vh;
+        height: 38px;
     }
     .carrito-celular-ul{
         display: flex;
@@ -3044,14 +3037,14 @@ a:visited{
     }
     
     .cajaPrincipalC{
-        height: 85vh;
+        height: 650px;
     }
 
     .carrito-caja{
 
         margin-top: 10px;
         display: block;
-        height: 80vh;
+        height: 605px;
         /* background-color: rebeccapurple; */
     }
 
@@ -3068,7 +3061,7 @@ a:visited{
         
     }
     .carrito-subCajaArriba{
-        height: 27vh;
+        height: 216px;
         padding-top: 10px;
         padding-left: 17px;
         padding-right: 8px;
@@ -3078,7 +3071,7 @@ a:visited{
     .carrito-picture{
 
         width: auto;
-        height: 32vh;
+        height: 275px;
         display: flex;      
         justify-content: center;
     }
@@ -3095,18 +3088,18 @@ a:visited{
         display: flex;
         justify-content: space-between;
         padding-right: 13px;
+        height: 55px;
 
     }
-
-    .carrito-subCaja1 input{
-
-        width: 32%;
-
-    }
-
+    
     .carrito-subCaja1-1{
-
         width: 50%;
+        height: 40px;
+    }
+    
+    .carrito-subCaja1 input{
+        width: 32%;
+        height: 38px;
 
     }
 
@@ -3155,6 +3148,36 @@ a:visited{
     .lineaCarritoF{
         border-top: 0;
         border-bottom: 4.3px solid  rgb(55 146 232);
+    }
+
+
+    /* pxssss */
+
+    .carrito-body{
+
+        height: 100vh;
+
+    }
+    #divVG{
+        height: 783px;
+
+    }
+
+    
+    #tituloF {
+        height: 60px;
+        align-items: end;
+        position: sticky;
+    }
+
+    .contenedorIconoCarrito{
+        height: 45px;
+        width: 48%;
+    }   
+
+    .divMv{
+
+        height: 37px;
     }
 
 
