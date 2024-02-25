@@ -2649,18 +2649,22 @@ a:visited{
     }
     /*  pxsss */
 
+    #divContainer{
+        height: 669px;
+
+    } 
 
     #divFormulario{
         width: 93%;
-        height: 600px;
+        height: 560px;
     }
     
     #tituloForm {
 
-        height: 143px;
+        height: 134px;
     }
     .areainputsG{
-        height: 453px;
+        height: 389px;
     }
     #plbIngresar h2{
 
