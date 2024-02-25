@@ -2619,11 +2619,7 @@ a:visited{
 
     /* responsive login */
 
-    #divFormulario{
-        width: 93%;
-        min-height: 80vh;
-    }
-
+    
     #iconoForm{
         position: static;
         right: 0;
@@ -2639,7 +2635,7 @@ a:visited{
         height: 62px;
         display: flex;
         justify-content: end;
-
+        
     }
     
     .login-titulo{
@@ -2648,12 +2644,59 @@ a:visited{
         width: 70%;
     }
     .inputsForm{
-
+        
         width: 75%;
+    }
+    /*  pxsss */
+
+
+    #divFormulario{
+        width: 93%;
+        height: 600px;
+    }
+    
+    #tituloForm {
+
+        height: 143px;
+    }
+    .areainputsG{
+        height: 453px;
+    }
+    #plbIngresar h2{
+
+        height: 80px;
+
+    }
+
+    .areaInputForm{
+
+        height : 70px;
+
+    }
+    .inputsForm {
+
+        height: 40px;
+
+    }
+
+    .olvidarContrasena{
+
+        height: 30px;
+
+    }
+    .divButtonIngresar{
+
+        height: 70px;
+
+    }
+
+    .buttonIngresarF {
+
+        height: 40px;
     }
 
     /* resposive crear cuenta  */
-
+    
     #divFormulario2{
         width: 90%;
     }
@@ -2872,7 +2915,7 @@ a:visited{
     }
 
     #tituloF {
-        height: 7vh;
+        height: 6vh;
         align-items: end;
     }
 
@@ -2951,7 +2994,7 @@ a:visited{
 
     .carrito-imagen-producto{
         margin-top: 10px;
-        width: 90%;
+        width: 86%;
         
 
     }
@@ -3047,9 +3090,8 @@ a:visited{
     }
 
     .lineaCarritoF{
-        border: 4.3px solid;
-        border-bottom: 0;
-        border-color: rgb(55 146 232);
+        border-top: 0;
+        border-bottom: 4.3px solid  rgb(55 146 232);
     }
 
 
