@@ -2618,7 +2618,9 @@ a:visited{
     }
 
     /* responsive login */
-
+    .login-body{
+        height: 75vh;
+    }
     
     #iconoForm{
         position: static;
@@ -2644,14 +2646,12 @@ a:visited{
         width: 70%;
     }
     .inputsForm{
-        
         width: 75%;
     }
     /*  pxsss */
 
     #divContainer{
-        height: 669px;
-
+        height: 624px;
     } 
 
     #divFormulario{
@@ -2701,9 +2701,7 @@ a:visited{
 
     /* resposive crear cuenta  */
     
-    #divFormulario2{
-        width: 90%;
-    }
+   
 
     .labelid {
         margin-left: 29px;
@@ -2713,7 +2711,68 @@ a:visited{
         width: 95%;
         height: 98vh;
     }
+    
+    /* pxsss */
 
+    #bodyResgistroC{
+
+        height: 95vh;
+
+    }
+
+    #divFormulario2{
+        height: auto;
+        width: 94%;
+    }
+
+    #divContainer2{
+        height: 832px;
+
+    }
+    .divInputsC{
+        height: 89px;
+    }
+    .cajaInps{
+
+        height: 40px;
+
+    } 
+    .divAB{
+        height: 44px;
+    }
+    .divGid{
+        height: auto;
+        /* height: 76px; */
+    }
+    .inputId{
+        height: 44px;
+    }
+
+    .registro-small{
+
+        margin-left: 10px;
+    }
+
+    .divInputsC2{
+
+        margin-top: 19px;
+        height: 80px ;
+    }
+
+    #divTerminos{
+
+        height: 40px;
+        line-height: 15px;
+    }
+    .divButtonIn{
+
+        height: 80px;
+    }
+    .buttonIngresarF h3{
+
+        height: 20px;
+
+    }
     /* responsive favoritos */
 
     #lineaLateral{

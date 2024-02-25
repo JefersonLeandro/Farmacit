@@ -96,7 +96,7 @@
                                     {% if form is defined and 'fIdentificacionPersona' in form.errors %}
                                         {% for error in form.errors['fIdentificacionPersona'] %}
                                         <div class="labelid">
-                                                <small style="color: red;">{{ error }}</small>
+                                                <small  class="registro-small" style="color: red;">{{ error }}</small>
                                         </div>
                                         {% endfor %}
                                     {% endif %}
@@ -120,7 +120,7 @@
                                     {% if form is defined and 'fCorreoPersona' in form.errors %}
                                         {% for error in form.errors['fCorreoPersona'] %}
                                         <div class="labelid">
-                                                <small style="color: red;">{{ error }}</small>
+                                                <small class="registro-small" style="color: red;">{{ error }}</small>
                                         </div>
                                         {% endfor %}
                                     {% endif %}
@@ -130,7 +130,7 @@
                                         {% if messages %}
                                             {% for message in messages %} 
                                             <div class="labelid">
-                                                <small style="color: red;">{{ message }}</small>
+                                                <small  style="color: red;">{{ message }}</small>
                                             </div>
                                             {% endfor %}
                                         {% endif %}
@@ -157,7 +157,7 @@
                                     {% if form is defined and 'fTelefonoPersona' in form.errors %}
                                         {% for error in form.errors['fTelefonoPersona'] %}
                                         <div class="labelid">
-                                                <small style="color: red;">{{ error }}</small>
+                                                <small  class="registro-small" style="color: red;">{{ error }}</small>
                                         </div>
                                         {% endfor %}
                                     {% endif %}
