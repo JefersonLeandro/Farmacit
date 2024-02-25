@@ -21,7 +21,7 @@
                 <div class="cajaColor">
                     <div class="cotenedorIconoC">
                         <div class="contenedorImgLogo">
-                            <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="100%"
+                            <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" class="carrito-img-logo" alt="logo" width="100%"
                                 height="48px">
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <span>{{tamano}}</span>
                         </div>
                         <div class="cajaCentralImg">
-                            <img src="{{url_for('static',filename = 'imagenes/carrito-de-compras.png')}}" alt="logo"
+                            <img class="carrito-img-carrito" src="{{url_for('static',filename = 'imagenes/carrito-de-compras.png')}}" alt="logo"
                                 width="100%" height="50px">
                         </div>
                     </div>
@@ -149,8 +149,14 @@
 
                         {% endif %}
 
-                        <div class="carrito-subHeader">
-                            <p class="carrito-subtotal">Subtotal {{ subtotal }}</p>
+                        <div class="carrito-subHeader display-flex justify-content-space-between pdg-r-16px ">
+                            <p class="carrito-subtotal ">Subtotal {{ subtotal }}</p>
+                            <!-- <p class="text-red">Cerrar</p> -->
+                            <svg id="svgCerrar" class=" carrito-svg-x color-white h-color-red display-none"   xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                             fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
                         </div>
                         <div class="carrito-contenedorInfo">
                             <div class="carrito-descripcion">
@@ -159,7 +165,7 @@
                                 <strong class="carrito-total">Total {{total}}</strong>
                             </div>
                             <div class="carrito-contenedorImagen">
-                                <img src="/static/imagenes/chicaAnimada.png" class="carrito-imagen" alt="">
+                                <img src="/static/imagenes/chicaAnimada.png" class="carrito-imagen-animada" alt="">
                             </div>
                         </div>
                     </div>
@@ -211,20 +217,21 @@
             <div class="lineaCarritoF"></div>
             <div class="tituloH">
                 <nav class="navSuperiorF">
-                    <ul>
-                        <li><a href="tablaProductoDeseado.php" class="aLinkProductosD">Productos deseados</a></li>
-                        <li><a href="index.php" class="aLinkProductosD">Seguir comprando</a></li>
-                        <li><a href="index.php" class="aLinkProductosD">Servicios</a></li>
-                        <li><a href="index.php" class="aLinkProductosD">Destacados</a></li>
+                    <ul class="carrito-pc-ul">
+                        <li><a href="{{url_for('bp_favoritos.index')}}" class="aLinkProductosD">Productos deseados</a></li>
+                        <li><a href="{{url_for('bp_inicio.index')}}" class="aLinkProductosD">Seguir comprando</a></li>
+                        <li><a href="#" class="aLinkProductosD">Servicios</a></li>
+                        <li><a href="#" class="aLinkProductosD">Destacados</a></li>
+                    </ul>
+
+                    <ul class="carrito-celular-ul display-none list-style-type-none">
+                        <li > <a class="aLinkProductosD" href="{{url_for('bp_favoritos.index')}}">favoritos</a></li>
+                        <li class="carrito-li-factura" class="aLinkProductosD" >factura</li>
                     </ul>
                 </nav>
             </div>
         </div>
     </main>
-
-    
-
-
 
 </body>
 
@@ -264,6 +271,20 @@
 <script>
 
     //eventos 
+
+    const liFactura = document.querySelector(".carrito-li-factura"),
+          seccionFactura = document.querySelector(".carrito-info"),
+          svgCerrar = document.querySelector("#svgCerrar");
+    
+    //alerta
+    liFactura.addEventListener('click', function () {
+        seccionFactura.classList.add('active');
+    });
+    svgCerrar.addEventListener('click', function () {
+        seccionFactura.classList.remove('active');
+     
+    });
+
 
     //inputs
 

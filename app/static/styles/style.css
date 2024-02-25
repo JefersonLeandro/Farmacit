@@ -2077,7 +2077,7 @@ a:visited{
     width: 98%;
     height: 46vh;
 }
-.navSuperiorF ul{
+.carrito-pc-ul{
     
     display: flex;
     justify-content: center;
@@ -2232,8 +2232,15 @@ a:visited{
     width: 32%;
 }
 
-.carrito-imagen {
-    width: 100%;  
+.carrito-imagen  {
+    width: 100%;
+    border-radius: 10px;
+      
+}
+
+.carrito-imagen-animada{
+    width: 100%;
+
 }
 .carrito-contenedorImagen {
    
@@ -2275,13 +2282,6 @@ a:visited{
     color: rgb(204, 108, 108);
 
 }
-
-.carrito-imagen{
-
-    border-radius: 10px;
-    
-}
-
 
 .carrito-scroll{
 
@@ -2389,9 +2389,7 @@ a:visited{
 }
                 /* colores */
 .text-red{
-
     color: red;
-
 }
 .color-white{
 
@@ -2422,13 +2420,26 @@ a:visited{
 .justify-content-end{
     justify-content: end;
 }   
-
+.justify-content-space-between{
+    justify-content: space-between;
+}
 
                     /* decoracion  */
 
+
+.list-style-type-none{
+    list-style: none;
+}
 .h-text-decoration-underline:hover{
     text-decoration: underline;
 }
+
+
+            /* hover */
+.h-color-red:hover{
+    color: red;
+}
+
 
 
 
@@ -2447,7 +2458,12 @@ a:visited{
   background-color: #d8d1d1;
 }
 
+                /* padding */
+.pdg-r-16px{
 
+    padding-right: 16px;
+
+}
 
 
 
@@ -2605,6 +2621,7 @@ a:visited{
 
     #divFormulario{
         width: 93%;
+        min-height: 80vh;
     }
 
     #iconoForm{
@@ -2849,7 +2866,189 @@ a:visited{
         border-top: 0;
     }
 
-}   
+    /* rensponsive carrito */
+    /* #mainVDF{
+        height: 95vh;
+    } */
+
+    #tituloF {
+        height: 7vh;
+        align-items: end;
+    }
+
+    .cajaColor , .carrito-pc-ul{
+        display: none;
+    }
+
+    
+    .cotenedorIconoC {
+        width: 30%;
+        height: 5vh;
+        
+    }
+
+    .contenedorIconoCarrito{
+        height: 5vh;
+        width: 48%;
+    }   
+    .contenedorCentralC{
+        width: 52%;
+
+    }
+
+    .contenedorCC {
+
+        height: 4.5vh   ;
+    }
+    .cajaCentralC{
+        width: 40%;
+        height: 5.6vh;
+    }
+
+    .cajaCentralImg{
+        height: 5.6vh;
+    }
+
+    .carrito-img-carrito{
+
+        width: 85%;
+        height: 39px;
+
+    }
+
+    .subCajaI {
+        width: 100%;
+    }
+    .cajaCarritoI {
+        width: 98%;
+        height: 79vh;
+        max-height: 79vh;
+    }
+    .navSuperiorF{
+        width: 63%;
+        height: 5.6vh;
+    }
+    .carrito-celular-ul{
+        display: flex;
+        align-items: center;
+        padding-left: 0;
+        margin-bottom: 0;
+        font-size: 20px;
+        gap: 10px;
+    }
+    
+    .cajaPrincipalC{
+        height: 82vh;
+    }
+
+    .carrito-caja{
+
+        margin-top: 10px;
+        display: block;
+        height: 80vh;
+        /* background-color: rebeccapurple; */
+    }
+
+    .carrito-imagen-producto{
+        margin-top: 10px;
+        width: 90%;
+        
+
+    }
+
+    .carrito-cajaMediana{
+
+        width: 98%;
+        
+    }
+    .carrito-subCajaArriba{
+        height: 27vh;
+        padding-top: 10px;
+        padding-left: 17px;
+        padding-right: 8px;
+    }
+   
+
+    .carrito-picture{
+
+        width: auto;
+        height: 30vh;
+        display: flex;      
+        justify-content: center;
+    }
+
+    .carrito-subCajaAbajo{
+
+        display: block;
+
+    }
+
+    .carrito-subCaja1{
+        padding-left: 17px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 13px;
+
+    }
+
+    .carrito-subCaja1 input{
+
+        width: 32%;
+
+    }
+
+    .carrito-subCaja1-1{
+
+        width: 50%;
+
+    }
+
+    .carrito-info{
+        display: none;
+        width: 100%;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+
+    }
+
+    .carrito-info.active{
+        display: block;
+
+    }
+
+    .carrito-subInfo{
+
+        width: 93%;
+        padding-left: 16px;
+
+    }
+
+    .carrito-imagen-animada{
+        width: 59%;
+        position: absolute;
+        right: 18px;
+        top: 11vh;
+
+    }
+
+    .carrito-descripcion {
+        flex: none;
+        width: 90%;
+    }
+
+    .carrito-svg-x{
+        display: block;
+    }
+    
+    .carrito-li-factura{
+        color: black;
+    }
+
+
+    }
+
 
 
 @media screen and (max-width: 350px) {
