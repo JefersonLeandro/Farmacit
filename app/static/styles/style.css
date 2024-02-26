@@ -3167,7 +3167,7 @@ a:visited{
     #tituloF {
         height: 46px;
         align-items: end;
-        position: sticky;
+        /* position: sticky; */
     }
 
     .contenedorIconoCarrito{

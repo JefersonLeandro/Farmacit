@@ -13,7 +13,7 @@ def index():
     
     if current_user.is_authenticated and current_user.idRol == 3: 
         facturas = Factura.query.all()
-        return render_template('/areaAdministracion/Facturas.html' , facturas = facturas)
+        return render_template('/areaAdministracion/facturas.html' , facturas = facturas)
     return redirect(url_for('bp_inicio.index'))
 
 
