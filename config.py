@@ -11,9 +11,7 @@ class Config:
     # Conexion en linea 
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:cEf6g3afc6DgHh5gAfBeFgBeFe333aFh@monorail.proxy.rlwy.net:14502/dbFarmacit'
 
-    # tareas
-    # -generar qr
-    # -poner los links del carrito 
+
     
     #hacer el local
     SQLALCHEMY_TRACK_MODIFICATIONS = False

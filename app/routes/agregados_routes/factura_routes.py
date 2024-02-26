@@ -61,7 +61,7 @@ def index():
                 productosAgotados = [] #vacia los productos agotados
                 actualizarCantidades(informacionCompra)
          
-                flash("Gracias por elegirnos , compra realizada correctamente  ","compraExito") 
+                flash("Gracias por elegirnos , compra realizada correctamente. ","compraExito") 
 
             else:
                 

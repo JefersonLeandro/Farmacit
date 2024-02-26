@@ -11,5 +11,5 @@ class Producto (db.Model):
     stockProducto = db.Column(db.Integer, nullable=False)
     precioProducto = db.Column(db.Integer, nullable=False)
     idMarcaProducto = db.Column(db.Integer, db.ForeignKey('MarcasProductos.idMarcaProducto') , nullable=False)
-    rs_Imagenes = db.relationship('Imagen', backref='bk_producto', lazy=True)
+    rs_Imagenes = db.relationship('Imagen', primaryjoin="and_(Producto.idProducto==Imagen.idProducto, Imagen.tipoImagen==0)" , backref='bk_producto', lazy=True)
     

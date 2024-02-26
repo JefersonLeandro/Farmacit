@@ -16,6 +16,13 @@ def index():
 
     aliasImagen = aliased(Imagen)
 
+    # productosImagenPrimaria = (
+    #     db.session.query(Producto, Imagen)
+    #     .join(Imagen, Imagen.idProducto == Producto.idProducto)
+    #     .filter(Imagen.tipoImagen == 0)
+    #     .all()
+    # )
+    
     productosImagenPrimaria = (
         db.session.query(Producto)
         .join(aliasImagen, Producto.rs_Imagenes)
@@ -23,7 +30,7 @@ def index():
         .distinct()
         .all()
     )
-      
+          
     marcasProductos = MarcaProducto.query.all()
     
     if current_user.is_authenticated : 

@@ -55,6 +55,6 @@ def busqueda():
             (Persona.nombrePersona.like(f'%{cadena}%'))
         ).all()
         
-        return render_template('/areaAdministracion/Facturas.html' , facturas = resultados)
+        return render_template('/areaAdministracion/facturas.html' , facturas = resultados)
     return redirect(url_for('bp_inicio.index'))   
     
