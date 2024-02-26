@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request , redirect, url_for 
+from flask import Blueprint, render_template, request , redirect, url_for , flash
 from flask_login import  current_user , login_required
 from app.models import Persona , Rol
 from flask_bcrypt import Bcrypt
+from sqlalchemy.exc import IntegrityError
 from app import db
 
 bp = Blueprint('bp_personas', __name__)
@@ -76,10 +77,15 @@ def modificar(idPersona):
 
 def eliminar(idPersona):
     
-    persona = Persona.query.get_or_404(idPersona)
-    db.session.delete(persona)
-    db.session.commit()
+    try:
+        persona = Persona.query.get_or_404(idPersona)
+        db.session.delete(persona)
+        db.session.commit()
     
+    except IntegrityError as e:
+        db.session.rollback()  # Deshace la transacción para evitar cambios no deseados
+        flash('Error de integridad referencial. No se puede eliminar la persona debido a relaciones existentes.', 'errorIntegridad')
+        
 
 
 

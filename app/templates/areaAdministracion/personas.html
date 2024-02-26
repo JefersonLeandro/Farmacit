@@ -165,6 +165,18 @@
 
 
     </main>
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'errorIntegridad' %}
+                <script>
+                    window.setTimeout(function(){
+                        alert("{{mensaje}}");
+                    }, 500);//50mls
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
 
 </body>
 
