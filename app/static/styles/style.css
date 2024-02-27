@@ -398,7 +398,7 @@ aside{
     grid-template: 2tf;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     overflow-y: scroll;
-    max-height: 600px;
+    max-height: 588px;
 }
 
 .cajas{
@@ -2587,7 +2587,7 @@ a:visited{
     }
 
     .cajas{
-        height: 47vh;
+        height: 48gitvh;
     }
 
     #divContactG{
