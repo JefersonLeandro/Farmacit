@@ -398,7 +398,7 @@ aside{
     grid-template: 2tf;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     overflow-y: scroll;
-    max-height: 615px;
+    max-height: 600px;
 }
 
 .cajas{
