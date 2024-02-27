@@ -255,7 +255,8 @@ p {
 
  #barraLateralG{
     width: 22%;
-    height: 80vh;
+    /* height: 80vh; */
+    height: 625px;
    
 
 
@@ -276,7 +277,7 @@ aside{
     flex-direction: column;
     gap:10px;
     align-items: center;
-    height: 80vh;
+    height: 619px;
 
 }
 #barraL1{
@@ -284,7 +285,7 @@ aside{
     border: 3px solid black;
     border-radius: 10px;
     width: 80%;
-    height: 12vh;
+    height: 95px;
     position: relative;
     top: 92px;
     left: 30px;
@@ -297,23 +298,22 @@ aside{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;    
     background:#148ad8;
-    height: 5vh;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
+
 .barraC p{
     
     text-align: center;
     font-size: 18px;
     color: white;
-    height: 5vh;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 }
 
 
@@ -322,7 +322,8 @@ aside{
     border: 3px solid black;
     border-radius: 10px;
     width: 80%;
-    height: 40vh;
+    height: 300px;
+    background-color: re;
     position: relative;
     top: 93px;
     left: 30px; 
@@ -339,9 +340,11 @@ aside{
 
    
     width: 100%;
-    height: 7vh;
+    height: 58px;
     background: transparent;
     outline: 0;
+    border-left: 0;
+    border-right: 0;
     padding-left: 10px;
     appearance: none;
 	-webkit-appearance: none;
@@ -375,28 +378,27 @@ aside{
     position: relative;
     gap: 10px;
     top: 18px;
-    height: 24vh;
+    height: 190px;
 }    
 
 .divSeccion{
     width: 100%;
-    height: 40vh;
+    height: 308px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;  
-    gap: 20px; 
+    gap: 20px;
+
 }  
 
 #seccionP{
-
     width: 100%;
     display: grid;
     grid-template: 2tf;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     overflow-y: scroll;
-    max-height: 79vh; 
-
+    max-height: 615px;
 }
 
 .cajas{
@@ -407,7 +409,7 @@ aside{
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
-    height: 36vh;
+    height: 290px;
     width: 92%;
     background: white;
     /* cursor: pointer; */
@@ -426,7 +428,7 @@ aside{
     display: flex;
     justify-content: center;
     width: 9%;
-    height: 6vh;
+    height: 30px;
 }
 /* .cajaSecundaria{
     display: flex;
@@ -456,7 +458,7 @@ aside{
 
 .cajaC{
 
-    height: 10vh;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -482,7 +484,7 @@ aside{
     display: flex;
     justify-content: center;
     gap: 8px;
-    height: 5vh;
+    height: 39px;
 }
 
 .buttonComprar,.buttonVentana{
@@ -520,7 +522,7 @@ aside{
     display: flex;
     background:  #148ad8;
     justify-content: center;
-    height: 14vh;
+    height: 115px;
 
    
 }
@@ -569,7 +571,6 @@ aside{
 
     display: flex;
     flex-direction: row;
-    position: relative;
     gap: 30px;
 
 
