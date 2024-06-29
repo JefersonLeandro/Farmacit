@@ -2329,8 +2329,9 @@ a:visited{
     background-color: rgb(220, 220, 220);
 
 }
-
-
+.bg-azul-oscuro{
+    background: rgb(55 146 232);
+}
             /* gap */
 .gap4{
     display: flex;
@@ -2420,6 +2421,9 @@ a:visited{
                 /* justify-content */
 .justify-content-end{
     justify-content: end;
+}   
+.justify-content-center{
+    justify-content: center;
 }   
 .justify-content-space-between{
     justify-content: space-between;

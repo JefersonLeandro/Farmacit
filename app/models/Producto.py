@@ -1,5 +1,5 @@
-from sqlalchemy.orm import relationship
 from app.extensiones import db
+from sqlalchemy.orm import relationship
 
 class Producto (db.Model):
     

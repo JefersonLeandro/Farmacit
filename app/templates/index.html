@@ -401,7 +401,7 @@
 
     </main>
 
-    <footer>
+    <footer >
         <div id="divContactG">
 
             <div id="divCR1">
@@ -484,6 +484,11 @@
 
 
         </div>
+        <div class="bg-azul-oscuro display-flex justify-content-center" >
+            <span class="display-flex gap-1">
+                Copyright <p id="fecha"> </p> &copy; Todos los derechos reservados.
+            </span>
+        </div>
     </footer>
 
     {% with mensajes = get_flashed_messages(with_categories=true) %}
@@ -500,7 +505,7 @@
         {% endfor %}
     {% endwith %}
 
-
+    <script src="{{url_for('static', filename='/scripts/index.js' )}}"></script>
 </body>
 </html>
 

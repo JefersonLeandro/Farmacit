@@ -1,5 +1,5 @@
-from flask_login import UserMixin
 from app.extensiones import db
+from flask_login import UserMixin
 
 class Persona (db.Model, UserMixin):
     
@@ -10,7 +10,7 @@ class Persona (db.Model, UserMixin):
     identificacionPersona = db.Column(db.String(15), nullable=False)
     correoPersona = db.Column(db.String(255), nullable=False)
     telefonoPersona = db.Column(db.String(15), nullable=False)
-    contrasenaPersona = db.Column(db.String, nullable=False)
+    contrasenaPersona = db.Column(db.String(256), nullable=False)
     idRol =db.Column(db.Integer, db.ForeignKey('Roles.idRol'), nullable=False)
     productosDeseados = db.relationship('ProductoDeseado', backref='bk_persona', lazy=True)
     
@@ -32,4 +32,3 @@ class Persona (db.Model, UserMixin):
         # Debe devolver un identificador único del usuario. Flask-Login utiliza este método para obtener 
         # el identificador del usuario actual.
 
-    
