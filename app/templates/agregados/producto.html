@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='imagenes/logoQ1.png') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap-5.3.0/js/bootstrap.js') }}"></script> 
+
+</head>
+
+<body id="bodyDescripcion">
+    <main>
+        <div class="seccionPrincipalD">
+            <div id="divCorauselG">
+                <div id="divCorauselS">
+                    <div id="divCarouselC">
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                            <div class="carousel-inner">
+                              
+                                {% for (elProducto, imagen) in producto  %}
+                                <div class="carousel-item active " data-bs-interval="10000" id="centrarImgs">
+                                    <img  height="300px" src="{{url_for('static' , filename='imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..."  loading="lazy" >          
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divDescripcionG">
+
+                <div id="divDescripcionS">
+                    <div id="tituloD">
+
+                        <h3>Noxpirin plus</h3>
+                    </div>
+                    <div id="descripcionCentral">
+
+                        <span>caja x 6.00 capsulas</span>
+                        <span class="spanC">Noxpirin plus</span>
+                        <span class="spanC">Referencia: 1</span>
+                        <span>Incluye 0% de impuestos</span>
+                        <span class="spanAT">Antes$ 8.950</span>
+                        <span class="spanAH">Ahora$7.600</span>
+                        <span>capsula a $ 1.266,67</span>
+                    </div>
+                    <div id="divButtonA">
+                        <button type="button" id="buttonCarrito" class="btn btn-outline-primary">
+                            <h5 id="h5">Añadir al Carrito</h5>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                <path
+                                    d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                                <path
+                                    d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                            </svg>
+                        </button>
+
+                    </div>
+                    <div id="descripcionProductoG">
+                        <div id="descripcionProductoS">
+                            <h4>Descripcion del Producto</h4>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores ipsam consectetur vitae
+                            dolore provident, facilis, nulla fugit vero facere eligendi iste inventore corporis
+                            voluptate quos animi dolores commodi, eveniet expedita!
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae, amet hic. Ea assumenda
+                            dignissimos, porro aspernatur sit est enim at quam voluptatum dolor, accusamus incidunt nisi
+                            molestias quaerat blanditiis ipsam!</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

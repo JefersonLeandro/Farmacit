@@ -110,20 +110,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Acerca de nosotros</a>
                                     </li>
-                                    <!-- <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                           aria-expanded="false">
-                                            Desplegable
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        </ul>
-                                    </li> -->
+                                    
                                     <li class="nav-item">
 
                                         {% if current_user.is_authenticated %}
@@ -331,15 +318,16 @@
                                     <div class='cajas'>
                                         <div  class='linkDi1'>
                                             <div class='contenedorImgP'>
-                                                <a href='#' class='contenedorImg'>
+                                                <a href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}" class='contenedorImg'>
                                                     <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}" alt="" class='imgsG inicio-img-producto' width='75%' height='145px' loading="lazy">
                                                 </a>  
-                                                <a href='#' class='cajaC'>
+                                                <a href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}" class='cajaC'>
                                                     <span>{{producto.nombreProducto}}</span>
                                                     <h6>{{producto.descripcionUnidad}}</h6>
                                                     <h6>{{producto.precioProducto}}</h6>
                                                 </a>
                                             </div>
+                                          
                                             {% if current_user.is_authenticated %}
                                                 <form class='cajaFP' action="{{url_for('bp_favoritos.acciones')}}" method="post">
                                                     <input type="hidden" name="fAccion" value="Ingresar">
