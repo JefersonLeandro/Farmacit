@@ -23,11 +23,10 @@
                     <div id="divCarouselC">
                         <div id="carouselExampleFade" class="carousel slide carousel-fade">
                             <div class="carousel-inner">
-                              
                                 {% for (elProducto, imagen) in producto  %}
-                                <div class="carousel-item active " data-bs-interval="10000" id="centrarImgs">
-                                    <img  height="300px" src="{{url_for('static' , filename='imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..."  loading="lazy" >          
-                                </div>
+                                    <div class="carousel-item active " data-bs-interval="10000" id="centrarImgs">
+                                        <img  height="300px" src="{{url_for('static' , filename='imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..."  loading="lazy" >          
+                                    </div>
                                 {% endfor %}
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -51,7 +50,6 @@
                         <h3>Noxpirin plus</h3>
                     </div>
                     <div id="descripcionCentral">
-
                         <span>caja x 6.00 capsulas</span>
                         <span class="spanC">Noxpirin plus</span>
                         <span class="spanC">Referencia: 1</span>
