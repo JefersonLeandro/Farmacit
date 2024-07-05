@@ -21,24 +21,29 @@
             <div id="divCorauselG">
                 <div id="divCorauselS">
                     <div id="divCarouselC">
-                        <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                        <div id="carouselExample" class="carousel slide">
                             <div class="carousel-inner">
+                                
+                                {% set ns = namespace(clase = "active") %}
                                 {% for (elProducto, imagen) in producto  %}
-                                    <div class="carousel-item active " data-bs-interval="10000" id="centrarImgs">
-                                        <img  height="300px" src="{{url_for('static' , filename='imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..."  loading="lazy" >          
+                                    <div class="carousel-item {{ns.clase}}"> 
+                                        <img src="{{url_for('static' , filename='/imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..." loading="lazy">          
                                     </div>
-                                {% endfor %}
+                                    {% set ns.clase = "" %}
+                                {% endfor %} 
+
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Next</span>
                             </button>
                         </div>
                     </div>
+                    {{contador}}
                 </div>
             </div>
 
