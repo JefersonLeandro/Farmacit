@@ -10,14 +10,6 @@ bp = Blueprint('bp_producto', __name__)
 
 @bp.route('/producto/<int:idProducto>', methods=['GET'])
 def index(idProducto):
-    #  resultados = (
-    #     db.session.query(CarritoCompra, Producto, Imagen)
-    #     .join(Producto, CarritoCompra.idProducto == Producto.idProducto)
-    #     .join(Imagen, Producto.idProducto == Imagen.idProducto)
-    #     .filter(CarritoCompra.idPersona == current_user.idPersona, Imagen.tipoImagen == 0)
-    #     .order_by(CarritoCompra.idCarrito.asc())
-    #     .all()
-    # )
     
     producto = (
         db.session.query(Producto, Imagen)
