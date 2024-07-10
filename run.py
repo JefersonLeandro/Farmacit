@@ -4,8 +4,6 @@ import os
 
 app = create_app()
 
-
-
 with app.app_context():
     from app.extensiones import db
     db.create_all()

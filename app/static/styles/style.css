@@ -1022,7 +1022,7 @@ a:visited{
     height: 88vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   
 }
 #divDescripcionS{
@@ -1032,12 +1032,8 @@ a:visited{
       
 }
 #divCarouselC{
-
-    width: 80%;
+    width: 90%;
     height: 60vh;
-   
-
-
 }
 #tituloD{
 

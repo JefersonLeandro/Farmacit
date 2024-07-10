@@ -15,13 +15,6 @@ bp = Blueprint('bp_inicio', __name__)
 def index():
 
     aliasImagen = aliased(Imagen)
-
-    # productosImagenPrimaria = (
-    #     db.session.query(Producto, Imagen)
-    #     .join(Imagen, Imagen.idProducto == Producto.idProducto)
-    #     .filter(Imagen.tipoImagen == 0)
-    #     .all()
-    # )
     
     productosImagenPrimaria = (
         db.session.query(Producto)

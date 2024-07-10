@@ -17,17 +17,17 @@
 
 <body id="bodyDescripcion">
     <main>
-        <div class="seccionPrincipalD">
-            <div id="divCorauselG">
-                <div id="divCorauselS">
-                    <div id="divCarouselC">
-                        <div id="carouselExample" class="carousel slide">
+        <div class="seccionPrincipalD" >
+            <div id="divCorauselG" >
+                <div id="divCorauselS" >
+                    <div id="divCarouselC" >
+                        <div id="carouselExample" class="carousel slide" >
                             <div class="carousel-inner">
-
+                                <!-- traer solamente el producto y por medio de un relationship traer la imagenes -->
                                 {% set ns = namespace(clase = "active") %}
                                 {% for (elProducto, imagen) in producto  %}
                                     <div class="carousel-item {{ns.clase}}"> 
-                                        <img src="{{url_for('static' , filename='/imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..." loading="lazy">          
+                                        <img  width="auto" height="490px" src="{{url_for('static' , filename='/imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..." loading="lazy">          
                                     </div>
                                     {% set ns.clase = "" %}
                                 {% endfor %} 
@@ -43,7 +43,6 @@
                             </button>
                         </div>
                     </div>
-                    {{contador}}
                 </div>
             </div>
 

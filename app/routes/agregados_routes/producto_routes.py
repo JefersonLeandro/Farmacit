@@ -15,7 +15,12 @@ def index(idProducto):
         db.session.query(Producto, Imagen)
         .join(Producto, Producto.idProducto==Imagen.idProducto)
         .where(Imagen.idProducto == idProducto)
-        .order_by(Imagen.idImagen.desc())
         .all()
     )
+
+    # terminar de llevar solamente el producto y alla acceder alas imagenes o hacer algo asi como nombreProducto,  imagenes = {imagen1, imagen2 etc..}
+    pr = Producto.query.first()
+    for pro in pr.rs_imgs: 
+        print("HOlaaaaaaaaa", pro.nombreImagen)
+
     return render_template('agregados/producto.html',producto=producto)
