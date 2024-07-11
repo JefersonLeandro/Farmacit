@@ -495,8 +495,6 @@ aside{
     font-size: 18.3px;
     width: 50%;
     color: white;
-
-
 }
 .buttonAgregar{
 
@@ -1068,13 +1066,9 @@ a:visited{
     font-size: 30px;
 }
 #divButtonA{
-
-   
     width: 100%;
     height: 10vh;
     padding-top: 20px;
-    padding-left: 40px;
-
 }
 #buttonCarrito{
 
@@ -1104,6 +1098,25 @@ a:visited{
     width: 90%;
 
 }
+
+.producto_form{
+    padding-left: 40px;
+}
+
+.producto_btn_compra{
+
+    border: 0;
+    background: #148ad8;
+    border-radius: 8px;
+    font-size: 18.3px;
+    width: 50%;
+    color: white;
+    margin-right: 10px;
+}
+
+
+
+
 
                                                     /* STYLES Tabla deseos */
 #divTablaG{
@@ -1471,8 +1484,7 @@ a:visited{
 
     padding-left: 14px;
 }
-/* .divButtonA{
-} */
+
 .divButtonA{
 
   width: 150px;

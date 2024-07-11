@@ -25,13 +25,10 @@
                             <div class="carousel-inner">
                                 <!-- traer solamente el producto y por medio de un relationship traer la imagenes -->
                                 {% set ns = namespace(clase = "active") %}
-                                {% for (elProducto, imagen) in producto  %}
+                                {% for elProducto in producto.rs_imgs  %}
                                     <div class="carousel-item {{ns.clase}}"> 
-                                        <img  width="auto" height="490px" src="{{url_for('static' , filename='/imagenes/'+imagen.nombreImagen)}}" class="d-block w-100" alt="..." loading="lazy">          
+                                        <img  width="auto" height="490px" src="{{url_for('static' , filename='/imagenes/'+elProducto.nombreImagen)}}" class="d-block w-100" alt="..." loading="lazy">          
                                     </div>
-                                    {% set ns.clase = "" %}
-                                {% endfor %} 
-
                                     {% set ns.clase = "" %}
                                 {% endfor %} 
 
@@ -57,39 +54,57 @@
                 <div id="divDescripcionS">
                     <div id="tituloD">
 
-                        <h3>Noxpirin plus</h3>
+                        <h3>{{producto.nombreProducto}}</h3>
                     </div>
                     <div id="descripcionCentral">
-                        <span>caja x 6.00 capsulas</span>
-                        <span class="spanC">Noxpirin plus</span>
-                        <span class="spanC">Referencia: 1</span>
-                        <span>Incluye 0% de impuestos</span>
-                        <span class="spanAT">Antes$ 8.950</span>
-                        <span class="spanAH">Ahora$7.600</span>
-                        <span>capsula a $ 1.266,67</span>
+                        <span>{{producto.descripcionUnidad}}</span>
+                        <span class="spanC">Referencia: {{producto.idProducto}}</span>
+                        <span>Incluye 19% de impuestos</span>
+                        <span>Marca {{producto.marca.nombreMarca}}</span>
+                        <span class="spanAH">$ {{producto.precioProducto}}</span>
+
+                        {% set stockProducto= producto.stockProducto%}
+                        {% if stockProducto <= 15 and stockProducto > 0 : %}
+                            <span class="text-red">stock en linea  {{ producto.stockProducto }}</span>
+                        {% elif stockProducto == 0 :%}
+                            <span class="text-red">Producto sin stock</span>
+                        {% endif%}
+
                     </div>
-                    <div id="divButtonA">
-                        <button type="button" id="buttonCarrito" class="btn btn-outline-primary">
-                            <h5 id="h5">Añadir al Carrito</h5>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                <path
-                                    d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                                <path
-                                    d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                            </svg>
-                        </button>
+                    <div>
+
+                        {% if current_user.is_authenticated %}
+                            <form class='producto_form' action="{{url_for('bp_carrito.insertar')}}" method='post'>
+                                <input type="hidden" name="fIdProducto" value="{{producto.idProducto}}">
+                                <button class='producto_btn_compra'  type='button'>
+                                    <p>Comprar ahora</p>
+                                </button>
+                                <button class='buttonAgregar' name='agregarCarrito' value='' type='submit'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' width='20' height='30' fill='currentColor' class='bi bi-cart-plus-fill' viewBox='0 0 16 16'>
+                                    <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z'/>
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <form class='' action="{{url_for('bp_favoritos.acciones')}}" method="post">
+                                <input type="hidden" name="fAccion" value="Ingresar">
+                                    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-bookmark-star' viewBox='0 0 16 16'>
+                                        <path d='M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z'/>
+                                        <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z'/>
+                                    </svg>
+                            </form>
+                        
+                        {% else %}
+
+                            
+                        
+                        {%endif%}    
 
                     </div>
                     <div id="descripcionProductoG">
                         <div id="descripcionProductoS">
                             <h4>Descripcion del Producto</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores ipsam consectetur vitae
-                            dolore provident, facilis, nulla fugit vero facere eligendi iste inventore corporis
-                            voluptate quos animi dolores commodi, eveniet expedita!
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae, amet hic. Ea assumenda
-                            dignissimos, porro aspernatur sit est enim at quam voluptatum dolor, accusamus incidunt nisi
-                            molestias quaerat blanditiis ipsam!</p>
+                            <p>{{producto.descripcionProductoGeneral}}!</p>
 
                         </div>
                     </div>
