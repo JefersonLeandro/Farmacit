@@ -5,11 +5,7 @@ from flask_bcrypt import Bcrypt
 from app import db
 
 
-#funciones
 
-
-
-# bp = bp_autenticacion_crear
 bp = Blueprint('bp_login', __name__)
 
 @bp.route('/login') 

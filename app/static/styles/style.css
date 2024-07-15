@@ -435,7 +435,7 @@ aside{
     /* background: red;} */
 
 
-.cajaFavorito{
+.cajaFavorito, .productoBtnFavorito{
 
     display: flex;
     align-items: center;
@@ -837,9 +837,6 @@ a:visited{
     display: flex;
     align-items: center;
     justify-content: center;
- 
-    
-    
 }
 
 .divIdentificacion{
@@ -1099,22 +1096,41 @@ a:visited{
 
 }
 
-.producto_form{
+.productoForm{
+    width: 60%;
     padding-left: 40px;
+
 }
 
-.producto_btn_compra{
+.productoFormFavorito{
+
+    display: flex;
+    align-items: center;
+}
+
+.productoBtncompra{
 
     border: 0;
     background: #148ad8;
-    border-radius: 8px;
+    border-radius: 7.1px;
     font-size: 18.3px;
-    width: 50%;
+    width: 75%;
+    height: 32px;
     color: white;
     margin-right: 10px;
 }
-
-
+.productoBtnCarrito{
+    border: 0;
+    background:  #148ad8;
+    color: white;
+    border-radius: 7.1px;
+    width: 12%;
+    font-size: 21px;
+}
+.containerOpcionesProducto{
+    padding-top: 15px;
+    display: flex;
+}
 
 
 
@@ -2588,10 +2604,6 @@ a:visited{
         width: 85%;
         height: 200px;
     }
-
-    /* .buttonAgregar{
-        width: 21%;
-    } */
 
     .divSeccion{
 

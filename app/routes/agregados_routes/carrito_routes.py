@@ -57,6 +57,7 @@ def insertar():
         stockDisponible = verificacion.stockProducto if verificacion else 0
         cantidad = consulta.cantidadCarrito if consulta else 1
         
+        paginaAnterior= request.referrer
         
         if not consulta : 
             # inserta     
@@ -73,10 +74,8 @@ def insertar():
         else:
             #actualiza la cantidad del carrito encontrado 
             if stockDisponible > cantidad :  
-        
                 cantidad = consulta.cantidadCarrito + 1  
                 consulta.cantidadCarrito = cantidad
-                
             else: 
 
                 flash("Producto no agregado, stock superado", "stockSuperado")
@@ -84,8 +83,10 @@ def insertar():
         try:
             db.session.commit()
         
-        except IntegrityError:
+        except IntegrityError:  
             db.session.rollback() 
+    if paginaAnterior:
+        return redirect(paginaAnterior)
     
     return redirect(url_for('bp_inicio.index'))
 

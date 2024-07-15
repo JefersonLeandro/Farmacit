@@ -62,6 +62,8 @@ def insertar():
     idProducto = request.form["fIdProducto"]
     productoDeseado = ProductoDeseado.query.filter_by(idProducto=idProducto, idPersona=current_user.idPersona).first()
     
+    paginaAnterior=request.referrer
+
     if not productoDeseado:
         # si no exite lo inserta 
         nuevoProductoDeseado = ProductoDeseado(idProductoDeseado=None, idPersona=current_user.idPersona, idProducto=idProducto)
@@ -72,8 +74,11 @@ def insertar():
         except IntegrityError:
             # Se producirá una excepción si hay una violación de restricción única
             db.session.rollback()  
-            
-    return redirect(url_for("bp_inicio.index"))
+        
+    if paginaAnterior:
+        return redirect(paginaAnterior)
+                  
+    return redirect(url_for('bp_inicio.index'))
 
 
 def tranferirFavorito():
