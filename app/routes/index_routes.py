@@ -38,9 +38,7 @@ def tamanoCarrito():
         db.session.query(func.coalesce(func.sum(CarritoCompra.cantidadCarrito), 0).label('cantidadTotal'))
         .filter(CarritoCompra.idPersona == current_user.idPersona)
         .scalar()
-    )
-
-        
+    )        
     return cantidadTotal
     
 

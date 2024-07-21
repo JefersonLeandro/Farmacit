@@ -48,28 +48,27 @@
                         </div>
                     </div>
                     {% if current_user.is_authenticated %}
-                    {% if tamano == 0 %}
-                    <div class='ventanaBotones'>
-                        <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
-                        <button type="click" class='buttonVentana' onclick="direccionar()"
-                            id='aceptarBtn1'>Aceptar</button>
-                    </div>
+                        {% if tamano == 0 %}
+                        <div class='ventanaBotones'>
+                            <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
+                            <button type="click" class='buttonVentana' onclick="direccionar()"
+                                id='aceptarBtn1'>Aceptar</button>
+                        </div>
 
-                    {% else %}
-                    <form class='ventanaBotones' action="{{url_for('bp_favoritos.acciones')}}" method='post'>
-                        <input type="hidden" name="fIdProductoDeseado" value="0">
-                        <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
-                        <button class='buttonVentana' id='aceptarBtn' name='fAccion'
-                            value='EliminarTodo'>Aceptar</button>
-                    </form>
+                        {% else %}
+                        <form class='ventanaBotones' action="{{url_for('bp_favoritos.acciones')}}" method='post'>
+                            <input type="hidden" name="fIdProductoDeseado" value="0">
+                            <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
+                            <button class='buttonVentana' id='aceptarBtn' name='fAccion'
+                                value='EliminarTodo'>Aceptar</button>
+                        </form>
                     {% endif %}
                     {% else %}
-                    <div class='ventanaBotones'>
-                        <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
-                        <button type="click" class='buttonVentana' onclick="direccionar()"
-                            id='aceptarBtn1'>Aceptar</button>
-
-                    </div>
+                        <div class='ventanaBotones'>
+                            <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
+                            <button type="click" class='buttonVentana' onclick="direccionar()"
+                                id='aceptarBtn1'>Aceptar</button>
+                        </div>
                     {% endif %}
 
                 </div>
@@ -169,7 +168,7 @@
 
                                 {% for productoDeseado, producto, imagen in productos %}
                                 <div class="favoritos-caja-producto" id="{{productoDeseado.idProductoDeseado}}">
-                                    <a href="#" class="favoritos-link-nombre" style="display: inline-block;">
+                                    <a href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}" class="favoritos-link-nombre" style="display: inline-block;">
                                         <h6 class="favoritos-nombreProducto-h">{{producto.nombreProducto}}</h6>
                                     </a>
                                     <div class='cajaPD'>
@@ -213,7 +212,7 @@
                                                 </div>
                                             </div>
                                             <div class='divImagen'>
-                                                <a href='#' class='imagenProducto'>
+                                                <a href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}" class='imagenProducto'>
                                                     <img src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
                                                         alt="{{imagen.nombreImagen}}" class='favoritos-img-producto'
                                                         width='100%' height='150px'>

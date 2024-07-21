@@ -30,7 +30,7 @@ def autenticacion():
                 contrasenaBD = consulta.contrasenaPersona
                 
                 if bcrypt.check_password_hash(contrasenaBD, contrasena):
-                    login_user(consulta)#se marca como autenticado y recibe un objecto En este caso la persona
+                    login_user(consulta)#se marca como autenticado y recibe un objecto en este caso la persona
                     return redirect(url_for('bp_inicio.index'))
 
         mensajeInvalidado = "datos invalidos" 
@@ -42,5 +42,7 @@ def autenticacion():
     
 @bp.route('/logout', methods=['GET']) 
 def logout():
+    
     logout_user()
-    return redirect(url_for('bp_inicio.index'))
+    paginaAnterior = request.referrer
+    return redirect(paginaAnterior)
