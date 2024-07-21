@@ -68,13 +68,15 @@
                         {% for (carrito, producto, imagen) in productos %}
 
                         <div class="carrito-caja">
-                            <a class="carrito-picture" href="#">
+                            <a class="carrito-picture" href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}">
                                 <img class="carrito-imagen" src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
                                     alt="{{producto.nombreProducto}}" width="100%" height="100%" />
                             </a>
                             <div class="carrito-cajaMediana">
                                 <div class="carrito-subCajaArriba">
-                                    <h6>{{producto.nombreProducto}}</h6>
+                                    <a href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}">
+                                        <h6>{{producto.nombreProducto}}</h6>
+                                    </a>
                                     <p>{{producto.descripcionProductoGeneral[:290]}}.etc</p>
 
                                     <div class="carrito-stock">
