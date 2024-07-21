@@ -5,12 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='imagenes/logoQ1.png') }}" >
         {% block head %}{% endblock %}
 
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %} {% endblock %}</title>
     </head>
 
-    <body>
+    <body id="{% block idBody %}{% endblock %}">
     <header>
         <!-- P==PRIMARI@ -->
         <!-- S==secundario -->
@@ -220,7 +221,7 @@
         </div>
     </menu>    
 
-    {%block content %}{%endblock%}
+    {% block content %}{% endblock %}
 
     <footer >
         <div id="divContactG">
