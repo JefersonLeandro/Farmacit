@@ -13,8 +13,6 @@
     <main>
         <div id="divContainer">
             <div id="divFormulario">
-
-            <!--  action="../controlador/controladorInicioSession.php"   PONER LA VISTA DE REGISTRO EXIOSO YA PUEDE INICIAR SESION  -->
             <form  class = "formulario" action="{{url_for('bp_login.autenticacion')}}"  method="POST" >
 
                     <div id="tituloForm">
@@ -27,6 +25,7 @@
                             <h1>Farmacit</h1>
                         </div>
                     </div>
+                    <script src="{{url_for('static', filename='/scripts/autenticacion/login.js' )}}"></script>
                     <div class="areainputsG" onclick="cambiarColor()">
 
                         <div id="plbIngresar">
@@ -36,18 +35,7 @@
                         {% with mensajes = get_flashed_messages(with_categories=true) %}
                         {% for categoria, mensaje in mensajes %}
                             {% if categoria == 'invalidados' %}
-                             <h5 style="font-size: 18px; color: red;" id="datosInvalidos"  role="alert">{{mensaje}}</h5>
-                             <script>
-                                function remplazarValor() {
-                    
-                                    mensajeH5 = document.getElementById("datosInvalidos").value
-                                    if (mensajeH5 !== 'undefined') {
-                                        document.getElementById("datosInvalidos").innerHTML = "";
-                                    }
-                                } 
-
-                             </script>
-
+                                <h5 style="font-size: 18px; color: red;" id="datosInvalidos" role="alert">{{mensaje}}</h5>
                             {% endif %}
                         {% endfor %}
                         {% endwith %}
@@ -63,7 +51,6 @@
                         <div class="olvidarContrasena">
                             <h3><a href="">¿Olvido la contraseña?</a></h3>
                         </div>
-                        <!--en este div cambie la clase--> 
                         <div class="divButtonIngresar" >
                             <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession"  > 
                             
@@ -81,69 +68,16 @@
                 </form>
 
             </div>
-           
-
-
         </div>
         
         {% with mensajes = get_flashed_messages(with_categories=true) %}
         {% for categoria, mensaje in mensajes %}
             {% if categoria == 'exito' %}
-            <script>
-                // Función para mostrar una alerta después de cargar completamente la página
-                window.onload = function() {
-                    window.setTimeout(function(){
-                        alert("{{mensaje}}");
-                    }, 500); 
-                };
-
-                //50mls
-            </script>
+            <script>mostrarAlerta(mensaje="{{mensaje}}");</script>
             {% endif %}
         {% endfor %}
         {% endwith %}
         
     </main>
 </body>
-
-    <script>
-    
-           
-             function cambiarColor(){
-
-
-
-                    const colorOriginal = "rgb(118, 118, 118)";
-                    let inputCorreo = document.querySelector("#DocumentoCorreo");
-
-
-                    inputCorreo.addEventListener("input", function(event) {
-                       inputCorreo.style.borderBottomColor = "black";
-                    });
-
-//                    Agrega un evento de blur al input
-                    inputCorreo.addEventListener("blur", function() {
-//                    Cambia el color del input al original  
-                      inputCorreo.style.borderBottomColor = colorOriginal;  
-                                                                        
-                   });
-                   
-
-                    let inputContrasena = document.querySelector("#contrasena");
-
-                    inputContrasena.addEventListener("input", function(event) {
-                       inputContrasena.style.borderBottomColor = "black";
-                    });
-
-//                    Agrega un evento de blur al input
-                    inputContrasena.addEventListener("blur", function() {
-//                     Cambia el color del input al original  
-                      inputContrasena.style.borderBottomColor = colorOriginal;                                               
-                   });
- 
-              }
-             
-                
-                
-    </script>
 </html>
