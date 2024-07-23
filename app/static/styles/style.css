@@ -1372,14 +1372,18 @@ a:visited{
 }
 
                                                     /* STYLES AREA DE ADMINISTRACION */
+.contenedorGeneral_area{
+    display: flex;
+
+}
+
 #bordeG{
     width: 100%;
     height: 80vh;
+    padding-left: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-
-
 }
 
 #bordeP{
