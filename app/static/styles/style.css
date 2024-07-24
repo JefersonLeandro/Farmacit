@@ -1372,14 +1372,27 @@ a:visited{
 }
 
                                                     /* STYLES AREA DE ADMINISTRACION */
-.contenedorGeneral_area{
-    display: flex;
+
+.svgFlechaAtras{
+    width: 30px;
+    /* background-color: #0077ff; */
+    background-color: rgb(58, 156, 248);
+    border-radius: 20px;
+}
+.contenedorSvgFlecha{
+    height: 354px;
+    padding-top: 20px;
+    width: 20px;
+    z-index: 1;
 
 }
-
+.EnlaceASvg{
+    display: block;
+    height: 30px;
+}
 #bordeG{
     width: 100%;
-    height: 80vh;
+    height: 520px;
     padding-left: 50px;
     display: flex;
     justify-content: start;
@@ -1387,12 +1400,12 @@ a:visited{
 }
 
 #bordeP{
-    /* (izquierda,posicion vertical,tamano de la sombra, cantidad de desenfoque) */
+    
     border: 3px solid black;
     box-shadow: -0px 8px 0px -5px rgba(0,0,0,.2), 0 16px 16px 2px rgba(0,0,0,.14), 0 6px 5px 5px rgba(0,0,0,.12);
     border-radius: 5px;
     width: 80%;
-    height: 60vh;
+    height: 394px;
    
 }
 .hA{
@@ -1407,17 +1420,16 @@ a:visited{
 }
 #bordeCa{
 
-    /* border: 3px solid black; */
     border-radius: 5px;
     width: 98%;
-    height: 45vh;
+    height: 290px;
     display: flex;
     justify-content: center;
 }
 #bordeCS{
-
+    
     width: 98%;
-    height: 24vh;
+    height: 180px;
     gap: 12px;
     display: flex;
     align-items: center;
@@ -1425,66 +1437,62 @@ a:visited{
     
 }
 #bordeCG{
-
+    
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 #divCa{
-
+    
     display: flex;
     margin-top: 10px;
-    /* align-items: center; */
 }
 #aImg{
-
     padding-left: 14px;
 }
 
 .divButtonA{
-
-  width: 150px;
-  height: 23vh;
-  border: 3px solid rgb(27, 25, 25);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  box-shadow:0 0px 4px 1px rgba(0,0,0,.2), 0 3px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
-  
+    
+    width: 147.5px;
+    height: 170px;
+    border: 3px solid rgb(27, 25, 25);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-shadow:0 0px 4px 1px rgba(0,0,0,.2), 0 3px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+    
 }
 
 .buttonAF{
-
     width: 120px;
-    height: 5vh;
+    height: 34px;
     border: 0;
     border-radius: 8px;
     background: rgb(55 146 232);
     box-sizing: border-box;
 }
 .divButtonA h3{
-
+    
     border-radius: 8px;
     color: white;
     text-align: center;
     display: flex;
-    height: 5vh;
+    height: 32px;
     align-items: center;
     justify-content: center;
 }
 .SvgA{
-    height: 14vh;
+    height: 83px;
     display: flex;
     align-items: end;
-
-
+    
+    
 }
 .buttonAb{
-
-    height: 7vh;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
