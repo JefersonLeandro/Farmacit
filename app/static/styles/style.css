@@ -1498,6 +1498,10 @@ a:visited{
     justify-content: center;
 }
 
+.flechasProductos{
+    display: none;
+}
+
                                                     /* STYLES AREA DE VISTA DE LAS fARMACIA*/
 
 #mainVDF{
@@ -1566,7 +1570,7 @@ a:visited{
 .seccionCV {
 
     height: 76vh;
-    width: 95%;
+    width: 97%;
     overflow-y: scroll;
     -ms-overflow-style: none; /* Deshabilitar la barra de desplazamiento predeterminada en IE 10+ */
     scrollbar-width: none; /* Deshabilitar la barra de desplazamiento predeterminada en Firefox */
