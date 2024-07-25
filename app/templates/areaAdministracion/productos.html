@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
 </head>
 
-<body>
+<body >
     <main id="mainVDF">
         <div id="divVG">
             <div id="tituloF">
@@ -60,10 +60,10 @@
 
             </div>
             <div class="lineaA"></div>
-            <div id="seccionGV">
+            <div id="seccionGV"  >
                
-                <div class="seccionCV">
-                    <table border="1" class="table  table-striped">
+                <div class="seccionCV"  >
+                    <table border="1" id="0" class="table  table-striped">
                         <thead>    
                             <tr>
                                 <th scope="col">nombreProducto</th>
@@ -72,7 +72,7 @@
                                 <th scope="col">stockProducto</th>
                                 <th scope="col">precioProducto</th>
                                 <th scope="col">MarcaProducto</th>
-                                <th scope="col"></th>
+                                <th scope="col" ></th>
                             </tr>
                         </thead>
                          <tBody>
@@ -111,7 +111,7 @@
                      
 
                             <tr>
-                                <form id="fIngresarProducto" action="{{ url_for('bp_productos.acciones')}}" method="post">
+                                <form id="fIngresarProducto" action="{{ url_for('bp_productos.acciones')}}" method="post" >
                                     <input type="hidden" name="fIdProducto" value="0">
                                     <td><input type="text" name="fNombreProducto" required></td>
                                     <td><input type="text" name="fDescripcionUnidad" required></td>
@@ -133,7 +133,7 @@
                                         </select> 
                                     </td>
 
-                                    <td><button type="submit" name="fAccion" value="Ingresar"
+                                    <td id="1"><button type="submit" name="fAccion" value="Ingresar"
                                             class="buttonEnviar">Ingresar</button>
                                         <button type="reset" value="Limpiar"
                                             class="buttonEnviar">Limpiar</button>
@@ -146,12 +146,12 @@
                     </table>
                 </div>
                 <div class="contenedorFlechas">
-                    <a href="#" class="flechasProductos mb-2">
+                    <a href="#0" class="flechasProductos mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
                             <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
                         </svg>
                     </a>
-                    <a href="#" class="flechasProductos">
+                    <a href="#1" class="flechasProductos">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
                             <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
                         </svg>

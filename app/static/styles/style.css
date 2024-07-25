@@ -1501,6 +1501,12 @@ a:visited{
 .flechasProductos{
     display: none;
 }
+.contenedorFlechas{
+    width: 3%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
                                                     /* STYLES AREA DE VISTA DE LAS fARMACIA*/
 
