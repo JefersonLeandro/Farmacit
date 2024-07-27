@@ -1,6 +1,5 @@
-
 function activar(){
-    const contenedor = document.querySelector(".seccionCV");
+    const contenedor = document.querySelector(".seccionCVP");
     let bandera = true;
 
     contenedor.addEventListener('scroll', function() {
@@ -11,10 +10,4 @@ function activar(){
             atributo.style.display = 'block'
         });
     }, { once: true });
-}
-
-function scrollArriba(){
-    if (window.scrollY !== 0){
-        window.scrollTo(0, 0);
-    }
 }

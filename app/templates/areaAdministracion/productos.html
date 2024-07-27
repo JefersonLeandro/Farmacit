@@ -145,8 +145,9 @@
 
                     </table>
                 </div>
+                <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
                 <div class="contenedorFlechas">
-                    <a href="#0" class="flechasProductos mb-2">
+                    <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
                             <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
                         </svg>
@@ -171,7 +172,6 @@
             </div>
 
         </div>
-        <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
 
         {% with mensajes = get_flashed_messages(with_categories=true) %}
             {% for categoria, mensaje in mensajes %}
@@ -184,7 +184,7 @@
                 {% endif %}
             {% endfor %}
         {% endwith %}
-
+        <script>activar();</script>
 
     </main>
 

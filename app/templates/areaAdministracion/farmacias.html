@@ -44,15 +44,12 @@
                         </a>
                     </div>
                  </div>
-                
-
             </div>
             <div class="lineaA"></div>
             <div id="seccionGV">
                 <div class="seccionCV">                                    
-                    <table border="1"  class="table table-striped">
+                    <table border="1"  class="table table-striped" id="0">
                             
-                        <!--cambiar el color a gris el encabezado y mirara si esta cogiendo la clase STRIPE-->
                         <thead class="Secondary">
                                 <tr> 
                                     <th scope="col">nitFarmacia</th>
@@ -64,8 +61,6 @@
                 
                                 </tr>
                         </thead>
-                                
-                                
                         <tBody>  
 
                             {% for farmacia in farmacias: %}
@@ -82,27 +77,34 @@
                                 </form></tr>
                             {%endfor%}
 
-
                                 <tr>
-                                <form id="fIngresarFarmacia" action="{{url_for('bp_farmacias.acciones')}}" method="post">
+                                    <form id="fIngresarFarmacia" action="{{url_for('bp_farmacias.acciones')}}" method="post">
                                         <input type="hidden" name="fIdFarmacia" value="0">
                                         <td><input type="text"  name="fNitFarmacia" required></td>
                                         <td><input type="text"  name="fNombreFarmacia" required ></td>
                                         <td><input type="number" name="fTelefonoFarmacia"required ></td>
                                         <td><input type="email" name="fCorreoFarmacia"required ></td>
                                         <td><input type="text" name="fUbicacionFarmacia"required ></td>
-                                        <td><button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar">Ingresar</button>
+                                        <td id="1"><button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar">Ingresar</button>
                                             <button type="reset"  value="Limpiar"  class="buttonEnviar">Limpiar</button></td>
                                     </form>
                                 </tr>  
                             </tBody>
-
                         </table>
-                        
-
                 </div>
-
-                
+                <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
+                <div class="contenedorFlechas">
+                    <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
+                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+                        </svg>
+                    </a>
+                    <a href="#1" class="flechasProductos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
+                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
             <div class="lineaAF"></div>
             <div id="tituloAbajo">
@@ -112,15 +114,10 @@
                 </div>
                 <div id="tituloH">
                     <h2>Farmacit</h2>
-                </div>
-                    
+                </div>  
             </div>
-            
         </div>
-
-
+        <script>activar();</script>
     </main>
-
 </body>
-
 </html>
