@@ -8,6 +8,7 @@
     <title>Imagenes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
+
 </head>
 
 
@@ -57,10 +58,8 @@
                 <div class="miCaja1 ">
                     <div class="miSubC seccionCVP">
                         <div class="cajaIntermedia">
-                            <table border="1" class="table table-striped">
-
+                            <table border="1" class="table table-striped" id="0">
                                 <thead>
-
                                     <tr>
                                         <th scope="col" class="miThs">nombreImagen</th>
                                         <th scope="col" style="padding-left:10px;">TipoImagen</th>
@@ -68,8 +67,6 @@
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-
-
                                 </tBody>
                           
                                 {% for imagen in imagenes: %}
@@ -112,12 +109,26 @@
                                     </tr>
                              
                                 {%endfor%}
+                                <tr id="1"></tr>
 
                                 </tBody>
-                            </table>
-
+                            </table >
                         </div>
                     </div>
+                </div>
+                
+                
+                <div class="contenedorFlechas posicionamientoFlechas" id="width0" >
+                    <a href="#0" class="flechasProductos mb-2" onclick="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
+                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+                        </svg>
+                    </a>
+                    <a href="#1" class="flechasProductos cursorPointer" onclick="scrollAbajo();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
+                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="miCaja2">
                     <div class="cajaDerechaG">
@@ -129,7 +140,6 @@
                                     <button type="submit" name="fEnviar" value="Buscar" class="buttonEnviar" style="width: 20%;">Buscar</button>
                                 </div>
                             </form>
-
                         </div>
                         <div class="miListaP">
 
@@ -144,7 +154,7 @@
                                     {% endfor %}
                                     {% endwith %}
                                         
-                                    {%if productosEncontrados: %}
+                                    {% if productosEncontrados: %}
                                         <ol class="list-group list-group-numbered listaFavoritos scrollable" id="listaProductos">
                                             {% for productoEncontrado in productosEncontrados : %} 
                                                 <li class="list-group-item d-flex justify-content-between align-items-start" id="listaBuscar" >
@@ -155,11 +165,11 @@
                                                     
                                                         {{productoEncontrado.descripcionUnidad}} 
                                                     </div>
-                                                        <span class="badge bg-primary rounded-pill" id="unSpan">{{productoEncontrado.idProducto}}</span>
+                                                    <span class="badge bg-primary rounded-pill" id="unSpan">{{productoEncontrado.idProducto}}</span>
                                                 </li>
                                             {%endfor%}
                                         </ol>
-                                    {%endif%}
+                                    {% endif %}
                                 </div>
                             </form>
                         </div>
@@ -167,7 +177,7 @@
                         <form id="formularioPrincipal" action="{{url_for('bp_imagenes.acciones')}}" method="post"  enctype="multipart/form-data">
                             <div class="areaInsertar">
                                 <div class="subArea1P " >
-                                    <table border="1" class="table table-striped">
+                                    <table border="1" class="table table-striped" >
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="miThs">nombreImagen</th>
@@ -197,7 +207,7 @@
                                     </table>
                                 </div>
                         
-                                <div class="subArea2P" id="formEnviar">
+                                <div class="subArea2P" id="formEnviar" >
                                     <button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar miBtnW">Ingresar</button>
                                     <button type="reset" name="fAccion" value="Limpiar" class="buttonEnviar miBtnW">Limpiar</button>
                                 </div>
@@ -209,7 +219,6 @@
             <div class="lineaAF"></div>
             <div id="tituloAbajo">
                 <div id="iconoAbajo">
-
                     <img src="/static/imagenes/logoQ1.png" alt="logo" width="41px" height="41px">
                 </div>
                 <div id="tituloH">
@@ -218,56 +227,23 @@
             </div>
         </div>
     </main>
-            <script>
-                  // Seleccionar todos los elementos <li> dentro del contenedor con la id "listaProductos"
-                let listaItems = document.querySelectorAll("#listaProductos li");
-                let inputId = document.querySelector("#inputD");
-
-                // Iterar sobre cada elemento <li> utilizando forEach
-                listaItems.forEach(function(li) {
-                    // Agregar un manejador de clic para cada elemento <li>
-                    li.addEventListener("click", function(event) {
-                        // Imprimir un mensaje en la consola cuando se hace clic en un elemento <li>
-                        console.log("Se hizo clic en un elemento con id 'listaBuscar'");
-
-                        // Obtener el valor del elemento <span> dentro del elemento <li> clicado
-                        let span = li.querySelector("#unSpan");
-                        // Imprimir el contenido del elemento <span> en la consola
-                        console.log("Valor del span: " + span.textContent);
-                        inputId.value = span.textContent;
-                    });
-                });
-
-              </script>  
-
-            {% with mensajes = get_flashed_messages(with_categories=true) %}
-                {% for categoria, mensaje in mensajes %}
-                    {% if categoria == 'idNoEncontrado' %}
-                    <script>
-                        // Función para mostrar una alerta después de cargar completamente la página
-                        window.onload = function() {
-                            window.setTimeout(function(){
-                                alert("{{mensaje}}");
-                            }, 500); 
-                        };//500mls
-                    </script>
-                    {% endif %}
-                {% endfor %}
-            {% endwith %}
-    
-    
-    
-    <style>
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'idNoEncontrado' %}
+                <script>
+                    mostrarMensaje(mensaje='{{mensaje}}');
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+<style>
         .miCaja1 {
             width: 60%;
             height: 83vh;
             /* background: palegoldenrod;s */
             padding: 15px;
-
-
-
         }
-
+        
         .miCaja2 {
             width: 40%;
             height: 83vh;
@@ -283,17 +259,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
+            
         }
-
+        
         .cajaIntermedia {
             width: 95%;
             height: 71vh;
             /* border: 3px solid black; */
             /* background: white; */
         }
-
-
         #iconoImagen {
             height: 10vh;
             padding-bottom: 15px;
@@ -302,23 +276,23 @@
             display: flex;
             align-items: end;
         }
-
+        
         .miThs {
             padding-left: 45px !important;
             box-sizing: border-box;
-
+            
         }
-
+        
         .miTds {
             padding-left: 23px !important;
             padding-right: 1px !important;
             box-sizing: border-box;
-
+            
 
         }
-
+        
         .cajaDerechaG {
-
+            
             /* border: 3px solid black; */
             width: 90%;
             height: 90%;
@@ -342,13 +316,13 @@
             padding-left: 6px;
             padding-right: 6px;
         }
-
+        
         .areaBuscar {
             display: flex;
             gap: 10px;
         }
-
-
+        
+        
         .miListaP {
 
             height: 50%;
@@ -359,15 +333,15 @@
             display: flex;
             justify-content: center;
         }
-
+        
         .areaListaP {
-
+            
             height: 33vh;
             width: 90%;
             /* border: 1px solid black; */
 
         }
-
+        
         .areaInsertar {
 
             height: 25%;
@@ -378,12 +352,11 @@
 
             height: 70%;
         }
-
+        
         .subArea2P {
-
+            
             height: 30%;
         }
-
 
         #formEnviar{
 
@@ -391,8 +364,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-
-
         }
 
         .miBtnW {
@@ -400,19 +371,17 @@
         }
 
         .miListaS {
-
+            
             width: 85%;
             height: 33vh;
             padding-left: 10px;
             padding-top: 10px;
             border: 3px solid;
             border-radius: 10px;
-
-
         }
 
         .inputDisabled {
-
+            
             width: 90%;
             height: 27px;
             font-size: 18px;
@@ -432,7 +401,7 @@
 
             overflow-y: scroll;
             max-height: 31vh;
-
+            
         }
 
         #listaProductos::-webkit-scrollbar {
@@ -445,16 +414,13 @@
             background-color: #e1e0e0; /* Color de la barra de desplazamiento */
             border-radius: 10px;
         }
-        
-    
-
+        .posicionamientoFlechas{
+            position: relative;
+            left: -20px;
+        }
     </style>
-
-
-
-
-
-
+    <script src="{{url_for('static', filename='/scripts/areaAdministracion/imagenes.js' )}}"></script>
+    <script src="{{url_for('static', filename='/scripts/areaAdministracion/personas.js' )}}"></script>
+    <script>activar();</script>
 </body>
-
 </html>
