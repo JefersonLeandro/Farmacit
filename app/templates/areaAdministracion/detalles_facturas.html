@@ -93,8 +93,6 @@
                     </a>
                 </div>
             </div>
-
-
             <div class="lineaAF"></div>
             <div id="tituloAbajo">
                 <div id="iconoAbajo">
@@ -106,7 +104,8 @@
             </div>
         </div>
         <script src="{{url_for('static', filename='/scripts/areaAdministracion/facturas.js' )}}"></script>
-        <script>activar();</script>
+        <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
+        <script>activar("facturas-scroll");</script>
     </main>
 </body>
 </html>

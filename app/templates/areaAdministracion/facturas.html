@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
 </head>
 
-
-
 <body>
     <main id="mainVDF">
         <div class="facturas-subMain">
@@ -120,7 +118,8 @@
     </main>
 
     <script src="{{url_for('static', filename='/scripts/areaAdministracion/facturas.js' )}}"></script>
-    <script>activar();</script>
+    <script src="{{url_for('static', filename='/scripts/reutilizable.js' )}}"></script>
+    <script>activar("facturas-scroll");</script>
 
 </body>
 </html>

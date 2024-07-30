@@ -25,23 +25,22 @@
                             <h1>Farmacit</h1>
                         </div>
                     </div>
-                    <script src="{{url_for('static', filename='/scripts/autenticacion/login.js' )}}"></script>
                     <div class="areainputsG" onclick="cambiarColor()">
-
+                        
                         <div id="plbIngresar">
                             <h2>Ingresa a tu cuenta</h2>
                         </div>
-
+                        
                         {% with mensajes = get_flashed_messages(with_categories=true) %}
-                        {% for categoria, mensaje in mensajes %}
-                            {% if categoria == 'invalidados' %}
-                                <h5 style="font-size: 18px; color: red;" id="datosInvalidos" role="alert">{{mensaje}}</h5>
-                            {% endif %}
-                        {% endfor %}
+                            {% for categoria, mensaje in mensajes %}
+                                {% if categoria == 'invalidados' %}
+                                    <h5 style="font-size: 18px; color: red;" id="datosInvalidos" role="alert">{{mensaje}}</h5>
+                                {% endif %}
+                            {% endfor %}
                         {% endwith %}
-
-
-
+                        
+                        
+                        
                         <div class="areaInputForm">
                             <input type="text" placeholder="Correo electronico "  class="inputsForm" name="emailDocumento" id="DocumentoCorreo" onclick="remplazarValor()" required>
                         </div>
@@ -53,29 +52,31 @@
                         </div>
                         <div class="divButtonIngresar" >
                             <button class="buttonIngresarF" style="font-family: inherit; font-size: 18px;" type="submit"  name="btnIngresar" value="iniciarSession"  > 
-                            
-                            <h3>Ingresar</h3>
+                                
+                                <h3>Ingresar</h3>
                             </button> 
-
+                            
                         </div>
                         <div id="divCrearC">
                             <p>¿No tienes una cuenta?<a href="{{url_for('bp_crear_cuenta.crearCuenta')}}" class="linkCuenta"><h4>Crear una cuenta</h4></a></p>
-                           
+                            
                         </div>
                         
-
+                        
                     </div>
                 </form>
-
+                
             </div>
         </div>
+        <script src="{{url_for('static', filename='/scripts/autenticacion/login.js' )}}"></script>
+        <script src="{{url_for('static', filename='/scripts/reutilizable.js' )}}"></script>
         
         {% with mensajes = get_flashed_messages(with_categories=true) %}
-        {% for categoria, mensaje in mensajes %}
-            {% if categoria == 'exito' %}
-            <script>mostrarAlerta(mensaje="{{mensaje}}");</script>
-            {% endif %}
-        {% endfor %}
+            {% for categoria, mensaje in mensajes %}
+                {% if categoria == 'exito' %}
+                    <script>mostrarAlerta(mensaje="{{mensaje}}");</script>
+                {% endif %}
+            {% endfor %}
         {% endwith %}
         
     </main>

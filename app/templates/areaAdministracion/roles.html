@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos TipoPersona</title>
+    <title>Roles </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
 </head>
@@ -117,15 +117,12 @@
                 </div>
             </div>
         </div>
-        <script>activar();</script>
+        <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
+        <script>activar("seccionCV");</script>
         {% with mensajes = get_flashed_messages(with_categories=true) %}
             {% for categoria, mensaje in mensajes %}
                 {% if categoria == 'errorIntegridad' %}
-                    <script>
-                        window.setTimeout(function(){
-                            alert("{{mensaje}}");
-                        }, 500);//50mls
-                    </script>
+                    <script>mostrarAlerta(mensaje="{{mensaje}}");</script>
                 {% endif %}
             {% endfor %}
         {% endwith %}

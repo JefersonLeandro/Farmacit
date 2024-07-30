@@ -38,9 +38,6 @@ def acciones():
         return redirect(url_for('bp_roles.index'))
        
     return redirect(url_for('bp_inicio.index'))
-    
-
-
 
 def insertar():
     

@@ -105,10 +105,8 @@
                                     <td><button type="submit" name="fAccion" value="Modificar" class="buttonEnviar2">Modificar</button>
                                         <button type="submit" name="fAccion" value="Eliminar" class="buttonEnviar2">Eliminar</button></td>
                                 </form>
-                               
                             </tr>
                             {%endfor%}
-                     
 
                             <tr>
                                 <form id="fIngresarProducto" action="{{ url_for('bp_productos.acciones')}}" method="post" >
@@ -138,11 +136,9 @@
                                         <button type="reset" value="Limpiar"
                                             class="buttonEnviar">Limpiar</button>
                                     </td>
-
                                 </form>
                             </tr>
                         </tBody>
-
                     </table>
                 </div>
                 <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
@@ -172,19 +168,15 @@
             </div>
 
         </div>
-
+        <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
         {% with mensajes = get_flashed_messages(with_categories=true) %}
             {% for categoria, mensaje in mensajes %}
                 {% if categoria == 'errorIntegridad' %}
-                    <script>
-                        window.setTimeout(function(){
-                            alert("{{mensaje}}");
-                        }, 500);//50mls
-                    </script>
+                    <script>mostrarAlerta(mensaje="{{mensaje}}");</script>
                 {% endif %}
             {% endfor %}
         {% endwith %}
-        <script>activar();</script>
+        <script>activar("seccionCV");</script>
 
     </main>
 

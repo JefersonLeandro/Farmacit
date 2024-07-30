@@ -11,7 +11,6 @@
 
 </head>
 
-
 <body>
     <main id="mainVDF">
         <div id="divVG">
@@ -227,15 +226,7 @@
             </div>
         </div>
     </main>
-    {% with mensajes = get_flashed_messages(with_categories=true) %}
-        {% for categoria, mensaje in mensajes %}
-            {% if categoria == 'idNoEncontrado' %}
-                <script>
-                    mostrarMensaje(mensaje='{{mensaje}}');
-                </script>
-            {% endif %}
-        {% endfor %}
-    {% endwith %}
+
 <style>
         .miCaja1 {
             width: 60%;
@@ -420,7 +411,16 @@
         }
     </style>
     <script src="{{url_for('static', filename='/scripts/areaAdministracion/imagenes.js' )}}"></script>
-    <script src="{{url_for('static', filename='/scripts/areaAdministracion/personas.js' )}}"></script>
-    <script>activar();</script>
+    <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+            {% if categoria == 'idNoEncontrado' %}
+                <script>mostrarAlerta(mensaje='{{mensaje}}');</script>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+    <script>activar("seccionCVP");</script>
 </body>
 </html>

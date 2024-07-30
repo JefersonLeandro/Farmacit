@@ -51,7 +51,7 @@
                         {% if tamano == 0 %}
                         <div class='ventanaBotones'>
                             <button class='buttonVentana' id='cancelarBtn' type="button">Cancelar</button>
-                            <button type="click" class='buttonVentana' onclick="direccionar()"
+                            <button type="click" class='buttonVentana' onclick="direccionar();"
                                 id='aceptarBtn1'>Aceptar</button>
                         </div>
 
@@ -101,7 +101,6 @@
                                         d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                                 </svg>
                                 <div class="lineaTrash"></div>
-
                             </div>
                         </div>
                     </div>
@@ -265,8 +264,6 @@
                                 </svg>
                             </a>
                         </div>
-
-
                     </footer>
                 </div>
 
@@ -370,10 +367,7 @@
 
             }
 
-            /* .buttonVentana:hover.active2{
-            transition: 0ms; 
-            esto era para solucionar el problema de la transicion del buttom
-        } */
+            
 
             .aCerrarPopup svg {
                 /* color: rgb(255, 255, 255); */
@@ -448,91 +442,23 @@
                 color: red;
             }
 
-
-
             /* ------------------------------------------------------------------- */
         </style>
 
-
-
-        <script>
-
-            const clickSvg = document.getElementById("svgTrash"),
-                ventana = document.querySelector(".cerrarVentanaG"),
-                svgCerrar = document.getElementById("svgCerrar"),
-                btnCancelar = document.getElementById("cancelarBtn"),
-                overLay = document.querySelector(".overLay"),
-                btnAceptar1 = document.getElementById("aceptarBtn1"),
-
-                lista = document.getElementById("listaP"),
-                iconoLista = document.querySelector(".favoritos-svg-lista"),
-                liProducto = document.querySelectorAll(".list-group-item"),
-                listaSvgX = document.querySelector(".favoritos-svg-x"),
-                listaCompleta = document.querySelector("#favoritos-lista-completa");
-
-            //alerta
-            clickSvg.addEventListener('click', function () {
-                ventana.classList.add('active');
-                overLay.classList.add('active');
-                listaCompleta.classList.add('active');
-            });
-
-            svgCerrar.addEventListener('click', function () {
-                ventana.classList.remove('active');
-                overLay.classList.remove('active');
-            });
-
-            btnCancelar.addEventListener('click', function () {
-
-                ventana.classList.remove('active');
-                overLay.classList.remove('active');
-            });
-
-            //lista
-
-            iconoLista.addEventListener('click', function () {
-                lista.classList.add('active');
-                overLay.classList.add('active');
-
-                console.log("click- lista ")
-            });
-
-
-
-            liProducto.forEach(function (li) {
-                li.addEventListener("click", function (event) {
-                    lista.classList.remove('active');
-                    overLay.classList.remove('active');
-                });
-            });
-
-            listaSvgX.addEventListener('click', function () {
-
-                lista.classList.remove('active');
-                overLay.classList.remove('active');
-            });
-
-            function direccionar() {
-                window.location.href = "{{ url_for('bp_inicio.index') }}"
-            }
-        </script>
-
-
+        <script src="{{url_for('static', filename='scripts/agregados/favoritos.js' )}}"></script>
         {% with mensajes = get_flashed_messages(with_categories=true) %}
-        {% for categoria, mensaje in mensajes %}
-        {% if categoria == 'indisponibilidad' or categoria == 'agregado' or categoria == 'stockSuperado'%}
-        <script>
-            window.onload = function () {
-                window.setTimeout(function () {
-                    alert("{{mensaje}}");
-                }, 10);
-            };
-        </script>
-        {% endif %}
-        {% endfor %}
+            {% for categoria, mensaje in mensajes %}
+                {% if categoria == 'indisponibilidad' or categoria == 'agregado' or categoria == 'stockSuperado'%}
+                    <script>mostrarMensaje(mensaje="{{mensaje}}");</script>
+                {% endif %}
+            {% endfor %}
         {% endwith %}
 
-
+        <script>
+            function direccionar(url_for) {
+                window.location.href ="{{ url_for('bp_inicio.index') }}";
+            }
+        </script>
     </main>
 </body>
 

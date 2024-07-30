@@ -8,14 +8,6 @@ function remplazarValor() {
     }
 } 
 
-function mostrarAlerta(mensaje){
-    // Función para mostrar una alerta después de cargar completamente la página
-    window.onload = function() {
-        window.setTimeout(function(){
-            alert(mensaje);
-        }, 500); 
-    };
-}
 
 function cambiarColor(){
 
