@@ -12,39 +12,26 @@
 
 </head>
 
-
-
 <body id="bodyResgistroC">
 
     <main>
-       
         <div id="divContainer2">
             <div id="divFormulario2">
                 <form class="formulario" action="{{url_for('bp_crear_cuenta.RegistrarUsuario')}}" id="miFormulario" onclick="cambiarColor();"  method="post" >
-                   
-
                     <div id="tituloForm">
                         <div id="iconoForm">
-                            <!--el mismo error de la imagen-->
                             <img class="login-img"  src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="70px" height="70px">
-
                         </div>
                         <div class="login-titulo">
                             <h1>Farmacit</h1>
                         </div>
                         <div> 
                         </div>
-                            
-                        
                     </div>
                     <div id="divInputsG">
-
                         <div>
-
-                            <div id="plbIngresar">
-                                
+                            <div id="plbIngresar">   
                                 <h2>Crear una cuenta</h2>
-
                             </div>
                                <div class="divInputsC">
 
@@ -52,10 +39,7 @@
                                     <div>
                                         <label for="fNombrePersona" name="Nombre">Nombre</label>
                                     </div>
-                                    
-                                     <!-- crear una alerta para datos -->
                                      <input type="text" name="fNombrePersona" placeholder="Sus nombres" class="divAB nombreC" id="nombreP" value="{{ form.fNombrePersona.data if form and form.fNombrePersona }}">
-
 
                                     {% if form  is defined and 'fNombrePersona' in form.errors %}
                                         {% for error in form.errors['fNombrePersona'] %}
@@ -100,8 +84,6 @@
                                         </div>
                                         {% endfor %}
                                     {% endif %}
-
-
                                 </div>
                             </div>
                             
@@ -136,10 +118,6 @@
                                         {% endif %}
                                     {% endwith %}
                                     
-                                    
-
-
-
                                 </div>
                             </div>
                             <div class="divGid">
@@ -199,20 +177,15 @@
 
                         </div>
                         
-                        <div id="divTerminos">
-                            <!--el checkbox cuando no esta marcado el java script le agrega una clase-->                                                                                                                                                        
-                            
+                        <div id="divTerminos">                                                                                                                                                      
                             <input type="checkbox" id="aceptarTerminos" onchange="" required >   
                           
                             <a href="#"  id="aTerminos" > Aceptar los términos y condiciones </a>
- 
-                        </div>
-                        
-                       
+                        </div> 
                     </div>
                     <div class="divButtonIn">
                         
-                        <button class="buttonIngresarF" type="submit"  name="fAccion" style="font-family: inherit; font-size: 18px;" onclick="return verificarCampos() && manipularCheckbox() && mostrarAlerta();" id="mibtnC">
+                        <button class="buttonIngresarF" type="submit"  name="fAccion" style="font-family: inherit; font-size: 18px;"  id="mibtnC">
                                 <h3>Registrar</h3> 
                         </button>
                     </div>
@@ -221,134 +194,13 @@
             </div>
 
         </div>
-
+        
+        <script src="{{url_for('static', filename='/scripts/autenticacion/crear_cuenta.js' )}}"></script>
+        <script>cambiarColor();</script>
 </body>
 
 </html>
 
-  <script>
-                            
-                            
-                            function cambiarColor(){
-
-                                //nombre
-                                
-                                    const colorOriginal = "rgb(118, 118, 118)";
-                                    const inputs = document.querySelector(".nombreC");
-                                    
-
-                                  inputs.addEventListener("input", function(event) {
-                                       inputs.style.borderBottomColor = "Black";
-                                    });
-
-//                                     Agrega un evento de blur al input
-                                    inputs.addEventListener("blur", function() {
-//                                       Cambia el color del input al original  
-                                        inputs.style.borderBottomColor = colorOriginal;  
-//                                                                         
-                                   });
-                                   
- 
-                                  //apellido
-//                                  
-                                    let inputApellido = document.querySelector(".apellidoC");
-                     
-                                  
-                                     inputApellido.addEventListener("input", function(event) {
-//                                     
-                                       inputApellido.style.borderBottomColor = "Black";
-
-                                    });
-                                    
-                                    
-                                    inputApellido.addEventListener("blur", function() {
-                                        inputApellido.style.borderBottomColor = colorOriginal;  
-                                  
-                                   });
-                                   
-                                  //identificacion
-                                  
-                                  let inputDocumento = document.querySelector(".documentoC");
-                             
-                                  inputDocumento.addEventListener("input", function(event) {
-                                       inputDocumento.style.borderBottomColor = "Black";
-
-                                    });
-
-//                                
-                                    inputDocumento.addEventListener("blur", function() { 
-                                        inputDocumento.style.borderBottomColor = colorOriginal;  
-                                   });
-                                   
-                                   
-                                   //correo
-                                   
-                                  let inputEmail = document.querySelector(".emailC");
-                             
-                                    inputEmail.addEventListener("input", function(event) {
-                                       inputEmail.style.borderBottomColor = "Black";
-
-                                    });
-
-                                    inputEmail.addEventListener("blur", function() { 
-                                        inputEmail.style.borderBottomColor = colorOriginal;  
-                                   });
-                                   
-                                   
-                                   //Telefono
-                                   
-                                  let inputTelefono = document.querySelector(".telefonoC");
-                             
-                                  
-                                  
-                                    inputTelefono.addEventListener("input", function(event) {
-                                       inputTelefono.style.borderBottomColor = "Black";
-
-                                    });
-
-                                    inputTelefono.addEventListener("blur", function() { 
-                                        inputTelefono.style.borderBottomColor = colorOriginal;  
-                                   });
-                                   
-                                   
-                                   //Contrasena
-                                   
-                                   
-                                  let inputContrasena = document.querySelector(".contraC");
-                             
-                                    inputContrasena.addEventListener("input", function(event) {
-                                       inputContrasena.style.borderBottomColor = "Black";
-
-                                    });
-
-                                    inputContrasena.addEventListener("blur", function() { 
-                                        inputContrasena.style.borderBottomColor = colorOriginal;  
-                                   });
-                                   
-                                   
-                                   //confirmar Contrasena
-                                   
-                                   
-                                  let inputConfirmarC = document.querySelector(".contraCC");
-                                  
-                                    inputConfirmarC.addEventListener("input", function(event) {
-                                       inputConfirmarC.style.borderBottomColor = "Black";
-
-                                    });
-
-                                    inputConfirmarC.addEventListener("blur", function() { 
-                                        inputConfirmarC.style.borderBottomColor = colorOriginal;  
-                                   });
-                                  
-                                  
-
-                                
-                            }
-          
-                            
-                      
-                               
-                       </script>
                                
 
 

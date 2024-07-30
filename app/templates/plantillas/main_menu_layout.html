@@ -306,21 +306,17 @@
             </span>
         </div>
     </footer>
+    
+    <script src="{{url_for('static', filename='/scripts/index.js' )}}"></script>
 
     {% with mensajes = get_flashed_messages(with_categories=true) %}
         {% for categoria, mensaje in mensajes %}
             {% if categoria == 'stockSuperado' or categoria == "sinConcidencias" %}
-                <script>
-                    window.onload = function() {
-                        window.setTimeout(function(){
-                            alert("{{mensaje}}");
-                        },10 ); 
-                    };
-                </script>
+                    <script>mostrarMensaje(mensaje="{{mensaje}}");</script>
             {% endif %}
         {% endfor %}
     {% endwith %}
 
-    <script src="{{url_for('static', filename='/scripts/index.js' )}}"></script>
+    <script>actualizarFecha();</script>
 </body>
 </html>

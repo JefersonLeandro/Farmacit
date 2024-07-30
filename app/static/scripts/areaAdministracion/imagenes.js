@@ -16,12 +16,3 @@ listaItems.forEach(function(li) {
     });
 });
 
-function mostrarMensaje(mensaje){
-
-    // Función para mostrar una alerta después de cargar completamente la página
-    window.onload = function() {
-        window.setTimeout(function(){
-            alert(mensaje);
-        }, 500); 
-    };//500mls
-}
