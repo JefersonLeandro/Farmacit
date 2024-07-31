@@ -24,7 +24,7 @@ def create_app():
     bcrypt = Bcrypt(app)
     
     #Configurar la URI de la base de datos para usar SQLite
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3306/DbFarmacit'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3306/farmacit_db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Instancias de SQLAlchemy y Flask-Migrate
