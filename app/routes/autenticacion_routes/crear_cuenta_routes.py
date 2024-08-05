@@ -22,37 +22,37 @@ def crearCuenta():
 class RegistrationForm(Form):
     
     fNombrePersona = StringField('fNombrePersona', [
-        validators.DataRequired(message="Nombre requerido"),
-        validators.Length(min=4, max=28, message="Ingrese un nombre valido")
+        validators.DataRequired(message="Nombre requerido."),
+        validators.Length(min=4, max=28, message="Ingrese un nombre valido.")
         ])
     
     fApellidoPersona = StringField('fApellidoPersona', [
-        validators.DataRequired(message="Apellido requerido"),
-        validators.Length(min=4, max=28, message="Ingrese un Apellido valido")
+        validators.DataRequired(message="Apellido requerido."),
+        validators.Length(min=4, max=28, message="Ingrese un Apellido valido.")
         ])
     
     fIdentificacionPersona = StringField('fIdentificacionPersona', [
-        validators.DataRequired(message="Identificacion requerida"),
-        validators.Length(min= 6, max=12, message="Ingrese una identificacion valida")
+        validators.DataRequired(message="Identificación requerida."),
+        validators.Length(min= 6, max=12, message="Ingrese una identificacion valida.")
         ])
     fTelefonoPersona = StringField('fTelefonoPersona', [
-        validators.DataRequired(message="Telefono requerido"),
-        validators.Length(min= 10, max=12, message="Ingrese un telefono valido")
+        validators.DataRequired(message="Telefono requerido."),
+        validators.Length(min= 10, max=12, message="Ingrese un telefono valido.")
         ])
     
     fCorreoPersona = StringField('fCorreoPersona', [
-        validators.DataRequired(message="Correo Electronico requerido"),
-        validators.Email(message="Ingrese una dirección de correo electrónico válida"),
-        validators.Length(max=255, message="El correo execede el numero maximo de caracteres")
+        validators.DataRequired(message="Correo Electronico requerido."),
+        validators.Email(message="Ingrese una dirección de correo electrónico válida."),
+        validators.Length(max=255, message="El correo execede el numero maximo de caracteres.")
         ])
     
     fContrasenaPersona = PasswordField('fContrasenaPersona', validators=[
-        validators.DataRequired(message="La contraseña es requerida"),
-        validators.Length(min=6, max=15, message="Ingrese una contraseña de 6 a 15 caracteres")
+        validators.DataRequired(message="La contraseña es requerida."),
+        validators.Length(min=6, max=15, message="Ingrese una contraseña de 6 a 15 caracteres.")
     ])
     
     fConfirmarContrasena = PasswordField('fConfirmarContrasena', validators=[
-        validators.EqualTo('fContrasenaPersona', message='Las contraseñas deben coincidir')
+        validators.EqualTo('fContrasenaPersona', message='Las contraseñas deben coincidir.')
     ])
     
 @bp.route('/login/crear_cuenta/Registrar', methods=['GET', 'POST'])

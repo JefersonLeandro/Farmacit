@@ -36,28 +36,28 @@
                                <div class="divInputsC">
 
                                 <div class="cajaInps">
-                                    <div>
+                                    <div class="font-size-18px">
                                         <label for="fNombrePersona" name="Nombre">Nombre</label>
                                     </div>
-                                     <input type="text" name="fNombrePersona" placeholder="Sus nombres" class="divAB nombreC" id="nombreP" value="{{ form.fNombrePersona.data if form and form.fNombrePersona }}">
+                                     <input type="text" name="fNombrePersona" placeholder="Sus nombres" class="divAB nombreC font-size-14px" id="nombreP" value="{{ form.fNombrePersona.data if form and form.fNombrePersona }}">
 
                                     {% if form  is defined and 'fNombrePersona' in form.errors %}
                                         {% for error in form.errors['fNombrePersona'] %}
-                                            <small style="color: red;">{{ error }}</small>
+                                            <small   class="font-size-14px" style="color: red;">{{ error }}</small>
                                         {% endfor %}
                                     {% endif %}
                                     </div>
 
                                 <div class="cajaInps">
-                                    <div>
+                                    <div class="font-size-18px">
                                         <label for="cajaInps">Apellido</label>
 
                                     </div>
-                                    <input type="text" name="fApellidoPersona" placeholder="Sus apellidos" class="divAB apellidoC" id="apellidoP" value="{{ form.fApellidoPersona.data if form and form.fApellidoPersona }}">
+                                    <input type="text" name="fApellidoPersona" placeholder="Sus apellidos" class="divAB apellidoC font-size-14px" id="apellidoP" value="{{ form.fApellidoPersona.data if form and form.fApellidoPersona }}">
                                    
                                     {% if form is defined and 'fApellidoPersona' in form.errors %}
                                         {% for error in form.errors['fApellidoPersona'] %}
-                                            <small style="color: red;">{{ error }}</small>
+                                            <small  class="font-size-14px" style="color: red;">{{ error }}</small>
                                         {% endfor %}
                                     {% endif %}
                                 </div>
@@ -67,12 +67,12 @@
                             <div class="divGid">
                                 <div class="divIdentificacion">
 
-                                    <div class="labelid">
+                                    <div class="labelid font-size-18px">
                                         <label for="labelid">Identificacion</label>
 
                                     </div>
                                     <div class="cajasId">
-                                        <input type="number" class="inputId documentoC" name="fIdentificacionPersona"
+                                        <input type="number" class="inputId documentoC font-size-14px" name="fIdentificacionPersona"
                                             placeholder="Su identificacion" id="documentoP" value="{{ form.fIdentificacionPersona.data if form and form.fIdentificacionPersona }}" >
                                             
                                            
@@ -80,7 +80,7 @@
                                     {% if form is defined and 'fIdentificacionPersona' in form.errors %}
                                         {% for error in form.errors['fIdentificacionPersona'] %}
                                         <div class="labelid">
-                                                <small  class="registro-small" style="color: red;">{{ error }}</small>
+                                                <small  class="registro-small font-size-14px" style="color: red;">{{ error }}</small>
                                         </div>
                                         {% endfor %}
                                     {% endif %}
@@ -90,19 +90,19 @@
                             <div class="divGid">
                                 <div class="divIdentificacion">
 
-                                    <div class="labelid">
+                                    <div class="labelid font-size-18px">
                                         <label for="labelid">Correo</label>
 
                                     </div>
                                     <div class="cajasId">
-                                        <input type="email" class="inputId emailC" name="fCorreoPersona"
+                                        <input type="email" class="inputId emailC font-size-14px" name="fCorreoPersona"
                                                placeholder="Su correo"  id="inputCorreo"  value="{{ form.fCorreoPersona.data if form and form.fCorreoPersona }}" >
                                     </div>
 
                                     {% if form is defined and 'fCorreoPersona' in form.errors %}
                                         {% for error in form.errors['fCorreoPersona'] %}
                                         <div class="labelid">
-                                                <small class="registro-small" style="color: red;">{{ error }}</small>
+                                                <small class="registro-small font-size-14px " style="color: red;">{{ error }}</small>
                                         </div>
                                         {% endfor %}
                                     {% endif %}
@@ -112,7 +112,7 @@
                                         {% if messages %}
                                             {% for message in messages %} 
                                             <div class="labelid">
-                                                <small  style="color: red;">{{ message }}</small>
+                                                <small  class="font-size-14px"  style="color: red;">{{ message }}</small>
                                             </div>
                                             {% endfor %}
                                         {% endif %}
@@ -123,19 +123,19 @@
                             <div class="divGid">
                                 <div class="divIdentificacion">
 
-                                    <div class="labelid">
+                                    <div class="labelid font-size-18px">
                                         <label for="labelid">Telefono</label>
 
                                     </div>
                                     <div class="cajasId">
-                                        <input type="number" class="inputId telefonoC" name="fTelefonoPersona"
+                                        <input type="number" class="inputId telefonoC font-size-14px" name="fTelefonoPersona"
                                             placeholder="Su Telefono" id="telefonoP"  value="{{ form.fTelefonoPersona.data if form and form.fTelefonoPersona }}">
 
                                     </div>
                                     {% if form is defined and 'fTelefonoPersona' in form.errors %}
                                         {% for error in form.errors['fTelefonoPersona'] %}
                                         <div class="labelid">
-                                                <small  class="registro-small" style="color: red;">{{ error }}</small>
+                                                <small  class="registro-small font-size-14px" style="color: red;">{{ error }}</small>
                                         </div>
                                         {% endfor %}
                                     {% endif %}
@@ -147,37 +147,41 @@
                         </div>
                         <div class="divInputsC2">
 
-                            <div class="cajaInps">
-                                <div>
-                                    <label for="cajaInps" >Contraseña</label>
+                            <div class="cajaContrasenas">
+                                <div class="font-size-18px">
+                                    <label for="cajaContrasenas" >Contraseña</label>
                                 </div>
 
-                                <input type="password" placeholder="Su Contraseña" name="fContrasenaPersona" class="divAB contraC" id="inputContrasena"   autocomplete="new-password" >
-                                {% if form is defined and 'fContrasenaPersona' in form.errors %}
-                                    {% for error in form.errors['fContrasenaPersona'] %}
-                                    <small style="color: red;">{{ error }}</small>
-                                    {% endfor %}
-                                {% endif %}
+                                <input type="password" placeholder="Su Contraseña" name="fContrasenaPersona" class="divAB contraC font-size-14px" id="inputContrasena"   autocomplete="new-password" >
+                               
                                
                             </div>
 
-                            <div class="cajaInps">
-                                <div>
-                                    <label for="cajaInps">Confirmar contraseña</label>
+                            <div class="cajaContrasenas">
+                                <div class="font-size-18px">
+                                    <label for="cajaContrasenas">Confirmar contraseña</label>
 
                                 </div>
-                                <input type="password" placeholder="Confirmar" name="fConfirmarContrasena" class="divAB contraCC" id="inputConfirmarContrasena"  >
-                                {% if form is defined and 'fConfirmarContrasena' in form.errors %}
-                                    {% for error in form.errors['fConfirmarContrasena'] %}
-                                        <small style="color: red;">{{ error }}</small>
-                                    {% endfor %}
-                                {% endif %}
-                            
+                                <input type="password" placeholder="Confirmar" name="fConfirmarContrasena" class="divAB contraCC font-size-14px" id="inputConfirmarContrasena"  >
+                       
                             </div>
 
                         </div>
+                        <div class="mensajesValidacion">
+                            {% if form is defined and 'fContrasenaPersona' in form.errors %}
+                                {% for error in form.errors['fContrasenaPersona'] %}
+                                <small  class="font-size-14px" style="color: red;">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                            {% if form is defined and 'fConfirmarContrasena' in form.errors %}
+                                {% for error in form.errors['fConfirmarContrasena'] %}
+                                    <small  class="font-size-14px" style="color: red;">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                            
                         
-                        <div id="divTerminos">                                                                                                                                                      
+                        <div id="divTerminos" class="font-size-18px">                                                                                                                                                      
                             <input type="checkbox" id="aceptarTerminos" onchange="" required >   
                           
                             <a href="#"  id="aTerminos" > Aceptar los términos y condiciones </a>
