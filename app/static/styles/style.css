@@ -1651,9 +1651,6 @@ a:visited{
     align-items: end;
     justify-content: end;
     gap: 10px;
-
-
-
 }
 .divMv{
 
@@ -1691,43 +1688,118 @@ a:visited{
 
 /*                                                          STYLES DE TABLA ROLES                       */
 
+
+#main-roles{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* background-color: red; */
+    width: 100%;
+}
+
+#subContedor-roles{
+    width: 98%;
+    /* background-color: purple; */
+    height: 590px;
+    border-radius: 3px; 
+}
+
+#encabezado-roles{
+    width:100%;
+    height:60px;
+    display: flex; 
+}
+
+.iconos-roles{
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 36px;
+    width: 40px;
+    background: rgb(1, 170, 208);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+#titulo-roles{
+    box-sizing: border-box;
+    display: flex;
+    align-items: end;
+    height: 60px;
+    font-size: 22px;
+}
+
+#iconoPrincipal-roles{
+    height: 60px;
+    padding-bottom: 14px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    display: flex;
+    align-items: end; 
+}
 #width6{
     width: 6%;
-
 }
 .seccionGeneral{
     /* arreglar */
-    height: 71vh!important;
+    height: 475px!important;
 }
 
 .subSeccion{
-
     width: 80%;
-    height: 65vh;
+    height: 430px;
+}
 
+#seccionCentral-roles{
+    display: flex;
+    padding-top: 20px;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
 }
 
 .subMain{
-    /* arreglar */
     width: 45%!important;
 
 }
 #iconsH{
-
-    height: 10vh;
+    height: 60px;
     box-sizing: border-box;
     display: flex;
     align-items: end;
     justify-content: end;
     width: 79%;
-    gap: 10px ;
+    gap: 10px;
+}
 
+.btn-roles{
+    border: 0;
+    background: #0077ff;
+    border-radius: 10px;
+    width: 48.55%;
+    height: 38px;
+    color: white;
+
+}
+.bgOscuro-roles{
+    background: #343e48!important;
+}
+
+#tituloFooter-roles h2{
+    height: 43.5px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    font-size: 40px;
+    padding-left: 3px;
+    box-sizing: border-box;
+    margin-bottom: 0;
 }
                                                         /*  END STYLES TABLA ROLES*/
 
                                 /* STYLES AREA DE VISTA DE LAS FACTURAS*/
 .facturas-subContenedor{
-
     width: 50%;
     margin-left: 14px;
 }
@@ -2323,6 +2395,10 @@ a:visited{
 }
 
 /*           widths         */
+
+.widthFull{
+    width: 100%;
+}
 .width86{
     width: 86%;
 }
@@ -2356,8 +2432,14 @@ a:visited{
 .width5{
     width: 5%;
 }
-
+.width7{
+    width: 7%;
+}
                     /* heights */
+
+.heightFull{
+    height: 100%;
+}
 
 .height65px{
 
