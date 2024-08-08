@@ -1,185 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'plantillas/tabla_layout.html'%}
+{% block title %}Productos{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
-</head>
+{% block nameTitle %}Productos{% endblock %}
 
-<body >
-    <main id="mainVDF">
-        <div id="divVG">
-            <div id="tituloF">
-                <div id="cotenedorVDF">
-                    <div class="SvgA">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                            class="bi bi-boxes" viewBox="0 0 16 16">
-                            <path
-                                d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z" />
-                        </svg>
-                    </div>
-                </div>
-                <div id="contenedorH1" class="Separar">
-                    <h1>Productos</h1>
-                </div>
-                <div class="subTituloT" style="display: flex; align-items: end; padding-bottom: 4px; margin-left: 20px; width: auto;">
-                    <a href="{{url_for('bp_marcas_productos.index')}}">
-                    <h4>-Marcas</h4>
-                    </a>
-                </div>
-                <div class="subTituloT" style="display: flex; align-items: end; padding-bottom: 4px; margin-left: 20px; width: auto;">
-                    <a href="{{url_for('bp_imagenes.index')}}">
-                    <h4>-Imagenes</h4>
-                    </a>
-                </div>
-                <div id="iconsAV" class="width72">
+{% block liContent %}
+    <li>
+        <a href="{{url_for('bp_marcas_productos.index')}}">
+        <h4>-Marcas</h4>
+        </a>
+    </li>
+    <li>
+        <a href="{{url_for('bp_imagenes.index')}}">
+            <h4>-Imagenes</h4>
+        </a>
+    </li>
+{% endblock %}
 
-                    <div class="divMv">
-                        <a href="{{url_for('bp_administracion.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-                            </svg>
-                        </a>
-                    </div>
+{% block iconsContent %}
+    <div class="cajaIconos-p-tabla">
+        <a href="{{url_for('bp_administracion.index')}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+        </a>
+    </div>
+{% endblock %}
 
-                    <div class="divMv">
-                        <a href="{{url_for('bp_inicio.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                                class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
-                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+{% block content %}
+<div id="seccionGV">
+    <div class="seccionCV"  >
+        <table border="1" id="0" class="table  table-striped">
+            <thead>    
+                <tr>
+                    <th scope="col">nombreProducto</th>
+                    <th scope="col">descripcionUnidad</th>
+                    <th scope="col">descripcionProductoGeneral</th>
+                    <th scope="col">stockProducto</th>
+                    <th scope="col">precioProducto</th>
+                    <th scope="col">MarcaProducto</th>
+                    <th scope="col" ></th>
+                </tr>
+            </thead>
+                <tBody>
+                {%for producto in productos : %}
+                <tr>
+                    <form id="fModificarDatosProducto" action="{{ url_for('bp_productos.acciones')}}" method="post">
+                        <td><input type="hidden" name="fIdProducto" value="{{producto.idProducto}}">
+                            <input type="text" name="fNombreProducto" required value="{{producto.nombreProducto}}"></td>
+                        <td><input type="text" name="fDescripcionUnidad" required value="{{producto.descripcionUnidad}}"></td>
+                        <td><input type="text" name="fDescripcionProductoGeneral" value="{{producto.descripcionProductoGeneral}}"></td>
+                        <td><input type="number" name="fStockProducto" value="{{producto.stockProducto}}"></td>
+                        <td><input type="number"  name="fPrecioProducto" value="{{producto.precioProducto}}" ></td>
+                        <td>
+                                <select name="fIdMarcaProducto" required>
+                                {%for marcaProducto in marcasProductos%}
+                                    {%if marcaProducto.idMarcaProducto == producto.idMarcaProducto %}
+                                        <option value="{{producto.idMarcaProducto}}" selected>
+                                            {{marcaProducto.nombreMarca}}
+                                        </option>
 
-            </div>
-            <div class="lineaA"></div>
-            <div id="seccionGV"  >
-               
-                <div class="seccionCV"  >
-                    <table border="1" id="0" class="table  table-striped">
-                        <thead>    
-                            <tr>
-                                <th scope="col">nombreProducto</th>
-                                <th scope="col">descripcionUnidad</th>
-                                <th scope="col">descripcionProductoGeneral</th>
-                                <th scope="col">stockProducto</th>
-                                <th scope="col">precioProducto</th>
-                                <th scope="col">MarcaProducto</th>
-                                <th scope="col" ></th>
-                            </tr>
-                        </thead>
-                         <tBody>
-                            {%for producto in productos : %}
-                            <tr>
-                                <form id="fModificarDatosProducto" action="{{ url_for('bp_productos.acciones')}}" method="post">
-                                    <td><input type="hidden" name="fIdProducto" value="{{producto.idProducto}}">
-                                        <input type="text" name="fNombreProducto" required value="{{producto.nombreProducto}}"></td>
-                                    <td><input type="text" name="fDescripcionUnidad" required value="{{producto.descripcionUnidad}}"></td>
-                                    <td><input type="text" name="fDescripcionProductoGeneral" value="{{producto.descripcionProductoGeneral}}"></td>
-                                    <td><input type="number" name="fStockProducto" value="{{producto.stockProducto}}"></td>
-                                    <td><input type="number"  name="fPrecioProducto" value="{{producto.precioProducto}}" ></td>
-                                    <td>
-                                         <select name="fIdMarcaProducto" required>
-                                            {%for marcaProducto in marcasProductos%}
-                                                {%if marcaProducto.idMarcaProducto == producto.idMarcaProducto %}
-                                                    <option value="{{producto.idMarcaProducto}}" selected>
-                                                        {{marcaProducto.nombreMarca}}
-                                                    </option>
+                                    {%else:%}
+                                        <option value="{{marcaProducto.idMarcaProducto}}">
+                                            {{marcaProducto.nombreMarca}}
+                                        </option>
+                                    {%endif%}
+                                {%endfor%}
+                                </select>
+                            </td>
+                        
+                        <td><button type="submit" name="fAccion" value="Modificar" class="btn-roles">Modificar</button>
+                            <button type="submit" name="fAccion" value="Eliminar" class="btn-roles">Eliminar</button></td>
+                    </form>
+                </tr>
+                {%endfor%}
 
-                                                {%else:%}
-                                                    <option value="{{marcaProducto.idMarcaProducto}}">
-                                                        {{marcaProducto.nombreMarca}}
-                                                    </option>
-                                                {%endif%}
-                                            {%endfor%}
-                                         </select>
-                                     </td>
-                                    
-                                    <td><button type="submit" name="fAccion" value="Modificar" class="buttonEnviar2">Modificar</button>
-                                        <button type="submit" name="fAccion" value="Eliminar" class="buttonEnviar2">Eliminar</button></td>
-                                </form>
-                            </tr>
-                            {%endfor%}
+                <tr>
+                    <form id="fIngresarProducto" action="{{ url_for('bp_productos.acciones')}}" method="post" >
+                        <input type="hidden" name="fIdProducto" value="0">
+                        <td><input type="text" name="fNombreProducto" required></td>
+                        <td><input type="text" name="fDescripcionUnidad" required></td>
+                        <td><input type="text" name="fDescripcionProductoGeneral" required></td>
+                        <td><input type="number" name="fStockProducto" required></td>
+                        <td><input type="text" name="fPrecioProducto" required ></td>
 
-                            <tr>
-                                <form id="fIngresarProducto" action="{{ url_for('bp_productos.acciones')}}" method="post" >
-                                    <input type="hidden" name="fIdProducto" value="0">
-                                    <td><input type="text" name="fNombreProducto" required></td>
-                                    <td><input type="text" name="fDescripcionUnidad" required></td>
-                                    <td><input type="text" name="fDescripcionProductoGeneral" required></td>
-                                    <td><input type="number" name="fStockProducto" required></td>
-                                    <td><input type="text" name="fPrecioProducto" required ></td>
+                        <td>
+                            <select name='fIdMarcaProducto' required>
+                                <option disabled selected>
+                                        Selecciona
+                                </option>
+                                {% for marcaProducto in marcasProductos %}
+                                    <option value="{{marcaProducto.idMarcaProducto}}" >
+                                        {{marcaProducto.nombreMarca}}
+                                    </option>
+                                {%endfor%}
+                                
+                            </select> 
+                        </td>
 
-                                    <td>
-                                        <select name='fIdMarcaProducto' required>
-                                           <option disabled selected>
-                                                 Selecciona
-                                           </option>
-                                           {% for marcaProducto in marcasProductos %}
-                                                <option value="{{marcaProducto.idMarcaProducto}}" >
-                                                    {{marcaProducto.nombreMarca}}
-                                                </option>
-                                            {%endfor%}
-                                            
-                                        </select> 
-                                    </td>
-
-                                    <td id="1"><button type="submit" name="fAccion" value="Ingresar"
-                                            class="buttonEnviar">Ingresar</button>
-                                        <button type="reset" value="Limpiar"
-                                            class="buttonEnviar">Limpiar</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </tBody>
-                    </table>
-                </div>
-                <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
-                <div class="contenedorFlechas">
-                    <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
-                        </svg>
-                    </a>
-                    <a href="#1" class="flechasProductos">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="lineaAF"></div>
-            <div id="tituloAbajo">
-                <div id="iconoAbajo">
-                    <img  src="/static/imagenes/logoQ1.png" alt="logo"  width="41px" height="41px">
-
-                </div>
-                <div id="tituloH">
-                    <h2>Farmacit</h2>
-                </div>
-
-            </div>
-
-        </div>
-        <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
-        {% with mensajes = get_flashed_messages(with_categories=true) %}
-            {% for categoria, mensaje in mensajes %}
-                {% if categoria == 'errorIntegridad' %}
-                    <script>mostrarAlerta(mensaje="{{mensaje}}");</script>
-                {% endif %}
-            {% endfor %}
-        {% endwith %}
-        <script>activar("seccionCV");</script>
-
-    </main>
-
-</body>
-
-</html>
+                        <td id="1"><button type="submit" name="fAccion" value="Ingresar"
+                                class="btn-roles bgOscuro-roles">Ingresar</button>
+                            <button type="reset" value="Limpiar"
+                                class="btn-roles bgOscuro-roles">Limpiar</button>
+                        </td>
+                    </form>
+                </tr>
+            </tBody>
+        </table>
+    </div>
+    <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
+    <div class="contenedorFlechas">
+        <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+            </svg>
+        </a>
+        <a href="#1" class="flechasProductos">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
+            </svg>
+        </a>
+    </div>
+</div>
+{% endblock %}
