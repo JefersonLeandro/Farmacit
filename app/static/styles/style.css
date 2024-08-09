@@ -2532,6 +2532,9 @@ a:visited{
 .height30px{
     height: 30px;
 }
+.height35px{
+    height: 35px;
+}
 
 
 
@@ -2660,6 +2663,8 @@ a:visited{
         padding-left: 53px;
     }   
 }
+
+
 
 @media screen and (max-width: 768px) {
 
