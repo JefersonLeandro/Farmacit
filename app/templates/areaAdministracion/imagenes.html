@@ -1,63 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imagenes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
+{% extends 'plantillas/tabla_layout.html'%}
+{% block title %}Imagenes{% endblock %}
 
-</head>
+{% block svg %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="35" fill="currentColor"
+        class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+        <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+        <path
+            d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z" />
+    </svg>
+{% endblock %}
 
-<body>
-    <main id="mainVDF">
-        <div id="divVG">
+{% block nameTitle %}Imagenes{% endblock%}
 
-            <div id="tituloF">
-                <div id="iconoImagen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="35" fill="currentColor"
-                        class="bi bi-file-earmark-image" viewBox="0 0 16 16">
-                        <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                        <path
-                            d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z" />
-                    </svg>
-                </div>
-                <div id="contenedorH1" class="Separar">
+{% block iconsContent %}
+    <div class="cajaIconos-p-tabla" >
+        <a href="{{url_for('bp_productos.index')}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+        </a>
+    </div>    
 
-                    <h1>Imagenes</h1>
+{% endblock %}
 
-                </div>
-               
-                <div id="iconsAV" class="width86">
+{% block content %}
+    <div id="seccionGV">
+        <div class="miCaja1 ">
+            <div class="miSubC seccionCVP">
+                <div class="cajaIntermedia">
+                    <table border="1" class="table table-striped" id="0">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="miThs">nombreImagen</th>
+                                <th scope="col" style="padding-left:10px;">TipoImagen</th>
+                                <th scope="col" class="pdg-l-20px">idProducto</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        </tBody>
+                
+                        {% for imagen in imagenes: %}
+                            <tr>
+                            <form id="fModificarDatosFarmacia" action="{{url_for('bp_imagenes.acciones')}}" method="post">
+                                <td class="miTds">
+                                    <input type="hidden" name="fIdImagen" value="{{imagen.idImagen}}">
+                                    <input type="text" readonly value="{{imagen.nombreImagen}}" class="colorDisabled width90">
+                                </td>
 
-                    <div class="divMv">
-                        <a href="{{url_for('bp_productos.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-                            </svg>
-                        </a>
-                    </div>
+                                <td style="padding-left: 0!important;">
+                                    
+                                    <select name="fTipoImagen"  select>
+                                        {% set selectTp0 ="" %}
+                                        {% set selectTp1 ="" %}
 
-                    <div class="divMv">
-                        <a href="{{url_for('bp_inicio.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                                class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
-                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
-                            </svg>
-                        </a>
-                    </div>
+                                        {%if imagen.tipoImagen == 1:  %}
+                                            {% set selectTp1 = "selected" %}
+                                        {%else : %}    
+                                            {% set selectTp0 = "selected" %}
+                                        {%endif%}
+
+                                        <!-- 0 - primeria--> 
+                                        <!--1 - segundarias-->
+                                        <option value="0"  {{selectTp0}} >Primaria</option>
+                                        <option value="1" {{selectTp1}} >Secundaria</option>
+                                            
+                                    </select>
+                                </td>
+                                <td style="width: 18%;">
+                                    <input type="number" readonly style="width: 90%;" value="{{imagen.idProducto}}" class="disabled" >
+                                </td>
+                                <td>
+                                    <button type="submit" name="fAccion" value="Modificar"
+                                        class="btn-roles">Modificar</button>
+                                    <button type="submit" name="fAccion" value="Eliminar"
+                                        class="btn-roles">Eliminar</button>
+                                </td>
+                            </form>
+                            </tr>
+                    
+                        {%endfor%}
+                        <tr id="1"></tr>
+
+                        </tBody>
+                    </table >
                 </div>
             </div>
-            <div class="lineaA"></div>
-            <div id="seccionGV">
-                <div class="miCaja1 ">
-                    <div class="miSubC seccionCVP">
-                        <div class="cajaIntermedia">
-                            <table border="1" class="table table-striped" id="0">
+        </div>
+        
+        
+        <div class="contenedorFlechas posicionamientoFlechas" id="width0" >
+            <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
+                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+                </svg>
+            </a>
+            <a href="#1" class="flechasProductos cursorPointer" onclick="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
+                </svg>
+            </a>
+        </div>
+        <div class="miCaja2">
+            <div class="cajaDerechaG">
+                <div class="buscarP">
+                    <h5>Buscar un producto</h5>
+                    <form action="{{url_for('bp_imagenes.buscar')}}" method="post">
+                        <div class="areaBuscar">
+                            <input type="search" placeholder="Nombre o descripcion" class="inputBusquedaP"  value="{{ cadena if cadena else '' }}" name="fValorBusqueda" required >
+                            <button type="submit" name="fEnviar" value="Buscar" class="buttonEnviar height30px" style="width: 80px;">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="miListaP">
+
+                    <form class="areaListaP" action="#" method="post">
+                        <div class="miListaS">
+                            
+                            {% with mensajes = get_flashed_messages(with_categories=true) %}
+                            {% for categoria, mensaje in mensajes %}
+                                {% if categoria == 'busquedaVacia' %}
+                                    <li class="list-group-item">{{mensaje}}</li>
+                                {% endif %}
+                            {% endfor %}
+                            {% endwith %}
+                                
+                            {% if productosEncontrados: %}
+                                <ol class="list-group list-group-numbered listaFavoritos scrollable" id="listaProductos">
+                                    {% for productoEncontrado in productosEncontrados : %} 
+                                        <li class="list-group-item d-flex justify-content-between align-items-start" id="listaBuscar" >
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">
+                                                    {{productoEncontrado.nombreProducto}}
+                                                </div>
+                                            
+                                                {{productoEncontrado.descripcionUnidad}} 
+                                            </div>
+                                            <span class="badge bg-primary rounded-pill" id="unSpan">{{productoEncontrado.idProducto}}</span>
+                                        </li>
+                                    {%endfor%}
+                                </ol>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+
+                <form id="formularioPrincipal" action="{{url_for('bp_imagenes.acciones')}}" method="post"  enctype="multipart/form-data">
+                    <div class="areaInsertar">
+                        <div class="subArea1P " >
+                            <table border="1" class="table table-striped" >
                                 <thead>
                                     <tr>
                                         <th scope="col" class="miThs">nombreImagen</th>
@@ -66,350 +157,40 @@
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                </tBody>
-                          
-                                {% for imagen in imagenes: %}
+                                <tbody>
                                     <tr>
-                                    <form id="fModificarDatosFarmacia" action="{{url_for('bp_imagenes.acciones')}}" method="post">
-                                        <td class="miTds">
-                                            <input type="hidden" name="fIdImagen" value="{{imagen.idImagen}}">
-                                            <input type="text" readonly value="{{imagen.nombreImagen}}" class="colorDisabled">
-                                        </td>
-
-                                        <td style="padding-left: 0!important;">
-                                            
-                                            <select name="fTipoImagen"  select>
-                                                {% set selectTp0 ="" %}
-                                                {% set selectTp1 ="" %}
-
-                                                {%if imagen.tipoImagen == 1:  %}
-                                                    {% set selectTp1 = "selected" %}
-                                                {%else : %}    
-                                                    {% set selectTp0 = "selected" %}
-                                                {%endif%}
-
-                                                <!--0 - primeria-->
-                                                <!--1 - segundarias-->
-                                                <option value="0"  {{selectTp0}} >Primaria</option>
-                                                <option value="1" {{selectTp1}} >Secundaria</option>
-                                                    
-                                            </select>
-                                        </td>
-                                        <td style="width: 18%;">
-                                            <input type="number" readonly style="width: 90%;" value="{{imagen.idProducto}}" class="disabled" >
+                                        <td>
+                                            <input type="hidden" name="fIdImagen" value="0">
+                                            <input type="file" name="fArchivoImagen" class="custom-file-upload" required>
                                         </td>
                                         <td>
-                                            <button type="submit" name="fAccion" value="Modificar"
-                                                class="buttonEnviar2">Modificar</button>
-                                            <button type="submit" name="fAccion" value="Eliminar"
-                                                class="buttonEnviar2">Eliminar</button>
+                                            <select name="fTipoImagen"  required>
+                                                <option value="" disabled selected>-Selecciona-</option>
+                                                <option value="0">Primaria</option>
+                                                <option value="1">Secundaria</option>
+                                            </select>
                                         </td>
-                                    </form>
+                                        <td>
+                                            <input type="number"  name="fIdProducto" class="inputDisabled" id="inputD" required>
+                                        </td>
                                     </tr>
-                             
-                                {%endfor%}
-                                <tr id="1"></tr>
-
-                                </tBody>
-                            </table >
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div class="subArea2P" id="formEnviar" >
+                            <button type="submit" name="fAccion" value="Ingresar" class="btn-ingreso-imagenes">Ingresar</button>
+                            <button type="reset" name="fAccion" value="Limpiar" class="btn-ingreso-imagenes">Limpiar</button>
                         </div>
                     </div>
-                </div>
-                
-                
-                <div class="contenedorFlechas posicionamientoFlechas" id="width0" >
-                    <a href="#0" class="flechasProductos mb-2" onclick="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
-                        </svg>
-                    </a>
-                    <a href="#1" class="flechasProductos cursorPointer" onclick="scrollAbajo();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="miCaja2">
-                    <div class="cajaDerechaG">
-                        <div class="buscarP">
-                            <h5>Buscar un producto</h5>
-                            <form action="{{url_for('bp_imagenes.buscar')}}" method="post">
-                                <div class="areaBuscar">
-                                    <input type="search" placeholder="Nombre o descripcion" class="inputBusquedaP"  value="{{ cadena if cadena else '' }}" name="fValorBusqueda" required >
-                                    <button type="submit" name="fEnviar" value="Buscar" class="buttonEnviar" style="width: 20%;">Buscar</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="miListaP">
-
-                            <form class="areaListaP" action="#" method="post">
-                                <div class="miListaS">
-                                      
-                                    {% with mensajes = get_flashed_messages(with_categories=true) %}
-                                    {% for categoria, mensaje in mensajes %}
-                                        {% if categoria == 'busquedaVacia' %}
-                                             <li class="list-group-item">{{mensaje}}</li>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% endwith %}
-                                        
-                                    {% if productosEncontrados: %}
-                                        <ol class="list-group list-group-numbered listaFavoritos scrollable" id="listaProductos">
-                                            {% for productoEncontrado in productosEncontrados : %} 
-                                                <li class="list-group-item d-flex justify-content-between align-items-start" id="listaBuscar" >
-                                                    <div class="ms-2 me-auto">
-                                                        <div class="fw-bold">
-                                                            {{productoEncontrado.nombreProducto}}
-                                                        </div>
-                                                    
-                                                        {{productoEncontrado.descripcionUnidad}} 
-                                                    </div>
-                                                    <span class="badge bg-primary rounded-pill" id="unSpan">{{productoEncontrado.idProducto}}</span>
-                                                </li>
-                                            {%endfor%}
-                                        </ol>
-                                    {% endif %}
-                                </div>
-                            </form>
-                        </div>
-
-                        <form id="formularioPrincipal" action="{{url_for('bp_imagenes.acciones')}}" method="post"  enctype="multipart/form-data">
-                            <div class="areaInsertar">
-                                <div class="subArea1P " >
-                                    <table border="1" class="table table-striped" >
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="miThs">nombreImagen</th>
-                                                <th scope="col" style="padding-left:10px;">TipoImagen</th>
-                                                <th scope="col" style="padding-left: 35px;">idProducto</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <input type="hidden" name="fIdImagen" value="0">
-                                                    <input type="file" name="fArchivoImagen" class="custom-file-upload" required>
-                                                </td>
-                                                <td>
-                                                    <select name="fTipoImagen"  required>
-                                                        <option value="" disabled selected>-Selecciona-</option>
-                                                        <option value="0">Primaria</option>
-                                                        <option value="1">Secundaria</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="number"  name="fIdProducto" class="inputDisabled" id="inputD" required>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                        
-                                <div class="subArea2P" id="formEnviar" >
-                                    <button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar miBtnW">Ingresar</button>
-                                    <button type="reset" name="fAccion" value="Limpiar" class="buttonEnviar miBtnW">Limpiar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="lineaAF"></div>
-            <div id="tituloAbajo">
-                <div id="iconoAbajo">
-                    <img src="/static/imagenes/logoQ1.png" alt="logo" width="41px" height="41px">
-                </div>
-                <div id="tituloH">
-                    <h2>Farmacit</h2>
-                </div>
+                </form>
             </div>
         </div>
-    </main>
+    </div>
+{% endblock%}
 
-<style>
-        .miCaja1 {
-            width: 60%;
-            height: 83vh;
-            /* background: palegoldenrod;s */
-            padding: 15px;
-        }
-        
-        .miCaja2 {
-            width: 40%;
-            height: 83vh;
-            /* background: rgb(137, 131, 144); */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
-        .miSubC {
-            height: 100%;
-            /* border: 3px solid black; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-        }
-        
-        .cajaIntermedia {
-            width: 95%;
-            height: 71vh;
-            /* border: 3px solid black; */
-            /* background: white; */
-        }
-        #iconoImagen {
-            height: 10vh;
-            padding-bottom: 15px;
-            box-sizing: border-box;
-            padding-left: 10px;
-            display: flex;
-            align-items: end;
-        }
-        
-        .miThs {
-            padding-left: 45px !important;
-            box-sizing: border-box;
-            
-        }
-        
-        .miTds {
-            padding-left: 23px !important;
-            padding-right: 1px !important;
-            box-sizing: border-box;
-            
-
-        }
-        
-        .cajaDerechaG {
-            
-            /* border: 3px solid black; */
-            width: 90%;
-            height: 90%;
-
-        }
-
-        .buscarP {
-            height: 24%;
-            padding-left: 26px;
-            padding-top: 35px;
-            padding-right: 35px;
-        }
-
-        .inputBusquedaP {
-
-            height: 4.5vh;
-            width: 68%;
-            border-radius: 10px;
-            border: 3px solid black;
-            outline: none;
-            padding-left: 6px;
-            padding-right: 6px;
-        }
-        
-        .areaBuscar {
-            display: flex;
-            gap: 10px;
-        }
-        
-        
-        .miListaP {
-
-            height: 50%;
-            /* border: 3px solid black; */
-            border-top: none;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .areaListaP {
-            
-            height: 33vh;
-            width: 90%;
-            /* border: 1px solid black; */
-
-        }
-        
-        .areaInsertar {
-
-            height: 25%;
-            /* border: 3px solid black; */
-        }
-
-        .subArea1P {
-
-            height: 70%;
-        }
-        
-        .subArea2P {
-            
-            height: 30%;
-        }
-
-        #formEnviar{
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .miBtnW {
-            width: 20% !important;
-        }
-
-        .miListaS {
-            
-            width: 85%;
-            height: 33vh;
-            padding-left: 10px;
-            padding-top: 10px;
-            border: 3px solid;
-            border-radius: 10px;
-        }
-
-        .inputDisabled {
-            
-            width: 90%;
-            height: 27px;
-            font-size: 18px;
-            background-color: #ffffff; /* Cambia el color de fondo */ 
-            border: 1px solid #ccc; /* Cambia el borde */
-            /* cursor: not-allowed;  Cambia el cursor */ 
-        }
-        .disabled{
-            width: 90%;
-            height: 27px;
-            font-size: 18px;
-            background-color: #f0f0f0;
-            cursor: not-allowed;
-            border: 1px solid #ccc;
-        }
-        #listaProductos.scrollable{
-
-            overflow-y: scroll;
-            max-height: 31vh;
-            
-        }
-
-        #listaProductos::-webkit-scrollbar {
-            width: 8px; /* Ancho de la barra de desplazamiento */
-        }
-        #listaProductos::-webkit-scrollbar-track {
-            background-color: #f3f3f3; /* Color del fondo de la barra de desplazamiento */
-        }
-        #listaProductos::-webkit-scrollbar-thumb {
-            background-color: #e1e0e0; /* Color de la barra de desplazamiento */
-            border-radius: 10px;
-        }
-        .posicionamientoFlechas{
-            position: relative;
-            left: -20px;
-        }
-    </style>
+{% block finalContent %}
     <script src="{{url_for('static', filename='/scripts/areaAdministracion/imagenes.js' )}}"></script>
     <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
 
@@ -422,5 +203,5 @@
     {% endwith %}
 
     <script>activar("seccionCVP");</script>
-</body>
-</html>
+{% endblock%}
+

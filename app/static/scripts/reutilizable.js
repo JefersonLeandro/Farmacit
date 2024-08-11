@@ -7,6 +7,14 @@ function mostrarAlerta(mensaje){
     };
 }
 
+
+function scrollArriba(){
+    if (window.scrollY !== 0){
+        window.scrollTo(0, 0);
+    }
+}
+
+
 function activar(classContenedor, classAtributos){
     const contenedor = document.querySelector(`.${classContenedor}`);
     contenedor.addEventListener('scroll', function() {

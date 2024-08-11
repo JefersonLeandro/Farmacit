@@ -72,7 +72,7 @@
                     </tbody>
             </table>
         </div>
-        <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
+       
         <div class="display-flex align-items-center heightFull width7">
             <div class="contenedorFlechas widthFull" >
                 <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
@@ -92,7 +92,7 @@
 {% endblock %}
 
 {% block finalContent %}
-    <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
+<script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
     <script>activar("seccionCV");</script>
     {% with mensajes = get_flashed_messages(with_categories=true) %}
         {% for categoria, mensaje in mensajes %}
