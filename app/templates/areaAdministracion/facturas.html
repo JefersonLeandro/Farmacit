@@ -1,125 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'plantillas/tabla_mediana_layout.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facturas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
-</head>
+{% block title %}Facturas{% endblock %}
 
-<body>
-    <main id="mainVDF">
-        <div class="facturas-subMain">
-            <div id="tituloF"> 
-                <div id="cotenedorVDF">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
-                        <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
-                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
-                    </svg>
-                </div>
-                <div id="contenedorH1" class="width15">
-                    <h1>Facturas</h1>
-                </div>
-                <a href="{{url_for('bp_detallesFacturas.index')}}" class="display-online-block" id="contenedorH1" class="facturas-subContenedor">
-                        <h2> -Detalles</h2>
-                </a>
-                <form action="{{url_for('bp_administracion_facturas.busqueda')}}" class="facturas-input-busqueda gap-10px" method="post">
-                    <input type="search" placeholder="Documento o nombre.." name="fCadena" class="width60 height30px">
-                    <button class="boton-gris" >Buscar</button>
-                </form>
+{% block svg %} 
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
+        <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+    </svg>
+{% endblock %}
 
-                <div class="facturas-iconos"   >
-                    <div class="divMv">
-                        <a href="{{url_for('bp_administracion.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="divMv">
-                        <a href="{{url_for('bp_inicio.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                                class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
-                                <path
-                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="lineaA"></div>
-            <div class="facturas-centro">
-                <div class="facturas-scroll subSeccion">
-                    <table border="1"  class="table table-striped" id="0">
-                        <thead  class="text-center">
-                            
-                            <tr class="fondon-gris-oscuro">
-                                <th scope="col">nombrePersona</th>
-                                <th scope="col">totalCompra</th>
-                                <th scope="col">fechaCompra</th>
-                                <th></th>
-                            </tr>
-                            
-                        </thead>
-                        
-                        <tbody class="text-center">
-                            {%for factura in facturas: %}
-                                <tr>
-                                    <td>
-                                        {% if factura.rs_persona %}
-                                            <p>{{factura.rs_persona.nombrePersona}}</p>
-                                        {% else: %}
-                                            <p>{{factura.nombrePersona}}</p>
-                                        {%endif%}
-                                    </td>
-                                    <td>
-                                        <p>{{factura.totalCompra}}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{factura.fechaCompra}}</p>
-                                    </td>
-                                    <td>
-                                        <a href="{{ url_for('bp_administracion_facturas.detallesEspecificos', idFactura=factura.idFactura) }}" class="h-text-decoration-underline">Ver detalles</a>
-                                    </td>
-                                </tr>
-                            {%endfor%}
-                            <tr id="1"></tr>
-                        </tbody>
-                    </table>
-                </div>
+{% block nameTitle %}Facturas{% endblock %}
+
+{% block liContent %}
+    <li>
+        <a href="{{url_for('bp_detallesFacturas.index')}}" class="display-online-block"  class="facturas-subContenedor">
+            <h2> -Detalles</h2>
+        </a>
+    </li>
+    <li class="width72">
+        <form action="{{url_for('bp_administracion_facturas.busqueda')}}" class="facturas-input-busqueda gap-10px" method="post">
+            <input type="search" placeholder="Documento o nombre.." name="fCadena" class="width60 height30px">
+            <button class="boton-gris" >Buscar</button>
+        </form>
+    </li>
+{% endblock %}
+
+
+{% block iconsContent %}
+    <div class="cajaIconos-p-tabla" >
+        <a href="{{url_for('bp_administracion.index')}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="facturas-centro">
+    <div class="facturas-scroll subSeccion">
+        <table border="1"  class="table table-striped" id="0">
+            <thead  class="text-center">
                 
-                <div class="contenedorFlechas width5 justify-content-center">
-                    <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
-                        </svg>
-                    </a>
-                    <a href="#1" class="flechasProductos">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="lineaAF"></div>
-            <div id="tituloAbajo">
-                <div id="iconoAbajo">
-                    <img src="/static/imagenes/logoQ1.png" alt="logo" width="41px" height="41px">
-                </div>
-                <div id="tituloH">
-                    <h2>Farmacit</h2>
-                </div>
-            </div>
-        </div>
-    </main>
+                <tr class="fondon-gris-oscuro">
+                    <th scope="col">nombrePersona</th>
+                    <th scope="col">totalCompra</th>
+                    <th scope="col">fechaCompra</th>
+                    <th></th>
+                </tr>
+                
+            </thead>
+            
+            <tbody class="text-center">
+                {%for factura in facturas: %}
+                    <tr>
+                        <td>
+                            {% if factura.rs_persona %}
+                                <p>{{factura.rs_persona.nombrePersona}}</p>
+                            {% else: %}
+                                <p>{{factura.nombrePersona}}</p>
+                            {%endif%}
+                        </td>
+                        <td>
+                            <p>{{factura.totalCompra}}</p>
+                        </td>
+                        <td>
+                            <p>{{factura.fechaCompra}}</p>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('bp_administracion_facturas.detallesEspecificos', idFactura=factura.idFactura) }}" class="h-text-decoration-underline">Ver detalles</a>
+                        </td>
+                    </tr>
+                {%endfor%}
+                <tr id="1"></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="contenedorFlechas width5 justify-content-center">
+        <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+            </svg>
+        </a>
+        <a href="#1" class="flechasProductos">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
+            </svg>
+        </a>
+    </div>
+</div>
+{% endblock %}
 
+{% block finalContent %}
     <script src="{{url_for('static', filename='/scripts/areaAdministracion/facturas.js' )}}"></script>
     <script src="{{url_for('static', filename='/scripts/reutilizable.js' )}}"></script>
     <script>activar("facturas-scroll");</script>
 
-</body>
-</html>
+{% endblock %}
+
+

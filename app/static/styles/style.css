@@ -1801,7 +1801,7 @@ a:visited{
 }
 .facturas-subMain{
 
-    width: 55%;
+    width: 60%!important;
 
 }
 .facturas-iconos{
@@ -1832,7 +1832,7 @@ a:visited{
 
 .facturas-input-busqueda{
     
-    width: 36%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: end;
@@ -2625,7 +2625,12 @@ a:visited{
 
                                                                             /* END STYLES PLANTILLA TABLA_LAYOUT */
 
+                                                                            /* STYLES PLANTILLA TABLA MEDIANA LAYOUT */
 
+
+
+
+                                                                            /* END STYLES PLANTILLA TABLA MEDIANA LAYOUT */
 
 
 
@@ -2702,6 +2707,10 @@ a:visited{
 }
 .width90{
   width: 90%;  
+}
+
+.width63{
+    width: 63%!important;
 }
                     /* heights */
 
@@ -2816,7 +2825,9 @@ a:visited{
 .pdg-l-20px{
     padding-left: 20px!important;
 }
-
+.pdg-left-1rem{
+    padding-left: 1rem!important;
+}
     /* font - sizes */
 
 .font-size-18px{

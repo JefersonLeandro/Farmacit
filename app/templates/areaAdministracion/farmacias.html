@@ -1,124 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'plantillas/tabla_layout.html'%}
+{% block title %}Farmacias{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmacias</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.css') }}">
-</head>
+{% block svg %} 
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+        class="bi bi-building" viewBox="0 0 16 16">
+        <path
+            d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z" />
+        <path
+            d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z" />
+    </svg>
+{% endblock %}
 
-<body>
-    <main id="mainVDF">
-        <div id="divVG">
+{% block nameTitle %}Farmacias{% endblock %}
+
+{% block iconsContent %}
+    <div class="cajaIconos-p-tabla">
+        <a href="{{url_for('bp_administracion.index')}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="seccionGV">
+        <div class="seccionCV">                                    
+            <table border="1"  class="table table-striped" id="0">
+                    
+                <thead class="Secondary">
+                        <tr> 
+                            <th scope="col">nitFarmacia</th>
+                            <th scope="col">nombreFarmacia</th>
+                            <th scope="col">telefonoFarmacia</th>
+                            <th scope="col">correoFarmacia</th>
+                            <th scope="col">ubicacionFarmacia</th>
+                            <th scope="col"></th>
         
-            <div id="tituloF">
-                <div id="cotenedorVDF">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                        class="bi bi-building" viewBox="0 0 16 16">
-                        <path
-                            d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z" />
-                        <path
-                            d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z" />
-                    </svg>
-                </div>
-                <div id="contenedorH1">
-                    <h1>Farmacias</h1>
-                </div>
-                <div id="iconsAV" class="width86">
-                    <div class="divMv">
-                        <a href="{{url_for('bp_administracion.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="divMv">
-                        <a href="{{url_for('bp_inicio.index')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                 </div>
-            </div>
-            <div class="lineaA"></div>
-            <div id="seccionGV">
-                <div class="seccionCV">                                    
-                    <table border="1"  class="table table-striped" id="0">
-                            
-                        <thead class="Secondary">
-                                <tr> 
-                                    <th scope="col">nitFarmacia</th>
-                                    <th scope="col">nombreFarmacia</th>
-                                    <th scope="col">telefonoFarmacia</th>
-                                    <th scope="col">correoFarmacia</th>
-                                    <th scope="col">ubicacionFarmacia</th>
-                                    <th scope="col"></th>
-                
-                                </tr>
-                        </thead>
-                        <tBody>  
+                        </tr>
+                </thead>
+                <tBody>  
 
-                            {% for farmacia in farmacias: %}
-                                 
-                                 <tr><form id="fModificarDatosFarmacia" action="{{url_for('bp_farmacias.acciones')}}"  method="post">
-                                    <td><input type="hidden" name="fIdFarmacia" value="{{farmacia.idFarmacia}}">
-                                       <input type="text" name="fNitFarmacia" value="{{farmacia.nitFarmacia}}" required ></td>
-                                    <td><input type="text" name="fNombreFarmacia" value="{{farmacia.nombreFarmacia}}" required ></td>
-                                    <td><input type="number" name="fTelefonoFarmacia" value="{{farmacia.telefonoFarmacia}}" required ></td>
-                                    <td><input type="email" name="fCorreoFarmacia" value="{{farmacia.correoFarmacia}}" required ></td>
-                                    <td><input type="text" name="fUbicacionFarmacia" value="{{farmacia.ubicacionFarmacia}}" required ></td>
-                                    <td><button type="submit" name="fAccion" value="Modificar" class="buttonEnviar2">Modificar</button>
-                                            <button type="submit" name="fAccion" value="Eliminar" class="buttonEnviar2">Eliminar</button></td>
-                                </form></tr>
-                            {%endfor%}
+                    {% for farmacia in farmacias: %}
+                        
+                        <tr><form id="fModificarDatosFarmacia" action="{{url_for('bp_farmacias.acciones')}}"  method="post">
+                            <td><input type="hidden" name="fIdFarmacia" value="{{farmacia.idFarmacia}}">
+                            <input type="text" name="fNitFarmacia" value="{{farmacia.nitFarmacia}}" required ></td>
+                            <td><input type="text" name="fNombreFarmacia" value="{{farmacia.nombreFarmacia}}" required ></td>
+                            <td><input type="number" name="fTelefonoFarmacia" value="{{farmacia.telefonoFarmacia}}" required ></td>
+                            <td><input type="email" name="fCorreoFarmacia" value="{{farmacia.correoFarmacia}}" required ></td>
+                            <td><input type="text" name="fUbicacionFarmacia" value="{{farmacia.ubicacionFarmacia}}" required ></td>
+                            <td><button type="submit" name="fAccion" value="Modificar" class="btn-roles">Modificar</button>
+                                    <button type="submit" name="fAccion" value="Eliminar" class="btn-roles">Eliminar</button></td>
+                        </form></tr>
+                    {%endfor%}
 
-                                <tr>
-                                    <form id="fIngresarFarmacia" action="{{url_for('bp_farmacias.acciones')}}" method="post">
-                                        <input type="hidden" name="fIdFarmacia" value="0">
-                                        <td><input type="text"  name="fNitFarmacia" required></td>
-                                        <td><input type="text"  name="fNombreFarmacia" required ></td>
-                                        <td><input type="number" name="fTelefonoFarmacia"required ></td>
-                                        <td><input type="email" name="fCorreoFarmacia"required ></td>
-                                        <td><input type="text" name="fUbicacionFarmacia"required ></td>
-                                        <td id="1"><button type="submit" name="fAccion" value="Ingresar" class="buttonEnviar">Ingresar</button>
-                                            <button type="reset"  value="Limpiar"  class="buttonEnviar">Limpiar</button></td>
-                                    </form>
-                                </tr>  
-                            </tBody>
-                        </table>
-                </div>
-                <script src="{{url_for('static', filename='/scripts/areaAdministracion/productos.js' )}}"></script>
-                <div class="contenedorFlechas">
-                    <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
-                        </svg>
-                    </a>
-                    <a href="#1" class="flechasProductos">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="lineaAF"></div>
-            <div id="tituloAbajo">
-                <div id="iconoAbajo">
-                    <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="41px" height="41px">
-
-                </div>
-                <div id="tituloH">
-                    <h2>Farmacit</h2>
-                </div>  
-            </div>
+                        <tr>
+                            <form id="fIngresarFarmacia" action="{{url_for('bp_farmacias.acciones')}}" method="post">
+                                <input type="hidden" name="fIdFarmacia" value="0">
+                                <td><input type="text"  name="fNitFarmacia" required></td>
+                                <td><input type="text"  name="fNombreFarmacia" required ></td>
+                                <td><input type="number" name="fTelefonoFarmacia"required ></td>
+                                <td><input type="email" name="fCorreoFarmacia"required ></td>
+                                <td><input type="text" name="fUbicacionFarmacia"required ></td>
+                                <td id="1"><button type="submit" name="fAccion" value="Ingresar" class="btn-roles bgOscuro-roles">Ingresar</button>
+                                    <button type="reset"  value="Limpiar"  class="btn-roles bgOscuro-roles">Limpiar</button></td>
+                            </form>
+                        </tr>  
+                    </tBody>
+                </table>
         </div>
-        <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
-        <script>activar("seccionCV");</script>
-    </main>
-</body>
-</html>
+        <div class="contenedorFlechas">
+            <a href="#0" class="flechasProductos mb-2" onclick="scrollArriba();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-short svgFlechaAtras" viewBox="0 0 16 16" >
+                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+                </svg>
+            </a>
+            <a href="#1" class="flechasProductos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short svgFlechaAtras" viewBox="0 0 16 16" >
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block finalContent %}
+    <script src="{{url_for('static', filename='scripts/reutilizable.js' )}}"></script>
+    <script>activar("seccionCV");</script>
+
+{% endblock %}
+
