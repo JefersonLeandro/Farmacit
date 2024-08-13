@@ -2685,9 +2685,7 @@ a:visited{
 }
 
 .width65px{
-
     width:65px;
-
 }
 
 .width15{
@@ -2711,6 +2709,13 @@ a:visited{
 
 .width63{
     width: 63%!important;
+}
+.width383px{
+    width: 383px!important;
+}
+.widthAuto{
+
+    width: auto!important;
 }
                     /* heights */
 

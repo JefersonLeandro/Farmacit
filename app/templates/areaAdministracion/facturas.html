@@ -9,20 +9,26 @@
     </svg>
 {% endblock %}
 
-{% block nameTitle %}Facturas{% endblock %}
+{% block titleContent  %}
+    <div class="subContenedorTitulo-p-tabla">
+        <h1>Facturas</h1>
+    </div>
+{% endblock %}
 
-{% block liContent %}
-    <li>
-        <a href="{{url_for('bp_detallesFacturas.index')}}" class="display-online-block"  class="facturas-subContenedor">
-            <h2> -Detalles</h2>
-        </a>
-    </li>
-    <li class="width72">
-        <form action="{{url_for('bp_administracion_facturas.busqueda')}}" class="facturas-input-busqueda gap-10px" method="post">
-            <input type="search" placeholder="Documento o nombre.." name="fCadena" class="width60 height30px">
-            <button class="boton-gris" >Buscar</button>
-        </form>
-    </li>
+{% block ulContent %}
+    <ul class="subContenedorOpciones-p-tabla pdg-left-1rem">
+        <li>
+            <a href="{{url_for('bp_detallesFacturas.index')}}" class="display-online-block"  class="facturas-subContenedor">
+                <h2> -Detalles</h2>
+            </a>
+        </li>
+        <li class="width72">
+            <form action="{{url_for('bp_administracion_facturas.busqueda')}}" class="facturas-input-busqueda gap-10px" method="post">
+                <input type="search" placeholder="Documento o nombre.." name="fCadena" class="width60 height30px">
+                <button class="boton-gris" >Buscar</button>
+            </form>
+        </li>
+    </ul>
 {% endblock %}
 
 

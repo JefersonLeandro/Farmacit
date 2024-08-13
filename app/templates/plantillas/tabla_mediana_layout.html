@@ -19,14 +19,9 @@
                         {% block svg %}{% endblock %}
                     </div>
                 </div>
-                <div class="subContenedorTitulo-p-tabla">
-                    <h1>{% block nameTitle %}{% endblock %}</h1>
-                </div>
+                {% block titleContent %}{% endblock %}
                 <div class="subcontenedorGeneral-p-tabla ">
-                    <ul class="subContenedorOpciones-p-tabla pdg-left-1rem">
-                        {% block liContent %}{% endblock %}
-                    </ul>
-
+                        {% block ulContent %}{% endblock %}
                     <div class="subContenedorIconos-p-tabla" >
                         {%block iconsContent%}{%endblock%}
                         
