@@ -1072,16 +1072,14 @@ a:visited{
 #divTablaG{
 
     width: 100%;
-    height: 100vh;
+    height: 702px;
     display: flex;
     justify-content: center;
     align-items: center;
- 
-
 }
 #divTablaC{
     width: 80%;
-    height: 95vh;
+    height: 650px;
 }
 #tituloTabla1{
 
@@ -1089,7 +1087,7 @@ a:visited{
     background: rgb(55 146 232);
     border-top-right-radius:10px;
     border-top-left-radius:10px;
-    height: 8vh;
+    height: 48px;
     font-size: 40px;
     display: flex;
     justify-content: center;
@@ -1104,19 +1102,15 @@ a:visited{
 #divCentralTabla{
 
     width: 100%;
-    height: 80vh;
+    height: 546px;
     display: flex;
     border-radius: 3px;
-    /* border: 3px solid black; */
     flex-direction: column;
 
 }
 #encajar{
     display: flex;
-    /* border: 3px solid rgb(247, 91, 255); */
-    height: 75vh;
-
-    
+    height: 513px;
 }
 #listaP{
     width: 32%;
@@ -1130,7 +1124,7 @@ a:visited{
 }
 #contenedorTrash{
     width: 100%;
-    height: 6vh;
+    height: 32px;
     display: flex;
     align-items: center;
 
@@ -1175,7 +1169,8 @@ a:visited{
 }
 #listaG.scrollable {
     overflow-y: scroll;
-    max-height: 57vh;
+    max-height: 377px;
+
  }
  #centrarLista{
 
@@ -1184,7 +1179,7 @@ a:visited{
     align-items: center;
     justify-content: center;
     margin-top: 18px;
-    height: 65vh;
+    height: 453px;
  }
  #centrarLista svg{
     margin-bottom: 5px;
@@ -1206,50 +1201,45 @@ a:visited{
     border:  1px solid#000000;
     border-radius: 3px;
     width: 80%;
-    height: 60vh;
+    height: 380px;
  }
  #productosGeneral{
-    height: 75vh;
+    height:513px;
     width: 75%;
     display: flex;
     align-items: center;
 
  }
  #productoD{
-    /* border: 2px solid red; */
-    height: 72vh;
+    height: 489px;
     overflow: auto;
     width: 100%;
-
 }
 
 .cajaPD{
 
-    height: 21vh;
-    /* border: 3px solid yellow; */ 
+    height: 145px;
 }
 .dividirD{
     display:flex;
-    /* border: 3px solid palevioletred; */
-    height: 18vh;
+    height: 140px;
 }
 .descripcionP{
     width: 75%;
 }
 .descripcionP:hover{
     box-shadow: 0px 5px 2px -2px rgba(0,0,0,0.5), 0px 0px 3px 0px rgba(0,0,0,0);
-
 }
 .descripcionR{
 
     width: 100%;
-    height: 11vh;
+    height: 97px;
     padding-left: 4px;
 
 }
 #comprarTodo{
 
-    height: 6vh;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1261,7 +1251,7 @@ a:visited{
     border-left: none;
     border-right: none;
     border-top: none;
-    width: 53%;
+    width: 243px;
 
 }
 .buttonComprarTodo:hover{
@@ -1270,7 +1260,7 @@ a:visited{
 #lineaLateral{
 
     width: 0;
-    height: 72vh;
+    height: 484px;
     border: 1px solid black;
     position: relative;
     top: 8px;
@@ -1281,26 +1271,23 @@ a:visited{
 
     display: flex;
     width: 100%;
-    height: 6vh;
-
+    height: 43px;
 }
 .botonG{
 
     width: 60%;
-    height: 6vh;
+    height: 40px;
     display: flex;
     align-items: center;
     padding-left: 4px;
     gap: 10px;
-
-
 }
 #botonC{
 
     display: flex;
     justify-self: center;
     width: 30%;
-    height: 4.2vh;
+    height: 30px;
     align-items: center;
     
 }
@@ -1313,16 +1300,13 @@ a:visited{
 
 .divImagen{
     width: 25%;
-    /* border: 3px solid blue; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .imagenProducto{
-    
-    /* border: 3px solid brown ; */
     width: 90%;
-    height: 15vh;
+    height: 145px;
     display: flex;
     align-items: center;
 
@@ -1334,7 +1318,7 @@ a:visited{
     background: rgb(55 146 232);
     border-bottom-right-radius: 10px;
     border-Bottom-left-radius: 10px;
-    height: 8vh;
+    height: 53px;
     font-size: 40px;
     display: flex;
     justify-content: center;
@@ -1348,7 +1332,7 @@ a:visited{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 60px;
+    height: 53px;
 }
 #footerC svg{
     display: flex;
