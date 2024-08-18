@@ -18,20 +18,22 @@
         <div id="divVG">
 
             <div id="tituloF">
-                <div class="cajaColor">
-                    <div class="cotenedorIconoC">
-                        <div class="contenedorImgLogo">
-                            <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" class="carrito-img-logo" alt="logo" width="100%"
-                                height="48px">
+                <div class="display-flex">
+                    <div class="cajaColor">
+                        <div class="cotenedorIconoC">
+                            <div class="contenedorImgLogo">
+                                <img src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" class="carrito-img-logo" alt="logo" width="100%"
+                                    height="48px">
+                            </div>
+                        </div>
+                        <div  class="Separar subContenedor contenedorTitulo-carrito">
+                            <h1 class="tituloCarrito">Farmacit</h1>
                         </div>
                     </div>
-                    <div id="contenedorH1" class="Separar subContenedor">
-                        <h1 class="tituloCarrito">Farmacit</h1>
-                    </div>
-                </div>
-                <div class="contenedorIconoCarrito">
-                    <div class="contenedorCC">
-                        <h5>Carrito compras</h5>
+                    <div class="contenedorIconoCarrito">
+                        <div class="contenedorCC">
+                            <h5>Carrito compras</h5>
+                        </div>
                     </div>
                 </div>
                 {% set tamano = productos|default([])|length %}
@@ -42,10 +44,10 @@
                         </div>
                         <div class="cajaCentralImg">
                             <img class="carrito-img-carrito" src="{{url_for('static',filename = 'imagenes/carrito-de-compras.png')}}" alt="logo"
-                                width="100%" height="50px">
+                                width="100%" height="45px">
                         </div>
                     </div>
-                    <div class="divMv">
+                    <div class="cajaIconos-p-tabla">
                         <a href="{{url_for('bp_inicio.index')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                                 class="bi bi-house-fill" viewBox="0 0 16 16">
@@ -70,7 +72,7 @@
                         <div class="carrito-caja">
                             <a class="carrito-picture" href="{{ url_for('bp_producto.index', idProducto=producto.idProducto) }}">
                                 <img class="carrito-imagen" src="{{url_for('static',filename = 'imagenes/'+imagen.nombreImagen)}}"
-                                    alt="{{producto.nombreProducto}}" width="100%" height="100%" />
+                                    alt="{{producto.nombreProducto}}" width="100%" height="165px" />
                             </a>
                             <div class="carrito-cajaMediana">
                                 <div class="carrito-subCajaArriba">
@@ -124,7 +126,7 @@
 
                         {%else : %}
                         <div class='alert alert-dark-tranparent' role='alert'>
-                            <h5>Tu carrito está vacío, inicia session <a href='{{url_for("bp_login.login")}}'
+                            <h5>Tu carrito está vacío, inicia sesión <a href='{{url_for("bp_login.login")}}'
                                     style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar
                                 productos.</h5>
                         </div>
@@ -161,13 +163,17 @@
                             </svg>
                         </div>
                         <div class="carrito-contenedorInfo">
-                            <div class="carrito-descripcion">
+                            <div>
                                 <p class="carrito-cantidad">Cantidad {{cantidad}}</p>
-                                <p class="carrito-iva">Iva {{iva}}</p>
-                                <strong class="carrito-total">Total {{total}}</strong>
                             </div>
-                            <div class="carrito-contenedorImagen">
-                                <img src="/static/imagenes/chicaAnimada.png" class="carrito-imagen-animada" alt="">
+                            <div class="display-flex justify-content-space-between">
+                                <div class="carrito-descripcion">
+                                    <p class="carrito-iva">Iva {{iva}}</p>
+                                    <strong class="carrito-total">Total {{total}}</strong>
+                                </div>
+                                <div class="carrito-contenedorImagen">
+                                    <img src="/static/imagenes/chicaAnimada.png" class="carrito-imagen-animada" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -217,7 +223,7 @@
             </div>
             <div class="lineaCarritoF"></div>
             <div class="tituloH">
-                <nav class="navSuperiorF">
+                <nav class="navSuperiorF width504px height41px">
                     <ul class="carrito-pc-ul">
                         <li><a href="{{url_for('bp_favoritos.index')}}" class="aLinkProductosD">Productos deseados</a></li>
                         <li><a href="{{url_for('bp_inicio.index')}}" class="aLinkProductosD">Seguir comprando</a></li>

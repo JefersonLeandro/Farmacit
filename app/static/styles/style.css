@@ -1510,8 +1510,9 @@ a:visited{
 #tituloF{
      /* LINEA ABAJO */
     width: 100%;
-    height: 10vh;
+    height: 60px;
     display: flex;
+    justify-content: space-between;
 
 }
 #cotenedorVDF{
@@ -2019,12 +2020,12 @@ a:visited{
 
 
 .tituloCarrito{
-        margin-bottom: 0;
-        font-size: 50px;
+    margin-bottom: 0;
+    font-size: 50px;
 }
 .cajaColor{
 
-    width: 16%;
+    width: 229px;
     display: flex;
     gap: 2px;
     justify-content: center;
@@ -2034,13 +2035,21 @@ a:visited{
 }
 .cotenedorIconoC{
     width: 22%;
-    height: 10vh;
+    height: 51px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: end;
 }
-    .contenedorImgLogo{
+
+.contenedorTitulo-carrito{
+    box-sizing: border-box;
+    /* background-color: #fbff0d; */
+    height: 57px;
+    font-size: 22px;
+}
+
+.contenedorImgLogo{
     width: 90%;
 }
 .subContenedor{
@@ -2062,20 +2071,20 @@ a:visited{
 }
 .contenedorIconoCarrito{
 
-    width: 10%;
-    height: 10vh;
+    width: 168px;
+    height: 60px;
     box-sizing: border-box;
     display: flex;
+    justify-content: center;
     align-items: end;
 
 }
 .contenedorCC{
-    height: 4vh;
-    width: 100%;
+    height: 24px;
+    width: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
     background:  rgb(55 146 232);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -2084,19 +2093,18 @@ a:visited{
     margin-bottom: 0rem;
 }
 .contenedorCentralC{
-    width: 71%;
     display: flex;
     align-items: end;
     justify-content: end;
     gap: 12px;
 }
 .cajaCentralC{
-    width: 7.5%;
+    width: 75px;
     background:  rgb(55 146 232);
     background: rgb(1, 170, 208);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    height: 7vh;
+    height: 46px;
     display: flex;
 }
 .cajaCentralImg{
@@ -2104,7 +2112,7 @@ a:visited{
     align-items: end;
     justify-content: center;
     width: 65%;
-    height: 7vh;
+    height: 46px;
 }
 .cajaNumero{
     width: 35%;
@@ -2117,16 +2125,12 @@ a:visited{
     display: flex;
     width: 100%;
     height: 80vh;
-    /* background: rebeccapurple; */
-
 }
 .subCajaI{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 70%;
-    /* background: yellow; */
-
 }
 .contenedorLineaV{
 
@@ -2144,23 +2148,20 @@ a:visited{
 }
 .subCajaD{
     width: 30%;
-    /* background: yellowgreen; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .cajaCarritoD{
-        width: 90%;
-        /* background: rgb(55 146 232);// programar para despues recortando la imagen y denjando la barra debajo de ella */
-        height: 75vh;
-        display: flex;
-        align-items: center;
+    width: 90%;
+    height: 75vh;
+    display: flex;
+    align-items: center;
 }
 .cajaLateral{
 
     width: 100%;
     height: 77vh;
-    /* background: white; */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -2173,16 +2174,14 @@ a:visited{
     width: 100%;
     height: 25vh;
     margin-bottom: 7.8px;
-    /* background: red; */
 }
     
 .cajaProductoC:hover{
-    box-shadow: 0px 3px 3px 0px gray ;
-    /* //rgb(1, 170, 208) */
+    box-shadow: 0px 3px 3px 0px gray;
 }
 .cajaPequenaC{
 
-    /* background: rgb(24, 235, 239); */
+    background: rgb(18, 246, 250);
     height: 25vh;
     width: 20%;
     /* border: 3px solid black; */
@@ -2195,7 +2194,7 @@ a:visited{
 
     width: 40%;
     height: 25vh;
-    /* background: rgb(123, 101, 160); */
+    background: rgb(102, 102, 102);
     
 
 }
@@ -2204,14 +2203,11 @@ a:visited{
     overflow-y: scroll;
     width: 100%;
     height: 17vh;
-    /* background: burlywood; */
-
 }
 .subCajaS2{
 
     width: 100%;
     height: 8vh;
-    /* background:rgb(47, 229, 6); */
     display: flex;
     align-items: center;
 }
@@ -2220,12 +2216,11 @@ a:visited{
     width: 60%;
     height: 5vh;
     display: flex;
-
 }
 .inputCantidad{
     border-radius: 8px;
     border: none;
-    background: rgb(55 146 232) ;
+    background: rgb(255, 255, 255) ;
     opacity: 0.9;
     width: 10%;
     font-size: 18px;
@@ -2286,7 +2281,6 @@ a:visited{
     padding-right: 10px;
 }
 .cajaImgM{
-    /* border: 3px solid black; */
     width: 98%;
     height: 46vh;
 }
@@ -2302,8 +2296,6 @@ a:visited{
     gap: 15px;
 }
 .navSuperiorF {
-
-    background:  rgb(55 146 232);
     height: 6vh;
     width: 34%;
     display: flex;
@@ -2311,11 +2303,10 @@ a:visited{
     justify-content: center;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
-    
+    background: rgb(55 146 232);
     
 }
 .navSuperiorF li:hover{
-    
     color: rgb(255, 255, 255);
 } 
 .tituloH{
@@ -2330,17 +2321,14 @@ a:visited{
 }
 .btnComprarT{
     height: 10vh;
-    
 }
 .btnComprarT button{
     font-size: 18px;
 }
 
-/* mirar aca hacia las clases que no se estan utilizando */
-
 .carrito-caja{
      
-    height: 25vh;
+    height: 190px;
     width: 100%;
     padding: 1px;
     display: flex;
@@ -2364,7 +2352,7 @@ a:visited{
 }
 .carrito-subCajaArriba{
     width: 100%;
-    height: 16vh;
+    height: auto;
     padding: 5px;
 }
 
@@ -2374,7 +2362,7 @@ a:visited{
 
 .carrito-subCaja1{
     width: 65%;
-    height: 8vh;
+    height: 50px;
     display: flex;
     align-items: center;
     padding-left: 8px;
@@ -2388,13 +2376,13 @@ a:visited{
     border-radius: 3px;
     width: 35%;
     border: 1px solid black;
-    height: 4.5vh;
+    height: 30px;
     font-size: 20px;
     padding: 5px;
 }
 .carrito-subCaja1-1{
-    width: 30%;
-    height: 6vh;
+    width: 120px;
+    height: 35px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -2413,12 +2401,11 @@ a:visited{
 
 .carrito-info {
     width: 30%;
-    padding-left: 20px;
 }
 
 .carrito-subInfo {
-    height: 30vh;
-    width: 88%;
+    height: 248px;
+    width: 350px;
     display: flex;
     flex-direction: column;
     font-size: 24px;
@@ -2426,41 +2413,41 @@ a:visited{
     background-color: rgb(55 146 232);
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    padding-left: 25px;
-    padding-top: 24px;
+    padding-left: 15px;
+    padding-top: 16px;
 }
 
 .carrito-subHeader{
    width: 100%; 
 }
 
-.carrito-contenedorInfo{
-    display: flex;
-}
+/* .carrito-contenedorInfo{
+    /* display: flex; */
+*/
 
 .carrito-descripcion {
     flex: 1;
-    width: 32%;
+    width: 320px;
+    height: 160px;
 }
 
 .carrito-imagen  {
-    width: 90%;
+    width: 100%;
     border-radius: 10px;
       
 }
 
 .carrito-imagen-animada{
-    width: 100%;
-
+    height: 274px;
 }
-.carrito-contenedorImagen {
+/* .carrito-contenedorImagen {
    
     width: 68%;
-}
+} */
 .carrito-btnPagar{
 
-    width: 26%;
-    height: 10vh;
+    width: 90px;
+    height: 60px;
     display: flex;
     align-items: center;
 
@@ -2476,11 +2463,9 @@ a:visited{
     display:none; 
     background-color:transparent;
     border: none;
-    width: 55%;
-    height: 70%;
+    width: 61px;
+    height: 37px;
     text-decoration: underline;
-    border-radius: 10px;
-    font-size: 17px;
 }
 
 
@@ -2497,6 +2482,7 @@ a:visited{
 
     overflow-y: scroll;
     max-height: 17vh;
+    background-color: #1eff00;
 
 }
 
@@ -2697,6 +2683,9 @@ a:visited{
 .width383px{
     width: 383px!important;
 }
+.width504px{
+    width: 504px!important;
+}
 .widthAuto{
 
     width: auto!important;
@@ -2716,6 +2705,9 @@ a:visited{
 }
 .height35px{
     height: 35px;
+}
+.height41px{
+    height: 41px!important;
 }
 
 
