@@ -18,6 +18,34 @@ class Persona (db.Model, UserMixin):
     def get_id(self):
         return str(self.idPersona)
     
+    def __init__(self, nombre, apellido, identificacion, correo, telefono, contrasena):
+        self._nombre = nombre
+        self._apellido = apellido
+        self._identificacion = identificacion
+        self._correo = correo
+        self._telefono = telefono
+        self.__contrasena = contrasena  # Doble guion bajo para mayor protección
+
+    def get_nombre(self):
+        return self._nombre
+
+    def get_apellido(self):
+        return self._apellido
+
+    def get_identificacion(self):
+        return self._identificacion
+
+    def get_correo(self):
+        return self._correo
+
+    def get_telefono(self):
+        return self._telefono
+
+    def get_contrasena(self):
+        return self.__contrasena
+
+    
+    
     # is_authenticated: 
     #     Devuelve True si el usuario está autenticado, es decir, si ha proporcionado credenciales válidas.
 

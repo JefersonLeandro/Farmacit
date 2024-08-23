@@ -3,12 +3,10 @@ from wtforms import Form, StringField, PasswordField, validators
 from app.models.Persona import Persona
 from flask_login import  current_user
 from flask_bcrypt import Bcrypt
-from flask_wtf import FlaskForm 
-from app import db
+from flask_wtf import FlaskForm
+import random 
+from flask_mail import Message
 
-
-
-app = Flask(__name__)
 bp = Blueprint('bp_crear_cuenta', __name__)
 
 
@@ -80,15 +78,14 @@ def RegistrarUsuario():
             return render_template('/autenticacion/crear_cuenta.html' , form=form)
         
         elif  form.validate():
-            
+        # enviar codigo junto con correo. 
+        # asignar los datos del usuario al constructor por medio de un metodo. 
+        # direccionar a la pagina de virificacion. 
             hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
-            nuevaPersona = Persona(nombrePersona=nombre, apellidoPersona = apellido, identificacionPersona = identificacion, correoPersona = correo, telefonoPersona = telefono, contrasenaPersona = hashedContrasena, idRol= 1)
-            db.session.add(nuevaPersona)
-            db.session.commit()
-            mensajeExito = "Registro Exitoso"
-            flash(mensajeExito, 'exito')
-            return redirect(url_for('bp_login.login'))
-        
+            enviarCorreoVerificacion(nombre, correo, form)
+            Persona(nombre, apellido, identificacion, correo, telefono, hashedContrasena) 
+
+            return render_template('/autenticacion/validacion_correo_electronico.html', correo = correo) 
         else:
             return render_template('/autenticacion/crear_cuenta.html' , form=form)
    
@@ -96,10 +93,53 @@ def RegistrarUsuario():
         return redirect(url_for('bp_inicio.index'))
     return render_template("/autenticacion/crear_cuenta.html")
 
+def enviarCorreoVerificacion(nombre, correo, form):
     
+    from app import mail
+
+    code = generarCodigo()
     
-    
+    try:
+        
+        msg = Message(
+            subject="Code of verification (Farmacit)",
+            sender="Farmacit.envio.correos@gmail.com",
+            recipients=[f"{correo}"],
+            html=f"""
+            <html>
+                <body>
+                    <nav style="height:30px;, width:70%;, background:rgb(55 146 232);">
+                        <span style='color:blue;'>Hello {nombre}</span>
+                    </nav>
+                    <p>We are to one just step of finishing</p>
+                    <p>This is the code of verification <strong>{code}</strong> </p>
+           
+                    <p>---------------------------------------------------</p>
+                    <strong>Important</strong>
+                    <p>Don't share your code.</p>
+                    <p>¡Thansk for you patience!</p>
+                    <footer>
+                        <p>Contact us</p>
+                        <p>farmacit.servicio.cliente@gmail.com</p>
+                        <div style='display:flex;, gap:10px;  '>
+                            <a href='www.facebook.com' >Facebook</a>
+                            <a href='www.x.com' >Twitter</a>
+                            <a href='www.Instagram.com' >Instagram</a>
+                        </div>
+                    </footer>
+                </body>
+            </html>
+           """
+        )
+
+        mail.send(msg)
+
+    except Exception :
+
+        render_template('/autenticacion/crear_cuenta.html' , form=form)
 
 
 
-
+def generarCodigo():
+    code = random.randint(1000, 9999)
+    return code
