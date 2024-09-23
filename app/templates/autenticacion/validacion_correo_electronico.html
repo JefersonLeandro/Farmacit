@@ -4,29 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>verificación de correo eletronico </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">   
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+   
 </head>
 <body>
     <main>
-        <div>
+        <div id="contenedor-validacionC">
             <strong>Verificación de correo eletronico</strong>
-            <span>hemos enviado un codigo a {{correo}}</span>
-            <span>Revisa tu correo e inserta el codigo en las casillas de abajo</span>
-            
-            <p class="display-none pReenviar">Volver a enviar el codigo en :  <span class="spanTiempo"></span></p>
-            <span id="mensaje" class="color-red"></span>
-            <div>
-                <input type="number" class="valorInput" min="0" max="9"  required inputmode="numeric" >
-                <input type="number" class="valorInput" min="0" max="9" required inputmode="numeric" >
-                <input type="number" class="valorInput" min="0" max="9" required inputmode="numeric" >
-                <input type="number" class="valorInput" min="0" max="9" required inputmode="numeric" >
-            </div>
-            <div>
-                <button class="display-none" id="botonReenviar" onclick="agendamiento();" disabled >Reenviar</button>
-                <button id="botonValidar" onclick="validacion()">Validar</button>
+            <div id="contenido-central-validacionC">
+                <span>hemos enviado un codigo a {{correo}}</span>
+                <span>Revisa tu correo e inserta el codigo en las casillas de abajo</span>
+                
+                <p class="display-none pReenviar">Volver a enviar el codigo en :  <span class="spanTiempo"></span></p>
+                <span id="mensaje" class="color-red"></span>
+                <div>
+                    <input type="number" class="valorInput" min="0" max="9"  required inputmode="numeric" >
+                    <input type="number" class="valorInput" min="0" max="9" required inputmode="numeric" >
+                    <input type="number" class="valorInput" min="0" max="9" required inputmode="numeric" >
+                    <input type="number" class="valorInput" min="0" max="9" required inputmode="numeric" >
+                </div>
+                <div>
+                    <button class="display-none" id="botonReenviar" onclick="agendamiento();" disabled >Reenviar</button>
+                    <button id="botonValidar" onclick="validacion()">Validar</button>
+                </div>
             </div>
         </div>
     </main>
+    <!-- jQuery -->
+    <script src="{{url_for('static', filename='scripts/librerias/jquery.min.js' )}}"></script>
+    <!-- Countdown.js -->
+    <script src="{{url_for('static', filename='scripts/librerias/countdown.min.js')}}"></script>
     <script src="{{url_for('static', filename='scripts/autenticacion/validacion_correo_electronico.js' )}}"></script>
+
+
 </body>
 </html>

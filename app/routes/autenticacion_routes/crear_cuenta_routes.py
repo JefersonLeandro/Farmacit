@@ -1,24 +1,22 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash , session
+from flask import  Blueprint, render_template, request, redirect, url_for, flash , session
 from wtforms import Form, StringField, PasswordField, validators
 from app.models.Persona import Persona
 from flask_login import  current_user
 from flask_bcrypt import Bcrypt
-from flask_wtf import FlaskForm
 import random 
 from flask_mail import Message
 
 bp = Blueprint('bp_crear_cuenta', __name__)
 
-
-
 @bp.route('/login/crear_cuenta')
 def crearCuenta():
+    
     if current_user.is_authenticated:
         
         return redirect(url_for('bp_inicio.index'))
     return render_template('autenticacion/crear_cuenta.html') 
 
-class RegistrationForm(Form):
+class RegistrationForm(Form): 
     
     fNombrePersona = StringField('fNombrePersona', [
         validators.DataRequired(message="Nombre requerido."),
@@ -72,7 +70,6 @@ def RegistrarUsuario():
         form = RegistrationForm(request.form) 
         
         if not ('fCorreoPersona' in form.errors) and verificar:
-           
             # el correo ya esta registrado
             flash("El correo suministrado ya se encuentra registrado", 'error')
     
@@ -95,34 +92,34 @@ def RegistrarUsuario():
             } 
 
             verificacionCorreo(nombre, correo,codigo, form)
-            
-                   
+                
             return render_template('/autenticacion/validacion_correo_electronico.html', correo = correo) 
         else:
             return render_template('/autenticacion/crear_cuenta.html' , form=form)
    
     if current_user.is_authenticated:
         return redirect(url_for('bp_inicio.index'))
-    return render_template("/autenticacion/crear_cuenta.html")
+    return render_template("/autenticacion/crear_cuenta.html")  
 
 
-def verificacionCorreo(nombre, correo, codigo, form ):
-
+def verificacionCorreo(nombre, correo, codigo, form):
+     
     if "EnviarCorreo" not in session:
         session["EnviarCorreo"] = {}
 
-    bandera = session.get("EnviarCorreo").get(f"{correo}", True)
+    bandera = session["EnviarCorreo"].get(f"{correo}", True) 
     
-    if (bandera):
+    if bandera:
         try:  
-            enviarCorreo(nombre,correo,codigo)
-            session["EnviarCorreo"][f"{correo}"]=False
-
+            enviarCorreo(nombre,correo,codigo) 
+            session["EnviarCorreo"][f"{correo}"]=False 
+            session.modified = True
         except Exception :
-            render_template('/autenticacion/crear_cuenta.html' , form=form)
+            render_template('/autenticacion/crear_cuenta.html' , form=form) 
+
 
 def enviarCorreo(nombre,correo,codigo):
-    from app import mail
+    from app import mail 
 
     msg = Message(
     subject="Codigo de verificación (Farmacit)",

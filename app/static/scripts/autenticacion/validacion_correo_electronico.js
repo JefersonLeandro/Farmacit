@@ -1,13 +1,27 @@
-
+let numeroIntentos = localStorage.getItem("estado")  ?? true; 
 const botonReenviar = document.getElementById("botonReenviar");
 const span = document.getElementById("mensaje");
 let valores = document.querySelectorAll(".valorInput");
-let numeroIntentos = 1; 
+let contenidoCentral = document.getElementById("contenido-central-validacionC");
+let contenedor = document.getElementById("contenedor-validacionC");
 
-setTimeout(() => {
-    botonReenviar.style.display = "block";
-    botonReenviar.disabled = false;
-}, 3000); //muestra una vez al pasar el minuto.  
+console.log("nInte:"+numeroIntentos);
+if (numeroIntentos == "false"){
+
+    console.log("se debio ocultar los elementos. ");
+    crearYOcultarElementos();
+    eventoBeforeunload();
+}else{
+    
+    setTimeout(() => {
+        botonReenviar.style.display = "block";
+        botonReenviar.disabled = false;
+    }, 10000); //muestra una vez al pasar el minuto.  
+
+}
+//implimentar medidas de seguridad desde el serevidor cuando se haga el clic del boton reenviar y lleve un intervalo de 1 minuto para poder enviar la solicitud otra vez. 
+
+
 
 
 function validacion(){
@@ -103,17 +117,17 @@ function ajax(code){
 
 function agendamiento(){
 
-    console.log("dentre....");
+    console.log("dentre....1");
+    botonReenviar.style.display = "none";
+    botonReenviar.disabled = true;
 
-    if (numeroIntentos > 0 ){
+    if (numeroIntentos > 0 || numeroIntentos){
 
         temporizadorReenviar();
-        botonReenviar.style.display = "none";
-        botonReenviar.disabled = true;
         ajaxReenviarCodigo();
         console.log("nIntentos agendamiento : "+numeroIntentos);
     }else{
-        // volver a activar la varible global que se encuentra en el servidor
+        crearYOcultarElementos();
         console.log("llegaste a cero intentos, vuelve a intentarlo. ")
         console.log("nIntentos agendamiento : "+numeroIntentos);
     }
@@ -125,7 +139,7 @@ function temporizadorReenviar(){
 
     const spanT = document.querySelector('.spanTiempo');
     const p = document.querySelector('.pReenviar');
-    let tiempo = 60;
+    let tiempo = 2;
 
     p.style.display="block"; 
     
@@ -158,24 +172,110 @@ function ajaxReenviarCodigo(){
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 
-                let respuesta = (JSON.parse(xhr.responseText)).estado;
-                console.log("respuesta reenviar : "+respuesta);
+                let respuesta = (JSON.parse(xhr.responseText));
+                console.log("respuesta reenviar :"+respuesta);
                 
                 //controlar la respuesta 
-                if (respuesta=="ok" && respuesta.nIntentos !== null && respuesta.nIntentos !== undefined ){
-                    nIntentos = respuesta.nIntentos;
+                if (respuesta.estado=="ok" && respuesta.nIntentos !== null && respuesta.nIntentos !== undefined ){
+                    numeroIntentos = respuesta.nIntentos;
                     console.log("ajax intentos : "+respuesta.nIntentos);
+
+
                 }else if(respuesta == "fail"){
 
                     span.style.color ="yellow";
                     span.innerHTML = "Vuelve a intentarlo.";
                 }else{
                     span.style.color ="red";
-                    span.innerHTML = "Vuelve a intentarlo.";
+                    span.innerHTML = "Vuelve a intentarlo."; 
                 }
             }
         }
     }
     // Enviar la solicitud 
     xhr.send();
+}
+
+function temporizadorTiempoFuera(){
+    
+    let tiempoAlmacenado = localStorage.getItem("tiempo");
+    
+    if (tiempoAlmacenado){
+        console.log("se ejecuta formatear");
+        tiempoAlmacenado = formatearRespuesta(tiempoAlmacenado);
+    }
+
+    let tiempoTrascurrido = tiempoAlmacenado || ((2 * 60) + (50)) * 1000; 
+    
+    let endTime = new Date().getTime() + tiempoTrascurrido;
+    $(document).ready(function() {
+        $('.p-tiempo-trascurrido').countdown(endTime, function(event) {
+            $(this).html(event.strftime('%M : %S segundos'));
+
+            //verificar cuando sea 00. 
+            
+        });
+    });
+    
+}
+function crearYOcultarElementos(){
+
+    contenidoCentral.style.display="none";
+    localStorage.setItem("estado", false)
+    temporizadorTiempoFuera();
+
+    const nuevoSpan = document.createElement('span'),
+    nuevoP = document.createElement('p'),
+    nuevoARegresar = document.createElement("a"),
+    nuevoAConctanos= document.createElement('a'),
+    nuevoBoton = document.createElement('button');
+    
+   nuevoSpan.textContent = "Excediste el numero de intentos fallidos, vuelve a intentalo en : ";
+   nuevoSpan.classList.add("span-tiempo-fuera");
+   nuevoP.classList.add("p-tiempo-trascurrido");
+   nuevoAConctanos.href = "#";
+   nuevoAConctanos.textContent = "Conctatanos";
+   nuevoARegresar.href = "/";
+   nuevoBoton.textContent = "Regresar"
+   nuevoBoton.style.cursor = "pointer";
+
+   contenedor.append(nuevoSpan,nuevoP,nuevoAConctanos,nuevoARegresar);
+   nuevoARegresar.appendChild(nuevoBoton);
+}
+
+function eventoBeforeunload(){
+
+    window.addEventListener('beforeunload',(event) => {
+        console.log("antes de ser cargada. "); 
+        $(document).ready(function() {
+            let seleccion = document.querySelector(".p-tiempo-trascurrido");
+            let cadena = seleccion.textContent;
+            console.log(cadena + " cadena ");
+            let tiempo = cadena.replace("segundos","").replace(":", "").replace("  ", "").replace(" ", "");
+            console.log("tiempo es : "+tiempo);
+            localStorage.setItem("tiempo", tiempo);
+        });
+    });
+   
+}
+function formatearRespuesta(tiempoAlmacenado){
+   
+    console.log("111111:"+ tiempoAlmacenado);
+    console.log("tamano : "+ tiempoAlmacenado.length);
+    
+    let milisegundos;
+
+    if(tiempoAlmacenado.length == 4){
+
+        let minutos = parseInt(tiempoAlmacenado.substring(0,2), 10); 
+        let segundos = parseInt(tiempoAlmacenado.substring(2,4), 10); 
+
+        milisegundos = ((minutos * 60) + (segundos)) * 1000;  
+
+        console.log("minutos : "+ minutos);
+        console.log("segundos : "+ segundos);
+        console.log("milisegundos : "+ milisegundos);
+    }
+   
+    return milisegundos;
 }

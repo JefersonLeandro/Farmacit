@@ -7,12 +7,11 @@ from .crear_cuenta_routes import generarCodigo, enviarCorreo
 bp = Blueprint('bp_verificacionCorreo', __name__)
 
 # cambiar por un un diccionario y dejar para cada usuario ya que se estaria dejando para todos
-nIntentos = 10 
+
 
 @bp.route('/login/crear_cuenta/verificacion_correo' , methods=['POST', 'GET'])
-
 def index():
-    #verificacion
+    #verificacion 
 
     codigoEntrada = request.get_json()
     codigo = str(session.get('codigo'))   
@@ -22,13 +21,13 @@ def index():
  
     if codigoEntrada.isdigit() and codigo == codigoEntrada:     
 
-        datos = session.get('datos_usuario') 
+        datos = session.get('datos_usuario')
          
         try:
             nuevaPersona = Persona(
                 nombrePersona=datos.get("nombre"),
                 apellidoPersona = datos.get("apellido"),
-                identificacionPersona = datos.get("identificacion"),
+                identificacionPersona = datos.get("identificacion"), 
                 correoPersona = datos.get("correo"), 
                 telefonoPersona = datos.get("telefono"),
                 contrasenaPersona = datos.get("contrasena"),
@@ -52,23 +51,30 @@ def index():
 @bp.route('/login/crear_cuenta/reenviar_codigo' , methods=['POST', 'GET'])
 def reenviarCorreo():
     
-    global nIntentos
-    nIntentos-=1
-
-    datos = session.get('datos_usuario')
-    nombre = datos.get("nombre")
-    correo = datos.get("correo")
-
-    codigo = generarCodigo()
-    session['codigo'] = codigo 
-
     try:
-        enviarCorreo(nombre, correo, codigo)
-        respuesta = {'estado':'ok','nIntentos' : nIntentos} 
+        if "nIntentos" not in session:
+            session["nIntentos"] = 10
+            
+        nIntentos = session.get("nIntentos")
+        datos = session.get('datos_usuario')
+        nombre = datos.get("nombre")
+        correo = datos.get("correo")
+
+        codigo = generarCodigo()
+        session['codigo'] = codigo 
+
+        if nIntentos > 0:
+            enviarCorreo(nombre, correo, codigo)
+            session["nIntentos"] = nIntentos - 1
+            session.modified = True 
+        # crear una tarea de una sola vez despues de 2 minutos para que vuelva a enviar un codigo. 
+        return jsonify({'estado':'ok','nIntentos': nIntentos}) 
+            
     except Exception as e:
         render_template('/autenticacion/validacion_correo_electronico.html', correo = correo)
-        respuesta = {'estado':'Fallo'} 
-    
-    return jsonify(respuesta) 
+        return jsonify({'estado':'Fallo'}) 
+
+
+   
     
     
