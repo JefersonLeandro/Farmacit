@@ -5,10 +5,7 @@ let valores = document.querySelectorAll(".valorInput");
 let contenidoCentral = document.getElementById("contenido-central-validacionC");
 let contenedor = document.getElementById("contenedor-validacionC");
 
-console.log("nInte:"+numeroIntentos);
 if (numeroIntentos == "false"){
-
-    console.log("se debio ocultar los elementos. ");
     crearYOcultarElementos();
     eventoBeforeunload();
 }else{
@@ -16,13 +13,9 @@ if (numeroIntentos == "false"){
     setTimeout(() => {
         botonReenviar.style.display = "block";
         botonReenviar.disabled = false;
-    }, 10000); //muestra una vez al pasar el minuto.  
+    }, 30000);  
 
-}
-//implimentar medidas de seguridad desde el serevidor cuando se haga el clic del boton reenviar y lleve un intervalo de 1 minuto para poder enviar la solicitud otra vez. 
-
-
-
+} 
 
 function validacion(){
 
@@ -41,11 +34,8 @@ function validarCampos(valores){
     
     let contador = 0; 
     for (const valor of valores) {
-        
-        console.log("value is "+valor.value)
 
         if ( valor.validity.valueMissing ) {
-            
             span.innerHTML="Los campos son requeridos";
             span.style.color = "red";
             contador++;
@@ -86,7 +76,6 @@ function ajax(code){
             if (xhr.status == 200) {
                 
                 let respuesta = (JSON.parse(xhr.responseText)).estado;
-                console.log("respuesta : "+respuesta);
                 
                 //controlar la respuesta 
                 if (respuesta == "ok" ){
@@ -117,29 +106,23 @@ function ajax(code){
 
 function agendamiento(){
 
-    console.log("dentre....1");
-    botonReenviar.style.display = "none";
     botonReenviar.disabled = true;
+    botonReenviar.style.display = "none";
 
     if (numeroIntentos > 0 || numeroIntentos){
-
         temporizadorReenviar();
         ajaxReenviarCodigo();
-        console.log("nIntentos agendamiento : "+numeroIntentos);
     }else{
         crearYOcultarElementos();
-        console.log("llegaste a cero intentos, vuelve a intentarlo. ")
-        console.log("nIntentos agendamiento : "+numeroIntentos);
+        eventoBeforeunload();
     }
-
-
 }
 
 function temporizadorReenviar(){
 
     const spanT = document.querySelector('.spanTiempo');
     const p = document.querySelector('.pReenviar');
-    let tiempo = 2;
+    let tiempo = 60;
 
     p.style.display="block"; 
     
@@ -157,7 +140,6 @@ function temporizadorReenviar(){
 }
 
 
-// this a function is for execute the function of reenviar , mirar esta parte. 
 function ajaxReenviarCodigo(){
 
     // Crear objeto XMLHttpRequest
@@ -173,15 +155,12 @@ function ajaxReenviarCodigo(){
             if (xhr.status == 200) {
                 
                 let respuesta = (JSON.parse(xhr.responseText));
-                console.log("respuesta reenviar :"+respuesta);
-                
+
                 //controlar la respuesta 
                 if (respuesta.estado=="ok" && respuesta.nIntentos !== null && respuesta.nIntentos !== undefined ){
                     numeroIntentos = respuesta.nIntentos;
-                    console.log("ajax intentos : "+respuesta.nIntentos);
 
-
-                }else if(respuesta == "fail"){
+                }else if(respuesta.estado == "fallo"){
 
                     span.style.color ="yellow";
                     span.innerHTML = "Vuelve a intentarlo.";
@@ -201,19 +180,21 @@ function temporizadorTiempoFuera(){
     let tiempoAlmacenado = localStorage.getItem("tiempo");
     
     if (tiempoAlmacenado){
-        console.log("se ejecuta formatear");
         tiempoAlmacenado = formatearRespuesta(tiempoAlmacenado);
     }
-
-    let tiempoTrascurrido = tiempoAlmacenado || ((2 * 60) + (50)) * 1000; 
+    // calcular tiempo en milisegundos ((2 * 60) + (50)) * 1000 
+    let tiempoTrascurrido = tiempoAlmacenado || 170000; 
     
     let endTime = new Date().getTime() + tiempoTrascurrido;
     $(document).ready(function() {
         $('.p-tiempo-trascurrido').countdown(endTime, function(event) {
             $(this).html(event.strftime('%M : %S segundos'));
-
-            //verificar cuando sea 00. 
-            
+             
+            if(event.strftime('%M%S') == "0000"){
+                ajaxReinicio();
+                localStorage.clear();
+                window.location.reload();
+            } 
         });
     });
     
@@ -221,7 +202,8 @@ function temporizadorTiempoFuera(){
 function crearYOcultarElementos(){
 
     contenidoCentral.style.display="none";
-    localStorage.setItem("estado", false)
+    localStorage.setItem("estado", false);
+
     temporizadorTiempoFuera();
 
     const nuevoSpan = document.createElement('span'),
@@ -230,38 +212,32 @@ function crearYOcultarElementos(){
     nuevoAConctanos= document.createElement('a'),
     nuevoBoton = document.createElement('button');
     
-   nuevoSpan.textContent = "Excediste el numero de intentos fallidos, vuelve a intentalo en : ";
-   nuevoSpan.classList.add("span-tiempo-fuera");
-   nuevoP.classList.add("p-tiempo-trascurrido");
-   nuevoAConctanos.href = "#";
-   nuevoAConctanos.textContent = "Conctatanos";
-   nuevoARegresar.href = "/";
-   nuevoBoton.textContent = "Regresar"
-   nuevoBoton.style.cursor = "pointer";
+    nuevoSpan.textContent = "Excediste el numero de intentos fallidos, vuelve a intentalo en : ";
+    nuevoSpan.classList.add("span-tiempo-fuera");
+    nuevoP.classList.add("p-tiempo-trascurrido");
+    nuevoAConctanos.href = "#";
+    nuevoAConctanos.textContent = "Conctatanos";
+    nuevoARegresar.href = "/";
+    nuevoBoton.textContent = "Regresar"
+    nuevoBoton.style.cursor = "pointer";
 
-   contenedor.append(nuevoSpan,nuevoP,nuevoAConctanos,nuevoARegresar);
-   nuevoARegresar.appendChild(nuevoBoton);
+    contenedor.append(nuevoSpan,nuevoP,nuevoAConctanos,nuevoARegresar);
+    nuevoARegresar.appendChild(nuevoBoton);
 }
 
 function eventoBeforeunload(){
 
     window.addEventListener('beforeunload',(event) => {
-        console.log("antes de ser cargada. "); 
         $(document).ready(function() {
             let seleccion = document.querySelector(".p-tiempo-trascurrido");
             let cadena = seleccion.textContent;
-            console.log(cadena + " cadena ");
             let tiempo = cadena.replace("segundos","").replace(":", "").replace("  ", "").replace(" ", "");
-            console.log("tiempo es : "+tiempo);
             localStorage.setItem("tiempo", tiempo);
         });
     });
    
 }
 function formatearRespuesta(tiempoAlmacenado){
-   
-    console.log("111111:"+ tiempoAlmacenado);
-    console.log("tamano : "+ tiempoAlmacenado.length);
     
     let milisegundos;
 
@@ -269,13 +245,35 @@ function formatearRespuesta(tiempoAlmacenado){
 
         let minutos = parseInt(tiempoAlmacenado.substring(0,2), 10); 
         let segundos = parseInt(tiempoAlmacenado.substring(2,4), 10); 
-
         milisegundos = ((minutos * 60) + (segundos)) * 1000;  
-
-        console.log("minutos : "+ minutos);
-        console.log("segundos : "+ segundos);
-        console.log("milisegundos : "+ milisegundos);
     }
    
     return milisegundos;
+}
+function ajaxReinicio(){
+
+      // Crear objeto XMLHttpRequest
+      let xhr = new XMLHttpRequest();
+
+      // Configurar la solicitud
+      xhr.open('POST', '/login/crear_cuenta/reiniciar_estado', true);
+      xhr.setRequestHeader('Content-Type', 'application/json'); // Cambiar el tipo de contenido a JSON
+  
+      // Configurar la función de devolución de llamada
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+              if (xhr.status == 200) {
+                  
+                  let respuesta = (JSON.parse(xhr.responseText));
+                  
+                  //controlar la respuesta 
+                  if(respuesta.estado == "Fallo"){
+                      console.log("respuesta: "+respuesta.error);
+                  }
+              }
+          }
+      }
+      // Enviar la solicitud 
+      xhr.send();
+
 }
