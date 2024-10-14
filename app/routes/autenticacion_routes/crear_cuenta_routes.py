@@ -12,7 +12,6 @@ bp = Blueprint('bp_crear_cuenta', __name__)
 def crearCuenta():
     
     if current_user.is_authenticated:
-        
         return redirect(url_for('bp_inicio.index'))
     return render_template('autenticacion/crear_cuenta.html') 
 
@@ -55,51 +54,51 @@ class RegistrationForm(Form):
 @bp.route('/login/crear_cuenta/Registrar', methods=['GET', 'POST'])
 def RegistrarUsuario():
     
-    if request.method == 'POST':
-        nombre = request.form['fNombrePersona']
-        apellido = request.form['fApellidoPersona']
-        identificacion = request.form['fIdentificacionPersona']
-        correo = request.form['fCorreoPersona'].strip()
-        telefono = request.form['fTelefonoPersona']
-        contrasena = request.form['fContrasenaPersona'].strip()
-        bcrypt = Bcrypt()
+    if not current_user.is_authenticated:
+        if request.method == 'POST':
+            nombre = request.form['fNombrePersona']
+            apellido = request.form['fApellidoPersona']
+            identificacion = request.form['fIdentificacionPersona']
+            correo = request.form['fCorreoPersona'].strip()
+            telefono = request.form['fTelefonoPersona']
+            contrasena = request.form['fContrasenaPersona'].strip()
+            bcrypt = Bcrypt()
 
-        
-        # Verificar si el correo ya está en la base de datos
-        verificar = Persona.query.filter_by(correoPersona=correo).first()
-        form = RegistrationForm(request.form) 
-        
-        if not ('fCorreoPersona' in form.errors) and verificar:
-            # el correo ya esta registrado
-            flash("El correo suministrado ya se encuentra registrado", 'error')
-    
-            return render_template('/autenticacion/crear_cuenta.html' , form=form)
-        
-        elif  form.validate():
-
-            hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
             
-            codigo = generarCodigo()
+            # Verificar si el correo ya está en la base de datos
+            verificar = Persona.query.filter_by(correoPersona=correo).first()
+            form = RegistrationForm(request.form) 
             
-            session['codigo'] = codigo  
-            session['datos_usuario'] = {
-                "nombre" : nombre,
-                "apellido" : apellido,
-                "identificacion" : identificacion, 
-                "correo" : correo,
-                "telefono" : telefono,
-                "contrasena" : hashedContrasena
-            } 
+            if not ('fCorreoPersona' in form.errors) and verificar:
+                # el correo ya esta registrado
+                flash("El correo suministrado ya se encuentra registrado", 'error')
+        
+                return render_template('/autenticacion/crear_cuenta.html' , form=form)
+            
+            elif  form.validate():
 
-            verificacionCorreo(nombre, correo,codigo, form)
+                hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
                 
-            return render_template('/autenticacion/validacion_correo_electronico.html', correo = correo) 
-        else:
-            return render_template('/autenticacion/crear_cuenta.html' , form=form)
-   
-    if current_user.is_authenticated:
-        return redirect(url_for('bp_inicio.index'))
-    return render_template("/autenticacion/crear_cuenta.html")  
+                codigo = generarCodigo()
+                
+                session['codigo'] = codigo  
+                session['datos_usuario'] = {
+                    "nombre" : nombre,
+                    "apellido" : apellido,
+                    "identificacion" : identificacion, 
+                    "correo" : correo,
+                    "telefono" : telefono,
+                    "contrasena" : hashedContrasena
+                } 
+
+                verificacionCorreo(nombre, correo,codigo, form)
+                    
+                return render_template('/autenticacion/validacion_correo_electronico.html', correo = correo) 
+            else:
+                return render_template('/autenticacion/crear_cuenta.html' , form=form)
+    
+        return render_template("/autenticacion/crear_cuenta.html")  
+    return redirect(url_for('bp_inicio.index'))
 
 
 def verificacionCorreo(nombre, correo, codigo, form):

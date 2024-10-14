@@ -20,8 +20,6 @@ def index():
     return redirect(url_for('bp_inicio.index'))
     
     
-    
-
 @bp.route('/area_administracion/personas/acciones', methods=['POST', 'GET'])
 @login_required
 def acciones():

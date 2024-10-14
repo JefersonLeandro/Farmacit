@@ -7,7 +7,7 @@ let contenedor = document.getElementById("contenedor-validacionC");
 
 if (numeroIntentos == "false"){
     crearYOcultarElementos();
-    eventoBeforeunload();
+    agregarEventoBeforeunload();
 }else{
     
     setTimeout(() => {
@@ -79,7 +79,6 @@ function ajax(code){
                 
                 //controlar la respuesta 
                 if (respuesta == "ok" ){
-
                     span.innerHTML = "";
                     alert("Codigo verificado, cuenta registrada. ¡ Ya puedes iniciar sesión ! 🎈 ");
                     window.location.href='/login';
@@ -114,7 +113,7 @@ function agendamiento(){
         ajaxReenviarCodigo();
     }else{
         crearYOcultarElementos();
-        eventoBeforeunload();
+        agregarEventoBeforeunload();
     }
 }
 
@@ -156,15 +155,19 @@ function ajaxReenviarCodigo(){
                 
                 let respuesta = (JSON.parse(xhr.responseText));
 
+                console.log("respuesta"+respuesta);
+
                 //controlar la respuesta 
                 if (respuesta.estado=="ok" && respuesta.nIntentos !== null && respuesta.nIntentos !== undefined ){
                     numeroIntentos = respuesta.nIntentos;
+                    console.log("intentos : ", numeroIntentos);
 
                 }else if(respuesta.estado == "fallo"){
 
                     span.style.color ="yellow";
                     span.innerHTML = "Vuelve a intentarlo.";
                 }else{
+                    console.log("fallo : ", respuesta.error);
                     span.style.color ="red";
                     span.innerHTML = "Vuelve a intentarlo."; 
                 }
@@ -178,22 +181,22 @@ function ajaxReenviarCodigo(){
 function temporizadorTiempoFuera(){
     
     let tiempoAlmacenado = localStorage.getItem("tiempo");
-    
+
     if (tiempoAlmacenado){
         tiempoAlmacenado = formatearRespuesta(tiempoAlmacenado);
     }
     // calcular tiempo en milisegundos ((2 * 60) + (50)) * 1000 
-    let tiempoTrascurrido = tiempoAlmacenado || 170000; 
+    let tiempoTrascurrido = tiempoAlmacenado || 170000;
     
     let endTime = new Date().getTime() + tiempoTrascurrido;
     $(document).ready(function() {
         $('.p-tiempo-trascurrido').countdown(endTime, function(event) {
             $(this).html(event.strftime('%M : %S segundos'));
              
-            if(event.strftime('%M%S') == "0000"){
-                ajaxReinicio();
+            if(event.strftime('%M%S') == "0002"){
+                removerEventoBeforeunload();
                 localStorage.clear();
-                window.location.reload();
+                ajaxReinicio();
             } 
         });
     });
@@ -225,51 +228,64 @@ function crearYOcultarElementos(){
     nuevoARegresar.appendChild(nuevoBoton);
 }
 
-function eventoBeforeunload(){
-
-    window.addEventListener('beforeunload',(event) => {
-        $(document).ready(function() {
-            let seleccion = document.querySelector(".p-tiempo-trascurrido");
-            let cadena = seleccion.textContent;
-            let tiempo = cadena.replace("segundos","").replace(":", "").replace("  ", "").replace(" ", "");
-            localStorage.setItem("tiempo", tiempo);
-        });
-    });
-   
+function agregarEventoBeforeunload(){
+    window.addEventListener('beforeunload', eventoBu ); 
 }
+
+function eventoBu(evento){
+
+    console.log(`type: ${evento.type}`);
+
+    $(document).ready(function() {
+        let seleccion = document.querySelector(".p-tiempo-trascurrido");
+        let cadena = seleccion.textContent;
+        let tiempo = cadena.replace(/\D/g, ''); 
+        localStorage.setItem("tiempo", tiempo);
+    });
+
+}
+
+function removerEventoBeforeunload(){
+    window.removeEventListener("beforeunload", eventoBu);
+}
+
+
 function formatearRespuesta(tiempoAlmacenado){
-    
+
     let milisegundos;
 
-    if(tiempoAlmacenado.length == 4){
-
+    if(tiempoAlmacenado.length == 4){ 
         let minutos = parseInt(tiempoAlmacenado.substring(0,2), 10); 
-        let segundos = parseInt(tiempoAlmacenado.substring(2,4), 10); 
-        milisegundos = ((minutos * 60) + (segundos)) * 1000;  
+        let segundos = parseInt(tiempoAlmacenado.substring(2,4), 10);
+        milisegundos = ((minutos * 60) + (segundos)) * 1000;
     }
-   
     return milisegundos;
 }
 function ajaxReinicio(){
-
+     
       // Crear objeto XMLHttpRequest
       let xhr = new XMLHttpRequest();
 
       // Configurar la solicitud
       xhr.open('POST', '/login/crear_cuenta/reiniciar_estado', true);
       xhr.setRequestHeader('Content-Type', 'application/json'); // Cambiar el tipo de contenido a JSON
-  
       // Configurar la función de devolución de llamada
       xhr.onreadystatechange = function () {
           if (xhr.readyState == 4) {
-              if (xhr.status == 200) {
-                  
-                  let respuesta = (JSON.parse(xhr.responseText));
-                  
-                  //controlar la respuesta 
-                  if(respuesta.estado == "Fallo"){
-                      console.log("respuesta: "+respuesta.error);
-                  }
+              if (xhr.status == 204 || xhr.status == 200) {
+                
+                //controlar la respuesta 
+                if((xhr.responseText) != ""){
+                    let respuesta = (JSON.parse(xhr.responseText));
+                    console.log("respuesta: "+respuesta.error);
+                }
+                
+                try {
+                    window.location.reload();
+                } catch (error) {
+                    console.error("el error es : "+error);
+                    window.location.reload();
+                }
               }
           }
       }

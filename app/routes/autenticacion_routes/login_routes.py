@@ -15,34 +15,34 @@ def login():
          return redirect(url_for('bp_inicio.index'))
     return render_template('/autenticacion/login.html')
 
-@bp.route('/login/autenticacion', methods=['GET', 'POST']) 
+@bp.route('/login/autenticacion', methods=['POST','GET']) 
 def autenticacion():
-    if request.method == 'POST':
-        correoUsuario = request.form['emailDocumento'].strip()
-        contrasena = request.form['contrasena'].strip()
-        bcrypt = Bcrypt()
-        
-        
-        if correoUsuario != "" and contrasena != "" and len(correoUsuario) <= 255  and  6 <= len(contrasena) <= 15 and "@" in correoUsuario:  
-            # es un correo
-            consulta  = Persona.query.filter_by(correoPersona=correoUsuario).first()
-            if consulta is not None: 
-                contrasenaBD = consulta.contrasenaPersona
-                
-                if bcrypt.check_password_hash(contrasenaBD, contrasena):
-                    login_user(consulta)#se marca como autenticado y recibe un objecto en este caso la persona
-                    return redirect(url_for('bp_inicio.index'))
+    if not current_user.is_authenticated:
+        if request.method == 'POST':
+            correoUsuario = request.form['emailDocumento'].strip()
+            contrasena = request.form['contrasena'].strip()
+            bcrypt = Bcrypt()
+            
+            
+            if correoUsuario != "" and contrasena != "" and len(correoUsuario) <= 255  and  6 <= len(contrasena) <= 15 and "@" in correoUsuario:  
+                # es un correo
+                consulta  = Persona.query.filter_by(correoPersona=correoUsuario).first()
+                if consulta is not None: 
+                    contrasenaBD = consulta.contrasenaPersona
+                    
+                    if bcrypt.check_password_hash(contrasenaBD, contrasena):
+                        login_user(consulta)#se marca como autenticado y recibe un objecto en este caso la persona
+                        return redirect(url_for('bp_inicio.index'))
 
-        mensajeInvalidado = "datos invalidos" 
-        flash(mensajeInvalidado, 'invalidados') 
-      
-    if current_user.is_authenticated:
-         return redirect(url_for('bp_inicio.index'))
-    return render_template('/autenticacion/login.html') 
+            mensajeInvalidado = "datos invalidos" 
+            flash(mensajeInvalidado, 'invalidados')  
+        return render_template('/autenticacion/login.html') 
+    return redirect(url_for('bp_inicio.index'))
     
 @bp.route('/logout', methods=['GET']) 
 def logout():
-    
-    logout_user()
-    paginaAnterior = request.referrer
-    return redirect(paginaAnterior)
+    if current_user.is_authenticated:
+        logout_user()
+        paginaAnterior = request.referrer
+        return redirect(paginaAnterior)
+    return redirect(url_for('bp_inicio.index'))
