@@ -1,7 +1,7 @@
 let numeroIntentos = localStorage.getItem("estado")  ?? true; 
 const botonReenviar = document.getElementById("botonReenviar");
-const span = document.getElementById("mensaje");
-let valores = document.querySelectorAll(".valorInput");
+const span = document.getElementById("mensaje-vc");
+let valores = document.querySelectorAll(".cajaInput-vc");
 let contenidoCentral = document.getElementById("contenido-central-validacionC");
 let contenedor = document.getElementById("contenedor-validacionC");
 
@@ -36,6 +36,7 @@ function validarCampos(valores){
     for (const valor of valores) {
 
         if ( valor.validity.valueMissing ) {
+
             span.innerHTML="Los campos son requeridos";
             span.style.color = "red";
             contador++;
@@ -85,7 +86,7 @@ function ajax(code){
                     
                 }else if(respuesta == "falloVerificacion"){
 
-                    span.innerHTML = "codigo incorreto.";
+                    span.innerHTML = "Codigo incorreto.";
                     span.style.color ="red";
 
                 }else{
@@ -97,7 +98,8 @@ function ajax(code){
 
         boton.disabled = false
         boton.style.background = "";
-        boton.style.color = "black";
+        boton.style.color = "white"
+       
     }
     // Enviar la solicitud con los datos como objeto JSON
     xhr.send(JSON.stringify(code));
@@ -121,7 +123,7 @@ function temporizadorReenviar(){
 
     const spanT = document.querySelector('.spanTiempo');
     const p = document.querySelector('.pReenviar');
-    let tiempo = 60;
+    let tiempo = 59;
 
     p.style.display="block"; 
     
@@ -210,8 +212,10 @@ function crearYOcultarElementos(){
     temporizadorTiempoFuera();
 
     const nuevoSpan = document.createElement('span'),
+    divMensajeTiempo = document.createElement('div'),
     nuevoP = document.createElement('p'),
-    nuevoARegresar = document.createElement("a"),
+    divRegresar = document.createElement('div'),
+    nuevoARegresar = document.createElement('a'),
     nuevoAConctanos= document.createElement('a'),
     nuevoBoton = document.createElement('button');
     
@@ -224,7 +228,12 @@ function crearYOcultarElementos(){
     nuevoBoton.textContent = "Regresar"
     nuevoBoton.style.cursor = "pointer";
 
-    contenedor.append(nuevoSpan,nuevoP,nuevoAConctanos,nuevoARegresar);
+    divMensajeTiempo.classList.add("flex-center-center");
+    divRegresar.classList.add("flex-center-space-between");
+
+    contenedor.append(divMensajeTiempo,divRegresar);
+    divMensajeTiempo.append(nuevoSpan,nuevoP);
+    divRegresar.append(nuevoAConctanos,nuevoARegresar);
     nuevoARegresar.appendChild(nuevoBoton);
 }
 

@@ -93,7 +93,7 @@ def RegistrarUsuario():
 
                 verificacionCorreo(nombre, correo,codigo, form)
                     
-                return render_template('/autenticacion/validacion_correo_electronico.html', correo = correo) 
+                return redirect(url_for("bp_verificacionCorreo.index")) 
             else:
                 return render_template('/autenticacion/crear_cuenta.html' , form=form)
     

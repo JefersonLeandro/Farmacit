@@ -10,9 +10,8 @@ bp = Blueprint('bp_verificacionCorreo', __name__)
 
 @bp.route('/login/crear_cuenta/verificacion_correo' , methods=['POST', 'GET'])
 def index():
-    #verificacion 
 
-    if not current_user.is_authenticated:
+    if not current_user.is_authenticated and "datos_usuario" in session:
         if request.method=="POST":
 
             codigoEntrada = request.get_json()
@@ -45,14 +44,14 @@ def index():
             else:
                 respuesta = {'estado':'falloVerificacion'}
             return jsonify(respuesta)
-        
+         
         return render_template("autenticacion/validacion_correo_electronico.html")
     return redirect(url_for('bp_inicio.index'))
 
 @bp.route('/login/crear_cuenta/reenviar_codigo', methods=['POST', 'GET'])
 def reenviarCorreo():
-    if not current_user.is_authenticated:
-            
+    if not current_user.is_authenticated and "datos_usuario" in session:
+        # agregar un token verificacion para que por defecto no muestre informacion de la respuesta json. 
         try:
             tiempoActual = time.time()
             ultimoIntento = session.get("ultimoIntento")
@@ -60,7 +59,7 @@ def reenviarCorreo():
             if "nIntentos" not in session:
                 session["nIntentos"] = 5
 
-            if ultimoIntento is None or (tiempoActual - ultimoIntento) >= 60:
+            if ultimoIntento is None or (tiempoActual - ultimoIntento) >= 58:
                 nIntentos = session.get("nIntentos")
                 datos = session.get('datos_usuario')
                 nombre = datos.get("nombre")
@@ -78,33 +77,35 @@ def reenviarCorreo():
                     session["validacion"] =True
                 return jsonify({'estado': 'ok', 'nIntentos': nIntentos})
             else:
-                
-                tiempoEspera = 60 -  (tiempoActual - ultimoIntento)
+                tiempoEspera = 58 -  (tiempoActual - ultimoIntento)
                 return jsonify({'estado': 'espera', 'tiempo_restante': tiempoEspera})     
         except Exception as e:
             return jsonify({'estado': 'Fallo', 'error': str(e)})
     return redirect(url_for('bp_inicio.index'))
 
 
-@bp.route('/login/crear_cuenta/reiniciar_estado', methods=['POST'])
+@bp.route('/login/crear_cuenta/reiniciar_estado', methods=['POST', 'GET'])
 def reiniciarEstado():
-    if not current_user.is_authenticated:
+    if not current_user.is_authenticated and "datos_usuario" in session:
         if request.method=="POST":
             try:
+                nombre = session.get('datos_usuario').get("nombre")
                 correo = session.get('datos_usuario').get("correo")
             
                 ultimoIntento = session.get("ultimoIntento", 0)
                 validacion = session.get("validacion", False)
                 tiempoActual = time.time()
             
-                if ((tiempoActual - ultimoIntento) >= 170 ) and validacion and correo != None:
+                if ((tiempoActual - ultimoIntento) >= 170) and validacion and correo != None:
                 
                     session["EnviarCorreo"][f"{correo}"]=True
                     session["nIntentos"] = 3
                     session["ultimoIntento"] = time.time()
                     session["validacion"] = False
+                    codigo = generarCodigo()
+                    session['codigo'] =codigo
                     session.modified = True
-                    # reenviarCorreo()
+                    enviarCorreo(nombre, correo, codigo)
 
                 return '', 204 # no contiene contenido pero salio exitoso la solicitud
             
