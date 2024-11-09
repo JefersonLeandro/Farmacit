@@ -123,7 +123,7 @@
         var xhr = new XMLHttpRequest();
         let cantidad = parseInt(cantidadAsociada, 10);
 
-        let idCarrito = parseInt(id_Carrito, 10)
+        let idCarrito = parseInt(id_Carrito, 10);
 
         // Configurar la solicitud
         xhr.open('POST', '/carrito_compras/actulizar', true);

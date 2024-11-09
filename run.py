@@ -15,7 +15,7 @@ app.logger.addHandler(handler)
 
 with app.app_context():
     from app.extensiones import db
-    db.create_all()
+    db.create_all()#this can show a error 
 
 
 if __name__ == '__main__':

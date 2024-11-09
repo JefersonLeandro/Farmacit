@@ -17,7 +17,7 @@
     <main>
         <div id="divContainer2">
             <div id="divFormulario2">
-                <form class="formulario" action="{{url_for('bp_crear_cuenta.RegistrarUsuario')}}" id="miFormulario" onclick="cambiarColor();"  method="post" >
+                <form class="formulario" action="{{url_for('bp_crear_cuenta.RegistrarUsuario')}}" id="miFormulario" onclick="cambiarColor();"  method="post" onsubmit="ejecutarTarea();">
                     <div id="tituloForm">
                         <div id="iconoForm">
                             <img class="login-img"  src="{{url_for('static',filename = 'imagenes/logoQ1.png')}}" alt="logo" width="70px" height="70px">
@@ -188,13 +188,11 @@
                         </div> 
                     </div>
                     <div class="divButtonIn">
-                        
-                        <button class="buttonIngresarF" type="submit"  name="fAccion" style="font-family: inherit; font-size: 18px;"  id="mibtnC">
-                                <h3>Registrar</h3> 
+                        <button class="buttonIngresarF" type="submit"  name="fAccion" style="font-family: inherit; font-size: 18px;" onclick="" id="mibtnC">
+                            <h3>Registrar</h3> 
                         </button>
                     </div>
-
-                 </form>   
+                </form>   
             </div>
 
         </div>

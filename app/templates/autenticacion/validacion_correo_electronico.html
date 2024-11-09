@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>verificación de correo eletronico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+   
+</head>
+<body class="body-vc">
+    <main class="main-vc flex-center-center">
+        <div id="contenedor-validacionC">
+            <strong class="titulo-vc">Verificación de correo eletronico</strong>
+            <div id="contenido-central-validacionC" class="flex-center-center flex-direction-column gap-12px">
+                <div class="informacion-vc">
+                    <span>hemos enviado un codigo a {% if session['datos_usuario'] %} {{session['datos_usuario']['correo'] }} {% endif %} .</span>
+                    <span>Revisa el buzón de correo e inserta el codigo en las casillas de abajo.</span>
+                    <p class="display-none pReenviar">Volver a enviar el codigo en :  <span class="spanTiempo"></span> segundos</p>
+                </div>
+                    <span id="mensaje-vc" class="color-red"></span>
+                <div class="inputs-vc flex-center-center">
+                    <input type="number"   class="cajaInput-vc" min="0" max="9"  required inputmode="numeric" >
+                    <input type="number" class="cajaInput-vc" min="0" max="9" required inputmode="numeric" >
+                    <input type="number" class="cajaInput-vc" min="0" max="9" required inputmode="numeric" >
+                    <input type="number" class="cajaInput-vc" min="0" max="9" required inputmode="numeric" >
+                </div>
+                <div class="display-flex widthFull text-center">
+                    <div class="contenedorBtnReenviar-vc flex-center-center ">
+                        <a class="display-" id="botonReenviar" onclick="agendamiento();" disabled >Reenviar</a>
+                    </div>
+                    <div class="contenedorBtnValidar-vc flex-center-center">
+                        <button id="botonValidar" onclick="validacion()">Validar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .body-vc{
+            height: 100vh!important;
+
+        }
+       .main-vc{
+            height: 100vh;
+       } 
+       #contenedor-validacionC{
+            
+            border: 3px solid #0097ff;
+            padding: 5px;
+            padding-top: 15px;
+            border-radius: 10px;
+            height: auto;
+            width: 550px;
+            text-align: center;
+       }
+ 
+       .titulo-vc{
+            font-size: 30px;
+
+       }
+       .informacion-vc{
+            
+            margin-top: 15px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+
+       }
+       .pReenviar{
+            margin-top: 12px;
+       }
+       .contenedorMensaje-vc{
+            font-size: 17px;
+            height: 48px;
+            
+       }
+       .inputs-vc{
+            height: 57px;
+            gap: 19px;
+          
+        }
+        .cajaInput-vc{
+            border: 1px solid rgb(0 131 255);
+            border-radius: 6px;
+            height: 45px;
+            width: 43px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        #botonValidar{
+            height: 31px;
+            width: 80px;
+            font-size: 17px;
+            cursor: pointer;
+            background: rgb(55 146 232);
+            border: 0;
+            border-radius: 8px;
+            color: white;
+        }
+     
+        #botonReenviar{
+            text-decoration: underline;
+            text-align: center;
+            cursor: pointer;
+        }
+        .contenedorBtnValidar-vc{
+            width: 224px;
+            height: 70px;
+        }
+        .contenedorBtnReenviar-vc{
+            width: 150px;
+            
+        }
+        .flex-center-center{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .flex-direction-column{
+            flex-direction: column;
+        }
+
+        .gap-12px{
+            gap: 12px;
+
+        }
+
+        .flex-center-space-between{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+    </style>
+    <!-- jQuery -->
+    <script src="{{url_for('static', filename='scripts/librerias/jquery.min.js' )}}"></script>
+    <!-- Countdown.js -->
+    <script src="{{url_for('static', filename='scripts/librerias/countdown.min.js')}}"></script>
+    <script src="{{url_for('static', filename='scripts/autenticacion/validacion_correo_electronico.js' )}}"></script>
+
+
+</body>
+</html>

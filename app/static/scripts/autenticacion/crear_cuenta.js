@@ -107,3 +107,17 @@ function cambiarColor(){
             inputConfirmarC.style.borderBottomColor = colorOriginal;  
        });    
 }
+
+function ejecutarTarea(){
+   console.log("dentre..");
+   const btn = document.getElementById("mibtnC");
+   btn.disabled=true;
+   btn.style.background = "purple";
+   
+   setTimeout(() => {
+      btn.disabled = false;
+      console.log("tarea ejecutada. ");
+      btn.style.background = "black";
+
+   }, 10000);  
+}
