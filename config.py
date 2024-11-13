@@ -2,7 +2,7 @@
 class Config:
     
     # # Conexión local  
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost:3306/db_f'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost:3306/db_farmacit'
    
     # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://id21904228_jeferson:1002723384Je.@files.000webhost.com/id21904228_mysql'
 

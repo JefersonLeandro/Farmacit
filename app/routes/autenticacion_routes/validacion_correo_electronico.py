@@ -114,5 +114,3 @@ def reiniciarEstado():
             
         return render_template("autenticacion/validacion_correo_electronico.html")
     return redirect(url_for('bp_inicio.index'))
-# tareas
-# - 

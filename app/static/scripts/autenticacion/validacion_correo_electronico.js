@@ -1,64 +1,56 @@
 let numeroIntentos = localStorage.getItem("estado")  ?? true; 
 const botonReenviar = document.getElementById("botonReenviar");
 const span = document.getElementById("mensaje-vc");
-let valores = document.querySelectorAll(".cajaInput-vc");
+let valor = document.querySelector(".cajaInput-vc");
 let contenidoCentral = document.getElementById("contenido-central-validacionC");
 let contenedor = document.getElementById("contenedor-validacionC");
 
 if (numeroIntentos == "false"){
     crearYOcultarElementos();
     agregarEventoBeforeunload();
-}else{
+}
     
-    setTimeout(() => {
-        botonReenviar.style.display = "block";
-        botonReenviar.disabled = false;
-    }, 30000);  
-
-} 
+setTimeout(() => {
+    botonReenviar.style.display = "block";
+    botonReenviar.disabled = false;
+}, 30000);  
 
 function validacion(){
 
-    let resultadoValidacion = validarCampos(valores);
+    let resultadoValidacion = validarCampos(valor);
 
     if(resultadoValidacion){
-        let code=""; 
-        for (const valor of valores) {
-            code+=`${valor.value}`;
-        }
-        ajax(code);        
+        ajax(valor.value);        
     } 
 }
 
-function validarCampos(valores){
-    
-    let contador = 0; 
-    for (const valor of valores) {
+function validarCampos(valor){
 
-        if ( valor.validity.valueMissing ) {
+    let tamano = valor.value.length;
+    let contador = 0;
 
-            span.innerHTML="Los campos son requeridos";
-            span.style.color = "red";
-            contador++;
+    if (valor.validity.valueMissing || tamano < 4) {
 
-        }else if(! valor.checkValidity() ) {       
-            span.innerHTML="Valor incorrecto";
-            span.style.color = "red";
-            contador++;
-        }
+        span.innerHTML="Numeros requeridos";
+        span.style.color = "red";
+        contador++;
+
+    }else if(! valor.checkValidity()) {       
+        span.innerHTML="Valor incorrecto";
+        span.style.color = "red";
+        contador++;
     }
-   
-    if (contador==0){
+
+    if(contador == 0 && tamano === 4){
         if( span.innerHTML != null || span.innerHTML != undefined ){
             span.innerHTML = ""; 
         }
         return true;
     }
-    return false;
+    return false;   
 }
 
 function ajax(code){
-
     // Crear objeto XMLHttpRequest
     let xhr = new XMLHttpRequest();
 
@@ -193,7 +185,7 @@ function temporizadorTiempoFuera(){
     let endTime = new Date().getTime() + tiempoTrascurrido;
     $(document).ready(function() {
         $('.p-tiempo-trascurrido').countdown(endTime, function(event) {
-            $(this).html(event.strftime('%M : %S segundos'));
+            $(this).html(event.strftime(' %M : %S segundos'));
              
             if(event.strftime('%M%S') == "0002"){
                 removerEventoBeforeunload();
@@ -229,7 +221,9 @@ function crearYOcultarElementos(){
     nuevoBoton.style.cursor = "pointer";
 
     divMensajeTiempo.classList.add("flex-center-center");
+    divMensajeTiempo.classList.add("espaciado-tiempo-vc");
     divRegresar.classList.add("flex-center-space-between");
+    divRegresar.classList.add("espaciado-botones-vc");
 
     contenedor.append(divMensajeTiempo,divRegresar);
     divMensajeTiempo.append(nuevoSpan,nuevoP);
@@ -302,3 +296,6 @@ function ajaxReinicio(){
       xhr.send();
 
 }
+
+
+
