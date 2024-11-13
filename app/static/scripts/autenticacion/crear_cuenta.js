@@ -11,8 +11,8 @@ function cambiarColor(){
 
 //                                     Agrega un evento de blur al input
         inputs.addEventListener("blur", function() {
-//                                       Cambia el color del input al original  
-            inputs.style.borderBottomColor = colorOriginal;  
+//                                     Cambia el color del input al original  
+        inputs.style.borderBottomColor = colorOriginal;  
 //                                                                         
        });
        
@@ -109,15 +109,11 @@ function cambiarColor(){
 }
 
 function ejecutarTarea(){
-   console.log("dentre..");
+
    const btn = document.getElementById("mibtnC");
    btn.disabled=true;
-   btn.style.background = "purple";
-   
+
    setTimeout(() => {
       btn.disabled = false;
-      console.log("tarea ejecutada. ");
-      btn.style.background = "black";
-
    }, 10000);  
 }
