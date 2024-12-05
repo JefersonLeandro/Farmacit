@@ -63,7 +63,6 @@ def RegistrarUsuario():
             telefono = request.form['fTelefonoPersona']
             contrasena = request.form['fContrasenaPersona'].strip()
             bcrypt = Bcrypt()
-
             
             # Verificar si el correo ya está en la base de datos
             verificar = Persona.query.filter_by(correoPersona=correo).first()
