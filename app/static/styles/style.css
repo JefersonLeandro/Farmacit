@@ -2924,6 +2924,11 @@ a:visited{
 .pdg-left-1rem{
     padding-left: 1rem!important;
 }
+
+.pdg-l-40px{
+    padding-left: 40px;
+}
+
     /* font - sizes */
 
 .font-size-18px{
@@ -3509,11 +3514,9 @@ a:visited{
     }
 
     .carrito-caja{
-
         margin-top: 10px;
         display: block;
         height: 605px;
-        /* background-color: rebeccapurple; */
     }
 
     .carrito-imagen-producto{
@@ -3669,6 +3672,4 @@ a:visited{
 
 }
 
-
-/* reponsive para celulares mas pequenos */
 
