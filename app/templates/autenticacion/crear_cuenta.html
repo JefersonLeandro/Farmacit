@@ -106,17 +106,6 @@
                                         </div>
                                         {% endfor %}
                                     {% endif %}
-
-                                    <!-- mensaje flash -->
-                                    {% with messages = get_flashed_messages() %}
-                                        {% if messages %}
-                                            {% for message in messages %} 
-                                            <div class="labelid">
-                                                <small  class="font-size-14px"  style="color: red;">{{ message }}</small>
-                                            </div>
-                                            {% endfor %}
-                                        {% endif %}
-                                    {% endwith %}
                                     
                                 </div>
                             </div>

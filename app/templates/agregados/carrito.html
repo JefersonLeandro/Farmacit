@@ -216,10 +216,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    
-
                 </div>
-
             </div>
             <div class="lineaCarritoF"></div>
             <div class="tituloH">
@@ -242,12 +239,14 @@
 </body>
 
 <script src="{{url_for('static', filename='scripts/agregados/carrito.js' )}}"></script>
+
+
 {% with mensajes = get_flashed_messages(with_categories=true) %}
-{% for categoria, mensaje in mensajes %}
-    {% if categoria == 'stockSuperado' or categoria == 'sinStock' or categoria == 'compraExito'%}
-        <script>mostrarMensaje();</script>
-    {% endif %}
-{% endfor %}
+    {% for categoria, mensaje in mensajes %}
+        {% if categoria == 'stockSuperado' or categoria == 'sinStock' or categoria == 'compraExito'%}
+            <script>mostrarMensaje(mensaje="{{mensaje}}");</script>
+        {% endif %}
+    {% endfor %}
 {% endwith %}
 
 </html>

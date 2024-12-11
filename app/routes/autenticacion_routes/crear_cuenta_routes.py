@@ -1,5 +1,6 @@
 from flask import  Blueprint, render_template, request, redirect, url_for, flash , session
 from wtforms import Form, StringField, PasswordField, validators
+from wtforms import ValidationError
 from app.models.Persona import Persona
 from flask_login import  current_user
 from flask_bcrypt import Bcrypt
@@ -13,8 +14,14 @@ def crearCuenta():
     
     if current_user.is_authenticated:
         return redirect(url_for('bp_inicio.index'))
-    return render_template('autenticacion/crear_cuenta.html') 
-
+    return render_template('autenticacion/crear_cuenta.html')
+ 
+def duplicacionCorreo(form, field):
+    correo = field.data
+    verificar = Persona.query.filter_by(correoPersona=correo).first() 
+    if verificar:
+        raise ValidationError('El correo electrónico ya está registrado.')
+    
 class RegistrationForm(Form): 
     
     fNombrePersona = StringField('fNombrePersona', [
@@ -39,7 +46,8 @@ class RegistrationForm(Form):
     fCorreoPersona = StringField('fCorreoPersona', [
         validators.DataRequired(message="Correo Electronico requerido."),
         validators.Email(message="Ingrese una dirección de correo electrónico válida."),
-        validators.Length(max=255, message="El correo execede el numero maximo de caracteres.")
+        validators.Length(max=255, message="El correo execede el numero maximo de caracteres."),
+        duplicacionCorreo
         ])
     
     fContrasenaPersona = PasswordField('fContrasenaPersona', validators=[
@@ -50,6 +58,11 @@ class RegistrationForm(Form):
     fConfirmarContrasena = PasswordField('fConfirmarContrasena', validators=[
         validators.EqualTo('fContrasenaPersona', message='Las contraseñas deben coincidir.')
     ])
+
+    fConfirmarContrasena = PasswordField('fConfirmarContrasena', validators=[
+        validators.EqualTo('fContrasenaPersona', message='Las contraseñas deben coincidir.')
+    ])
+    
     
 @bp.route('/login/crear_cuenta/Registrar', methods=['GET', 'POST'])
 def RegistrarUsuario():
@@ -64,20 +77,12 @@ def RegistrarUsuario():
             contrasena = request.form['fContrasenaPersona'].strip()
             bcrypt = Bcrypt()
             
-            # Verificar si el correo ya está en la base de datos
-            verificar = Persona.query.filter_by(correoPersona=correo).first()
+            
             form = RegistrationForm(request.form) 
             
-            if not ('fCorreoPersona' in form.errors) and verificar:
-                # el correo ya esta registrado
-                flash("El correo suministrado ya se encuentra registrado", 'error')
-        
-                return render_template('/autenticacion/crear_cuenta.html' , form=form)
-            
-            elif  form.validate():
+            if form.validate():
 
                 hashedContrasena = bcrypt.generate_password_hash(contrasena).decode('utf-8')
-                
                 codigo = generarCodigo()
                 
                 session['codigo'] = codigo  
@@ -113,15 +118,14 @@ def verificacionCorreo(nombre, correo, codigo, form):
             session["EnviarCorreo"][f"{correo}"]=False 
             session.modified = True
         except Exception :
-            render_template('/autenticacion/crear_cuenta.html' , form=form) 
-
+            render_template('/autenticacion/crear_cuenta.html' , form=form)
 
 def enviarCorreo(nombre,correo,codigo):
     from app import mail 
 
     msg = Message(
     subject="Codigo de verificación (Farmacit)",
-    sender="Farmacit.envio.correos@gmail.com",
+    sender="Farmacit <Farmacit.envio.correos@gmail.com>",
     recipients=[f"{correo}"],
     html=f"""
     <html>
@@ -149,7 +153,7 @@ def enviarCorreo(nombre,correo,codigo):
     """
     )
 
-    mail.send(msg) 
+    mail.send(msg)
 
 def generarCodigo():
     codigo = random.randint(1000, 9999)

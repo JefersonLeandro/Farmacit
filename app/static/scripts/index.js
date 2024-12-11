@@ -3,6 +3,7 @@ function actualizarFecha(){
     const seleccion = document.getElementById("fecha");
     seleccion.innerHTML="   "+ fecha +"  "; 
 }
+
 function mostrarMensaje(mensaje){
     window.onload = function() {
         window.setTimeout(function(){

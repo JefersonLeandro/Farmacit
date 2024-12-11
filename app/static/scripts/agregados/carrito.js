@@ -76,8 +76,6 @@
 
 
     function verificacion(cantidadAsociada, stock_Producto, id_Carrito) {
-
-
         // Expresión regular que coincide con cualquier cosa que no sea un número
         let expresionRegular = /[^0-9]/;
 
@@ -113,7 +111,6 @@
                 window.location.reload();
             }
         }
-
         return bandera
     }
 
@@ -147,36 +144,27 @@
                     //controlar la respuesta 
                     if (respuesta.hasOwnProperty("resultados") ){
                         //recibir los datos actulizados devueltos por ajaxs 
-                        //alert("exito es "+respuesta.resultados)
                         let resultados = respuesta.resultados;
-                        //alert("Subtotal: " + resultados.subtotal);
-                        //alert("Cantidad Final: " + resultados.cantidadFinal);
-                        //alert("IVA: " + resultados.iva);
-                        //alert("Total: " + resultados.total);
-                        
+  
                         subtotal = document.querySelector(".carrito-subtotal");
                         cantidad = document.querySelector(".carrito-cantidad");
                         iva = document.querySelector(".carrito-iva");
                         total = document.querySelector(".carrito-total");
-
 
                         subtotal.innerHTML = "Subtotal "+resultados.subtotal
                         cantidad.innerHTML = "Cantidad "+resultados.cantidadFinal
                         iva.innerHTML = "Iva "+resultados.iva
                         total.innerHTML = "Total "+resultados.total
 
-
-
                         stockDisponibleDb = respuesta.stockProducto
                         
-
                         if (stockDisponibleDb > stockActual){
                             stock_Producto.value = stockDisponibleDb
                             mostrarSmall(small_stock, stockDisponibleDb)
                         }
 
                     }else if ((respuesta.hasOwnProperty("stockSuperado")) ) {
-                        //##### actulizar el input de la clase stock con el nuevo valor disponible  de ese producto 
+                        // actulizar el input de la clase stock con el nuevo valor disponible  de ese producto 
                         stockDisponible = respuesta.stockSuperado
                         input.value = stockDisponible
                         stock_Producto.value = stockDisponible;
@@ -195,21 +183,17 @@
                         
                         }
                         
-                        
                         mostrarSmall(small_stock, stockDisponible, stockActual )
                         alert(" stock en linea disponible es de : "+stockDisponible)
 
-                        
                     }else{
 
                         alert("otra cosa ")
                     }
 
                 } else {
-                    // Manejar errores aquí
-
+                   
                     alert("fallo ajax por parte del servidor ")
-                    //window.location.reload(); 
                 
                 }
             }
@@ -226,8 +210,6 @@
         if (small_stock) {
 
             if (stockDisponible <=20){
-
-                console.log("smallllllllllllllllll definido ")
                 small_stock.innerHTML = "stock en linea "+stockDisponible;
 
 
@@ -242,7 +224,7 @@
 function mostrarMensaje(mensaje){
     window.onload = function() {
         window.setTimeout(function(){
-            alert(mensaje);
+            window.alert(mensaje);
         },10 ); 
     };
 }

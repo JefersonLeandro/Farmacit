@@ -23,7 +23,11 @@
 
             </div>
             <div id="tituloP">
-                <h1 id="soyh1">Farmacit</h1>
+                {% if request.path == url_for('bp_inicio.index') %}
+                    <h1 id="soyh1">Farmacit</h1>
+                {% else %}
+                    <h1 id="soyh1"><a href="{{url_for('bp_inicio.index')}}">Farmacit</a></h1>
+                {% endif %}
             </div>
             
         </div>
@@ -38,13 +42,11 @@
                 </ul>
             </nav>
         </div>
-
-        <!-- plb==palabra -->
         <div id="iconoG">
 
             <div id="iconoS">
                 {% if  current_user.is_authenticated %}
-                    <a href="#" class="aSvg"> <!-- perfil -->
+                    <a href="#" class="aSvg">
                 {%else: %}
                     <a href="{{url_for('bp_login.login')}}" class="aSvg">
                 {%endif%}
@@ -69,7 +71,7 @@
                                     <li><a class='dropdown-items' href="{{url_for('bp_administracion.index')}}">Administrar</a></li>
                                 {% endif %}
                                 <li><hr class='dropdown-divider'></li>
-                                <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
+                                <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar sesión</a></li>
                             </ul>
                         </div> 
 
@@ -104,6 +106,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Acerca de nosotros</a>
+                                    {% if request.path != url_for('bp_inicio.index') %}
+                                        <a class="nav-link" href="{{url_for('bp_inicio.index')}}">Pagina inicio</a>
+                                    {% endif %}  
                                 </li>
                                 
                                 <li class="nav-item">
@@ -115,12 +120,12 @@
 
                                         {%endif%}
                                         
-                                        <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
+                                        <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar sesión</a></li>
 
-                                    {%else:%}
-                                        <li><a class='nav-link' href="{{url_for('bp_login.login')}}">Iniciar Sesion</a></li>
+                                    {% else: %}
+                                        <li><a class='nav-link' href="{{url_for('bp_login.login')}}">Iniciar sesión</a></li>
 
-                                    {%endif%}
+                                    {% endif %}
                                     
                                 </li>
                             </ul>
@@ -197,7 +202,7 @@
                                 <li><a class='dropdown-items' href="{{url_for('bp_administracion.index')}}">Administrar</a></li>
                             {% endif %}
                             <li><hr class='dropdown-divider'></li>
-                            <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar session</a></li>
+                            <li><a class='dropdown-item' href="{{url_for('bp_login.logout')}}">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </li> 
@@ -229,10 +234,10 @@
             <div id="divCR1">
                 <h4>Contáctanos</h4>
                 <div class="inicio-telefono">
-                    <span>Telefono: 3143842657</span>
+                    <span>Telefono: 1234567890</span>
                 </div>
                 <div>
-                    <span>Correo: servicio_cliente@gmail.com</span>
+                    <span>Correo: Jeferson.Fajard@gmail.com</span>
                 </div>
 
             </div>
@@ -302,7 +307,7 @@
         </div>
         <div class="bg-azul-oscuro display-flex justify-content-center" >
             <span class="display-flex gap-1">
-                Copyright <p id="fecha"> </p> &copy; Todos los derechos reservados.
+                &copy; <p id="fecha"> </p>  Todos los derechos reservados.
             </span>
         </div>
     </footer>

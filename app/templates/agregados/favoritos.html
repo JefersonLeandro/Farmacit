@@ -224,7 +224,7 @@
 
                                 {% if not (current_user.is_authenticated) %}
 
-                                <h5 class="favoritos-mensaje-login">Tu menú favoritos está vacío, inicia session <a
+                                <h5 class="favoritos-mensaje-login">Tu menú favoritos está vacío, inicia sesión <a
                                         href='{{url_for("bp_login.login")}}'
                                         style='text-decoration: underline; opacity: 0.6;'>aquí</a> para poder agregar
                                     productos.</h5>
@@ -270,9 +270,7 @@
             </div>
         </div>
 
-        <!-- En vez de mostrar los productos a la derecha se puede hacer un slaider con la imagenes del productos y dos flechas para pasar al siguiente <[===]> y aun lado la descripcion descripcion con el precio  -->
-        <!-- ventana emergente  -->
-
+       
         <style>
             /* ----------------------------STYLE PARA VENTANA EMERGENTE------------------- */
             .favoritos-svg-x {

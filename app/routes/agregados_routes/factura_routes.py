@@ -61,21 +61,15 @@ def index():
                 productosAgotados = [] #vacia los productos agotados
                 actualizarCantidades(informacionCompra)
          
-                flash("Gracias por elegirnos , compra realizada correctamente. ","compraExito") 
+                flash("Gracias por elegirnos, compra realizada correctamente. ","compraExito") 
 
             else:
-                
-                # fallo 
-                
                 db.session.commit() #confirmar cambios de verificar Factura
 
                 # Filtrar productos agotados de los resultados, solo dejar producto disponibles 
                 resultados = [res for res in resultados if res[1].stockProducto > 0] 
             
                 diccionario = calcularTotales()  
-                
-                # para mostrar los productos agotados debo dejar los productos agotados 
-                #return render_template('agregados/carrito.html',diccionario=diccionario , productos=resultados, productosAgotados = productosAgotados)
                 return redirect(url_for('bp_carrito.index'))
         
     return render_template('/agregados/carrito.html')                   
@@ -126,6 +120,4 @@ def actualizarCantidades(informacionCompra):
                 cantidad = carrito.cantidadCarrito
                 if stockDisponible < cantidad : 
                     carrito.cantidadCarrito = stockDisponible 
-            db.session.commit()    
-    
-    
+            db.session.commit()
